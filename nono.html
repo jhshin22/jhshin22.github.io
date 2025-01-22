@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>융자센터_신지호</title>
+    <title>융센_신지호</title>
     <style>
         body {
             margin: 0;
@@ -19,7 +19,7 @@
         }
         .slider-container {
             position: relative;
-            width: 90%; /* 모바일에서 적절한 크기 */
+            width: 90%;
             max-width: 400px;
             overflow: hidden;
             border-radius: 10px;
@@ -53,7 +53,7 @@
             color: white; /* 버튼 글씨색 */
             text-decoration: none;
             border-radius: 5px;
-            font-size: 16px; /* 버튼 글씨 크기 */
+            font-size: 16px;
             font-family: "Helvetica Neue", Arial, sans-serif; /* 폰트 */
             text-align: center;
             width: 45%;
@@ -85,23 +85,33 @@
         const slider = document.querySelector('.slider');
         const body = document.body;
 
-        // 슬라이드마다 다른 배경색 설정
-        const backgroundColors = ["#355f77", "#575e6f", "#736a60"]; // 초기 설정 색상
+        // 슬라이드별 유지 시간 설정 (밀리초 단위)
+        const slideDurations = [3000, 10000, 10000]; // 3초, 10초, 10초
+        const backgroundColors = ["#355f77", "#575e6f", "#736a60"]; // 새 배경색
 
+        // 슬라이드 전환 함수
         const changeSlide = () => {
             currentSlide = (currentSlide + 1) % totalSlides;
             slider.style.transform = `translateX(-${currentSlide * 100}%)`;
             body.style.backgroundColor = backgroundColors[currentSlide]; // 배경색 변경
+            startSlideTimer(); // 다음 슬라이드로 전환 예약
         };
 
-        let slideInterval = setInterval(changeSlide, 5000); // 5초 간격 자동 전환
+        // 슬라이드 전환 타이머 시작
+        let slideTimeout;
+        const startSlideTimer = () => {
+            clearTimeout(slideTimeout); // 기존 타이머 취소
+            slideTimeout = setTimeout(changeSlide, slideDurations[currentSlide]);
+        };
 
-        // 슬라이드 클릭 시 다음 슬라이드로 전환
+        // 슬라이드 클릭 시 즉시 전환
         document.querySelector('.slider-container').addEventListener('click', () => {
-            clearInterval(slideInterval);
+            clearTimeout(slideTimeout); // 기존 타이머 취소
             changeSlide();
-            slideInterval = setInterval(changeSlide, 5000); // 5초 간격 다시 시작
         });
+
+        // 초기 타이머 시작
+        startSlideTimer();
     </script>
 
 </body>
