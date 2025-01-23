@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노원융자센터_신지호</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #355f77; /* 초기 배경색 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 1s ease; /* 배경색 전환 효과 */
+        }
+        .slider-container {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slide {
+            min-width: 100%;
+            height: 0;
+            padding-bottom: 100%; /* 1:1 비율 유지 */
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            width: 90%;
+            max-width: 400px;
+            margin-top: 20px;
+            padding: 10px 0;
+            background-color: #007bff;
+            border-top: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff; /* 버튼 배경색 */
+            color: white; /* 버튼 글씨색 */
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: "Helvetica Neue", Arial, sans-serif; /* 폰트 */
+            text-align: center;
+            width: 45%;
+        }
+        .button:hover {
+            background-color: #0056b3; /* 버튼 호버 시 배경색 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide" style="background-image: url('001.jpg');"></div>
+            <div class="slide" style="background-image: url('002.jpg');"></div>
+            <div class="slide" style="background-image: url('003.jpg');"></div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <a href="sms:010-1234-5678" class="button">메시지 보내기</a>
+        <a href="tel:010-1234-5678" class="button">전화하기</a>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const slider = document.querySelector('.slider');
+        const body = document.body;
+
+        // 슬라이드별 유지 시간 설정 (밀리초 단위)
+        const slideDurations = [3000, 10000, 10000]; // 3초, 10초, 10초
+        const backgroundColors = ["#355f77", "#575e6f", "#736a60"]; // 새 배경색
+
+        // 슬라이드 전환 함수
+        const changeSlide = () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            body.style.backgroundColor = backgroundColors[currentSlide]; // 배경색 변경
+            startSlideTimer(); // 다음 슬라이드로 전환 예약
+        };
+
+        // 슬라이드 전환 타이머 시작
+        let slideTimeout;
+        const startSlideTimer = () => {
+            clearTimeout(slideTimeout); // 기존 타이머 취소
+            slideTimeout = setTimeout(changeSlide, slideDurations[currentSlide]);
+        };
+
+        // 슬라이드 클릭 시 즉시 전환
+        document.querySelector('.slider-container').addEventListener('click', () => {
+            clearTimeout(slideTimeout); // 기존 타이머 취소
+            changeSlide();
+        });
+
+        // 초기 타이머 시작
+        startSlideTimer();
+    </script>
+
+</body>
+</html>
