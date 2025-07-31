@@ -1,142 +1,209 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>OX 퀴즈 인증</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OX 퀴즈 인증</title>
+<style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
+        font-family: "Noto Sans KR", sans-serif;
+        margin: 0;
+        background-color: #f9f9f9;
+        text-align: center;
+        font-size: 18px;
+        padding: 20px;
     }
-    .question {
-      margin: 30px 0;
-      font-size: 20px;
-      font-weight: bold;
+    .quiz-box {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    .options button, .next-btn, .retry-btn, .sms-btn {
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 16px;
-      cursor: pointer;
+    .question-text {
+        font-size: 20px;
+        margin-bottom: 20px;
     }
-    .feedback {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
+    button {
+        font-size: 20px;
+        padding: 15px 25px;
+        border-radius: 10px;
+        margin: 10px;
+        border: none;
+        background-color: #1a73e8;
+        color: white;
+        cursor: pointer;
     }
-    .correct { color: green; }
-    .incorrect { color: red; }
-  </style>
+    button:hover {
+        background-color: #0c5cc2;
+    }
+    #explanation {
+        margin-top: 15px;
+        font-size: 18px;
+        color: #333;
+    }
+    #smsBtn, #retryBtn {
+        display: none;
+        background-color: #4CAF50;
+    }
+    @media (max-width: 600px) {
+        body {
+            font-size: 20px;
+        }
+        button {
+            font-size: 22px;
+            padding: 18px 30px;
+            width: 80%;
+        }
+        .question-text {
+            font-size: 22px;
+            line-height: 1.5em;
+        }
+    }
+</style>
 </head>
 <body>
 
-  <h1>OX 퀴즈</h1>
-  <div id="quizContainer"></div>
+<div class="quiz-box">
+    <h2>OX 퀴즈</h2>
+    <div id="question" class="question-text"></div>
+    <div>
+        <button onclick="checkAnswer('O')">O</button>
+        <button onclick="checkAnswer('X')">X</button>
+    </div>
+    <div id="explanation"></div>
+    <button id="nextBtn" style="display:none;" onclick="nextQuestion()">다음 문제</button>
+    <button id="retryBtn" onclick="retryQuiz()">다시하기</button>
+    <button id="smsBtn" onclick="sendSMS()">인증코드 전송</button>
+</div>
 
-  <script>
-    // 퀴즈 데이터
-    const quizData = [
-      { q: "1. 태양은 지구보다 크다.", a: "O", exp: "태양은 지구보다 약 109배 큽니다." },
-      { q: "2. 물은 100도에서 끓는다.", a: "O", exp: "표준기압에서 물은 100도에서 끓습니다." },
-      { q: "3. 대한민국의 수도는 서울이다.", a: "O", exp: "서울은 대한민국의 수도입니다." },
-      { q: "4. 1년은 364일이다.", a: "X", exp: "1년은 365일, 윤년은 366일입니다." },
-      { q: "5. 코끼리는 포유류다.", a: "O", exp: "코끼리는 새끼를 낳고 젖을 먹이는 포유류입니다." }
-    ];
+<script>
+const quizData = [
+    { q: "교보생명은 1958년에 설립되었다.", a: "O", exp: "정답입니다! 교보생명은 1958년에 설립되었습니다." },
+    { q: "보험계약대출은 신용점수에 영향을 주지 않는다.", a: "O", exp: "맞아요. 보험계약대출은 담보대출 성격이므로 신용점수에 직접 영향이 없습니다." },
+    { q: "DSR 규제는 모든 대출에 동일하게 적용된다.", a: "X", exp: "아닙니다. 정책금융, 일부 담보대출 등은 제외되기도 합니다." },
+    { q: "신용대출은 무조건 금리가 높다.", a: "X", exp: "아니요. 신용도, 우대조건 등에 따라 낮을 수도 있습니다." },
+    { q: "보험설계사는 대출상품을 취급할 수 있다.", a: "O", exp: "맞습니다. 일정 조건을 갖춘 설계사는 대출상품 안내가 가능합니다." }
+];
 
-    let current = 0;
-    let correctCount = 0;
-    const container = document.getElementById("quizContainer");
+let currentQuestion = 0;
+let correctCount = 0;
+const secretSalt = "KyoboSecretKey2025"; // 제작자만 아는 비밀키
 
-    // 문제 출력
-    function showQuestion() {
-      const q = quizData[current];
-      container.innerHTML = `
-        <div class="question">${q.q}</div>
-        <div class="options">
-          <button onclick="checkAnswer('O')">O</button>
-          <button onclick="checkAnswer('X')">X</button>
-        </div>
-        <div id="feedback"></div>
-      `;
-    }
+function loadQuestion() {
+    document.getElementById("question").innerText = quizData[currentQuestion].q;
+    document.getElementById("explanation").innerText = "";
+    document.getElementById("nextBtn").style.display = "none";
+}
 
-    // 정답 체크
-    function checkAnswer(selected) {
-      const q = quizData[current];
-      const feedbackEl = document.getElementById("feedback");
-
-      if (selected === q.a) {
+function checkAnswer(answer) {
+    let exp = quizData[currentQuestion].exp;
+    if (answer === quizData[currentQuestion].a) {
         correctCount++;
-        feedbackEl.innerHTML = `<div class="feedback correct">✅ 정답입니다!</div><div>${q.exp}</div>`;
-      } else {
-        feedbackEl.innerHTML = `<div class="feedback incorrect">❌ 오답입니다!</div><div>${q.exp}</div>`;
-      }
-
-      // 버튼 비활성화
-      document.querySelectorAll(".options button").forEach(btn => btn.disabled = true);
-
-      // 다음 버튼 또는 결과 버튼 표시
-      if (current < quizData.length - 1) {
-        feedbackEl.innerHTML += `<br><button class="next-btn" onclick="nextQuestion()">다음 문제 →</button>`;
-      } else {
-        feedbackEl.innerHTML += `<br><button class="next-btn" onclick="showResult()">결과 보기</button>`;
-      }
+        document.getElementById("explanation").innerHTML = "✅ 정답!<br>" + exp;
+    } else {
+        document.getElementById("explanation").innerHTML = "❌ 오답!<br>" + exp;
     }
+    document.getElementById("nextBtn").style.display = "inline-block";
+}
 
-    // 다음 문제
-    function nextQuestion() {
-      current++;
-      showQuestion();
+function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+        loadQuestion();
+    } else {
+        endQuiz();
     }
+}
 
-    // 인증코드 생성
-    function generateAuthCode() {
-      const now = new Date();
-      const seed = `${now.getFullYear()}${now.getMonth()+1}${now.getDate()}${now.getHours()}${now.getMinutes()}`;
-      const hash = CryptoJS.SHA256(seed).toString(CryptoJS.enc.Hex);
-      return hash.substring(0, 8);
+function endQuiz() {
+    if (correctCount === quizData.length) {
+        let code = generateCode();
+        document.getElementById("question").innerText = "🎉 모든 문제를 맞혔습니다! 인증코드: " + code;
+        document.getElementById("smsBtn").style.display = "inline-block";
+    } else {
+        document.getElementById("question").innerText = "😢 일부 문제를 틀렸습니다. 다시 시도해주세요.";
+        document.getElementById("retryBtn").style.display = "inline-block";
     }
+    document.querySelectorAll("button[onclick^='checkAnswer']").forEach(btn => btn.style.display = "none");
+    document.getElementById("nextBtn").style.display = "none";
+}
 
-    // OS 판별
-    function detectOS() {
-      const ua = navigator.userAgent;
-      if (/android/i.test(ua)) return 'android';
-      if (/iPhone|iPad|iPod/.test(ua)) return 'ios';
-      return 'other';
+function retryQuiz() {
+    currentQuestion = 0;
+    correctCount = 0;
+    document.querySelectorAll("button[onclick^='checkAnswer']").forEach(btn => btn.style.display = "inline-block");
+    document.getElementById("retryBtn").style.display = "none";
+    document.getElementById("smsBtn").style.display = "none";
+    loadQuestion();
+}
+
+function generateCode() {
+    let now = new Date();
+    let timeStr = `${now.getFullYear()}${now.getMonth()+1}${now.getDate()}${now.getHours()}${now.getMinutes()}`;
+    let raw = secretSalt + timeStr;
+    let hash = sha256(raw).substring(0, 8);
+    return hash;
+}
+
+function sendSMS() {
+    let code = generateCode();
+    let ua = navigator.userAgent.toLowerCase();
+    let phoneNumber = "01012345678";
+    if (/iphone|ipad|ipod/.test(ua)) {
+        window.location.href = `sms:${phoneNumber}&body=${code}`;
+    } else {
+        window.location.href = `sms:${phoneNumber}?body=${code}`;
     }
+}
 
-    // SMS 링크 생성
-    function createSMSLink(phoneNumber, message) {
-      const encoded = encodeURIComponent(message);
-      const os = detectOS();
-      if (os === 'android') return `sms:${phoneNumber}?body=${encoded}`;
-      if (os === 'ios') return `sms:${phoneNumber}&body=${encoded}`;
-      return null;
+// SHA-256 함수
+function sha256(ascii) {
+    const buffer = new TextEncoder().encode(ascii);
+    return crypto.subtle.digest("SHA-256", buffer).then(hash => {
+        return hex(hash);
+    });
+}
+function hex(buffer) {
+    const hexCodes = [];
+    const view = new DataView(buffer);
+    for (let i = 0; i < view.byteLength; i += 4) {
+        const value = view.getUint32(i);
+        const stringValue = value.toString(16);
+        const padding = '00000000';
+        const paddedValue = (padding + stringValue).slice(-padding.length);
+        hexCodes.push(paddedValue);
     }
+    return hexCodes.join("");
+}
+// Promise 대응
+function generateCode() {
+    let now = new Date();
+    let timeStr = `${now.getFullYear()}${now.getMonth()+1}${now.getDate()}${now.getHours()}${now.getMinutes()}`;
+    let raw = secretSalt + timeStr;
+    let hashPromise = sha256(raw);
+    return "로딩중...";
+}
+</script>
 
-    // 결과 출력
-    function showResult() {
-      if (correctCount === quizData.length) {
-        const code = generateAuthCode();
-        const smsLink = createSMSLink("01035418023", `인증코드: ${code}`);
-        container.innerHTML = `
-          🎉 모든 문제를 맞추셨습니다!<br>
-          인증코드: <strong>${code}</strong><br><br>
-          ${smsLink ? `<a href="${smsLink}"><button class="sms-btn">📩 문자앱으로 인증코드 전송</button></a>` : '⚠ 모바일에서만 지원됩니다.'}
-        `;
-      } else {
-        container.innerHTML = `
-          ❌ 일부 문제를 틀렸습니다.<br><br>
-          <button class="retry-btn" onclick="location.reload()">🔁 다시하기</button>
-        `;
-      }
-    }
+<script>
+// SHA-256 동기 처리 버전 (Promise 없이)
+function sha256Sync(str) {
+    const utf8 = new TextEncoder().encode(str);
+    const hashBuffer = new Uint8Array(crypto.subtle.digestSync ? crypto.subtle.digestSync("SHA-256", utf8) : []);
+    return Array.from(hashBuffer).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function generateCode() {
+    let now = new Date();
+    let timeStr = `${now.getFullYear()}${now.getMonth()+1}${now.getDate()}${now.getHours()}${now.getMinutes()}`;
+    let raw = secretSalt + timeStr;
+    return sha256Sync(raw).substring(0, 8);
+}
+</script>
 
-    // 첫 문제 시작
-    showQuestion();
-  </script>
-
+<script>
+loadQuestion();
+</script>
 </body>
 </html>
