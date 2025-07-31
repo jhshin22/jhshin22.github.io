@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>OX 퀴즈 인증</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .question {
+      margin: 30px 0;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .options button, .next-btn, .retry-btn, .sms-btn {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .feedback {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .correct { color: green; }
+    .incorrect { color: red; }
+  </style>
+</head>
+<body>
+
+  <h1>OX 퀴즈</h1>
+  <div id="quizContainer"></div>
+
+  <script>
+    // 퀴즈 데이터
+    const quizData = [
+      { q: "1. 태양은 지구보다 크다.", a: "O", exp: "태양은 지구보다 약 109배 큽니다." },
+      { q: "2. 물은 100도에서 끓는다.", a: "O", exp: "표준기압에서 물은 100도에서 끓습니다." },
+      { q: "3. 대한민국의 수도는 서울이다.", a: "O", exp: "서울은 대한민국의 수도입니다." },
+      { q: "4. 1년은 364일이다.", a: "X", exp: "1년은 365일, 윤년은 366일입니다." },
+      { q: "5. 코끼리는 포유류다.", a: "O", exp: "코끼리는 새끼를 낳고 젖을 먹이는 포유류입니다." }
+    ];
+
+    let current = 0;
+    let correctCount = 0;
+    const container = document.getElementById("quizContainer");
+
+    // 문제 출력
+    function showQuestion() {
+      const q = quizData[current];
+      container.innerHTML = `
+        <div class="question">${q.q}</div>
+        <div class="options">
+          <button onclick="checkAnswer('O')">O</button>
+          <button onclick="checkAnswer('X')">X</button>
+        </div>
+        <div id="feedback"></div>
+      `;
+    }
+
+    // 정답 체크
+    function checkAnswer(selected) {
+      const q = quizData[current];
+      const feedbackEl = document.getElementById("feedback");
+
+      if (selected === q.a) {
+        correctCount++;
+        feedbackEl.innerHTML = `<div class="feedback correct">✅ 정답입니다!</div><div>${q.exp}</div>`;
+      } else {
+        feedbackEl.innerHTML = `<div class="feedback incorrect">❌ 오답입니다!</div><div>${q.exp}</div>`;
+      }
+
+      // 버튼 비활성화
+      document.querySelectorAll(".options button").forEach(btn => btn.disabled = true);
+
+      // 다음 버튼 또는 결과 버튼 표시
+      if (current < quizData.length - 1) {
+        feedbackEl.innerHTML += `<br><button class="next-btn" onclick="nextQuestion()">다음 문제 →</button>`;
+      } else {
+        feedbackEl.innerHTML += `<br><button class="next-btn" onclick="showResult()">결과 보기</button>`;
+      }
+    }
+
+    // 다음 문제
+    function nextQuestion() {
+      current++;
+      showQuestion();
+    }
+
+    // 인증코드 생성
+    function generateAuthCode() {
+      const now = new Date();
+      const seed = `${now.getFullYear()}${now.getMonth()+1}${now.getDate()}${now.getHours()}${now.getMinutes()}`;
+      const hash = CryptoJS.SHA256(seed).toString(CryptoJS.enc.Hex);
+      return hash.substring(0, 8);
+    }
+
+    // OS 판별
+    function detectOS() {
+      const ua = navigator.userAgent;
+      if (/android/i.test(ua)) return 'android';
+      if (/iPhone|iPad|iPod/.test(ua)) return 'ios';
+      return 'other';
+    }
+
+    // SMS 링크 생성
+    function createSMSLink(phoneNumber, message) {
+      const encoded = encodeURIComponent(message);
+      const os = detectOS();
+      if (os === 'android') return `sms:${phoneNumber}?body=${encoded}`;
+      if (os === 'ios') return `sms:${phoneNumber}&body=${encoded}`;
+      return null;
+    }
+
+    // 결과 출력
+    function showResult() {
+      if (correctCount === quizData.length) {
+        const code = generateAuthCode();
+        const smsLink = createSMSLink("01012345678", `인증코드: ${code}`);
+        container.innerHTML = `
+          🎉 모든 문제를 맞추셨습니다!<br>
+          인증코드: <strong>${code}</strong><br><br>
+          ${smsLink ? `<a href="${smsLink}"><button class="sms-btn">📩 문자앱으로 인증코드 전송</button></a>` : '⚠ 모바일에서만 지원됩니다.'}
+        `;
+      } else {
+        container.innerHTML = `
+          ❌ 일부 문제를 틀렸습니다.<br><br>
+          <button class="retry-btn" onclick="location.reload()">🔁 다시하기</button>
+        `;
+      }
+    }
+
+    // 첫 문제 시작
+    showQuestion();
+  </script>
+
+</body>
+</html>
