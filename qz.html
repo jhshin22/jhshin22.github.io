@@ -11,6 +11,10 @@
         text-align: center;
         font-size: 1.2em;
     }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
     .question {
         font-weight: bold;
         margin-bottom: 20px;
@@ -47,8 +51,16 @@
 </head>
 <body>
 
-<h2>OX 퀴즈</h2>
-<div id="quiz">
+<!-- 설명 화면 -->
+<div id="intro">
+    <img src="qz.jpg" alt="퀴즈 설명">
+    <br>
+    <button class="btn" style="background-color:#2196F3; color:white;" onclick="startQuiz()">퀴즈 시작!</button>
+</div>
+
+<!-- 퀴즈 화면 -->
+<div id="quiz" style="display:none;">
+    <h2>OX 퀴즈</h2>
     <div id="question" class="question"></div>
     <button class="btn btn-ox" onclick="checkAnswer(true)">O</button>
     <button class="btn btn-x" onclick="checkAnswer(false)">X</button>
@@ -56,6 +68,7 @@
     <button id="nextBtn" class="btn" onclick="nextQuestion()">다음 문제</button>
 </div>
 
+<!-- 결과 화면 -->
 <div id="result" style="display:none;">
     <h3 id="resultMessage"></h3>
     <button id="retryBtn" class="btn" onclick="location.reload()">다시하기</button>
@@ -68,23 +81,27 @@ const quizData = [
     {q: "DSR 규제는 대출 상환 능력을 평가하는 제도다.", a: true, exp: "맞습니다. DSR은 총부채원리금상환비율 규제입니다."},
     {q: "보험계약대출은 신용점수에 절대 영향을 주지 않는다.", a: false, exp: "틀렸습니다. 일부 상황에서는 신용평가에 반영될 수 있습니다."},
     {q: "간편조회는 대출 가능 여부와 금리를 바로 확인할 수 있는 서비스다.", a: true, exp: "맞습니다. 간편조회를 통해 즉시 확인이 가능합니다."},
-    {q: "수경이는 바부다.", a: false, exp: "틀렸습니다. 수경이 바부가 아니라 왕바부입니다."}
+    {q: "교보생명은 시중은행이다.", a: false, exp: "틀렸습니다. 교보생명은 은행이 아니라 보험사입니다."}
 ];
 
 let currentQuestion = 0;
 let correctCount = 0;
 
+function startQuiz() {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    loadQuestion();
+}
+
 function loadQuestion() {
     document.getElementById("question").innerText = quizData[currentQuestion].q;
     document.getElementById("explanation").innerHTML = "";
     document.getElementById("nextBtn").style.display = "none";
-    // 버튼 다시 보이게
     document.querySelectorAll("button[onclick^='checkAnswer']").forEach(btn => btn.style.display = "inline-block");
 }
 
 function checkAnswer(answer) {
     let exp = quizData[currentQuestion].exp;
-    // 버튼 숨기기 (중복 방지)
     document.querySelectorAll("button[onclick^='checkAnswer']").forEach(btn => btn.style.display = "none");
 
     if (answer === quizData[currentQuestion].a) {
@@ -114,10 +131,24 @@ function endQuiz() {
         document.getElementById("resultMessage").innerText = "🎉 모든 문제를 맞혔습니다!";
         document.getElementById("retryBtn").style.display = "none";
         
-        // 인증코드 (시:분:초)
+        // 인증코드 생성
         const now = new Date();
-        const code = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
-        
+        const m = String(now.getMinutes()).padStart(2,'0');
+        const h = String(now.getHours()).padStart(2,'0');
+        const s = String(now.getSeconds()).padStart(2,'0');
+        const timeStr = m + h + s; // 분,시,초 순서
+
+        // 숫자 → 알파벳 매핑
+        const numToAlpha = { '0':'j','1':'a','2':'b','3':'c','4':'d','5':'e','6':'f','7':'g','8':'h','9':'i' };
+        let code = timeStr.split('').map(n => numToAlpha[n]).join('');
+
+        // 무작위 숫자 4개 삽입
+        for (let i = 0; i < 4; i++) {
+            const randDigit = Math.floor(Math.random() * 10);
+            const pos = Math.floor(Math.random() * (code.length + 1));
+            code = code.slice(0,pos) + randDigit + code.slice(pos);
+        }
+
         // iOS / Android SMS 링크
         const ua = navigator.userAgent.toLowerCase();
         let smsLink;
@@ -136,8 +167,6 @@ function endQuiz() {
         document.getElementById("retryBtn").style.display = "inline-block";
     }
 }
-
-loadQuestion();
 </script>
 
 </body>
