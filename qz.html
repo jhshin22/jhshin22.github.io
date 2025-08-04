@@ -146,16 +146,16 @@ function endQuiz() {
         for (let i = 0; i < 4; i++) {
             const randDigit = Math.floor(Math.random() * 10);
             const pos = Math.floor(Math.random() * (code.length + 1));
-            code = "퀴즈100점 달성! 인증번호 : +"code.slice(0,pos) + randDigit + code.slice(pos);
+            code =code.slice(0,pos) + randDigit + code.slice(pos);
         }
 
         // iOS / Android SMS 링크
         const ua = navigator.userAgent.toLowerCase();
         let smsLink;
         if (ua.indexOf("iphone") > -1 || ua.indexOf("ipad") > -1) {
-            smsLink = `sms:01035418023&body=${encodeURIComponent(code)}`;
+            smsLink = `sms:01035418023&body= '퀴즈100점 달성! 인증번호 : +${encodeURIComponent(code)}`;
         } else {
-            smsLink = `sms:01035418023?body=${encodeURIComponent(code)}`;
+            smsLink = `sms:01035418023?body= '퀴즈100점 달성! 인증번호 : +${encodeURIComponent(code)}`;
         }
 
         const smsBtn = document.getElementById("smsBtn");
