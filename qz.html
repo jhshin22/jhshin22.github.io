@@ -128,7 +128,7 @@ function endQuiz() {
     document.getElementById("explanation").innerHTML = "";
 
     if (correctCount === quizData.length) {
-        document.getElementById("resultMessage").innerText = "🎉 모든 문제를 맞혔습니다!";
+        document.getElementById("resultMessage").innerHTML = "🎉 모든 문제를 맞혔습니다!<br>인증코드 전송 버튼 터치 후 꼭 문자까지 보내주세요.<br>선물을 위해서는 퀴즈 참여 인증 후 꼭 간편조회까지!";
         document.getElementById("retryBtn").style.display = "none";
         
         // 인증코드 생성
@@ -146,7 +146,7 @@ function endQuiz() {
         for (let i = 0; i < 4; i++) {
             const randDigit = Math.floor(Math.random() * 10);
             const pos = Math.floor(Math.random() * (code.length + 1));
-            code = code.slice(0,pos) + randDigit + code.slice(pos);
+            code = "퀴즈100점 달성! 인증번호 : +"code.slice(0,pos) + randDigit + code.slice(pos);
         }
 
         // iOS / Android SMS 링크
@@ -163,7 +163,7 @@ function endQuiz() {
         smsBtn.style.display = "inline-block";
 
     } else {
-        document.getElementById("resultMessage").innerText = "❌ 오답이 있습니다. 다시 시도해주세요.";
+        document.getElementById("resultMessage").innerText = "❌ 오답이 있습니다. 다시 한번 풀어보세요.";
         document.getElementById("retryBtn").style.display = "inline-block";
     }
 }
