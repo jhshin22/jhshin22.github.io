@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사칙연산 계산기</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    }
+    .calculator {
+      width: 320px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+    }
+    .title {
+      margin: 0 0 16px;
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      color: #222;
+    }
+    .display {
+      width: 100%;
+      height: 72px;
+      border: none;
+      border-radius: 12px;
+      background: #f3f4f6;
+      text-align: right;
+      font-size: 32px;
+      padding: 0 16px;
+      margin-bottom: 16px;
+      color: #111;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    button {
+      border: none;
+      border-radius: 12px;
+      height: 56px;
+      font-size: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #e5e7eb;
+      transition: transform 0.08s ease, opacity 0.2s ease;
+    }
+    button:hover { opacity: 0.92; }
+    button:active { transform: scale(0.97); }
+    .operator { background: #dbeafe; }
+    .equal { background: #2563eb; color: #fff; }
+    .clear { background: #fecaca; }
+    .zero { grid-column: span 2; }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h1 class="title">사칙연산 계산기</h1>
+    <input id="display" class="display" type="text" value="0" readonly />
+    <div class="buttons">
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button onclick="appendValue('(')">(</button>
+      <button onclick="appendValue(')')">)</button>
+      <button class="operator" onclick="appendValue('/')">÷</button>
+
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button class="operator" onclick="appendValue('*')">×</button>
+
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button class="operator" onclick="appendValue('-')">−</button>
+
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button class="operator" onclick="appendValue('+')">+</button>
+
+      <button class="zero" onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+      <button class="equal" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+
+    function appendValue(value) {
+      if (display.value === '0' || display.value === 'Error') {
+        display.value = value;
+      } else {
+        display.value += value;
+      }
+    }
+
+    function clearDisplay() {
+      display.value = '0';
+    }
+
+    function calculate() {
+      try {
+        const result = Function('return ' + display.value)();
+        display.value = Number.isFinite(result) ? String(result) : 'Error';
+      } catch (error) {
+        display.value = 'Error';
+      }
+    }
+
+    document.addEventListener('keydown', (event) => {
+      const allowedKeys = '0123456789+-*/().';
+
+      if (allowedKeys.includes(event.key)) {
+        appendValue(event.key);
+      } else if (event.key === 'Enter') {
+        event.preventDefault();
+        calculate();
+      } else if (event.key === 'Backspace') {
+        event.preventDefault();
+        display.value = display.value.length > 1 ? display.value.slice(0, -1) : '0';
+      } else if (event.key.toLowerCase() === 'c' || event.key === 'Escape') {
+        clearDisplay();
+      }
+    });
+  </script>
+</body>
+</html>
