@@ -3,137 +3,421 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>사칙연산 계산기</title>
+  <title>지뢰찾기</title>
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
       font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background: linear-gradient(135deg, #dbeafe, #eff6ff 45%, #e0f2fe);
+      color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
     }
-    .calculator {
-      width: 320px;
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
-      padding: 20px;
+    .app {
+      width: min(100%, 760px);
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 24px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+      padding: 24px;
     }
-    .title {
-      margin: 0 0 16px;
-      font-size: 20px;
-      font-weight: 700;
-      text-align: center;
-      color: #222;
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
     }
-    .display {
-      width: 100%;
-      height: 72px;
-      border: none;
-      border-radius: 12px;
-      background: #f3f4f6;
-      text-align: right;
-      font-size: 32px;
-      padding: 0 16px;
-      margin-bottom: 16px;
-      color: #111;
+    .title-wrap h1 {
+      margin: 0;
+      font-size: 28px;
     }
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+    .title-wrap p {
+      margin: 6px 0 0;
+      color: #475569;
+      font-size: 14px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
       gap: 10px;
+      align-items: center;
     }
-    button {
+    select, button.control-btn {
       border: none;
       border-radius: 12px;
-      height: 56px;
-      font-size: 20px;
+      height: 42px;
+      padding: 0 14px;
+      font-size: 15px;
       font-weight: 600;
-      cursor: pointer;
-      background: #e5e7eb;
-      transition: transform 0.08s ease, opacity 0.2s ease;
+      background: #e2e8f0;
+      color: #0f172a;
     }
-    button:hover { opacity: 0.92; }
-    button:active { transform: scale(0.97); }
-    .operator { background: #dbeafe; }
-    .equal { background: #2563eb; color: #fff; }
-    .clear { background: #fecaca; }
-    .zero { grid-column: span 2; }
+    button.control-btn {
+      cursor: pointer;
+    }
+    button.control-btn:hover {
+      opacity: 0.92;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .stat-card {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+    }
+    .stat-label {
+      display: block;
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+    .stat-value {
+      font-size: 24px;
+      font-weight: 800;
+    }
+    .board-wrap {
+      overflow: auto;
+      background: #cbd5e1;
+      border-radius: 18px;
+      padding: 12px;
+    }
+    .board {
+      display: grid;
+      gap: 3px;
+      justify-content: start;
+      user-select: none;
+      touch-action: manipulation;
+    }
+    .cell {
+      width: 34px;
+      height: 34px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      background: #94a3b8;
+      color: #0f172a;
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.12);
+    }
+    .cell:hover { filter: brightness(1.04); }
+    .cell.revealed {
+      background: #e2e8f0;
+      box-shadow: none;
+      cursor: default;
+    }
+    .cell.mine.revealed { background: #fecaca; }
+    .cell.flagged { background: #fcd34d; }
+    .n1 { color: #2563eb; }
+    .n2 { color: #15803d; }
+    .n3 { color: #dc2626; }
+    .n4 { color: #1d4ed8; }
+    .n5 { color: #7c2d12; }
+    .n6 { color: #0f766e; }
+    .n7 { color: #111827; }
+    .n8 { color: #475569; }
+    .help {
+      margin-top: 14px;
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.5;
+    }
+    @media (max-width: 640px) {
+      .app { padding: 18px; }
+      .stats { grid-template-columns: 1fr; }
+      .cell {
+        width: 30px;
+        height: 30px;
+        border-radius: 7px;
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="calculator">
-    <h1 class="title">사칙연산 계산기</h1>
-    <input id="display" class="display" type="text" value="0" readonly />
-    <div class="buttons">
-      <button class="clear" onclick="clearDisplay()">C</button>
-      <button onclick="appendValue('(')">(</button>
-      <button onclick="appendValue(')')">)</button>
-      <button class="operator" onclick="appendValue('/')">÷</button>
+  <div class="app">
+    <div class="topbar">
+      <div class="title-wrap">
+        <h1>💣 지뢰찾기</h1>
+        <p>안전한 칸을 모두 열면 승리합니다.</p>
+      </div>
+      <div class="controls">
+        <select id="difficulty">
+          <option value="9x9x10">초급 (9×9 / 지뢰 10)</option>
+          <option value="12x12x20" selected>중급 (12×12 / 지뢰 20)</option>
+          <option value="16x16x40">고급 (16×16 / 지뢰 40)</option>
+        </select>
+        <button class="control-btn" id="restartBtn">새 게임</button>
+      </div>
+    </div>
 
-      <button onclick="appendValue('7')">7</button>
-      <button onclick="appendValue('8')">8</button>
-      <button onclick="appendValue('9')">9</button>
-      <button class="operator" onclick="appendValue('*')">×</button>
+    <div class="stats">
+      <div class="stat-card">
+        <span class="stat-label">남은 지뢰(추정)</span>
+        <span class="stat-value" id="mineCount">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">경과 시간</span>
+        <span class="stat-value" id="timer">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">상태</span>
+        <span class="stat-value" id="status">🙂</span>
+      </div>
+    </div>
 
-      <button onclick="appendValue('4')">4</button>
-      <button onclick="appendValue('5')">5</button>
-      <button onclick="appendValue('6')">6</button>
-      <button class="operator" onclick="appendValue('-')">−</button>
+    <div class="board-wrap">
+      <div class="board" id="board"></div>
+    </div>
 
-      <button onclick="appendValue('1')">1</button>
-      <button onclick="appendValue('2')">2</button>
-      <button onclick="appendValue('3')">3</button>
-      <button class="operator" onclick="appendValue('+')">+</button>
-
-      <button class="zero" onclick="appendValue('0')">0</button>
-      <button onclick="appendValue('.')">.</button>
-      <button class="equal" onclick="calculate()">=</button>
+    <div class="help">
+      왼쪽 클릭: 칸 열기 · 오른쪽 클릭: 깃발 표시<br>
+      모바일에서는 칸을 한 번 더 탭해서 깃발 모드로 바꾸는 대신, 우클릭을 지원하는 환경에서 깃발을 사용하세요.
     </div>
   </div>
 
   <script>
-    const display = document.getElementById('display');
+    const boardEl = document.getElementById('board');
+    const mineCountEl = document.getElementById('mineCount');
+    const timerEl = document.getElementById('timer');
+    const statusEl = document.getElementById('status');
+    const difficultyEl = document.getElementById('difficulty');
+    const restartBtn = document.getElementById('restartBtn');
 
-    function appendValue(value) {
-      if (display.value === '0' || display.value === 'Error') {
-        display.value = value;
-      } else {
-        display.value += value;
+    let rows = 12;
+    let cols = 12;
+    let mines = 20;
+    let board = [];
+    let revealedCount = 0;
+    let flaggedCount = 0;
+    let gameOver = false;
+    let firstClick = true;
+    let timer = 0;
+    let timerId = null;
+
+    function parseDifficulty() {
+      const [r, c, m] = difficultyEl.value.split('x').map(Number);
+      rows = r;
+      cols = c;
+      mines = m;
+    }
+
+    function createEmptyBoard() {
+      board = Array.from({ length: rows }, (_, r) =>
+        Array.from({ length: cols }, (_, c) => ({
+          r,
+          c,
+          mine: false,
+          revealed: false,
+          flagged: false,
+          adjacent: 0
+        }))
+      );
+    }
+
+    function getNeighbors(r, c) {
+      const result = [];
+      for (let dr = -1; dr <= 1; dr++) {
+        for (let dc = -1; dc <= 1; dc++) {
+          if (dr === 0 && dc === 0) continue;
+          const nr = r + dr;
+          const nc = c + dc;
+          if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
+            result.push(board[nr][nc]);
+          }
+        }
+      }
+      return result;
+    }
+
+    function placeMines(safeR, safeC) {
+      let placed = 0;
+      while (placed < mines) {
+        const r = Math.floor(Math.random() * rows);
+        const c = Math.floor(Math.random() * cols);
+        const cell = board[r][c];
+        const isSafeZone = Math.abs(r - safeR) <= 1 && Math.abs(c - safeC) <= 1;
+        if (!cell.mine && !isSafeZone) {
+          cell.mine = true;
+          placed++;
+        }
+      }
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          if (board[r][c].mine) continue;
+          board[r][c].adjacent = getNeighbors(r, c).filter(n => n.mine).length;
+        }
       }
     }
 
-    function clearDisplay() {
-      display.value = '0';
+    function renderBoard() {
+      boardEl.innerHTML = '';
+      boardEl.style.gridTemplateColumns = `repeat(${cols}, 34px)`;
+      if (window.innerWidth <= 640) {
+        boardEl.style.gridTemplateColumns = `repeat(${cols}, 30px)`;
+      }
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const cell = board[r][c];
+          const btn = document.createElement('button');
+          btn.className = 'cell';
+          btn.dataset.r = r;
+          btn.dataset.c = c;
+
+          if (cell.revealed) {
+            btn.classList.add('revealed');
+            if (cell.mine) {
+              btn.classList.add('mine');
+              btn.textContent = '💣';
+            } else if (cell.adjacent > 0) {
+              btn.textContent = cell.adjacent;
+              btn.classList.add(`n${cell.adjacent}`);
+            }
+          } else if (cell.flagged) {
+            btn.classList.add('flagged');
+            btn.textContent = '🚩';
+          }
+
+          btn.addEventListener('click', () => handleLeftClick(r, c));
+          btn.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            handleRightClick(r, c);
+          });
+
+          boardEl.appendChild(btn);
+        }
+      }
+
+      mineCountEl.textContent = Math.max(mines - flaggedCount, 0);
     }
 
-    function calculate() {
-      try {
-        const result = Function('return ' + display.value)();
-        display.value = Number.isFinite(result) ? String(result) : 'Error';
-      } catch (error) {
-        display.value = 'Error';
+    function startTimer() {
+      if (timerId) return;
+      timerId = setInterval(() => {
+        timer += 1;
+        timerEl.textContent = timer;
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timerId);
+      timerId = null;
+    }
+
+    function revealCell(r, c) {
+      const cell = board[r][c];
+      if (cell.revealed || cell.flagged) return;
+      cell.revealed = true;
+      revealedCount++;
+
+      if (cell.adjacent === 0 && !cell.mine) {
+        const queue = [cell];
+        while (queue.length) {
+          const current = queue.shift();
+          for (const neighbor of getNeighbors(current.r, current.c)) {
+            if (!neighbor.revealed && !neighbor.flagged && !neighbor.mine) {
+              neighbor.revealed = true;
+              revealedCount++;
+              if (neighbor.adjacent === 0) {
+                queue.push(neighbor);
+              }
+            }
+          }
+        }
       }
     }
 
-    document.addEventListener('keydown', (event) => {
-      const allowedKeys = '0123456789+-*/().';
-
-      if (allowedKeys.includes(event.key)) {
-        appendValue(event.key);
-      } else if (event.key === 'Enter') {
-        event.preventDefault();
-        calculate();
-      } else if (event.key === 'Backspace') {
-        event.preventDefault();
-        display.value = display.value.length > 1 ? display.value.slice(0, -1) : '0';
-      } else if (event.key.toLowerCase() === 'c' || event.key === 'Escape') {
-        clearDisplay();
+    function revealAllMines() {
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          if (board[r][c].mine) board[r][c].revealed = true;
+        }
       }
-    });
+    }
+
+    function checkWin() {
+      const safeCells = rows * cols - mines;
+      if (revealedCount >= safeCells && !gameOver) {
+        gameOver = true;
+        stopTimer();
+        statusEl.textContent = '😎';
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            if (board[r][c].mine) board[r][c].flagged = true;
+          }
+        }
+        flaggedCount = mines;
+        renderBoard();
+      }
+    }
+
+    function handleLeftClick(r, c) {
+      if (gameOver) return;
+      const cell = board[r][c];
+      if (cell.flagged || cell.revealed) return;
+
+      if (firstClick) {
+        placeMines(r, c);
+        firstClick = false;
+        startTimer();
+      }
+
+      if (cell.mine) {
+        cell.revealed = true;
+        gameOver = true;
+        revealAllMines();
+        stopTimer();
+        statusEl.textContent = '😵';
+        renderBoard();
+        return;
+      }
+
+      revealCell(r, c);
+      renderBoard();
+      checkWin();
+    }
+
+    function handleRightClick(r, c) {
+      if (gameOver) return;
+      const cell = board[r][c];
+      if (cell.revealed) return;
+      cell.flagged = !cell.flagged;
+      flaggedCount += cell.flagged ? 1 : -1;
+      renderBoard();
+    }
+
+    function initGame() {
+      parseDifficulty();
+      createEmptyBoard();
+      revealedCount = 0;
+      flaggedCount = 0;
+      gameOver = false;
+      firstClick = true;
+      timer = 0;
+      timerEl.textContent = '0';
+      statusEl.textContent = '🙂';
+      stopTimer();
+      renderBoard();
+    }
+
+    restartBtn.addEventListener('click', initGame);
+    difficultyEl.addEventListener('change', initGame);
+    window.addEventListener('resize', renderBoard);
+
+    initGame();
   </script>
 </body>
 </html>
