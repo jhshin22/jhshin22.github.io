@@ -108,9 +108,7 @@
       color: #0f172a;
       text-decoration: none;
     }
-    .article-title:hover {
-      text-decoration: underline;
-    }
+    .article-title:hover { text-decoration: underline; }
     .article-meta {
       display: flex;
       flex-wrap: wrap;
@@ -128,9 +126,12 @@
       font-size: 13px;
       font-weight: 700;
     }
-    .category-card {
-      overflow: hidden;
+    .summary {
+      color: #334155;
+      font-size: 14px;
+      margin: 0;
     }
+    .category-card { overflow: hidden; }
     .category-header {
       padding: 18px 20px;
       background: linear-gradient(135deg, #eff6ff, #f8fafc);
@@ -170,6 +171,13 @@
       color: #64748b;
       text-align: center;
     }
+    .loading, .error {
+      padding: 24px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      color: #475569;
+    }
     @media (max-width: 768px) {
       .hero { padding: 24px; }
       .hero h1 { font-size: 28px; }
@@ -182,206 +190,163 @@
     <section class="hero">
       <h1>금융 기사 대시보드</h1>
       <p>전반부는 오늘 가장 중요한 이슈 Top 5, 후반부는 주제별 대표 기사 14개로 구성했습니다.</p>
-      <div class="meta">
-        <span class="chip">기준일: 2026-04-20</span>
-        <span class="chip">Top 5 + 카테고리 7개</span>
-        <span class="chip">총 19개 기사 기반</span>
+      <div class="meta" id="metaChips">
+        <span class="chip">JSON 기반 자동 렌더링</span>
       </div>
     </section>
 
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <h2>🔹 전반부: 오늘 가장 중요한 이슈 (Top 5)</h2>
-          <div class="section-desc">당일/전일 기준 영향력이 큰 기사 5개를 전면 배치했습니다.</div>
-        </div>
-      </div>
-      <div class="top-grid">
-        <article class="article-card">
-          <span class="rank">1</span>
-          <a class="article-title" href="https://www.mk.co.kr/news/economy/12022019" target="_blank" rel="noopener noreferrer">급전·빚투 수요 늘어나자 보험계약대출 55조 넘어</a>
-          <div class="article-meta">
-            <span class="badge">보험계약대출</span>
-            <span>매일경제</span>
-            <span>ID 1</span>
-          </div>
-        </article>
-
-        <article class="article-card">
-          <span class="rank">2</span>
-          <a class="article-title" href="https://biz.newdaily.co.kr/site/data/html/2026/04/20/2026042000151.html?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">중금리대출 반토막 난 저축은행 … 규제 풀어도 '수익성 한계'</a>
-          <div class="article-meta">
-            <span class="badge">저축은행</span>
-            <span>뉴데일리</span>
-            <span>ID 2</span>
-          </div>
-        </article>
-
-        <article class="article-card">
-          <span class="rank">3</span>
-          <a class="article-title" href="https://dealsite.co.kr/articles/160420?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">[태광그룹 저축은행 점검] 고려·예가람저축銀, 가계대출 '제동' ...</a>
-          <div class="article-meta">
-            <span class="badge">가계대출 제동</span>
-            <span>딜사이트</span>
-            <span>ID 3</span>
-          </div>
-        </article>
-
-        <article class="article-card">
-          <span class="rank">4</span>
-          <a class="article-title" href="https://news.nate.com/view/20260420n03144?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">"은행 대비 10배" 저축은행 대출중개 수수료 인하 추진…업계 ...</a>
-          <div class="article-meta">
-            <span class="badge">대출중개 수수료</span>
-            <span>네이트뉴스</span>
-            <span>ID 4</span>
-          </div>
-        </article>
-
-        <article class="article-card">
-          <span class="rank">5</span>
-          <a class="article-title" href="https://www.hankyung.com/article/202604202401i?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">대출규제·매물감소…3월 서울 아파트 매매 거래량 17.7% 뚝</a>
-          <div class="article-meta">
-            <span class="badge">부동산 거래 위축</span>
-            <span>한국경제</span>
-            <span>ID 5</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <h2>🔹 후반부: 주제별 대표 기사 (총 14개)</h2>
-          <div class="section-desc">각 카테고리별 2개씩 묶어 한눈에 볼 수 있도록 정리했습니다.</div>
-        </div>
-      </div>
-
-      <div class="category-grid">
-        <section class="category-card">
-          <div class="category-header">
-            <h3>① 대출 관련 정책/규제 변화</h3>
-            <p>정책 변화나 규제 완화·강화가 직접적으로 대출 실행 환경에 영향을 주는 기사</p>
-          </div>
-          <div class="category-body">
-            <div class="small-card">
-              <a href="https://news.nate.com/view/20260420n03144?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">"은행 대비 10배" 저축은행 대출중개 수수료 인하 추진…업계 ...</a>
-              <div class="article-meta"><span>네이트뉴스</span><span>ID 4</span></div>
-            </div>
-            <div class="small-card">
-              <a href="https://www.mt.co.kr/finance/2026/04/20/2026042007243962475?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">금융사, 20일부터 내부망 클라우드 소프트웨어 허용.. 망분리규제 예외</a>
-              <div class="article-meta"><span>머니투데이</span><span>ID 6</span></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="category-card">
-          <div class="category-header">
-            <h3>② 금리/지표 변화</h3>
-            <p>대출 금리, 상품 간 격차, 가계대출 흐름 등 수요와 실행에 영향을 주는 지표성 기사</p>
-          </div>
-          <div class="category-body">
-            <div class="small-card">
-              <a href="https://www.chosun.com/economy/economy_general/2026/04/19/7AC6L3YAXZFWTIHQJH4PYABT6I/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">주담대 상품간 금리 격차 두 배로...규제가 불러온 대출 불균형</a>
-              <div class="article-meta"><span>조선일보</span><span>ID 8</span></div>
-            </div>
-            <div class="small-card">
-              <a href="https://www.newsis.com/view/NISX20260417_0003596325" target="_blank" rel="noopener noreferrer">주담대 꿈틀, '빚투' 신용대출도↑…4월 은행 가계대출 7600억 늘어</a>
-              <div class="article-meta"><span>뉴시스</span><span>ID 9</span></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="category-card">
-          <div class="category-header">
-            <h3>③ 시장 방향성</h3>
-            <p>부동산·증권시장 변화로 인해 대출 수요가 바뀔 수 있는 기사</p>
-          </div>
-          <div class="category-body">
-            <div class="small-card">
-              <a href="https://v.daum.net/v/20260420053146567?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">40% 급감한 디딤돌대출...투기수요 꺾었지만 실수요자 '발동동'</a>
-              <div class="article-meta"><span>다음뉴스</span><span>ID 10</span></div>
-            </div>
-            <div class="small-card">
-              <a href="https://www.mt.co.kr/stock/2026/04/19/2026041910031418049?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">"또 포모 올까 겁나, 이번엔 나도 좀 먹자"…빚투 사상 최고치 ...</a>
-              <div class="article-meta"><span>머니투데이</span><span>ID 11</span></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="category-card">
-          <div class="category-header">
-            <h3>④ 리스크/연체/NPL</h3>
-            <p>연체채권, 부실 위험, 자산건전성 저하 가능성을 보여주는 기사</p>
-          </div>
-          <div class="category-body">
-            <div class="small-card">
-              <a href="https://news.nate.com/view/20260420n00816?mid=n0100&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">포용의 역풍…인뱅, 연체채권 1조 털었다</a>
-              <div class="article-meta"><span>네이트뉴스</span><span>ID 12</span></div>
-            </div>
-            <div class="small-card">
-              <a href="https://news.nate.com/view/20260419n12301?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">[생산적 금융의 역설] 기업대출 증가 속 연체율 상승…은행 ...</a>
-              <div class="article-meta"><span>네이트뉴스</span><span>ID 13</span></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="category-card">
-          <div class="category-header">
-            <h3>⑤ 금융사 소매 대출 전략/상품</h3>
-            <p>소매대출 채널, 전략, 동행금융, 고객자산 컨설팅 등 금융사 실행 관점 기사</p>
-          </div>
-          <div class="category-body">
-            <div class="small-card">
-              <a href="https://www.hankyung.com/article/202604203171P?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">BNK저축은행, 동행금융 본격 시행</a>
-              <div class="article-meta"><span>한국경제</span><span>ID 14</span></div>
-            </div>
-            <div class="small-card">
-              <a href="https://www.insweek.co.kr/news/articleView.html?idxno=70622&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">한화생명, 생애자산 컨설팅 고도화</a>
-              <div class="article-meta"><span>보험주간</span><span>ID 15</span></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="category-card">
-          <div class="category-header">
-            <h3>⑥ 보험사 관련 이슈</h3>
-            <p>보험사 제도, 소비자보호, 경영 지표 등 보험업 전반의 주요 이슈</p>
-          </div>
-          <div class="category-body">
-            <div class="small-card">
-              <a href="https://www.mt.co.kr/amp/finance/2026/04/20/2026042008085817349" target="_blank" rel="noopener noreferrer">보험사기 피해자 2289명에 차보험 할증료 13.6억원 환급</a>
-              <div class="article-meta"><span>머니투데이</span><span>ID 16</span></div>
-            </div>
-            <div class="small-card">
-              <a href="https://www.sedaily.com/article/20034724?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">사업비 가정 제각각...한화·교보 20%p 격차</a>
-              <div class="article-meta"><span>서울경제</span><span>ID 17</span></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="category-card">
-          <div class="category-header">
-            <h3>⑦ AI 동향 (금융 AI 포함)</h3>
-            <p>금융권 생성형 AI 도입과 AI 보안 역량 강화 흐름을 보여주는 기사</p>
-          </div>
-          <div class="category-body">
-            <div class="small-card">
-              <a href="https://www.newsis.com/view/NISX20260419_0003597209?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">수출입은행, 자체 생성형AI 플랫폼 구축…130억원 투입</a>
-              <div class="article-meta"><span>뉴시스</span><span>ID 18</span></div>
-            </div>
-            <div class="small-card">
-              <a href="https://www.asiae.co.kr/article/2026041913114503100?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">금융보안원, 'AI 보안 전문인력 양성과정' 개설…금융권으로 확대</a>
-              <div class="article-meta"><span>아시아경제</span><span>ID 19</span></div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </section>
+    <div id="app">
+      <div class="loading">데이터를 불러오는 중입니다...</div>
+    </div>
 
     <div class="footer-note">
-      본 페이지는 제공된 기사 ID 분류 기준에 따라 정리한 대시보드입니다.
+      JSON 데이터 기반으로 자동 생성된 대시보드입니다.
     </div>
   </div>
+
+  <script>
+    const DATA_FILE = './articles_detailed_2026-04-20.json';
+
+    const categoryConfig = [
+      {
+        title: '① 대출 관련 정책/규제 변화',
+        desc: '정책 변화나 규제 완화·강화가 직접적으로 대출 실행 환경에 영향을 주는 기사',
+        ids: [6, 7]
+      },
+      {
+        title: '② 금리/지표 변화',
+        desc: '대출 금리, 상품 간 격차, 가계대출 흐름 등 수요와 실행에 영향을 주는 지표성 기사',
+        ids: [8, 9]
+      },
+      {
+        title: '③ 시장 방향성 (부동산/증권시장 등 대출수요 변동될만한 이슈)',
+        desc: '부동산·증권시장 변화로 인해 대출 수요가 바뀔 수 있는 기사',
+        ids: [10, 11]
+      },
+      {
+        title: '④ 리스크/연체/NPL',
+        desc: '연체채권, 부실 위험, 자산건전성 저하 가능성을 보여주는 기사',
+        ids: [12, 13]
+      },
+      {
+        title: '⑤ 금융사 소매 대출 전략/상품 (삼성생명, 한화생명 포함)',
+        desc: '소매대출 채널, 전략, 동행금융, 고객자산 컨설팅 등 금융사 실행 관점 기사',
+        ids: [14, 15]
+      },
+      {
+        title: '⑥ 보험사 관련 이슈',
+        desc: '보험사 제도, 소비자보호, 경영 지표 등 보험업 전반의 주요 이슈',
+        ids: [16, 17]
+      },
+      {
+        title: '⑦ AI 동향 (금융 AI 포함)',
+        desc: '금융권 생성형 AI 도입과 AI 보안 역량 강화 흐름을 보여주는 기사',
+        ids: [18, 19]
+      }
+    ];
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function renderTopArticle(article, rank) {
+      return `
+        <article class="article-card">
+          <span class="rank">${rank}</span>
+          <a class="article-title" href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
+          <div class="article-meta">
+            <span>${escapeHtml(article.publisher)}</span>
+            <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
+          </div>
+          <p class="summary">${escapeHtml(article.summary)}</p>
+        </article>
+      `;
+    }
+
+    function renderCategoryArticle(article) {
+      return `
+        <div class="small-card">
+          <a href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
+          <div class="article-meta">
+            <span>${escapeHtml(article.publisher)}</span>
+            <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
+          </div>
+          <p class="summary">${escapeHtml(article.summary)}</p>
+        </div>
+      `;
+    }
+
+    function renderDashboard(data) {
+      const articleMap = new Map((data.articles || []).map(article => [article.id, article]));
+      const topArticles = [1, 2, 3, 4, 5].map(id => articleMap.get(id)).filter(Boolean);
+
+      document.getElementById('metaChips').innerHTML = `
+        <span class="chip">기준일: ${escapeHtml(data.date)}</span>
+        <span class="chip">Top 5 + 카테고리 7개</span>
+        <span class="chip">총 ${escapeHtml(data.count)}개 기사 기반</span>
+      `;
+
+      const topSection = `
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>🔹 [전반부: id1번~5번] 오늘 가장 중요한 이슈 (Top 5)</h2>
+              <div class="section-desc">당일/전일 기준 가장 영향력 큰 이슈 5개 · 특정 이슈가 크면 동일 주제 집중 가능</div>
+            </div>
+          </div>
+          <div class="top-grid">
+            ${topArticles.map((article, index) => renderTopArticle(article, index + 1)).join('')}
+          </div>
+        </section>
+      `;
+
+      const categorySection = `
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>🔹 [후반부: id6번~19번] 주제별 대표 기사 (총 14개)</h2>
+              <div class="section-desc">각 카테고리별 2개씩 선정</div>
+            </div>
+          </div>
+          <div class="category-grid">
+            ${categoryConfig.map(category => {
+              const items = category.ids.map(id => articleMap.get(id)).filter(Boolean);
+              return `
+                <section class="category-card">
+                  <div class="category-header">
+                    <h3>${escapeHtml(category.title)}</h3>
+                    <p>${escapeHtml(category.desc)}</p>
+                  </div>
+                  <div class="category-body">
+                    ${items.map(renderCategoryArticle).join('')}
+                  </div>
+                </section>
+              `;
+            }).join('')}
+          </div>
+        </section>
+      `;
+
+      document.getElementById('app').innerHTML = topSection + categorySection;
+    }
+
+    async function init() {
+      try {
+        const response = await fetch(DATA_FILE, { cache: 'no-store' });
+        if (!response.ok) throw new Error('데이터를 불러오지 못했습니다.');
+        const data = await response.json();
+        renderDashboard(data);
+      } catch (error) {
+        document.getElementById('app').innerHTML = `<div class="error">대시보드 데이터를 불러오는 데 실패했습니다. JSON 파일 경로와 형식을 확인해주세요.</div>`;
+      }
+    }
+
+    init();
+  </script>
 </body>
 </html>
