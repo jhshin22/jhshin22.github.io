@@ -3,421 +3,394 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>지뢰찾기</title>
+  <title>수박 분열 미니게임</title>
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
       font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-      background: linear-gradient(135deg, #dbeafe, #eff6ff 45%, #e0f2fe);
-      color: #0f172a;
+      background: radial-gradient(circle at top, #d9f99d, #86efac 38%, #22c55e 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 24px;
+      padding: 18px;
+      color: #14532d;
     }
     .app {
-      width: min(100%, 760px);
-      background: rgba(255, 255, 255, 0.92);
-      border-radius: 24px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
-      padding: 24px;
+      width: min(100%, 980px);
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 26px;
+      box-shadow: 0 18px 45px rgba(20, 83, 45, 0.22);
+      overflow: hidden;
+      backdrop-filter: blur(6px);
     }
-    .topbar {
+    .header {
+      padding: 20px 22px 12px;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-    .title-wrap h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-    .title-wrap p {
-      margin: 6px 0 0;
-      color: #475569;
-      font-size: 14px;
-    }
-    .controls {
-      display: flex;
+      gap: 16px;
       flex-wrap: wrap;
-      gap: 10px;
       align-items: center;
     }
-    select, button.control-btn {
-      border: none;
-      border-radius: 12px;
-      height: 42px;
-      padding: 0 14px;
-      font-size: 15px;
-      font-weight: 600;
-      background: #e2e8f0;
-      color: #0f172a;
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      color: #166534;
     }
-    button.control-btn {
-      cursor: pointer;
+    .sub {
+      margin-top: 6px;
+      font-size: 14px;
+      color: #3f6212;
     }
-    button.control-btn:hover {
-      opacity: 0.92;
-    }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    .panel {
+      display: flex;
       gap: 10px;
-      margin-bottom: 16px;
+      flex-wrap: wrap;
+      align-items: center;
     }
-    .stat-card {
-      background: #f8fafc;
-      border-radius: 16px;
-      padding: 14px;
-      text-align: center;
-      border: 1px solid #e2e8f0;
+    .stat, .btn {
+      background: #ecfccb;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #365314;
     }
-    .stat-label {
+    .btn {
+      cursor: pointer;
+      background: #bbf7d0;
+      transition: transform 0.08s ease, opacity 0.2s ease;
+    }
+    .btn:hover { opacity: 0.92; }
+    .btn:active { transform: scale(0.98); }
+    .canvas-wrap {
+      padding: 0 16px 16px;
+    }
+    canvas {
+      width: 100%;
+      height: min(72vh, 680px);
       display: block;
-      font-size: 13px;
-      color: #64748b;
-      margin-bottom: 6px;
-    }
-    .stat-value {
-      font-size: 24px;
-      font-weight: 800;
-    }
-    .board-wrap {
-      overflow: auto;
-      background: #cbd5e1;
-      border-radius: 18px;
-      padding: 12px;
-    }
-    .board {
-      display: grid;
-      gap: 3px;
-      justify-content: start;
-      user-select: none;
+      background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+      border-radius: 22px;
+      border: 3px solid #86efac;
       touch-action: manipulation;
     }
-    .cell {
-      width: 34px;
-      height: 34px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-      background: #94a3b8;
-      color: #0f172a;
-      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.12);
-    }
-    .cell:hover { filter: brightness(1.04); }
-    .cell.revealed {
-      background: #e2e8f0;
-      box-shadow: none;
-      cursor: default;
-    }
-    .cell.mine.revealed { background: #fecaca; }
-    .cell.flagged { background: #fcd34d; }
-    .n1 { color: #2563eb; }
-    .n2 { color: #15803d; }
-    .n3 { color: #dc2626; }
-    .n4 { color: #1d4ed8; }
-    .n5 { color: #7c2d12; }
-    .n6 { color: #0f766e; }
-    .n7 { color: #111827; }
-    .n8 { color: #475569; }
-    .help {
-      margin-top: 14px;
+    .guide {
+      padding: 0 22px 22px;
+      color: #3f6212;
       font-size: 14px;
-      color: #475569;
-      line-height: 1.5;
+      line-height: 1.55;
+    }
+    .guide strong {
+      color: #166534;
     }
     @media (max-width: 640px) {
-      .app { padding: 18px; }
-      .stats { grid-template-columns: 1fr; }
-      .cell {
-        width: 30px;
-        height: 30px;
-        border-radius: 7px;
-        font-size: 14px;
-      }
+      h1 { font-size: 25px; }
+      .stat, .btn { font-size: 14px; padding: 11px 14px; }
+      .guide { font-size: 13px; }
+      canvas { height: 68vh; }
     }
   </style>
 </head>
 <body>
   <div class="app">
-    <div class="topbar">
-      <div class="title-wrap">
-        <h1>💣 지뢰찾기</h1>
-        <p>안전한 칸을 모두 열면 승리합니다.</p>
+    <div class="header">
+      <div>
+        <h1>🍉 수박 분열 미니게임</h1>
+        <div class="sub">공을 클릭하거나 터치하면 분열합니다. 수 → 박 2개, 박 → 수 2개</div>
       </div>
-      <div class="controls">
-        <select id="difficulty">
-          <option value="9x9x10">초급 (9×9 / 지뢰 10)</option>
-          <option value="12x12x20" selected>중급 (12×12 / 지뢰 20)</option>
-          <option value="16x16x40">고급 (16×16 / 지뢰 40)</option>
-        </select>
-        <button class="control-btn" id="restartBtn">새 게임</button>
+      <div class="panel">
+        <div class="stat" id="countStat">공 개수: 1</div>
+        <div class="stat" id="modeStat">상태: 진행 중</div>
+        <button class="btn" id="resetBtn">처음부터</button>
       </div>
     </div>
 
-    <div class="stats">
-      <div class="stat-card">
-        <span class="stat-label">남은 지뢰(추정)</span>
-        <span class="stat-value" id="mineCount">0</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-label">경과 시간</span>
-        <span class="stat-value" id="timer">0</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-label">상태</span>
-        <span class="stat-value" id="status">🙂</span>
-      </div>
+    <div class="canvas-wrap">
+      <canvas id="gameCanvas"></canvas>
     </div>
 
-    <div class="board-wrap">
-      <div class="board" id="board"></div>
-    </div>
-
-    <div class="help">
-      왼쪽 클릭: 칸 열기 · 오른쪽 클릭: 깃발 표시<br>
-      모바일에서는 칸을 한 번 더 탭해서 깃발 모드로 바꾸는 대신, 우클릭을 지원하는 환경에서 깃발을 사용하세요.
+    <div class="guide">
+      <strong>조작법</strong><br>
+      공을 <strong>클릭/터치</strong>하면 즉시 두 개로 분열합니다.<br>
+      <strong>수</strong>가 적힌 공은 터지면 <strong>박</strong> 공 2개가 되고, <strong>박</strong> 공은 터지면 <strong>수</strong> 공 2개가 됩니다.<br>
+      공끼리 부딪히거나 벽에 닿으면 방향을 바꿔 계속 통통 튑니다.
     </div>
   </div>
 
   <script>
-    const boardEl = document.getElementById('board');
-    const mineCountEl = document.getElementById('mineCount');
-    const timerEl = document.getElementById('timer');
-    const statusEl = document.getElementById('status');
-    const difficultyEl = document.getElementById('difficulty');
-    const restartBtn = document.getElementById('restartBtn');
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const countStat = document.getElementById('countStat');
+    const modeStat = document.getElementById('modeStat');
+    const resetBtn = document.getElementById('resetBtn');
 
-    let rows = 12;
-    let cols = 12;
-    let mines = 20;
-    let board = [];
-    let revealedCount = 0;
-    let flaggedCount = 0;
-    let gameOver = false;
-    let firstClick = true;
-    let timer = 0;
-    let timerId = null;
+    let balls = [];
+    let animationId = null;
+    const MIN_SPEED = 1.8;
+    const MAX_SPEED = 3.8;
+    const MAX_BALLS = 80;
 
-    function parseDifficulty() {
-      const [r, c, m] = difficultyEl.value.split('x').map(Number);
-      rows = r;
-      cols = c;
-      mines = m;
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = Math.floor(rect.width * ratio);
+      canvas.height = Math.floor(rect.height * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     }
 
-    function createEmptyBoard() {
-      board = Array.from({ length: rows }, (_, r) =>
-        Array.from({ length: cols }, (_, c) => ({
-          r,
-          c,
-          mine: false,
-          revealed: false,
-          flagged: false,
-          adjacent: 0
-        }))
-      );
+    function rand(min, max) {
+      return Math.random() * (max - min) + min;
     }
 
-    function getNeighbors(r, c) {
-      const result = [];
-      for (let dr = -1; dr <= 1; dr++) {
-        for (let dc = -1; dc <= 1; dc++) {
-          if (dr === 0 && dc === 0) continue;
-          const nr = r + dr;
-          const nc = c + dc;
-          if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
-            result.push(board[nr][nc]);
-          }
-        }
+    function makeVelocity() {
+      let vx = rand(-MAX_SPEED, MAX_SPEED);
+      let vy = rand(-MAX_SPEED, MAX_SPEED);
+      if (Math.abs(vx) < MIN_SPEED) vx = MIN_SPEED * Math.sign(vx || 1);
+      if (Math.abs(vy) < MIN_SPEED) vy = MIN_SPEED * Math.sign(vy || -1);
+      return { vx, vy };
+    }
+
+    function createBall(x, y, text, radius = 34) {
+      const { vx, vy } = makeVelocity();
+      return {
+        x,
+        y,
+        vx,
+        vy,
+        radius,
+        text,
+        color: text === '수' ? '#22c55e' : '#f97316',
+        ring: text === '수' ? '#166534' : '#9a3412'
+      };
+    }
+
+    function seedGame() {
+      resizeCanvas();
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      balls = [createBall(w / 2, h / 2, '수', 38)];
+      updateStats();
+    }
+
+    function updateStats() {
+      countStat.textContent = `공 개수: ${balls.length}`;
+      modeStat.textContent = balls.length >= MAX_BALLS ? '상태: 최대치 도달' : '상태: 진행 중';
+    }
+
+    function clampToBounds(ball) {
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      if (ball.x - ball.radius < 0) {
+        ball.x = ball.radius;
+        ball.vx *= -1;
       }
-      return result;
-    }
-
-    function placeMines(safeR, safeC) {
-      let placed = 0;
-      while (placed < mines) {
-        const r = Math.floor(Math.random() * rows);
-        const c = Math.floor(Math.random() * cols);
-        const cell = board[r][c];
-        const isSafeZone = Math.abs(r - safeR) <= 1 && Math.abs(c - safeC) <= 1;
-        if (!cell.mine && !isSafeZone) {
-          cell.mine = true;
-          placed++;
-        }
+      if (ball.x + ball.radius > w) {
+        ball.x = w - ball.radius;
+        ball.vx *= -1;
       }
-
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          if (board[r][c].mine) continue;
-          board[r][c].adjacent = getNeighbors(r, c).filter(n => n.mine).length;
-        }
+      if (ball.y - ball.radius < 0) {
+        ball.y = ball.radius;
+        ball.vy *= -1;
+      }
+      if (ball.y + ball.radius > h) {
+        ball.y = h - ball.radius;
+        ball.vy *= -1;
       }
     }
 
-    function renderBoard() {
-      boardEl.innerHTML = '';
-      boardEl.style.gridTemplateColumns = `repeat(${cols}, 34px)`;
-      if (window.innerWidth <= 640) {
-        boardEl.style.gridTemplateColumns = `repeat(${cols}, 30px)`;
+    function moveBalls() {
+      for (const ball of balls) {
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+        clampToBounds(ball);
       }
-
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const cell = board[r][c];
-          const btn = document.createElement('button');
-          btn.className = 'cell';
-          btn.dataset.r = r;
-          btn.dataset.c = c;
-
-          if (cell.revealed) {
-            btn.classList.add('revealed');
-            if (cell.mine) {
-              btn.classList.add('mine');
-              btn.textContent = '💣';
-            } else if (cell.adjacent > 0) {
-              btn.textContent = cell.adjacent;
-              btn.classList.add(`n${cell.adjacent}`);
-            }
-          } else if (cell.flagged) {
-            btn.classList.add('flagged');
-            btn.textContent = '🚩';
-          }
-
-          btn.addEventListener('click', () => handleLeftClick(r, c));
-          btn.addEventListener('contextmenu', (event) => {
-            event.preventDefault();
-            handleRightClick(r, c);
-          });
-
-          boardEl.appendChild(btn);
-        }
-      }
-
-      mineCountEl.textContent = Math.max(mines - flaggedCount, 0);
     }
 
-    function startTimer() {
-      if (timerId) return;
-      timerId = setInterval(() => {
-        timer += 1;
-        timerEl.textContent = timer;
-      }, 1000);
-    }
+    function resolveBallCollisions() {
+      for (let i = 0; i < balls.length; i++) {
+        for (let j = i + 1; j < balls.length; j++) {
+          const a = balls[i];
+          const b = balls[j];
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          const dist = Math.hypot(dx, dy);
+          const minDist = a.radius + b.radius;
 
-    function stopTimer() {
-      clearInterval(timerId);
-      timerId = null;
-    }
+          if (dist > 0 && dist < minDist) {
+            const nx = dx / dist;
+            const ny = dy / dist;
+            const overlap = (minDist - dist) / 2;
 
-    function revealCell(r, c) {
-      const cell = board[r][c];
-      if (cell.revealed || cell.flagged) return;
-      cell.revealed = true;
-      revealedCount++;
+            a.x -= nx * overlap;
+            a.y -= ny * overlap;
+            b.x += nx * overlap;
+            b.y += ny * overlap;
 
-      if (cell.adjacent === 0 && !cell.mine) {
-        const queue = [cell];
-        while (queue.length) {
-          const current = queue.shift();
-          for (const neighbor of getNeighbors(current.r, current.c)) {
-            if (!neighbor.revealed && !neighbor.flagged && !neighbor.mine) {
-              neighbor.revealed = true;
-              revealedCount++;
-              if (neighbor.adjacent === 0) {
-                queue.push(neighbor);
-              }
-            }
+            const dvx = a.vx - b.vx;
+            const dvy = a.vy - b.vy;
+            const impact = dvx * nx + dvy * ny;
+
+            if (impact > 0) continue;
+
+            const impulse = -impact;
+            a.vx += -impulse * nx;
+            a.vy += -impulse * ny;
+            b.vx += impulse * nx;
+            b.vy += impulse * ny;
+
+            const boostA = makeVelocity();
+            const boostB = makeVelocity();
+            a.vx = (a.vx + boostA.vx * 0.12);
+            a.vy = (a.vy + boostA.vy * 0.12);
+            b.vx = (b.vx + boostB.vx * 0.12);
+            b.vy = (b.vy + boostB.vy * 0.12);
           }
         }
       }
     }
 
-    function revealAllMines() {
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          if (board[r][c].mine) board[r][c].revealed = true;
-        }
+    function drawBall(ball) {
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fillStyle = ball.color;
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = ball.ring;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(ball.x - ball.radius * 0.24, ball.y - ball.radius * 0.28, ball.radius * 0.24, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.28)';
+      ctx.fill();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = `700 ${Math.max(18, ball.radius * 0.85)}px Arial, Apple SD Gothic Neo, Malgun Gothic, sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(ball.text, ball.x, ball.y + 1);
+    }
+
+    function draw() {
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.35)';
+      for (let i = 0; i < 10; i++) {
+        ctx.beginPath();
+        ctx.arc((i * 97) % w, (i * 73) % h, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      for (const ball of balls) {
+        drawBall(ball);
       }
     }
 
-    function checkWin() {
-      const safeCells = rows * cols - mines;
-      if (revealedCount >= safeCells && !gameOver) {
-        gameOver = true;
-        stopTimer();
-        statusEl.textContent = '😎';
-        for (let r = 0; r < rows; r++) {
-          for (let c = 0; c < cols; c++) {
-            if (board[r][c].mine) board[r][c].flagged = true;
-          }
-        }
-        flaggedCount = mines;
-        renderBoard();
-      }
+    function animate() {
+      moveBalls();
+      resolveBallCollisions();
+      draw();
+      animationId = requestAnimationFrame(animate);
     }
 
-    function handleLeftClick(r, c) {
-      if (gameOver) return;
-      const cell = board[r][c];
-      if (cell.flagged || cell.revealed) return;
-
-      if (firstClick) {
-        placeMines(r, c);
-        firstClick = false;
-        startTimer();
+    function findBallAt(x, y) {
+      for (let i = balls.length - 1; i >= 0; i--) {
+        const ball = balls[i];
+        const dx = x - ball.x;
+        const dy = y - ball.y;
+        if (Math.hypot(dx, dy) <= ball.radius) {
+          return i;
+        }
       }
+      return -1;
+    }
 
-      if (cell.mine) {
-        cell.revealed = true;
-        gameOver = true;
-        revealAllMines();
-        stopTimer();
-        statusEl.textContent = '😵';
-        renderBoard();
+    function normalizePosition(source, radius) {
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      source.x = Math.max(radius, Math.min(w - radius, source.x));
+      source.y = Math.max(radius, Math.min(h - radius, source.y));
+    }
+
+    function splitBall(index) {
+      if (index < 0 || index >= balls.length) return;
+      if (balls.length >= MAX_BALLS) {
+        updateStats();
         return;
       }
 
-      revealCell(r, c);
-      renderBoard();
-      checkWin();
+      const original = balls[index];
+      const nextText = original.text === '수' ? '박' : '수';
+      const newRadius = Math.max(20, original.radius * 0.88);
+      const offset = original.radius * 0.7;
+
+      const first = createBall(original.x - offset, original.y, nextText, newRadius);
+      const second = createBall(original.x + offset, original.y, nextText, newRadius);
+
+      first.vx = -Math.abs(first.vx) - 0.6;
+      second.vx = Math.abs(second.vx) + 0.6;
+      first.vy += rand(-0.8, 0.8);
+      second.vy += rand(-0.8, 0.8);
+
+      normalizePosition(first, first.radius);
+      normalizePosition(second, second.radius);
+
+      balls.splice(index, 1, first, second);
+
+      if (balls.length > MAX_BALLS) {
+        balls = balls.slice(0, MAX_BALLS);
+      }
+
+      updateStats();
     }
 
-    function handleRightClick(r, c) {
-      if (gameOver) return;
-      const cell = board[r][c];
-      if (cell.revealed) return;
-      cell.flagged = !cell.flagged;
-      flaggedCount += cell.flagged ? 1 : -1;
-      renderBoard();
+    function pointerToCanvas(event) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = event.clientX ?? (event.touches && event.touches[0]?.clientX);
+      const clientY = event.clientY ?? (event.touches && event.touches[0]?.clientY);
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
     }
 
-    function initGame() {
-      parseDifficulty();
-      createEmptyBoard();
-      revealedCount = 0;
-      flaggedCount = 0;
-      gameOver = false;
-      firstClick = true;
-      timer = 0;
-      timerEl.textContent = '0';
-      statusEl.textContent = '🙂';
-      stopTimer();
-      renderBoard();
+    function handlePointer(event) {
+      event.preventDefault();
+      const { x, y } = pointerToCanvas(event);
+      const hitIndex = findBallAt(x, y);
+      if (hitIndex !== -1) {
+        splitBall(hitIndex);
+      }
     }
 
-    restartBtn.addEventListener('click', initGame);
-    difficultyEl.addEventListener('change', initGame);
-    window.addEventListener('resize', renderBoard);
+    function resetGame() {
+      seedGame();
+      draw();
+    }
 
-    initGame();
+    canvas.addEventListener('click', handlePointer);
+    canvas.addEventListener('touchstart', handlePointer, { passive: false });
+    resetBtn.addEventListener('click', resetGame);
+    window.addEventListener('resize', () => {
+      const previous = balls.map(ball => ({ ...ball }));
+      resizeCanvas();
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      balls = previous.map(ball => {
+        ball.x = Math.min(Math.max(ball.radius, ball.x), w - ball.radius);
+        ball.y = Math.min(Math.max(ball.radius, ball.y), h - ball.radius);
+        return ball;
+      });
+      draw();
+    });
+
+    resetGame();
+    if (animationId) cancelAnimationFrame(animationId);
+    animate();
   </script>
 </body>
 </html>
