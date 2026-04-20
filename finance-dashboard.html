@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>금융 기사 대시보드</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8 65%, #60a5fa);
+      color: #fff;
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+    }
+    .hero p {
+      margin: 0;
+      opacity: 0.92;
+      font-size: 15px;
+    }
+    .meta {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .section {
+      margin-top: 28px;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .section h2 {
+      margin: 0;
+      font-size: 28px;
+    }
+    .section-desc {
+      color: #475569;
+      font-size: 15px;
+    }
+    .top-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+    }
+    .category-card, .article-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 22px;
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+    }
+    .article-card {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .rank {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-weight: 800;
+      font-size: 15px;
+    }
+    .article-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      text-decoration: none;
+    }
+    .article-title:hover {
+      text-decoration: underline;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: #475569;
+      font-size: 14px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .category-card {
+      overflow: hidden;
+    }
+    .category-header {
+      padding: 18px 20px;
+      background: linear-gradient(135deg, #eff6ff, #f8fafc);
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .category-header h3 {
+      margin: 0 0 6px;
+      font-size: 20px;
+    }
+    .category-header p {
+      margin: 0;
+      color: #475569;
+      font-size: 14px;
+    }
+    .category-body {
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+    }
+    .small-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff;
+    }
+    .small-card a {
+      text-decoration: none;
+      color: #0f172a;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .small-card a:hover { text-decoration: underline; }
+    .footer-note {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #64748b;
+      text-align: center;
+    }
+    @media (max-width: 768px) {
+      .hero { padding: 24px; }
+      .hero h1 { font-size: 28px; }
+      .section h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>금융 기사 대시보드</h1>
+      <p>전반부는 오늘 가장 중요한 이슈 Top 5, 후반부는 주제별 대표 기사 14개로 구성했습니다.</p>
+      <div class="meta">
+        <span class="chip">기준일: 2026-04-20</span>
+        <span class="chip">Top 5 + 카테고리 7개</span>
+        <span class="chip">총 19개 기사 기반</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>🔹 전반부: 오늘 가장 중요한 이슈 (Top 5)</h2>
+          <div class="section-desc">당일/전일 기준 영향력이 큰 기사 5개를 전면 배치했습니다.</div>
+        </div>
+      </div>
+      <div class="top-grid">
+        <article class="article-card">
+          <span class="rank">1</span>
+          <a class="article-title" href="https://www.mk.co.kr/news/economy/12022019" target="_blank" rel="noopener noreferrer">급전·빚투 수요 늘어나자 보험계약대출 55조 넘어</a>
+          <div class="article-meta">
+            <span class="badge">보험계약대출</span>
+            <span>매일경제</span>
+            <span>ID 1</span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <span class="rank">2</span>
+          <a class="article-title" href="https://biz.newdaily.co.kr/site/data/html/2026/04/20/2026042000151.html?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">중금리대출 반토막 난 저축은행 … 규제 풀어도 '수익성 한계'</a>
+          <div class="article-meta">
+            <span class="badge">저축은행</span>
+            <span>뉴데일리</span>
+            <span>ID 2</span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <span class="rank">3</span>
+          <a class="article-title" href="https://dealsite.co.kr/articles/160420?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">[태광그룹 저축은행 점검] 고려·예가람저축銀, 가계대출 '제동' ...</a>
+          <div class="article-meta">
+            <span class="badge">가계대출 제동</span>
+            <span>딜사이트</span>
+            <span>ID 3</span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <span class="rank">4</span>
+          <a class="article-title" href="https://news.nate.com/view/20260420n03144?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">"은행 대비 10배" 저축은행 대출중개 수수료 인하 추진…업계 ...</a>
+          <div class="article-meta">
+            <span class="badge">대출중개 수수료</span>
+            <span>네이트뉴스</span>
+            <span>ID 4</span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <span class="rank">5</span>
+          <a class="article-title" href="https://www.hankyung.com/article/202604202401i?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">대출규제·매물감소…3월 서울 아파트 매매 거래량 17.7% 뚝</a>
+          <div class="article-meta">
+            <span class="badge">부동산 거래 위축</span>
+            <span>한국경제</span>
+            <span>ID 5</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>🔹 후반부: 주제별 대표 기사 (총 14개)</h2>
+          <div class="section-desc">각 카테고리별 2개씩 묶어 한눈에 볼 수 있도록 정리했습니다.</div>
+        </div>
+      </div>
+
+      <div class="category-grid">
+        <section class="category-card">
+          <div class="category-header">
+            <h3>① 대출 관련 정책/규제 변화</h3>
+            <p>정책 변화나 규제 완화·강화가 직접적으로 대출 실행 환경에 영향을 주는 기사</p>
+          </div>
+          <div class="category-body">
+            <div class="small-card">
+              <a href="https://news.nate.com/view/20260420n03144?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">"은행 대비 10배" 저축은행 대출중개 수수료 인하 추진…업계 ...</a>
+              <div class="article-meta"><span>네이트뉴스</span><span>ID 4</span></div>
+            </div>
+            <div class="small-card">
+              <a href="https://www.mt.co.kr/finance/2026/04/20/2026042007243962475?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">금융사, 20일부터 내부망 클라우드 소프트웨어 허용.. 망분리규제 예외</a>
+              <div class="article-meta"><span>머니투데이</span><span>ID 6</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="category-card">
+          <div class="category-header">
+            <h3>② 금리/지표 변화</h3>
+            <p>대출 금리, 상품 간 격차, 가계대출 흐름 등 수요와 실행에 영향을 주는 지표성 기사</p>
+          </div>
+          <div class="category-body">
+            <div class="small-card">
+              <a href="https://www.chosun.com/economy/economy_general/2026/04/19/7AC6L3YAXZFWTIHQJH4PYABT6I/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">주담대 상품간 금리 격차 두 배로...규제가 불러온 대출 불균형</a>
+              <div class="article-meta"><span>조선일보</span><span>ID 8</span></div>
+            </div>
+            <div class="small-card">
+              <a href="https://www.newsis.com/view/NISX20260417_0003596325" target="_blank" rel="noopener noreferrer">주담대 꿈틀, '빚투' 신용대출도↑…4월 은행 가계대출 7600억 늘어</a>
+              <div class="article-meta"><span>뉴시스</span><span>ID 9</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="category-card">
+          <div class="category-header">
+            <h3>③ 시장 방향성</h3>
+            <p>부동산·증권시장 변화로 인해 대출 수요가 바뀔 수 있는 기사</p>
+          </div>
+          <div class="category-body">
+            <div class="small-card">
+              <a href="https://v.daum.net/v/20260420053146567?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">40% 급감한 디딤돌대출...투기수요 꺾었지만 실수요자 '발동동'</a>
+              <div class="article-meta"><span>다음뉴스</span><span>ID 10</span></div>
+            </div>
+            <div class="small-card">
+              <a href="https://www.mt.co.kr/stock/2026/04/19/2026041910031418049?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">"또 포모 올까 겁나, 이번엔 나도 좀 먹자"…빚투 사상 최고치 ...</a>
+              <div class="article-meta"><span>머니투데이</span><span>ID 11</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="category-card">
+          <div class="category-header">
+            <h3>④ 리스크/연체/NPL</h3>
+            <p>연체채권, 부실 위험, 자산건전성 저하 가능성을 보여주는 기사</p>
+          </div>
+          <div class="category-body">
+            <div class="small-card">
+              <a href="https://news.nate.com/view/20260420n00816?mid=n0100&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">포용의 역풍…인뱅, 연체채권 1조 털었다</a>
+              <div class="article-meta"><span>네이트뉴스</span><span>ID 12</span></div>
+            </div>
+            <div class="small-card">
+              <a href="https://news.nate.com/view/20260419n12301?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">[생산적 금융의 역설] 기업대출 증가 속 연체율 상승…은행 ...</a>
+              <div class="article-meta"><span>네이트뉴스</span><span>ID 13</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="category-card">
+          <div class="category-header">
+            <h3>⑤ 금융사 소매 대출 전략/상품</h3>
+            <p>소매대출 채널, 전략, 동행금융, 고객자산 컨설팅 등 금융사 실행 관점 기사</p>
+          </div>
+          <div class="category-body">
+            <div class="small-card">
+              <a href="https://www.hankyung.com/article/202604203171P?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">BNK저축은행, 동행금융 본격 시행</a>
+              <div class="article-meta"><span>한국경제</span><span>ID 14</span></div>
+            </div>
+            <div class="small-card">
+              <a href="https://www.insweek.co.kr/news/articleView.html?idxno=70622&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">한화생명, 생애자산 컨설팅 고도화</a>
+              <div class="article-meta"><span>보험주간</span><span>ID 15</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="category-card">
+          <div class="category-header">
+            <h3>⑥ 보험사 관련 이슈</h3>
+            <p>보험사 제도, 소비자보호, 경영 지표 등 보험업 전반의 주요 이슈</p>
+          </div>
+          <div class="category-body">
+            <div class="small-card">
+              <a href="https://www.mt.co.kr/amp/finance/2026/04/20/2026042008085817349" target="_blank" rel="noopener noreferrer">보험사기 피해자 2289명에 차보험 할증료 13.6억원 환급</a>
+              <div class="article-meta"><span>머니투데이</span><span>ID 16</span></div>
+            </div>
+            <div class="small-card">
+              <a href="https://www.sedaily.com/article/20034724?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">사업비 가정 제각각...한화·교보 20%p 격차</a>
+              <div class="article-meta"><span>서울경제</span><span>ID 17</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="category-card">
+          <div class="category-header">
+            <h3>⑦ AI 동향 (금융 AI 포함)</h3>
+            <p>금융권 생성형 AI 도입과 AI 보안 역량 강화 흐름을 보여주는 기사</p>
+          </div>
+          <div class="category-body">
+            <div class="small-card">
+              <a href="https://www.newsis.com/view/NISX20260419_0003597209?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">수출입은행, 자체 생성형AI 플랫폼 구축…130억원 투입</a>
+              <div class="article-meta"><span>뉴시스</span><span>ID 18</span></div>
+            </div>
+            <div class="small-card">
+              <a href="https://www.asiae.co.kr/article/2026041913114503100?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">금융보안원, 'AI 보안 전문인력 양성과정' 개설…금융권으로 확대</a>
+              <div class="article-meta"><span>아시아경제</span><span>ID 19</span></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      본 페이지는 제공된 기사 ID 분류 기준에 따라 정리한 대시보드입니다.
+    </div>
+  </div>
+</body>
+</html>
