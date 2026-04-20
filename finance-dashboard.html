@@ -109,7 +109,7 @@
       text-decoration: none;
     }
     .article-title:hover { text-decoration: underline; }
-    .article-meta {
+    .article-meta, .keyword-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -126,6 +126,17 @@
       font-size: 13px;
       font-weight: 700;
     }
+    .keyword {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid #e2e8f0;
+    }
     .summary {
       color: #334155;
       font-size: 14px;
@@ -134,7 +145,6 @@
     .category-card { overflow: hidden; }
     .category-header {
       padding: 18px 20px;
-      background: linear-gradient(135deg, #eff6ff, #f8fafc);
       border-bottom: 1px solid #e2e8f0;
     }
     .category-header h3 {
@@ -146,6 +156,13 @@
       color: #475569;
       font-size: 14px;
     }
+    .cat-0 .category-header { background: linear-gradient(135deg, #dbeafe, #eff6ff); }
+    .cat-1 .category-header { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); }
+    .cat-2 .category-header { background: linear-gradient(135deg, #dcfce7, #f0fdf4); }
+    .cat-3 .category-header { background: linear-gradient(135deg, #fee2e2, #fff1f2); }
+    .cat-4 .category-header { background: linear-gradient(135deg, #fef3c7, #fffbeb); }
+    .cat-5 .category-header { background: linear-gradient(135deg, #ede9fe, #f5f3ff); }
+    .cat-6 .category-header { background: linear-gradient(135deg, #fce7f3, #fdf2f8); }
     .category-body {
       padding: 14px;
       display: grid;
@@ -208,41 +225,13 @@
     const DATA_FILE = './articles_detailed_2026-04-20.json';
 
     const categoryConfig = [
-      {
-        title: '① 대출 관련 정책/규제 변화',
-        desc: '정책 변화나 규제 완화·강화가 직접적으로 대출 실행 환경에 영향을 주는 기사',
-        ids: [6, 7]
-      },
-      {
-        title: '② 금리/지표 변화',
-        desc: '대출 금리, 상품 간 격차, 가계대출 흐름 등 수요와 실행에 영향을 주는 지표성 기사',
-        ids: [8, 9]
-      },
-      {
-        title: '③ 시장 방향성 (부동산/증권시장 등 대출수요 변동될만한 이슈)',
-        desc: '부동산·증권시장 변화로 인해 대출 수요가 바뀔 수 있는 기사',
-        ids: [10, 11]
-      },
-      {
-        title: '④ 리스크/연체/NPL',
-        desc: '연체채권, 부실 위험, 자산건전성 저하 가능성을 보여주는 기사',
-        ids: [12, 13]
-      },
-      {
-        title: '⑤ 금융사 소매 대출 전략/상품 (삼성생명, 한화생명 포함)',
-        desc: '소매대출 채널, 전략, 동행금융, 고객자산 컨설팅 등 금융사 실행 관점 기사',
-        ids: [14, 15]
-      },
-      {
-        title: '⑥ 보험사 관련 이슈',
-        desc: '보험사 제도, 소비자보호, 경영 지표 등 보험업 전반의 주요 이슈',
-        ids: [16, 17]
-      },
-      {
-        title: '⑦ AI 동향 (금융 AI 포함)',
-        desc: '금융권 생성형 AI 도입과 AI 보안 역량 강화 흐름을 보여주는 기사',
-        ids: [18, 19]
-      }
+      { title: '① 대출 관련 정책/규제 변화', desc: '정책 변화나 규제 완화·강화가 직접적으로 대출 실행 환경에 영향을 주는 기사', ids: [6, 7] },
+      { title: '② 금리/지표 변화', desc: '대출 금리, 상품 간 격차, 가계대출 흐름 등 수요와 실행에 영향을 주는 지표성 기사', ids: [8, 9] },
+      { title: '③ 시장 방향성 (부동산/증권시장 등 대출수요 변동될만한 이슈)', desc: '부동산·증권시장 변화로 인해 대출 수요가 바뀔 수 있는 기사', ids: [10, 11] },
+      { title: '④ 리스크/연체/NPL', desc: '연체채권, 부실 위험, 자산건전성 저하 가능성을 보여주는 기사', ids: [12, 13] },
+      { title: '⑤ 금융사 소매 대출 전략/상품 (삼성생명, 한화생명 포함)', desc: '소매대출 채널, 전략, 동행금융, 고객자산 컨설팅 등 금융사 실행 관점 기사', ids: [14, 15] },
+      { title: '⑥ 보험사 관련 이슈', desc: '보험사 제도, 소비자보호, 경영 지표 등 보험업 전반의 주요 이슈', ids: [16, 17] },
+      { title: '⑦ AI 동향 (금융 AI 포함)', desc: '금융권 생성형 AI 도입과 AI 보안 역량 강화 흐름을 보여주는 기사', ids: [18, 19] }
     ];
 
     function escapeHtml(value) {
@@ -254,10 +243,35 @@
         .replace(/'/g, '&#39;');
     }
 
+    function buildKeywords(article) {
+      const base = `${article.title} ${article.summary}`;
+      const rules = [
+        ['보험계약대출', '보험계약대출'], ['저축은행', '저축은행'], ['가계대출', '가계대출'], ['중금리', '중금리'],
+        ['총량 규제', '총량규제'], ['플랫폼', '플랫폼'], ['클라우드', '클라우드'], ['망분리', '망분리'],
+        ['주담대', '주담대'], ['금리', '금리'], ['부동산', '부동산'], ['디딤돌대출', '디딤돌대출'],
+        ['빚투', '빚투'], ['연체', '연체'], ['NPL', 'NPL'], ['인뱅', '인터넷은행'], ['기업대출', '기업대출'],
+        ['동행금융', '동행금융'], ['한화생명', '한화생명'], ['보험사기', '보험사기'], ['사업비', '사업비'],
+        ['교보', '교보생명'], ['생성형AI', '생성형AI'], ['AI', 'AI'], ['보안', 'AI보안']
+      ];
+
+      const found = [];
+      for (const [needle, label] of rules) {
+        if (base.includes(needle) && !found.includes(label)) found.push(label);
+      }
+      return found.slice(0, 3);
+    }
+
+    function renderKeywords(article) {
+      const keywords = buildKeywords(article);
+      if (!keywords.length) return '';
+      return `<div class="keyword-row">${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join('')}</div>`;
+    }
+
     function renderTopArticle(article, rank) {
       return `
         <article class="article-card">
           <span class="rank">${rank}</span>
+          ${renderKeywords(article)}
           <a class="article-title" href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
           <div class="article-meta">
             <span>${escapeHtml(article.publisher)}</span>
@@ -271,6 +285,7 @@
     function renderCategoryArticle(article) {
       return `
         <div class="small-card">
+          ${renderKeywords(article)}
           <a href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
           <div class="article-meta">
             <span>${escapeHtml(article.publisher)}</span>
@@ -295,7 +310,7 @@
         <section class="section">
           <div class="section-head">
             <div>
-              <h2>🔹 [전반부: id1번~5번] 오늘 가장 중요한 이슈 (Top 5)</h2>
+              <h2>🔹 오늘 가장 중요한 이슈 (Top 5)</h2>
               <div class="section-desc">당일/전일 기준 가장 영향력 큰 이슈 5개 · 특정 이슈가 크면 동일 주제 집중 가능</div>
             </div>
           </div>
@@ -309,15 +324,15 @@
         <section class="section">
           <div class="section-head">
             <div>
-              <h2>🔹 [후반부: id6번~19번] 주제별 대표 기사 (총 14개)</h2>
+              <h2>🔹 주제별 대표 기사 (총 14개)</h2>
               <div class="section-desc">각 카테고리별 2개씩 선정</div>
             </div>
           </div>
           <div class="category-grid">
-            ${categoryConfig.map(category => {
+            ${categoryConfig.map((category, categoryIndex) => {
               const items = category.ids.map(id => articleMap.get(id)).filter(Boolean);
               return `
-                <section class="category-card">
+                <section class="category-card cat-${categoryIndex}">
                   <div class="category-header">
                     <h3>${escapeHtml(category.title)}</h3>
                     <p>${escapeHtml(category.desc)}</p>
