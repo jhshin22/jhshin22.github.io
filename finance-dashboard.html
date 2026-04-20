@@ -142,6 +142,33 @@
       font-size: 14px;
       margin: 0;
     }
+    .link-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      border: 1px solid #bfdbfe;
+    }
+    .link-hint:hover {
+      background: #dbeafe;
+    }
+    .guide-banner {
+      margin: 0 0 22px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #eef6ff;
+      border: 1px solid #cfe0ff;
+      color: #1e40af;
+      font-size: 14px;
+      font-weight: 700;
+    }
     .category-card { overflow: hidden; }
     .category-header {
       padding: 18px 20px;
@@ -173,13 +200,15 @@
       border-radius: 16px;
       padding: 14px;
       background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
     .small-card a {
       text-decoration: none;
       color: #0f172a;
       font-weight: 700;
       display: block;
-      margin-bottom: 8px;
     }
     .small-card a:hover { text-decoration: underline; }
     .footer-note {
@@ -267,6 +296,10 @@
       return `<div class="keyword-row">${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join('')}</div>`;
     }
 
+    function renderOriginalLink(article) {
+      return `<a class="link-hint" href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a>`;
+    }
+
     function renderTopArticle(article, rank) {
       return `
         <article class="article-card">
@@ -278,6 +311,7 @@
             <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
           </div>
           <p class="summary">${escapeHtml(article.summary)}</p>
+          ${renderOriginalLink(article)}
         </article>
       `;
     }
@@ -292,6 +326,7 @@
             <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
           </div>
           <p class="summary">${escapeHtml(article.summary)}</p>
+          ${renderOriginalLink(article)}
         </div>
       `;
     }
@@ -306,12 +341,16 @@
         <span class="chip">총 ${escapeHtml(data.count)}개 기사 기반</span>
       `;
 
+      const guideBanner = `
+        <div class="guide-banner">기사 제목이나 <strong>원문 보기 ↗</strong> 버튼을 누르면 해당 기사 원문으로 이동합니다.</div>
+      `;
+
       const topSection = `
         <section class="section">
           <div class="section-head">
             <div>
               <h2>🔹 오늘 가장 중요한 이슈 (Top 5)</h2>
-              <div class="section-desc">당일/전일 기준 가장 영향력 큰 이슈 5개 · 특정 이슈가 크면 동일 주제 집중 가능</div>
+              <div class="section-desc">당일/전일 기준 가장 영향력 큰 이슈 5개</div>
             </div>
           </div>
           <div class="top-grid">
@@ -347,7 +386,7 @@
         </section>
       `;
 
-      document.getElementById('app').innerHTML = topSection + categorySection;
+      document.getElementById('app').innerHTML = guideBanner + topSection + categorySection;
     }
 
     async function init() {
