@@ -116,7 +116,7 @@
       <strong>조작법</strong><br>
       공을 <strong>클릭/터치</strong>하면 즉시 두 개로 분열합니다.<br>
       <strong>수</strong>가 적힌 공은 터지면 <strong>박</strong> 공 2개가 되고, <strong>박</strong> 공은 터지면 <strong>수</strong> 공 2개가 됩니다.<br>
-      공끼리 부딪히거나 벽에 닿으면 방향을 바꿔 계속 통통 튑니다.
+      처음엔 느리게 시작하고, 분열이 진행될수록 점점 빨라집니다. 공끼리 부딪히거나 벽에 닿으면 방향을 바꿔 계속 통통 튑니다.
     </div>
   </div>
 
@@ -129,9 +129,21 @@
 
     let balls = [];
     let animationId = null;
-    const MIN_SPEED = 1.8;
-    const MAX_SPEED = 3.8;
+    const BASE_MIN_SPEED = 0.75;
+    const BASE_MAX_SPEED = 1.45;
     const MAX_BALLS = 80;
+
+    function getSpeedScale() {
+      return Math.min(2.35, 1 + (balls.length - 1) * 0.035);
+    }
+
+    function getCurrentMinSpeed() {
+      return BASE_MIN_SPEED * getSpeedScale();
+    }
+
+    function getCurrentMaxSpeed() {
+      return BASE_MAX_SPEED * getSpeedScale();
+    }
 
     function resizeCanvas() {
       const rect = canvas.getBoundingClientRect();
@@ -145,11 +157,24 @@
       return Math.random() * (max - min) + min;
     }
 
+    function clampVelocity(ball) {
+      const min = getCurrentMinSpeed();
+      const max = getCurrentMaxSpeed();
+      const speed = Math.hypot(ball.vx, ball.vy) || 1;
+      if (speed < min || speed > max) {
+        const target = Math.min(max, Math.max(min, speed));
+        ball.vx = (ball.vx / speed) * target;
+        ball.vy = (ball.vy / speed) * target;
+      }
+    }
+
     function makeVelocity() {
-      let vx = rand(-MAX_SPEED, MAX_SPEED);
-      let vy = rand(-MAX_SPEED, MAX_SPEED);
-      if (Math.abs(vx) < MIN_SPEED) vx = MIN_SPEED * Math.sign(vx || 1);
-      if (Math.abs(vy) < MIN_SPEED) vy = MIN_SPEED * Math.sign(vy || -1);
+      const min = getCurrentMinSpeed();
+      const max = getCurrentMaxSpeed();
+      let vx = rand(-max, max);
+      let vy = rand(-max, max);
+      if (Math.abs(vx) < min) vx = min * Math.sign(vx || 1);
+      if (Math.abs(vy) < min) vy = min * Math.sign(vy || -1);
       return { vx, vy };
     }
 
@@ -177,7 +202,7 @@
 
     function updateStats() {
       countStat.textContent = `공 개수: ${balls.length}`;
-      modeStat.textContent = balls.length >= MAX_BALLS ? '상태: 최대치 도달' : '상태: 진행 중';
+      modeStat.textContent = balls.length >= MAX_BALLS ? '상태: 최대치 도달' : `상태: 속도 x${getSpeedScale().toFixed(2)}`;
     }
 
     function clampToBounds(ball) {
@@ -199,6 +224,7 @@
         ball.y = h - ball.radius;
         ball.vy *= -1;
       }
+      clampVelocity(ball);
     }
 
     function moveBalls() {
@@ -241,12 +267,13 @@
             b.vx += impulse * nx;
             b.vy += impulse * ny;
 
-            const boostA = makeVelocity();
-            const boostB = makeVelocity();
-            a.vx = (a.vx + boostA.vx * 0.12);
-            a.vy = (a.vy + boostA.vy * 0.12);
-            b.vx = (b.vx + boostB.vx * 0.12);
-            b.vy = (b.vy + boostB.vy * 0.12);
+            const bump = 0.08 * getSpeedScale();
+            a.vx += -nx * bump;
+            a.vy += -ny * bump;
+            b.vx += nx * bump;
+            b.vy += ny * bump;
+            clampVelocity(a);
+            clampVelocity(b);
           }
         }
       }
@@ -316,6 +343,12 @@
       source.y = Math.max(radius, Math.min(h - radius, source.y));
     }
 
+    function rebalanceAllSpeeds() {
+      for (const ball of balls) {
+        clampVelocity(ball);
+      }
+    }
+
     function splitBall(index) {
       if (index < 0 || index >= balls.length) return;
       if (balls.length >= MAX_BALLS) {
@@ -331,10 +364,11 @@
       const first = createBall(original.x - offset, original.y, nextText, newRadius);
       const second = createBall(original.x + offset, original.y, nextText, newRadius);
 
-      first.vx = -Math.abs(first.vx) - 0.6;
-      second.vx = Math.abs(second.vx) + 0.6;
-      first.vy += rand(-0.8, 0.8);
-      second.vy += rand(-0.8, 0.8);
+      const splitKick = 0.18 * getSpeedScale();
+      first.vx = -Math.abs(first.vx) - splitKick;
+      second.vx = Math.abs(second.vx) + splitKick;
+      first.vy += rand(-0.25, 0.25);
+      second.vy += rand(-0.25, 0.25);
 
       normalizePosition(first, first.radius);
       normalizePosition(second, second.radius);
@@ -345,6 +379,7 @@
         balls = balls.slice(0, MAX_BALLS);
       }
 
+      rebalanceAllSpeeds();
       updateStats();
     }
 
@@ -383,6 +418,7 @@
       balls = previous.map(ball => {
         ball.x = Math.min(Math.max(ball.radius, ball.x), w - ball.radius);
         ball.y = Math.min(Math.max(ball.radius, ball.y), h - ball.radius);
+        clampVelocity(ball);
         return ball;
       });
       draw();
