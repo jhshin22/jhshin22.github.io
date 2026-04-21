@@ -10,6 +10,7 @@ const questionPanel = document.getElementById('questionPanel');
 const submitBtn = document.getElementById('submitBtn');
 const nextBtn = document.getElementById('nextBtn');
 const resetBtn = document.getElementById('resetBtn');
+const chartNote = document.getElementById('chartNote');
 
 let chart = null;
 let problems = [];
@@ -20,11 +21,12 @@ let answered = false;
 let results = [];
 
 function ensureChart() {
-  if (chart) {
-    return chart;
+  if (!window.echarts) {
+    throw new Error('ECharts 라이브러리를 불러오지 못했습니다.');
   }
+  if (chart) return chart;
   chartEl.innerHTML = '';
-  chart = echarts.init(chartEl, null, { renderer: 'canvas' });
+  chart = window.echarts.init(chartEl, null, { renderer: 'canvas' });
   return chart;
 }
 
@@ -70,97 +72,106 @@ function bindChoiceButtons() {
   });
 }
 
-function buildChartOption(problem, reveal = false) {
-  const visible = problem.visibleCandles || [];
+function getChartData(problem, reveal = false) {
+  const visible = Array.isArray(problem.visibleCandles) ? problem.visibleCandles : [];
   const target = problem.targetCandle;
   const candles = reveal ? [...visible, target] : visible;
-  const categoryData = candles.map(d => d.date);
-  const values = candles.map(d => [d.open, d.close, d.low, d.high]);
-  const volumes = candles.map((d, i) => ({
-    value: [i, d.volume, d.close >= d.open ? 1 : -1]
-  }));
 
-  const markAreaData = !reveal && visible.length
-    ? [[
-        { xAxis: visible[visible.length - 1].date },
-        { xAxis: visible[visible.length - 1].date }
-      ]]
+  return {
+    categoryData: candles.map(d => d.date),
+    candleValues: candles.map(d => [Number(d.open), Number(d.close), Number(d.low), Number(d.high)]),
+    volumeValues: candles.map(d => Number(d.volume)),
+    volumeDirections: candles.map(d => (Number(d.close) >= Number(d.open) ? 1 : -1)),
+    lastVisibleDate: visible.length ? visible[visible.length - 1].date : null,
+  };
+}
+
+function buildChartOption(problem, reveal = false) {
+  const { categoryData, candleValues, volumeValues, volumeDirections, lastVisibleDate } = getChartData(problem, reveal);
+
+  const markAreaData = !reveal && lastVisibleDate
+    ? [[{ xAxis: lastVisibleDate }, { xAxis: lastVisibleDate }]]
     : [];
 
   return {
     animation: false,
-    legend: { data: ['일봉', '거래량'] },
-    axisPointer: { link: [{ xAxisIndex: 'all' }] },
+    backgroundColor: '#ffffff',
     tooltip: {
       trigger: 'axis',
       axisPointer: { type: 'cross' }
     },
+    axisPointer: { link: [{ xAxisIndex: [0, 1] }] },
     grid: [
-      { left: '8%', right: '5%', top: 50, height: '55%' },
-      { left: '8%', right: '5%', top: '72%', height: '16%' }
+      { left: '8%', right: '4%', top: 24, height: '58%' },
+      { left: '8%', right: '4%', top: '74%', height: '14%' }
     ],
     xAxis: [
       {
         type: 'category',
         data: categoryData,
+        scale: true,
         boundaryGap: true,
-        axisLine: { onZero: false },
-        splitLine: { show: false },
-        min: 'dataMin',
-        max: 'dataMax'
+        axisLine: { lineStyle: { color: '#9fb0c7' } },
+        axisLabel: { color: '#66758a' },
+        splitLine: { show: false }
       },
       {
         type: 'category',
         gridIndex: 1,
         data: categoryData,
+        scale: true,
         boundaryGap: true,
-        axisLine: { onZero: false },
-        axisTick: { show: false },
-        splitLine: { show: false },
+        axisLine: { lineStyle: { color: '#9fb0c7' } },
         axisLabel: { show: false },
-        min: 'dataMin',
-        max: 'dataMax'
+        axisTick: { show: false },
+        splitLine: { show: false }
       }
     ],
     yAxis: [
-      { scale: true, splitArea: { show: true } },
-      { scale: true, gridIndex: 1, splitNumber: 2 }
+      {
+        scale: true,
+        axisLine: { show: false },
+        axisLabel: { color: '#66758a' },
+        splitLine: { lineStyle: { color: '#edf2f8' } }
+      },
+      {
+        gridIndex: 1,
+        scale: true,
+        axisLine: { show: false },
+        axisLabel: { color: '#66758a' },
+        splitLine: { show: false }
+      }
     ],
     dataZoom: [
-      { type: 'inside', xAxisIndex: [0, 1], start: 0, end: 100 },
-      { show: false, xAxisIndex: [0, 1], type: 'slider', start: 0, end: 100 }
+      { type: 'inside', xAxisIndex: [0, 1], start: 0, end: 100 }
     ],
-    visualMap: {
-      show: false,
-      seriesIndex: 1,
-      dimension: 2,
-      pieces: [
-        { value: 1, color: '#d9485f' },
-        { value: -1, color: '#11a36a' }
-      ]
-    },
     series: [
       {
         name: '일봉',
         type: 'candlestick',
-        data: values,
+        data: candleValues,
         itemStyle: {
           color: '#d9485f',
           color0: '#11a36a',
           borderColor: '#d9485f',
           borderColor0: '#11a36a'
         },
-        markArea: markAreaData.length ? {
-          itemStyle: { color: 'rgba(36, 91, 219, 0.08)' },
-          data: markAreaData
-        } : undefined
+        markArea: markAreaData.length
+          ? {
+              itemStyle: { color: 'rgba(36, 91, 219, 0.08)' },
+              data: markAreaData
+            }
+          : undefined
       },
       {
         name: '거래량',
         type: 'bar',
         xAxisIndex: 1,
         yAxisIndex: 1,
-        data: volumes
+        data: volumeValues,
+        itemStyle: {
+          color: params => (volumeDirections[params.dataIndex] === 1 ? '#d9485f' : '#11a36a')
+        }
       }
     ]
   };
@@ -178,10 +189,14 @@ function renderProblem() {
   nextBtn.hidden = true;
   resultPanel.hidden = true;
   questionPanel.hidden = false;
+
   const chartInstance = ensureChart();
+  const chartOption = buildChartOption(problem, false);
   chartInstance.clear();
-  chartInstance.setOption(buildChartOption(problem, false), true);
+  chartInstance.setOption(chartOption, true);
   chartInstance.resize();
+
+  chartNote.textContent = `샘플 데이터 로드 완료 · ${problem.company} 문제 표시 중 · 차트 오른쪽 빈칸 뒤에 숨겨진 다음 거래일을 맞혀보세요.`;
 }
 
 function renderResults() {
@@ -221,6 +236,7 @@ function submitAnswer() {
   score += gained;
   answered = true;
   scoreText.textContent = `${score}점`;
+
   const chartInstance = ensureChart();
   chartInstance.clear();
   chartInstance.setOption(buildChartOption(problem, true), true);
@@ -246,6 +262,7 @@ function submitAnswer() {
   feedbackText.textContent = `정답 공개 (전날 종가대비): 시가 ${directionText(actualOpen)}, 종가 ${directionText(actualClose)} — ${gained}점 획득`;
   submitBtn.hidden = true;
   nextBtn.hidden = false;
+  chartNote.textContent = `정답 공개 완료 · ${problem.company} (${problem.symbol}) · ${problem.targetCandle.date}`;
 }
 
 function goNext() {
@@ -258,18 +275,25 @@ function goNext() {
 }
 
 async function loadProblems() {
+  chartNote.textContent = '문제 데이터를 불러오는 중...';
   const res = await fetch('./data/problems.json', { cache: 'no-store' });
-  if (!res.ok) throw new Error('문제 데이터를 불러오지 못했습니다.');
+  if (!res.ok) {
+    throw new Error(`문제 데이터를 불러오지 못했습니다. (HTTP ${res.status})`);
+  }
   const data = await res.json();
   const candidates = Array.isArray(data.problems) ? data.problems : [];
   const valid = candidates.filter(p => Array.isArray(p.visibleCandles) && p.visibleCandles.length > 5 && p.targetCandle);
-  if (!valid.length) throw new Error('사용 가능한 문제가 없습니다. build_dataset.py 또는 GitHub Actions로 데이터를 생성해 주세요.');
+  if (!valid.length) {
+    throw new Error('사용 가능한 문제가 없습니다. build_dataset.py 또는 GitHub Actions로 데이터를 생성해 주세요.');
+  }
+  chartNote.textContent = `문제 데이터 로드 성공 · 총 ${valid.length}문제`;
   return shuffle(valid);
 }
 
 function showEmptyState(message) {
   disposeChart();
   chartEl.innerHTML = `<div class="empty-state">${message}</div>`;
+  chartNote.textContent = message;
   questionPanel.hidden = true;
   resultPanel.hidden = false;
   finalScore.textContent = '게임을 시작할 수 없습니다.';
@@ -287,6 +311,7 @@ resetBtn.addEventListener('click', async () => {
   results = [];
   renderProblem();
 });
+
 submitBtn.addEventListener('click', submitAnswer);
 nextBtn.addEventListener('click', goNext);
 window.addEventListener('resize', () => {
