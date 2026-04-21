@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import math
 import random
 from dataclasses import dataclass
 from datetime import datetime, timedelta
@@ -14,9 +13,9 @@ from pykrx import stock
 
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / 'data' / 'problems.json'
-SEED = 20260421
 VISIBLE_DAYS = 20
-PROBLEMS_PER_STOCK = 2
+PROBLEMS_PER_STOCK = 3
+TARGET_PROBLEM_COUNT = 30
 
 KR_STOCKS: Dict[str, str] = {
     '005930': '삼성전자',
@@ -106,6 +105,7 @@ def build_problems_from_df(df: pd.DataFrame, market: str, symbol: str, company: 
     for idx in candidates:
         if len(selected) >= PROBLEMS_PER_STOCK:
             break
+
         window = df.iloc[idx - VISIBLE_DAYS: idx]
         target = df.iloc[idx]
         prev_close = float(window.iloc[-1]['Close'])
@@ -128,7 +128,8 @@ def build_problems_from_df(df: pd.DataFrame, market: str, symbol: str, company: 
 
 
 def main() -> None:
-    rng = random.Random(SEED)
+    seed_value = datetime.utcnow().strftime('%Y%m%d')
+    rng = random.Random(seed_value)
     problems: List[Problem] = []
 
     for symbol, company in KR_STOCKS.items():
@@ -148,11 +149,14 @@ def main() -> None:
             print(f'US failed: {symbol} {company} -> {exc}')
 
     rng.shuffle(problems)
+    problems = problems[:TARGET_PROBLEM_COUNT]
+
     payload = {
         'generated_at': datetime.utcnow().isoformat() + 'Z',
-        'seed': SEED,
+        'seed': seed_value,
         'visible_days': VISIBLE_DAYS,
         'problem_count': len(problems),
+        'target_problem_count': TARGET_PROBLEM_COUNT,
         'problems': [p.__dict__ for p in problems],
     }
 
