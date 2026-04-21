@@ -54,6 +54,10 @@ function directionText(v) {
   return v === 'up' ? '상승' : '하락';
 }
 
+function resultText(isCorrect) {
+  return isCorrect ? '맞춤' : '틀림';
+}
+
 function resetChoiceButtons() {
   document.querySelectorAll('.choice-btn').forEach(btn => btn.classList.remove('active'));
   selections = { open: null, close: null };
@@ -87,65 +91,130 @@ function getChartData(problem, reveal = false) {
     )),
     volumeValues: candles.map(d => (d.volume == null ? '-' : Number(d.volume))),
     volumeDirections: candles.map(d => (d.close == null || d.open == null ? 0 : (Number(d.close) >= Number(d.open) ? 1 : -1))),
-    lastVisibleDate: visible.length ? visible[visible.length - 1].date : null,
     targetDate: target?.date ?? null,
     targetHigh: target?.high ?? null,
+    targetLow: target?.low ?? null,
   };
 }
 
-function buildGraphicOverlay(reveal = false) {
-  if (reveal) return [];
+function buildGraphicOverlay(problem, reveal = false, answerMeta = null) {
+  const visibleCount = Array.isArray(problem.visibleCandles) ? problem.visibleCandles.length : 0;
+  const xCenter = Math.max(visibleCount + 0.5, 1);
+
+  if (!reveal) {
+    return [
+      {
+        type: 'group',
+        z: 100,
+        children: [
+          {
+            type: 'rect',
+            shape: { x: -26, y: -92, width: 52, height: 184, r: 14 },
+            position: ['88%', '38%'],
+            style: {
+              fill: 'rgba(36, 91, 219, 0.10)',
+              stroke: '#245bdb',
+              lineWidth: 2,
+              shadowBlur: 10,
+              shadowColor: 'rgba(36, 91, 219, 0.12)'
+            }
+          },
+          {
+            type: 'text',
+            position: ['88%', '35%'],
+            style: {
+              text: '?',
+              fill: '#245bdb',
+              fontSize: 34,
+              fontWeight: 800,
+              textAlign: 'center',
+              textVerticalAlign: 'middle'
+            }
+          },
+          {
+            type: 'text',
+            position: ['88%', '46%'],
+            style: {
+              text: '예측 구간',
+              fill: '#245bdb',
+              fontSize: 11,
+              fontWeight: 700,
+              textAlign: 'center',
+              textVerticalAlign: 'middle'
+            }
+          }
+        ]
+      }
+    ];
+  }
+
+  if (!answerMeta) return [];
+
   return [
     {
       type: 'group',
-      right: '4%',
-      top: 24,
-      z: 100,
+      right: 22,
+      top: 18,
+      z: 120,
       children: [
         {
           type: 'rect',
-          shape: { x: 0, y: 0, width: 74, height: 366, r: 16 },
+          shape: { x: 0, y: 0, width: 176, height: 68, r: 14 },
           style: {
-            fill: 'rgba(36, 91, 219, 0.09)',
-            stroke: '#245bdb',
-            lineWidth: 2,
-          },
+            fill: 'rgba(255,255,255,0.94)',
+            stroke: '#d9e2ef',
+            lineWidth: 1,
+            shadowBlur: 12,
+            shadowColor: 'rgba(31, 43, 58, 0.10)'
+          }
         },
         {
           type: 'text',
           style: {
-            x: 29,
-            y: 130,
-            text: '?',
-            fill: '#245bdb',
-            fontSize: 44,
-            fontWeight: 800,
-          },
+            x: 14,
+            y: 22,
+            text: `시가 ${directionText(answerMeta.actualOpen)} · ${resultText(answerMeta.openCorrect)}`,
+            fill: answerMeta.openCorrect ? '#11a36a' : '#d9485f',
+            fontSize: 13,
+            fontWeight: 700
+          }
         },
         {
           type: 'text',
           style: {
-            x: 13,
-            y: 186,
-            text: '예측 구간',
-            fill: '#245bdb',
-            fontSize: 12,
-            fontWeight: 700,
-          },
-        },
-      ],
+            x: 14,
+            y: 46,
+            text: `종가 ${directionText(answerMeta.actualClose)} · ${resultText(answerMeta.closeCorrect)}`,
+            fill: answerMeta.closeCorrect ? '#11a36a' : '#d9485f',
+            fontSize: 13,
+            fontWeight: 700
+          }
+        }
+      ]
     },
+    {
+      type: 'text',
+      z: 121,
+      style: {
+        text: '예측한 캔들',
+        fill: '#8a6513',
+        fontSize: 11,
+        fontWeight: 700,
+        textAlign: 'center'
+      },
+      position: ['50%', '14%']
+    }
   ];
 }
 
-function buildChartOption(problem, reveal = false) {
-  const { categoryData, candleValues, volumeValues, volumeDirections, lastVisibleDate, targetDate, targetHigh } = getChartData(problem, reveal);
+function buildChartOption(problem, reveal = false, answerMeta = null) {
+  const { categoryData, candleValues, volumeValues, volumeDirections, targetDate, targetHigh, targetLow } = getChartData(problem, reveal);
 
   const markAreaData = reveal && targetDate
     ? [[{ xAxis: targetDate }, { xAxis: targetDate }]]
-    : !reveal && lastVisibleDate
-      ? [[{ xAxis: lastVisibleDate }, { xAxis: lastVisibleDate }]]
-      : [];
+    : [];
+
+  const targetMid = targetHigh != null && targetLow != null ? (Number(targetHigh) + Number(targetLow)) / 2 : null;
 
   return {
     animation: false,
@@ -157,7 +226,7 @@ function buildChartOption(problem, reveal = false) {
         }
       : { show: false },
     axisPointer: { link: [{ xAxisIndex: [0, 1] }] },
-    graphic: buildGraphicOverlay(reveal),
+    graphic: buildGraphicOverlay(problem, reveal, answerMeta),
     grid: [
       { left: '8%', right: '4%', top: 24, height: '58%' },
       { left: '8%', right: '4%', top: '74%', height: '14%' }
@@ -225,9 +294,7 @@ function buildChartOption(problem, reveal = false) {
         },
         markArea: markAreaData.length
           ? {
-              itemStyle: {
-                color: reveal ? 'rgba(245, 190, 59, 0.20)' : 'rgba(36, 91, 219, 0.08)'
-              },
+              itemStyle: { color: 'rgba(245, 190, 59, 0.22)' },
               data: markAreaData
             }
           : undefined,
@@ -238,6 +305,14 @@ function buildChartOption(problem, reveal = false) {
               itemStyle: { color: '#f5be3b' },
               label: { show: false },
               data: [{ coord: [targetDate, Number(targetHigh)], value: '정답' }]
+            }
+          : undefined,
+        markLine: reveal && targetDate && targetMid != null
+          ? {
+              symbol: ['none', 'none'],
+              label: { show: false },
+              lineStyle: { color: '#f5be3b', type: 'dashed', width: 1.5 },
+              data: [{ xAxis: targetDate }]
             }
           : undefined
       },
@@ -275,7 +350,7 @@ function renderProblem() {
 
   const chartInstance = ensureChart();
   chartInstance.clear();
-  chartInstance.setOption(buildChartOption(problem, false), true);
+  chartInstance.setOption(buildChartOption(problem, false, null), true);
   chartInstance.resize();
 
   chartNote.textContent = `날짜·가격 비공개 상태 · ${problem.company} 문제 표시 중 · 오른쪽 물음표 구간의 다음 거래일 캔들을 예측해 보세요.`;
@@ -314,14 +389,16 @@ function submitAnswer() {
   const openCorrect = selections.open === actualOpen;
   const closeCorrect = selections.close === actualClose;
   const gained = Number(openCorrect) + Number(closeCorrect);
+  const answerMeta = { actualOpen, actualClose, openCorrect, closeCorrect };
 
   score += gained;
   answered = true;
   scoreText.textContent = `${score}점`;
 
+  chartEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const chartInstance = ensureChart();
   chartInstance.clear();
-  chartInstance.setOption(buildChartOption(problem, true), true);
+  chartInstance.setOption(buildChartOption(problem, true, answerMeta), true);
   chartInstance.resize();
 
   results.push({
@@ -344,7 +421,7 @@ function submitAnswer() {
   feedbackText.textContent = `정답 공개 (전날 종가대비): 시가 ${directionText(actualOpen)}, 종가 ${directionText(actualClose)} — ${gained}점 획득`;
   submitBtn.hidden = true;
   nextBtn.hidden = false;
-  chartNote.textContent = `정답 공개 완료 · 하이라이트된 캔들이 방금 예측한 다음 거래일입니다. · ${problem.company} (${problem.symbol}) · ${problem.targetCandle.date}`;
+  chartNote.textContent = `정답 공개 완료 · 하이라이트된 캔들이 방금 예측한 다음 거래일입니다. · 차트 오른쪽 상단에서 시가/종가 정답 여부를 확인해 보세요.`;
 }
 
 function goNext() {
