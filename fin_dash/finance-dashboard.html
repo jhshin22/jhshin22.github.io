@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>소매여신 기사 대시보드</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8 65%, #60a5fa);
+      color: #fff;
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+      margin-bottom: 28px;
+    }
+    .hero h1 { margin: 0 0 12px; font-size: 34px; }
+    .hero p { margin: 0; opacity: 0.92; font-size: 15px; }
+    .meta { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .chip {
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .section { margin-top: 28px; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .section h2 { margin: 0; font-size: 28px; }
+    .section-desc { color: #475569; font-size: 15px; }
+    .top-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+    }
+    .category-card, .article-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 22px;
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+    }
+    .article-card {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .rank {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-weight: 800;
+      font-size: 15px;
+    }
+    .article-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      text-decoration: none;
+    }
+    .article-title:hover { text-decoration: underline; }
+    .article-meta, .keyword-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: #475569;
+      font-size: 14px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .keyword {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid #e2e8f0;
+    }
+    .summary { color: #334155; font-size: 14px; margin: 0; }
+    .link-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      border: 1px solid #bfdbfe;
+    }
+    .link-hint:hover { background: #dbeafe; }
+    .guide-banner {
+      margin: 0 0 22px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #eef6ff;
+      border: 1px solid #cfe0ff;
+      color: #1e40af;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .category-card { overflow: hidden; }
+    .category-header { padding: 18px 20px; border-bottom: 1px solid #e2e8f0; }
+    .category-header h3 { margin: 0 0 6px; font-size: 20px; }
+    .category-header p { margin: 0; color: #475569; font-size: 14px; }
+    .cat-0 .category-header { background: linear-gradient(135deg, #dbeafe, #eff6ff); }
+    .cat-1 .category-header { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); }
+    .cat-2 .category-header { background: linear-gradient(135deg, #dcfce7, #f0fdf4); }
+    .cat-3 .category-header { background: linear-gradient(135deg, #fee2e2, #fff1f2); }
+    .cat-4 .category-header { background: linear-gradient(135deg, #fef3c7, #fffbeb); }
+    .cat-5 .category-header { background: linear-gradient(135deg, #ede9fe, #f5f3ff); }
+    .cat-6 .category-header { background: linear-gradient(135deg, #fce7f3, #fdf2f8); }
+    .category-body { padding: 14px; display: grid; gap: 12px; }
+    .small-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .small-card a { text-decoration: none; color: #0f172a; font-weight: 700; display: block; }
+    .small-card a:hover { text-decoration: underline; }
+    .footer-note { margin-top: 30px; font-size: 13px; color: #64748b; text-align: center; }
+    .loading, .error {
+      padding: 24px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      color: #475569;
+    }
+    @media (max-width: 768px) {
+      .hero { padding: 24px; }
+      .hero h1 { font-size: 28px; }
+      .section h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>소매여신 기사 대시보드</h1>
+      <p>전반부는 오늘 가장 중요한 이슈 Top 5, 후반부는 주제별 대표 기사 14개로 구성했습니다.</p>
+      <div class="meta" id="metaChips">
+        <span class="chip">JSON 기반 자동 렌더링</span>
+      </div>
+    </section>
+
+    <div id="app">
+      <div class="loading">데이터를 불러오는 중입니다...</div>
+    </div>
+
+    <div class="footer-note">JSON 데이터 기반으로 자동 생성된 대시보드입니다.</div>
+  </div>
+
+  <script>
+    const DATA_FILE = './articles_detailed_2026-04-21.json';
+
+    const categoryConfig = [
+      { title: '① 대출 관련 정책/규제 변화', desc: '정책 변화나 규제 완화·강화가 직접적으로 대출 실행 환경에 영향을 주는 기사', ids: [6, 7] },
+      { title: '② 금리/지표 변화', desc: '대출 금리, 상품 간 격차, 가계대출 흐름 등 수요와 실행에 영향을 주는 지표성 기사', ids: [8, 9] },
+      { title: '③ 시장 방향성 (부동산/대출 수요)', desc: '부동산·생활자금 수요 변화로 인해 대출 수요가 바뀔 수 있는 기사', ids: [10, 11] },
+      { title: '④ 리스크/연체/NPL', desc: '연체채권, 부실 위험, 자산건전성 저하 가능성을 보여주는 기사', ids: [12, 13] },
+      { title: '⑤ 금융사 소매 대출 전략/상품 (특히 삼성생명, 한화생명 포함)', desc: '소매대출 채널, 전략, 구조금융, 고객 접점 변화 등 금융사 실행 관점 기사', ids: [14, 15] },
+      { title: '⑥ 보험사 관련 이슈', desc: '보험사 제도, 소비자보호, 채널 운영 등 보험업 전반의 주요 이슈', ids: [16, 17] },
+      { title: '⑦ AI 동향 (금융 AI 포함)', desc: '금융권 AI 도입과 AI 보안 역량 강화 흐름을 보여주는 기사', ids: [18, 19] }
+    ];
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function buildKeywords(article) {
+      if (Array.isArray(article.keywords)) return article.keywords.slice(0, 4);
+      if (typeof article.keywords === 'string') return article.keywords.split(',').map(v => v.trim()).filter(Boolean).slice(0, 4);
+      return [];
+    }
+
+    function renderKeywords(article) {
+      const keywords = buildKeywords(article);
+      if (!keywords.length) return '';
+      return `<div class="keyword-row">${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join('')}</div>`;
+    }
+
+    function renderOriginalLink(article) {
+      return `<a class="link-hint" href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a>`;
+    }
+
+    function renderTopArticle(article, rank) {
+      return `
+        <article class="article-card">
+          <span class="rank">${rank}</span>
+          ${renderKeywords(article)}
+          <a class="article-title" href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
+          <div class="article-meta">
+            <span>${escapeHtml(article.publisher)}</span>
+            <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
+          </div>
+          <p class="summary">${escapeHtml(article.summary)}</p>
+          ${renderOriginalLink(article)}
+        </article>
+      `;
+    }
+
+    function renderCategoryArticle(article) {
+      return `
+        <div class="small-card">
+          ${renderKeywords(article)}
+          <a href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
+          <div class="article-meta">
+            <span>${escapeHtml(article.publisher)}</span>
+            <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
+          </div>
+          <p class="summary">${escapeHtml(article.summary)}</p>
+          ${renderOriginalLink(article)}
+        </div>
+      `;
+    }
+
+    function renderDashboard(data) {
+      const articleMap = new Map((data.articles || []).map(article => [article.id, article]));
+      const topArticles = [1, 2, 3, 4, 5].map(id => articleMap.get(id)).filter(Boolean);
+
+      document.getElementById('metaChips').innerHTML = `
+        <span class="chip">기준일: ${escapeHtml(data.date)}</span>
+        <span class="chip">Top 5 + 카테고리 7개</span>
+        <span class="chip">총 ${escapeHtml(data.count)}개 기사 기반</span>
+      `;
+
+      const guideBanner = `<div class="guide-banner">기사 제목이나 <strong>원문 보기 ↗</strong> 버튼을 누르면 해당 기사 원문으로 이동합니다.</div>`;
+      const topSection = `
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>🔹 오늘 가장 중요한 이슈 (Top 5)</h2>
+              <div class="section-desc">당일/전일 기준 가장 영향력 큰 이슈 5개</div>
+            </div>
+          </div>
+          <div class="top-grid">${topArticles.map((article, index) => renderTopArticle(article, index + 1)).join('')}</div>
+        </section>
+      `;
+      const categorySection = `
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>🔹 주제별 대표 기사 (총 14개)</h2>
+              <div class="section-desc">각 카테고리별 2개씩 선정</div>
+            </div>
+          </div>
+          <div class="category-grid">
+            ${categoryConfig.map((category, categoryIndex) => {
+              const items = category.ids.map(id => articleMap.get(id)).filter(Boolean);
+              return `
+                <section class="category-card cat-${categoryIndex}">
+                  <div class="category-header">
+                    <h3>${escapeHtml(category.title)}</h3>
+                    <p>${escapeHtml(category.desc)}</p>
+                  </div>
+                  <div class="category-body">${items.map(renderCategoryArticle).join('')}</div>
+                </section>
+              `;
+            }).join('')}
+          </div>
+        </section>
+      `;
+
+      document.getElementById('app').innerHTML = guideBanner + topSection + categorySection;
+    }
+
+    async function init() {
+      try {
+        const response = await fetch(DATA_FILE, { cache: 'no-store' });
+        if (!response.ok) throw new Error('데이터를 불러오지 못했습니다.');
+        const data = await response.json();
+        renderDashboard(data);
+      } catch (error) {
+        document.getElementById('app').innerHTML = `<div class="error">대시보드 데이터를 불러오는 데 실패했습니다. JSON 파일 경로와 형식을 확인해주세요.</div>`;
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
