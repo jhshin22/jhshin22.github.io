@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f3d8f" />
+  <title>교보생명 신용대출 간편조회</title>
+  <style>
+    :root {
+      --bg1: #eef4ff;
+      --bg2: #f8fbff;
+      --card: rgba(255,255,255,0.92);
+      --primary: #0f3d8f;
+      --primary-2: #1e63d1;
+      --text: #16304d;
+      --muted: #5d6f85;
+      --line: #dbe6f5;
+      --shadow: 0 18px 50px rgba(16, 49, 94, 0.12);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #dbe9ff 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #e8fff3 0%, transparent 28%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 22px 22px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      background: #eaf2ff;
+      border: 1px solid #cfe0ff;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .sub {
+      margin: 14px 0 0;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--muted);
+      word-break: keep-all;
+    }
+
+    .actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      padding: 16px 18px;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn:active { transform: scale(0.985); }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 10px 24px rgba(16, 74, 170, 0.28);
+    }
+
+    .btn-secondary {
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .info {
+      margin-top: 18px;
+      padding: 14px 14px 14px 16px;
+      border-radius: 16px;
+      background: #f7faff;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(22, 33, 52, 0.94);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+      z-index: 1000;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .footer {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 12px;
+      color: #7d8ca0;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div class="badge">교보생명 · 신용대출 간편조회</div>
+      <h1>간편조회 링크를<br />바로 열고 공유하세요</h1>
+      <p class="sub">
+        고객에게 안내하기 전에 직접 접속할 수도 있고,<br />
+        <strong>공유하기</strong> 버튼으로 문자·카카오톡 등에 바로 전달할 수 있습니다.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="https://www.kyobo.com/dgt/web/loan/credit/credit-loan-step1" target="_blank" rel="noopener noreferrer">
+          간편조회 바로가기
+        </a>
+        <button id="shareBtn" class="btn btn-secondary" type="button">
+          링크 공유하기
+        </button>
+      </div>
+
+      <div class="info">
+        • 첫 번째 버튼: 간편조회 화면으로 바로 이동<br />
+        • 두 번째 버튼: 설계사가 고객에게 링크를 손쉽게 전달
+      </div>
+    </section>
+    <div class="footer">홈 화면에 추가해 두면 앱처럼 바로 사용할 수 있습니다.</div>
+  </main>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <script>
+    const loanUrl = 'https://www.kyobo.com/dgt/web/loan/credit/credit-loan-step1';
+    const pageUrl = window.location.href;
+    const shareBtn = document.getElementById('shareBtn');
+    const toast = document.getElementById('toast');
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2200);
+    }
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (e) {
+        const input = document.createElement('textarea');
+        input.value = text;
+        input.style.position = 'fixed';
+        input.style.left = '-9999px';
+        document.body.appendChild(input);
+        input.focus();
+        input.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(input);
+        return ok;
+      }
+    }
+
+    shareBtn.addEventListener('click', async () => {
+      const shareData = {
+        title: '교보생명 신용대출 간편조회',
+        text: '교보생명 신용대출 간편조회 링크입니다. 아래 버튼에서 바로 확인해보세요.',
+        url: loanUrl
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          return;
+        } catch (e) {
+          if (e && e.name === 'AbortError') return;
+        }
+      }
+
+      const copied = await copyText(loanUrl);
+      showToast(copied ? '간편조회 링크가 복사되었습니다.' : '공유 기능을 사용할 수 없습니다.');
+    });
+
+    // Some Android launchers share current page URL more intuitively if users long-press.
+    // Keep the landing page itself copyable as well.
+    document.addEventListener('contextmenu', async () => {
+      // no-op: preserves default browser/share behaviors
+    });
+  </script>
+</body>
+</html>
