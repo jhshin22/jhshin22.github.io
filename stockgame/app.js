@@ -75,32 +75,89 @@ function bindChoiceButtons() {
 function getChartData(problem, reveal = false) {
   const visible = Array.isArray(problem.visibleCandles) ? problem.visibleCandles : [];
   const target = problem.targetCandle;
-  const candles = reveal ? [...visible, target] : visible;
+  const candles = reveal
+    ? [...visible, target]
+    : [...visible, { date: '?', open: null, close: null, low: null, high: null, volume: null }];
 
   return {
+    visibleCount: visible.length,
     categoryData: candles.map(d => d.date),
-    candleValues: candles.map(d => [Number(d.open), Number(d.close), Number(d.low), Number(d.high)]),
-    volumeValues: candles.map(d => Number(d.volume)),
-    volumeDirections: candles.map(d => (Number(d.close) >= Number(d.open) ? 1 : -1)),
+    candleValues: candles.map(d => (
+      d.open == null ? '-' : [Number(d.open), Number(d.close), Number(d.low), Number(d.high)]
+    )),
+    volumeValues: candles.map(d => (d.volume == null ? '-' : Number(d.volume))),
+    volumeDirections: candles.map(d => (d.close == null || d.open == null ? 0 : (Number(d.close) >= Number(d.open) ? 1 : -1))),
     lastVisibleDate: visible.length ? visible[visible.length - 1].date : null,
+    targetDate: target?.date ?? null,
+    targetHigh: target?.high ?? null,
   };
 }
 
-function buildChartOption(problem, reveal = false) {
-  const { categoryData, candleValues, volumeValues, volumeDirections, lastVisibleDate } = getChartData(problem, reveal);
+function buildGraphicOverlay(reveal = false) {
+  if (reveal) return [];
+  return [
+    {
+      type: 'group',
+      right: '4%',
+      top: 24,
+      z: 100,
+      children: [
+        {
+          type: 'rect',
+          shape: { x: 0, y: 0, width: 74, height: 366, r: 16 },
+          style: {
+            fill: 'rgba(36, 91, 219, 0.09)',
+            stroke: '#245bdb',
+            lineWidth: 2,
+          },
+        },
+        {
+          type: 'text',
+          style: {
+            x: 29,
+            y: 130,
+            text: '?',
+            fill: '#245bdb',
+            fontSize: 44,
+            fontWeight: 800,
+          },
+        },
+        {
+          type: 'text',
+          style: {
+            x: 13,
+            y: 186,
+            text: '예측 구간',
+            fill: '#245bdb',
+            fontSize: 12,
+            fontWeight: 700,
+          },
+        },
+      ],
+    },
+  ];
+}
 
-  const markAreaData = !reveal && lastVisibleDate
-    ? [[{ xAxis: lastVisibleDate }, { xAxis: lastVisibleDate }]]
-    : [];
+function buildChartOption(problem, reveal = false) {
+  const { categoryData, candleValues, volumeValues, volumeDirections, lastVisibleDate, targetDate, targetHigh } = getChartData(problem, reveal);
+
+  const markAreaData = reveal && targetDate
+    ? [[{ xAxis: targetDate }, { xAxis: targetDate }]]
+    : !reveal && lastVisibleDate
+      ? [[{ xAxis: lastVisibleDate }, { xAxis: lastVisibleDate }]]
+      : [];
 
   return {
     animation: false,
     backgroundColor: '#ffffff',
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: { type: 'cross' }
-    },
+    tooltip: reveal
+      ? {
+          trigger: 'axis',
+          axisPointer: { type: 'cross' }
+        }
+      : { show: false },
     axisPointer: { link: [{ xAxisIndex: [0, 1] }] },
+    graphic: buildGraphicOverlay(reveal),
     grid: [
       { left: '8%', right: '4%', top: 24, height: '58%' },
       { left: '8%', right: '4%', top: '74%', height: '14%' }
@@ -112,7 +169,11 @@ function buildChartOption(problem, reveal = false) {
         scale: true,
         boundaryGap: true,
         axisLine: { lineStyle: { color: '#9fb0c7' } },
-        axisLabel: { color: '#66758a' },
+        axisLabel: {
+          color: '#66758a',
+          formatter: value => (reveal ? value : '')
+        },
+        axisTick: { show: reveal },
         splitLine: { show: false }
       },
       {
@@ -131,19 +192,25 @@ function buildChartOption(problem, reveal = false) {
       {
         scale: true,
         axisLine: { show: false },
-        axisLabel: { color: '#66758a' },
+        axisLabel: {
+          color: '#66758a',
+          formatter: value => (reveal ? formatNumber(value) : '')
+        },
         splitLine: { lineStyle: { color: '#edf2f8' } }
       },
       {
         gridIndex: 1,
         scale: true,
         axisLine: { show: false },
-        axisLabel: { color: '#66758a' },
+        axisLabel: {
+          color: '#66758a',
+          formatter: value => (reveal ? formatNumber(value) : '')
+        },
         splitLine: { show: false }
       }
     ],
     dataZoom: [
-      { type: 'inside', xAxisIndex: [0, 1], start: 0, end: 100 }
+      { type: 'inside', xAxisIndex: [0, 1], start: 0, end: 100, disabled: !reveal }
     ],
     series: [
       {
@@ -158,8 +225,19 @@ function buildChartOption(problem, reveal = false) {
         },
         markArea: markAreaData.length
           ? {
-              itemStyle: { color: 'rgba(36, 91, 219, 0.08)' },
+              itemStyle: {
+                color: reveal ? 'rgba(245, 190, 59, 0.20)' : 'rgba(36, 91, 219, 0.08)'
+              },
               data: markAreaData
+            }
+          : undefined,
+        markPoint: reveal && targetDate && targetHigh != null
+          ? {
+              symbol: 'pin',
+              symbolSize: 34,
+              itemStyle: { color: '#f5be3b' },
+              label: { show: false },
+              data: [{ coord: [targetDate, Number(targetHigh)], value: '정답' }]
             }
           : undefined
       },
@@ -170,7 +248,12 @@ function buildChartOption(problem, reveal = false) {
         yAxisIndex: 1,
         data: volumeValues,
         itemStyle: {
-          color: params => (volumeDirections[params.dataIndex] === 1 ? '#d9485f' : '#11a36a')
+          color: params => {
+            const dir = volumeDirections[params.dataIndex];
+            if (dir === 1) return '#d9485f';
+            if (dir === -1) return '#11a36a';
+            return 'rgba(36, 91, 219, 0.12)';
+          }
         }
       }
     ]
@@ -191,12 +274,11 @@ function renderProblem() {
   questionPanel.hidden = false;
 
   const chartInstance = ensureChart();
-  const chartOption = buildChartOption(problem, false);
   chartInstance.clear();
-  chartInstance.setOption(chartOption, true);
+  chartInstance.setOption(buildChartOption(problem, false), true);
   chartInstance.resize();
 
-  chartNote.textContent = `샘플 데이터 로드 완료 · ${problem.company} 문제 표시 중 · 차트 오른쪽 빈칸 뒤에 숨겨진 다음 거래일을 맞혀보세요.`;
+  chartNote.textContent = `날짜·가격 비공개 상태 · ${problem.company} 문제 표시 중 · 오른쪽 물음표 구간의 다음 거래일 캔들을 예측해 보세요.`;
 }
 
 function renderResults() {
@@ -262,7 +344,7 @@ function submitAnswer() {
   feedbackText.textContent = `정답 공개 (전날 종가대비): 시가 ${directionText(actualOpen)}, 종가 ${directionText(actualClose)} — ${gained}점 획득`;
   submitBtn.hidden = true;
   nextBtn.hidden = false;
-  chartNote.textContent = `정답 공개 완료 · ${problem.company} (${problem.symbol}) · ${problem.targetCandle.date}`;
+  chartNote.textContent = `정답 공개 완료 · 하이라이트된 캔들이 방금 예측한 다음 거래일입니다. · ${problem.company} (${problem.symbol}) · ${problem.targetCandle.date}`;
 }
 
 function goNext() {
