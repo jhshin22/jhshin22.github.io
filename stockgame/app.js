@@ -12,6 +12,8 @@ const nextBtn = document.getElementById('nextBtn');
 const resetBtn = document.getElementById('resetBtn');
 const chartNote = document.getElementById('chartNote');
 
+const GAME_PROBLEM_COUNT = 3;
+
 let chart = null;
 let problems = [];
 let currentIndex = 0;
@@ -330,7 +332,7 @@ function renderProblem() {
   feedbackText.textContent = '';
   progressText.textContent = `${currentIndex + 1} / ${problems.length}`;
   scoreText.textContent = `${score}점`;
-  marketText.textContent = problem.market;
+  marketText.textContent = '비공개';
   submitBtn.hidden = false;
   nextBtn.hidden = true;
   resultPanel.hidden = true;
@@ -341,7 +343,7 @@ function renderProblem() {
   chartInstance.setOption(buildChartOption(problem, false, null), true);
   chartInstance.resize();
 
-  chartNote.textContent = `날짜·가격 비공개 상태 · ${problem.company} 문제 표시 중 · 마지막 세로 띠로 표시된 예측 구간의 다음 거래일 캔들을 예측해 보세요.`;
+  chartNote.textContent = `날짜·가격·종목 비공개 상태 · 마지막 세로 띠로 표시된 예측 구간의 다음 거래일 캔들을 예측해 보세요.`;
 }
 
 function renderResults() {
@@ -351,7 +353,7 @@ function renderResults() {
   resultList.innerHTML = results.map((item, idx) => {
     return `
       <article class="result-card">
-        <h3>${idx + 1}번 문제 - ${item.company} (${item.symbol}) <span class="badge ${item.totalCorrect === 2 ? 'correct' : 'wrong'}">${item.totalCorrect}/2 정답</span></h3>
+        <h3>${idx + 1}번 문제 - <strong>${item.company}</strong> (${item.symbol}) <span class="badge ${item.totalCorrect === 2 ? 'correct' : 'wrong'}">${item.totalCorrect}/2 정답</span></h3>
         <div class="result-grid">
           <div><strong>시장</strong>: ${item.market}</div>
           <div><strong>정답 날짜</strong>: ${item.targetDate}</div>
@@ -382,6 +384,7 @@ function submitAnswer() {
   score += gained;
   answered = true;
   scoreText.textContent = `${score}점`;
+  marketText.textContent = problem.market;
 
   chartEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const chartInstance = ensureChart();
@@ -409,7 +412,7 @@ function submitAnswer() {
   feedbackText.textContent = `정답 공개 (전날 종가대비): 시가 ${directionText(actualOpen)}, 종가 ${directionText(actualClose)} — ${gained}점 획득`;
   submitBtn.hidden = true;
   nextBtn.hidden = false;
-  chartNote.textContent = `정답 공개 완료 · 하이라이트된 세로 띠와 캔들이 방금 예측한 다음 거래일입니다. · 차트 오른쪽 상단에서 시가/종가 정답 여부를 확인해 보세요.`;
+  chartNote.innerHTML = `정답 공개 완료 · 이번 차트는 <strong>${problem.company}</strong> (${problem.symbol}) · ${problem.targetCandle.date} · 차트 오른쪽 상단에서 시가/종가 정답 여부를 확인해 보세요.`;
 }
 
 function goNext() {
@@ -433,8 +436,9 @@ async function loadProblems() {
   if (!valid.length) {
     throw new Error('사용 가능한 문제가 없습니다. build_dataset.py 또는 GitHub Actions로 데이터를 생성해 주세요.');
   }
-  chartNote.textContent = `문제 데이터 로드 성공 · 총 ${valid.length}문제`;
-  return shuffle(valid);
+  const shuffled = shuffle(valid);
+  chartNote.textContent = `문제 데이터 로드 성공 · 전체 ${valid.length}문제 중 이번 판은 ${Math.min(GAME_PROBLEM_COUNT, shuffled.length)}문제 랜덤 출제`;
+  return shuffled.slice(0, GAME_PROBLEM_COUNT);
 }
 
 function showEmptyState(message) {
