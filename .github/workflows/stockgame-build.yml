@@ -3,7 +3,7 @@ name: Build stockgame dataset
 on:
   workflow_dispatch:
   schedule:
-    - cron: '15 21 * * 0'
+    - cron: '15 21 * * *'
 
 permissions:
   contents: write
