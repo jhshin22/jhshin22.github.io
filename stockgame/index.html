@@ -13,20 +13,14 @@
       <div>
         <p class="eyebrow">Stock Game</p>
         <h1>내일 주가 맞추기</h1>
-        <p class="subtitle">과거 일봉 캔들 + 거래량만 보고 다음 날 시가/종가 방향을 맞춰보세요.</p>
+        <p class="subtitle">과거 일봉 캔들 + 거래량만 보고 다음 날 차트의 방향을 직감으로 맞혀보세요.</p>
       </div>
       <button id="resetBtn" class="ghost-btn">새 게임</button>
     </header>
 
-    <section class="panel info-panel">
-      <div class="info-item"><span>문제</span><strong id="progressText">-</strong></div>
-      <div class="info-item"><span>점수</span><strong id="scoreText">-</strong></div>
-      <div class="info-item"><span>시장</span><strong id="marketText">-</strong></div>
-    </section>
-
     <section class="panel chart-panel">
       <div id="chart" class="chart"></div>
-      <div class="chart-note" id="chartNote">차트 오른쪽 빈칸 뒤에 숨겨진 다음 거래일을 맞혀보세요.</div>
+      <div class="chart-note" id="chartNote">차트 오른쪽 물음표 구간에 숨겨진 다음 거래일을 예측해 보세요. 정답 공개 전에는 날짜와 가격이 비공개입니다.</div>
     </section>
 
     <section class="panel question-panel" id="questionPanel">
@@ -54,6 +48,12 @@
         <button id="nextBtn" class="secondary-btn" hidden>다음 문제</button>
       </div>
       <p id="feedbackText" class="feedback"></p>
+    </section>
+
+    <section class="panel info-panel">
+      <div class="info-item"><span>문제</span><strong id="progressText">-</strong></div>
+      <div class="info-item"><span>점수</span><strong id="scoreText">-</strong></div>
+      <div class="info-item"><span>시장</span><strong id="marketText">-</strong></div>
     </section>
 
     <section class="panel result-panel" id="resultPanel" hidden>
