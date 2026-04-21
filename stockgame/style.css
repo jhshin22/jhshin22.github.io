@@ -52,6 +52,17 @@ body {
 h1 { margin: 0; font-size: 32px; }
 .subtitle { margin: 10px 0 0; color: var(--muted); }
 
+.chart-panel { padding: 18px; margin-bottom: 18px; }
+.chart { width: 100%; height: 560px; }
+.chart-note { color: var(--muted); font-size: 14px; margin-top: 10px; line-height: 1.6; }
+
+.question-panel, .result-panel { padding: 22px; }
+.question-panel { margin-bottom: 18px; }
+.question-guide, .feedback { color: var(--muted); }
+.question-basis { color: var(--muted); font-size: 14px; }
+.question-block + .question-block { margin-top: 22px; }
+.choice-group { display: flex; gap: 10px; margin-top: 12px; }
+
 .info-panel {
   padding: 16px 20px;
   display: grid;
@@ -67,16 +78,6 @@ h1 { margin: 0; font-size: 32px; }
   margin-bottom: 6px;
 }
 .info-item strong { font-size: 18px; }
-
-.chart-panel { padding: 18px; margin-bottom: 18px; }
-.chart { width: 100%; height: 520px; }
-.chart-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
-
-.question-panel, .result-panel { padding: 22px; }
-.question-panel { margin-bottom: 18px; }
-.question-guide, .feedback { color: var(--muted); }
-.question-block + .question-block { margin-top: 22px; }
-.choice-group { display: flex; gap: 10px; margin-top: 12px; }
 
 .choice-btn, .primary-btn, .secondary-btn, .ghost-btn {
   border-radius: 12px;
@@ -151,8 +152,7 @@ h1 { margin: 0; font-size: 32px; }
 @media (max-width: 768px) {
   .app { padding: 14px; }
   .hero { flex-direction: column; }
-  .info-panel { grid-template-columns: 1fr; }
-  .chart { height: 360px; }
+  .chart { height: 400px; }
   .choice-group, .action-row { flex-direction: column; }
-  .result-grid { grid-template-columns: 1fr; }
+  .result-grid, .info-panel { grid-template-columns: 1fr; }
 }
