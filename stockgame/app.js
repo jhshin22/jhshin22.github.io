@@ -11,14 +11,29 @@ const submitBtn = document.getElementById('submitBtn');
 const nextBtn = document.getElementById('nextBtn');
 const resetBtn = document.getElementById('resetBtn');
 
-const chart = echarts.init(chartEl);
-
+let chart = null;
 let problems = [];
 let currentIndex = 0;
 let score = 0;
 let selections = { open: null, close: null };
 let answered = false;
 let results = [];
+
+function ensureChart() {
+  if (chart) {
+    return chart;
+  }
+  chartEl.innerHTML = '';
+  chart = echarts.init(chartEl, null, { renderer: 'canvas' });
+  return chart;
+}
+
+function disposeChart() {
+  if (chart) {
+    chart.dispose();
+    chart = null;
+  }
+}
 
 function shuffle(array) {
   const copied = [...array];
@@ -163,7 +178,10 @@ function renderProblem() {
   nextBtn.hidden = true;
   resultPanel.hidden = true;
   questionPanel.hidden = false;
-  chart.setOption(buildChartOption(problem, false), true);
+  const chartInstance = ensureChart();
+  chartInstance.clear();
+  chartInstance.setOption(buildChartOption(problem, false), true);
+  chartInstance.resize();
 }
 
 function renderResults() {
@@ -179,7 +197,7 @@ function renderResults() {
           <div><strong>정답 날짜</strong>: ${item.targetDate}</div>
           <div><strong>시가 방향</strong>: <span class="${item.openCorrect ? 'correct' : 'wrong'}">${directionText(item.actualOpenDirection)}</span> / 내 답: ${directionText(item.userOpen)}</div>
           <div><strong>종가 방향</strong>: <span class="${item.closeCorrect ? 'correct' : 'wrong'}">${directionText(item.actualCloseDirection)}</span> / 내 답: ${directionText(item.userClose)}</div>
-          <div><strong>전일 종가</strong>: ${formatNumber(item.prevClose)}</div>
+          <div><strong>전날 종가</strong>: ${formatNumber(item.prevClose)}</div>
           <div><strong>다음날 시가 · 종가</strong>: ${formatNumber(item.targetOpen)} · ${formatNumber(item.targetClose)}</div>
         </div>
       </article>
@@ -189,7 +207,7 @@ function renderResults() {
 
 function submitAnswer() {
   if (!selections.open || !selections.close) {
-    feedbackText.textContent = '시가와 종가 방향을 모두 선택해 주세요.';
+    feedbackText.textContent = '시가와 종가 방향을 모두 선택해 주세요. (전날 종가대비)';
     return;
   }
 
@@ -203,7 +221,10 @@ function submitAnswer() {
   score += gained;
   answered = true;
   scoreText.textContent = `${score}점`;
-  chart.setOption(buildChartOption(problem, true), true);
+  const chartInstance = ensureChart();
+  chartInstance.clear();
+  chartInstance.setOption(buildChartOption(problem, true), true);
+  chartInstance.resize();
 
   results.push({
     company: problem.company,
@@ -222,7 +243,7 @@ function submitAnswer() {
     totalCorrect: gained
   });
 
-  feedbackText.textContent = `정답 공개: 시가 ${directionText(actualOpen)}, 종가 ${directionText(actualClose)} — ${gained}점 획득`;
+  feedbackText.textContent = `정답 공개 (전날 종가대비): 시가 ${directionText(actualOpen)}, 종가 ${directionText(actualClose)} — ${gained}점 획득`;
   submitBtn.hidden = true;
   nextBtn.hidden = false;
 }
@@ -247,7 +268,7 @@ async function loadProblems() {
 }
 
 function showEmptyState(message) {
-  chart.clear();
+  disposeChart();
   chartEl.innerHTML = `<div class="empty-state">${message}</div>`;
   questionPanel.hidden = true;
   resultPanel.hidden = false;
@@ -256,7 +277,6 @@ function showEmptyState(message) {
 }
 
 resetBtn.addEventListener('click', async () => {
-  chartEl.innerHTML = '';
   problems = await loadProblems().catch(err => {
     showEmptyState(err.message);
     return null;
@@ -269,7 +289,12 @@ resetBtn.addEventListener('click', async () => {
 });
 submitBtn.addEventListener('click', submitAnswer);
 nextBtn.addEventListener('click', goNext);
-window.addEventListener('resize', () => chart.resize());
+window.addEventListener('resize', () => {
+  if (chart) chart.resize();
+});
+window.addEventListener('pageshow', () => {
+  if (chart) chart.resize();
+});
 
 bindChoiceButtons();
 resetBtn.click();
