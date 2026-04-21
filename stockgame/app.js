@@ -79,71 +79,51 @@ function bindChoiceButtons() {
 function getChartData(problem, reveal = false) {
   const visible = Array.isArray(problem.visibleCandles) ? problem.visibleCandles : [];
   const target = problem.targetCandle;
-  const candles = reveal
-    ? [...visible, target]
-    : [...visible, { date: '?', open: null, close: null, low: null, high: null, volume: null }];
+  const hiddenSlot = { date: '?', open: null, close: null, low: null, high: null, volume: null };
+  const candles = reveal ? [...visible, target] : [...visible, hiddenSlot];
 
   return {
-    visibleCount: visible.length,
     categoryData: candles.map(d => d.date),
     candleValues: candles.map(d => (
       d.open == null ? '-' : [Number(d.open), Number(d.close), Number(d.low), Number(d.high)]
     )),
     volumeValues: candles.map(d => (d.volume == null ? '-' : Number(d.volume))),
     volumeDirections: candles.map(d => (d.close == null || d.open == null ? 0 : (Number(d.close) >= Number(d.open) ? 1 : -1))),
+    hiddenSlotDate: hiddenSlot.date,
     targetDate: target?.date ?? null,
     targetHigh: target?.high ?? null,
     targetLow: target?.low ?? null,
   };
 }
 
-function buildGraphicOverlay(problem, reveal = false, answerMeta = null) {
-  const visibleCount = Array.isArray(problem.visibleCandles) ? problem.visibleCandles.length : 0;
-  const xCenter = Math.max(visibleCount + 0.5, 1);
-
+function buildGraphicOverlay(reveal = false, answerMeta = null) {
   if (!reveal) {
     return [
       {
-        type: 'group',
-        z: 100,
-        children: [
-          {
-            type: 'rect',
-            shape: { x: -26, y: -92, width: 52, height: 184, r: 14 },
-            position: ['88%', '38%'],
-            style: {
-              fill: 'rgba(36, 91, 219, 0.10)',
-              stroke: '#245bdb',
-              lineWidth: 2,
-              shadowBlur: 10,
-              shadowColor: 'rgba(36, 91, 219, 0.12)'
-            }
-          },
-          {
-            type: 'text',
-            position: ['88%', '35%'],
-            style: {
-              text: '?',
-              fill: '#245bdb',
-              fontSize: 34,
-              fontWeight: 800,
-              textAlign: 'center',
-              textVerticalAlign: 'middle'
-            }
-          },
-          {
-            type: 'text',
-            position: ['88%', '46%'],
-            style: {
-              text: '예측 구간',
-              fill: '#245bdb',
-              fontSize: 11,
-              fontWeight: 700,
-              textAlign: 'center',
-              textVerticalAlign: 'middle'
-            }
-          }
-        ]
+        type: 'text',
+        right: '6.5%',
+        top: '33%',
+        z: 121,
+        style: {
+          text: '?',
+          fill: 'rgba(36, 91, 219, 0.55)',
+          fontSize: 28,
+          fontWeight: 800,
+          textAlign: 'center'
+        }
+      },
+      {
+        type: 'text',
+        right: '4.8%',
+        top: '42%',
+        z: 121,
+        style: {
+          text: '예측 구간',
+          fill: 'rgba(36, 91, 219, 0.72)',
+          fontSize: 11,
+          fontWeight: 700,
+          textAlign: 'center'
+        }
       }
     ];
   }
@@ -191,26 +171,18 @@ function buildGraphicOverlay(problem, reveal = false, answerMeta = null) {
           }
         }
       ]
-    },
-    {
-      type: 'text',
-      z: 121,
-      style: {
-        text: '예측한 캔들',
-        fill: '#8a6513',
-        fontSize: 11,
-        fontWeight: 700,
-        textAlign: 'center'
-      },
-      position: ['50%', '14%']
     }
   ];
 }
 
 function buildChartOption(problem, reveal = false, answerMeta = null) {
-  const { categoryData, candleValues, volumeValues, volumeDirections, targetDate, targetHigh, targetLow } = getChartData(problem, reveal);
+  const { categoryData, candleValues, volumeValues, volumeDirections, hiddenSlotDate, targetDate, targetHigh, targetLow } = getChartData(problem, reveal);
 
-  const markAreaData = reveal && targetDate
+  const predictionBandData = !reveal
+    ? [[{ xAxis: hiddenSlotDate }, { xAxis: hiddenSlotDate }]]
+    : [];
+
+  const revealBandData = reveal && targetDate
     ? [[{ xAxis: targetDate }, { xAxis: targetDate }]]
     : [];
 
@@ -226,7 +198,7 @@ function buildChartOption(problem, reveal = false, answerMeta = null) {
         }
       : { show: false },
     axisPointer: { link: [{ xAxisIndex: [0, 1] }] },
-    graphic: buildGraphicOverlay(problem, reveal, answerMeta),
+    graphic: buildGraphicOverlay(reveal, answerMeta),
     grid: [
       { left: '8%', right: '4%', top: 24, height: '58%' },
       { left: '8%', right: '4%', top: '74%', height: '14%' }
@@ -292,12 +264,17 @@ function buildChartOption(problem, reveal = false, answerMeta = null) {
           borderColor: '#d9485f',
           borderColor0: '#11a36a'
         },
-        markArea: markAreaData.length
+        markArea: predictionBandData.length
           ? {
-              itemStyle: { color: 'rgba(245, 190, 59, 0.22)' },
-              data: markAreaData
+              itemStyle: { color: 'rgba(36, 91, 219, 0.10)' },
+              data: predictionBandData
             }
-          : undefined,
+          : revealBandData.length
+            ? {
+                itemStyle: { color: 'rgba(245, 190, 59, 0.22)' },
+                data: revealBandData
+              }
+            : undefined,
         markPoint: reveal && targetDate && targetHigh != null
           ? {
               symbol: 'pin',
@@ -329,7 +306,18 @@ function buildChartOption(problem, reveal = false, answerMeta = null) {
             if (dir === -1) return '#11a36a';
             return 'rgba(36, 91, 219, 0.12)';
           }
-        }
+        },
+        markArea: predictionBandData.length
+          ? {
+              itemStyle: { color: 'rgba(36, 91, 219, 0.08)' },
+              data: predictionBandData
+            }
+          : revealBandData.length
+            ? {
+                itemStyle: { color: 'rgba(245, 190, 59, 0.16)' },
+                data: revealBandData
+              }
+            : undefined
       }
     ]
   };
@@ -353,7 +341,7 @@ function renderProblem() {
   chartInstance.setOption(buildChartOption(problem, false, null), true);
   chartInstance.resize();
 
-  chartNote.textContent = `날짜·가격 비공개 상태 · ${problem.company} 문제 표시 중 · 오른쪽 물음표 구간의 다음 거래일 캔들을 예측해 보세요.`;
+  chartNote.textContent = `날짜·가격 비공개 상태 · ${problem.company} 문제 표시 중 · 마지막 세로 띠로 표시된 예측 구간의 다음 거래일 캔들을 예측해 보세요.`;
 }
 
 function renderResults() {
@@ -421,7 +409,7 @@ function submitAnswer() {
   feedbackText.textContent = `정답 공개 (전날 종가대비): 시가 ${directionText(actualOpen)}, 종가 ${directionText(actualClose)} — ${gained}점 획득`;
   submitBtn.hidden = true;
   nextBtn.hidden = false;
-  chartNote.textContent = `정답 공개 완료 · 하이라이트된 캔들이 방금 예측한 다음 거래일입니다. · 차트 오른쪽 상단에서 시가/종가 정답 여부를 확인해 보세요.`;
+  chartNote.textContent = `정답 공개 완료 · 하이라이트된 세로 띠와 캔들이 방금 예측한 다음 거래일입니다. · 차트 오른쪽 상단에서 시가/종가 정답 여부를 확인해 보세요.`;
 }
 
 function goNext() {
