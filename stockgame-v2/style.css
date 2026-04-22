@@ -18,6 +18,15 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
   background: linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
   color: var(--text);
+  transition: background 280ms ease;
+}
+
+body.answer-correct {
+  background: linear-gradient(180deg, #eaf8f1 0%, #f3f6fb 72%);
+}
+
+body.answer-wrong {
+  background: linear-gradient(180deg, #fdecef 0%, #f3f6fb 72%);
 }
 
 .app {
@@ -31,6 +40,16 @@ body {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+}
+
+.answer-correct .question-panel {
+  border-color: #9bd8b7;
+  box-shadow: 0 14px 34px rgba(17, 163, 106, 0.16);
+}
+
+.answer-wrong .question-panel {
+  border-color: #f0b8c2;
+  box-shadow: 0 14px 34px rgba(217, 72, 95, 0.16);
 }
 
 .intro-screen[hidden],
@@ -140,6 +159,7 @@ h2 { font-size: 22px; margin-bottom: 10px; }
 .result-panel {
   padding: 16px;
   margin-bottom: 12px;
+  transition: border-color 220ms ease, box-shadow 220ms ease;
 }
 
 .chart {
@@ -198,6 +218,9 @@ h2 { font-size: 22px; margin-bottom: 10px; }
   font-weight: 700;
 }
 
+.answer-correct .feedback { color: var(--green); }
+.answer-wrong .feedback { color: var(--red); }
+
 .trade-summary {
   margin-top: 10px;
   padding: 12px 14px;
@@ -208,12 +231,160 @@ h2 { font-size: 22px; margin-bottom: 10px; }
   line-height: 1.7;
 }
 
+.monkey-rival {
+  display: grid;
+  grid-template-columns: 118px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.monkey-character {
+  position: relative;
+  width: 112px;
+  height: 112px;
+  margin: 0 auto;
+}
+
+.monkey-face,
+.monkey-ear,
+.monkey-muzzle,
+.monkey-eye,
+.monkey-mouth,
+.monkey-badge {
+  position: absolute;
+  display: block;
+}
+
+.monkey-face {
+  inset: 13px;
+  border-radius: 50%;
+  background: #8f5b36;
+  border: 3px solid #704426;
+  box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.08), 0 10px 20px rgba(36, 58, 92, 0.12);
+  z-index: 2;
+}
+
+.monkey-ear {
+  width: 34px;
+  height: 40px;
+  top: 36px;
+  border-radius: 50%;
+  background: #8f5b36;
+  border: 3px solid #704426;
+  z-index: 1;
+}
+
+.monkey-ear::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: #f0c3a2;
+}
+
+.monkey-ear.left { left: 0; }
+.monkey-ear.right { right: 0; }
+
+.monkey-eye {
+  width: 9px;
+  height: 11px;
+  top: 31px;
+  border-radius: 50%;
+  background: #1f2b3a;
+}
+
+.monkey-eye.left { left: 26px; }
+.monkey-eye.right { right: 26px; }
+
+.monkey-muzzle {
+  left: 19px;
+  right: 19px;
+  bottom: 16px;
+  height: 36px;
+  border-radius: 45% 45% 50% 50%;
+  background: #f1c8a8;
+}
+
+.monkey-mouth {
+  left: 39px;
+  bottom: 30px;
+  width: 16px;
+  height: 7px;
+  border-bottom: 3px solid #704426;
+  border-radius: 0 0 16px 16px;
+  z-index: 3;
+}
+
+.monkey-badge {
+  right: -2px;
+  bottom: 4px;
+  z-index: 4;
+  min-width: 44px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #eef4ff;
+  border: 1px solid #d5e3ff;
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.monkey-character.thinking .monkey-mouth {
+  width: 13px;
+  height: 3px;
+  left: 40px;
+  border-bottom-width: 3px;
+}
+
+.monkey-character.correct .monkey-badge {
+  background: #eaf8f1;
+  border-color: #bfe7d1;
+  color: var(--green);
+}
+
+.monkey-character.wrong .monkey-badge {
+  background: #fdecef;
+  border-color: #f2bbc5;
+  color: var(--red);
+}
+
+.monkey-character.correct .monkey-mouth {
+  height: 10px;
+  border-bottom-color: var(--green);
+}
+
+.monkey-character.wrong .monkey-mouth {
+  width: 18px;
+  height: 7px;
+  left: 38px;
+  bottom: 25px;
+  border-top: 3px solid var(--red);
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+}
+
+.monkey-character.buy .monkey-face {
+  box-shadow: inset 0 -8px 0 rgba(17, 163, 106, 0.14), 0 10px 20px rgba(36, 58, 92, 0.12);
+}
+
+.monkey-character.sell .monkey-face {
+  box-shadow: inset 0 -8px 0 rgba(217, 72, 95, 0.14), 0 10px 20px rgba(36, 58, 92, 0.12);
+}
+
+.monkey-copy > strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
 .monkey-box {
   border-radius: 14px;
   padding: 14px;
   border: 1px dashed #cfd9e6;
   background: #fbfdff;
   font-weight: 700;
+  line-height: 1.6;
 }
 
 .decision-bar {
@@ -308,6 +479,14 @@ h2 { font-size: 22px; margin-bottom: 10px; }
   }
   .chart {
     height: 360px;
+  }
+  .monkey-rival {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: center;
+  }
+  .monkey-box {
+    text-align: left;
   }
   .result-grid {
     grid-template-columns: 1fr;
