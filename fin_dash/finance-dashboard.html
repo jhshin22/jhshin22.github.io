@@ -185,7 +185,7 @@
   <div class="container">
     <section class="hero">
       <h1>소매여신 기사 대시보드</h1>
-      <p>전반부는 오늘 가장 중요한 이슈 Top 5, 후반부는 주제별 대표 기사 14개로 구성했습니다.</p>
+      <p>전반부는 오늘 가장 중요한 이슈 Top 5, 후반부는 주제별 대표 기사로 구성했습니다.</p>
       <div class="meta" id="metaChips">
         <span class="chip">JSON 기반 자동 렌더링</span>
       </div>
@@ -202,13 +202,13 @@
     const DATA_FILE = './articles_detailed_2026-04-22.json';
 
     const categoryConfig = [
-      { title: '① 정책/규제 변화', desc: '정책 변화나 규제 완화·강화가 직접적으로 대출 실행 환경에 영향을 주는 기사', ids: [6, 7] },
-      { title: '② 금리/지표 변화', desc: '대출 금리, 중금리 공급, 업권별 여신 흐름 등 수요와 실행에 영향을 주는 기사', ids: [8, 9] },
-      { title: '③ 시장 방향성 (부동산/대출 수요)', desc: '부동산·생활자금 수요 변화로 인해 대출 수요가 바뀔 수 있는 기사', ids: [10, 11] },
-      { title: '④ 리스크/연체/NPL', desc: '연체채권, 부실 위험, 자산건전성 저하 가능성을 보여주는 기사', ids: [12, 13] },
-      { title: '⑤ 금융사 소매 대출 전략/상품 (특히 삼성생명, 한화생명 포함)', desc: '소매대출 채널, 전략, 플랫폼, 포트폴리오 재배치 등 금융사 실행 관점 기사', ids: [14, 15] },
-      { title: '⑥ 보험사 관련 이슈', desc: '보험금 지급, 손해율, 채널과 수익성 등 보험업 전반의 주요 이슈', ids: [16, 17] },
-      { title: '⑦ AI 동향 (금융 AI 포함)', desc: '금융권 AI 인프라와 생성형 AI 실행 전략을 보여주는 기사', ids: [18, 19] }
+      { title: '① 정책/규제 변화', desc: '정책 변화나 규제 완화·강화가 직접적으로 대출 실행 환경에 영향을 주는 기사', ids: [6] },
+      { title: '② 금리/지표 변화', desc: '금리와 업권별 여신 흐름, 중금리 공급 변화를 보여주는 기사', ids: [7] },
+      { title: '③ 시장 방향성 (부동산/증권 등)', desc: '주거비와 수요 구조 변화로 인해 대출 수요가 바뀔 수 있는 기사', ids: [8] },
+      { title: '④ 리스크/연체/NPL', desc: '다중채무, 부실 위험, 상환능력 저하 가능성을 보여주는 기사', ids: [9] },
+      { title: '⑤ 금융사 소매 대출 전략/상품', desc: '수신·대출 전략과 재원 조달 변화 등 금융사 실행 관점 기사', ids: [10] },
+      { title: '⑥ 보험사관련 이슈(타사 포함)', desc: '보험사 손해율과 비용 압박 등 보험업 주요 이슈', ids: [11] },
+      { title: '⑦ AI 동향 (금융 AI 포함)', desc: '금융권 생성형 AI와 AX 실행 흐름을 보여주는 기사', ids: [12] }
     ];
 
     function escapeHtml(value) {
@@ -240,16 +240,23 @@
       return `<a class="link-hint" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a>`;
     }
 
+    function renderMeta(article) {
+      return `
+        <div class="article-meta">
+          <span>${escapeHtml(article.publisher)}</span>
+          <span>${escapeHtml(article.udate || '')}</span>
+          <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
+        </div>
+      `;
+    }
+
     function renderTopArticle(article, rank) {
       return `
         <article class="article-card">
           <span class="rank">${rank}</span>
           ${renderKeywords(article)}
           <a class="article-title" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
-          <div class="article-meta">
-            <span>${escapeHtml(article.publisher)}</span>
-            <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
-          </div>
+          ${renderMeta(article)}
           <p class="summary">${escapeHtml(article.summary)}</p>
           ${renderOriginalLink(article)}
         </article>
@@ -261,10 +268,7 @@
         <div class="small-card">
           ${renderKeywords(article)}
           <a href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
-          <div class="article-meta">
-            <span>${escapeHtml(article.publisher)}</span>
-            <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
-          </div>
+          ${renderMeta(article)}
           <p class="summary">${escapeHtml(article.summary)}</p>
           ${renderOriginalLink(article)}
         </div>
@@ -297,8 +301,8 @@
         <section class="section">
           <div class="section-head">
             <div>
-              <h2>🔹 주제별 대표 기사 (총 14개)</h2>
-              <div class="section-desc">각 카테고리별 2개씩 선정</div>
+              <h2>🔹 주제별 대표 기사</h2>
+              <div class="section-desc">카테고리별 대표 기사 1건씩 선정</div>
             </div>
           </div>
           <div class="category-grid">
