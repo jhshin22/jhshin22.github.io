@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>내일 주가 맞추기 게임 v2</title>
-  <link rel="stylesheet" href="./style.css?v=20260422c" />
+  <link rel="stylesheet" href="./style.css?v=20260422d" />
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 </head>
 <body>
@@ -47,7 +47,7 @@
         <h2 id="questionTitle">문제</h2>
         <p class="question-guide" id="questionGuide"></p>
         <div class="open-hint" id="openHintBox" hidden>
-          <span class="hint-label">해당일 시가</span>
+          <span class="hint-label">당일 시가 공개</span>
           <strong id="openHintValue">-</strong>
         </div>
         <p id="feedbackText" class="feedback"></p>
@@ -56,7 +56,23 @@
 
       <section class="panel monkey-panel" id="monkeyPanel">
         <h2>원숭이의 결정</h2>
-        <div id="monkeyDecisionBox" class="monkey-box">이번 문제 시작 전입니다.</div>
+        <div class="monkey-rival">
+          <div id="monkeyCharacter" class="monkey-character thinking" aria-label="경쟁 상대 원숭이">
+            <span class="monkey-ear left"></span>
+            <span class="monkey-ear right"></span>
+            <span class="monkey-face">
+              <span class="monkey-eye left"></span>
+              <span class="monkey-eye right"></span>
+              <span class="monkey-muzzle"></span>
+              <span class="monkey-mouth"></span>
+            </span>
+            <span id="monkeyBadge" class="monkey-badge">대기</span>
+          </div>
+          <div class="monkey-copy">
+            <strong id="monkeyMoodText">원숭이도 차트를 보는 중</strong>
+            <div id="monkeyDecisionBox" class="monkey-box">이번 문제 시작 전입니다.</div>
+          </div>
+        </div>
       </section>
 
       <section class="decision-bar panel" id="decisionBar">
@@ -73,6 +89,6 @@
     </section>
   </div>
 
-  <script type="module" src="./app.js?v=20260422c"></script>
+  <script type="module" src="./app.js?v=20260422d"></script>
 </body>
 </html>
