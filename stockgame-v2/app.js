@@ -74,6 +74,11 @@ function formatPercent(value) {
   return `${(value * 100).toFixed(2)}%`;
 }
 
+function formatPercentFromBase(value, base) {
+  const pct = ((Number(value) / Number(base)) - 1) * 100;
+  return `${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%`;
+}
+
 function directionText(v) {
   return v === 'up' ? '상승' : '하락';
 }
@@ -121,10 +126,6 @@ function buildRounds(problems) {
     }));
 }
 
-function toPercentValue(value, base) {
-  return ((Number(value) / Number(base)) - 1) * 100;
-}
-
 function getChartData(round, reveal = false) {
   const { problem, type } = round;
   const visible = Array.isArray(problem.visibleCandles) ? problem.visibleCandles : [];
@@ -132,25 +133,16 @@ function getChartData(round, reveal = false) {
   const prevClose = Number(visible[visible.length - 1].close);
 
   if (type === 'close') {
-    const normalize = candle => ({
-      date: candle.date,
-      open: toPercentValue(candle.open, prevClose),
-      close: toPercentValue(candle.close, prevClose),
-      low: toPercentValue(candle.low, prevClose),
-      high: toPercentValue(candle.high, prevClose),
-      volume: candle.volume,
-    });
-
     const candles = reveal
-      ? [...visible.map(normalize), normalize(target)]
+      ? [...visible, target]
       : [
-          ...visible.map(normalize),
+          ...visible,
           {
             date: target.date,
-            open: toPercentValue(target.open, prevClose),
-            close: toPercentValue(target.open, prevClose),
-            low: toPercentValue(target.open, prevClose),
-            high: toPercentValue(target.open, prevClose),
+            open: Number(target.open),
+            close: Number(target.open),
+            low: Number(target.open),
+            high: Number(target.open),
             volume: target.volume,
           }
         ];
@@ -158,14 +150,15 @@ function getChartData(round, reveal = false) {
     return {
       isPercentMode: true,
       showVolume: false,
+      percentBase: prevClose,
       categoryData: candles.map(d => d.date),
-      candleValues: candles.map(d => [d.open, d.close, d.low, d.high]),
+      candleValues: candles.map(d => [Number(d.open), Number(d.close), Number(d.low), Number(d.high)]),
       volumeValues: [],
       volumeDirections: [],
       targetDate: target.date,
-      targetHigh: toPercentValue(target.high, prevClose),
-      targetLow: toPercentValue(target.low, prevClose),
-      openPercent: toPercentValue(target.open, prevClose),
+      targetHigh: Number(target.high),
+      targetLow: Number(target.low),
+      openPercent: ((Number(target.open) / prevClose) - 1) * 100,
     };
   }
 
@@ -176,13 +169,14 @@ function getChartData(round, reveal = false) {
   return {
     isPercentMode: false,
     showVolume: true,
+    percentBase: null,
     categoryData: candles.map(d => d.date),
     candleValues: candles.map(d => (d.open == null ? '-' : [Number(d.open), Number(d.close), Number(d.low), Number(d.high)])),
     volumeValues: candles.map(d => (d.volume == null ? '-' : Number(d.volume))),
     volumeDirections: candles.map(d => (d.close == null || d.open == null ? 0 : (Number(d.close) >= Number(d.open) ? 1 : -1))),
     targetDate: target.date,
-    targetHigh: target.high,
-    targetLow: target.low,
+    targetHigh: Number(target.high),
+    targetLow: Number(target.low),
     openPercent: null,
   };
 }
@@ -193,7 +187,7 @@ function buildGraphicOverlay() {
 
 function buildChartOption(round, reveal = false, outcome = null) {
   const chartData = getChartData(round, reveal);
-  const { isPercentMode, showVolume, categoryData, candleValues, volumeValues, volumeDirections, targetDate, targetHigh, targetLow } = chartData;
+  const { isPercentMode, showVolume, percentBase, categoryData, candleValues, volumeValues, volumeDirections, targetDate, targetHigh, targetLow } = chartData;
   const predictionBandData = !reveal ? [[{ xAxis: categoryData[categoryData.length - 1] }, { xAxis: categoryData[categoryData.length - 1] }]] : [];
   const revealBandData = reveal && targetDate ? [[{ xAxis: targetDate }, { xAxis: targetDate }]] : [];
   const targetMid = targetHigh != null && targetLow != null ? (Number(targetHigh) + Number(targetLow)) / 2 : null;
@@ -244,12 +238,17 @@ function buildChartOption(round, reveal = false, outcome = null) {
         }
       ];
 
+  const percentFormatter = value => {
+    if (!reveal || percentBase == null) return '';
+    return formatPercentFromBase(value, percentBase);
+  };
+
   const yAxis = showVolume
     ? [
         {
           scale: true,
           axisLine: { show: false },
-          axisLabel: { color: '#66758a', formatter: value => (reveal ? (isPercentMode ? `${value.toFixed(1)}%` : formatNumber(value)) : '') },
+          axisLabel: { color: '#66758a', formatter: value => (reveal ? formatNumber(value) : '') },
           splitLine: { lineStyle: { color: '#edf2f8' } }
         },
         {
@@ -264,7 +263,7 @@ function buildChartOption(round, reveal = false, outcome = null) {
         {
           scale: true,
           axisLine: { show: false },
-          axisLabel: { color: '#66758a', formatter: value => (reveal ? `${value.toFixed(1)}%` : '') },
+          axisLabel: { color: '#66758a', formatter: percentFormatter },
           splitLine: { lineStyle: { color: '#edf2f8' } }
         }
       ];
@@ -424,7 +423,7 @@ function renderProblem() {
 
   chartNote.textContent = type === 'open'
     ? '과거 캔들과 거래량만 보고 다음 거래일 시가 방향을 판단해 보세요. 차트 안 겹침을 막기 위해 안내 패널은 차트 밖에서만 표시합니다.'
-    : '유형 2는 거래량을 숨기고, 가격도 전일 종가 대비 등락률 기준으로만 보여줍니다. 시가 정보는 차트 밖 패널에서 강조됩니다.';
+    : '유형 2는 실제 가격 데이터로 차트를 그리되, 사용자에게는 전일 종가 대비 등락률 기준으로만 보이게 처리했습니다.';
 }
 
 function renderResults() {
