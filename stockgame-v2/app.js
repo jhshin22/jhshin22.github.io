@@ -34,6 +34,7 @@ const nextBtn = document.getElementById('nextBtn');
 
 const INITIAL_BALANCE = 1000000;
 const GAME_ROUND_COUNT = 6;
+const MONKEY_POSITION_KEY = 'stockgame-v2-monkey-position';
 
 let chart = null;
 let rounds = [];
@@ -42,6 +43,8 @@ let answered = false;
 let playerBalance = INITIAL_BALANCE;
 let monkeyBalance = INITIAL_BALANCE;
 let results = [];
+let monkeyDrag = null;
+let monkeyPositionLoaded = false;
 
 function ensureChart() {
   if (!window.echarts) throw new Error('ECharts 라이브러리를 불러오지 못했습니다.');
@@ -79,9 +82,13 @@ function formatPercent(value) {
   return `${(value * 100).toFixed(2)}%`;
 }
 
+function formatPercentValue(value) {
+  return `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
+}
+
 function formatPercentFromBase(value, base) {
   const pct = ((Number(value) / Number(base)) - 1) * 100;
-  return `${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%`;
+  return formatPercentValue(pct);
 }
 
 function directionText(v) {
@@ -96,10 +103,15 @@ function typeLabel(type) {
   return type === 'open' ? '유형 1 · 시가 예측' : '유형 2 · 종가 예측';
 }
 
-function questionPrompt(type) {
-  return type === 'open'
-    ? '전날까지의 차트만 보고 다음 거래일 시가가 전날 종가보다 위에서 시작할지 아래에서 시작할지 고르세요.'
-    : '별표로 표시된 당일 시가를 기준으로 종가가 위에서 끝날지 아래에서 끝날지 고르세요.';
+function questionPrompt(round) {
+  if (round.type === 'open') {
+    return '전날까지의 차트만 보고 다음 거래일 시가가 전날 종가보다 위에서 시작할지 아래에서 시작할지 고르세요.';
+  }
+
+  const prevClose = Number(round.problem.visibleCandles[round.problem.visibleCandles.length - 1].close);
+  const targetOpen = Number(round.problem.targetCandle.open);
+  const openPercent = ((targetOpen / prevClose) - 1) * 100;
+  return `전일 대비 당일 시가(${formatPercentValue(openPercent)})를 기준으로 종가가 위에서 끝날지 아래에서 끝날지 고르세요.`;
 }
 
 function clearAnswerFeedback() {
@@ -125,6 +137,91 @@ function setMonkeyResult(decision, isCorrect) {
   monkeyMoodText.textContent = `${positionText(decision)} 골랐어`;
   monkeyDecisionBox.textContent = isCorrect ? '예측 성공!' : '예측 실패...';
   monkeyBadge.textContent = isCorrect ? '성공' : '실패';
+}
+
+function clampMonkeyPanelPosition(x, y) {
+  const margin = 8;
+  const width = monkeyPanel.offsetWidth || 300;
+  const height = monkeyPanel.offsetHeight || 96;
+  return {
+    x: Math.min(Math.max(x, margin), Math.max(margin, window.innerWidth - width - margin)),
+    y: Math.min(Math.max(y, margin), Math.max(margin, window.innerHeight - height - margin)),
+  };
+}
+
+function setMonkeyPanelPosition(x, y, save = true) {
+  const pos = clampMonkeyPanelPosition(x, y);
+  monkeyPanel.style.left = `${pos.x}px`;
+  monkeyPanel.style.top = `${pos.y}px`;
+  monkeyPanel.style.right = 'auto';
+  monkeyPanel.style.bottom = 'auto';
+  monkeyPanel.dataset.moved = 'true';
+
+  if (save) {
+    try {
+      localStorage.setItem(MONKEY_POSITION_KEY, JSON.stringify(pos));
+    } catch (_) {
+      // Storage can be unavailable in private browsing; dragging should still work.
+    }
+  }
+}
+
+function loadMonkeyPanelPosition() {
+  try {
+    const raw = localStorage.getItem(MONKEY_POSITION_KEY);
+    if (!raw) return false;
+    const saved = JSON.parse(raw);
+    if (!Number.isFinite(saved?.x) || !Number.isFinite(saved?.y)) return false;
+    setMonkeyPanelPosition(saved.x, saved.y, false);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
+function restoreMonkeyPanelPosition() {
+  if (!monkeyPositionLoaded) {
+    monkeyPositionLoaded = loadMonkeyPanelPosition();
+  } else if (monkeyPanel.dataset.moved === 'true') {
+    const rect = monkeyPanel.getBoundingClientRect();
+    setMonkeyPanelPosition(rect.left, rect.top, false);
+  }
+}
+
+function initMonkeyDrag() {
+  monkeyPanel.addEventListener('pointerdown', event => {
+    if (event.button != null && event.button !== 0) return;
+    const rect = monkeyPanel.getBoundingClientRect();
+    monkeyDrag = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      panelX: rect.left,
+      panelY: rect.top,
+    };
+    monkeyPanel.classList.add('dragging');
+    monkeyPanel.setPointerCapture?.(event.pointerId);
+    event.preventDefault();
+  });
+
+  monkeyPanel.addEventListener('pointermove', event => {
+    if (!monkeyDrag || event.pointerId !== monkeyDrag.pointerId) return;
+    const x = monkeyDrag.panelX + event.clientX - monkeyDrag.startX;
+    const y = monkeyDrag.panelY + event.clientY - monkeyDrag.startY;
+    setMonkeyPanelPosition(x, y, false);
+  });
+
+  function finishDrag(event) {
+    if (!monkeyDrag || event.pointerId !== monkeyDrag.pointerId) return;
+    const rect = monkeyPanel.getBoundingClientRect();
+    setMonkeyPanelPosition(rect.left, rect.top, true);
+    monkeyPanel.classList.remove('dragging');
+    monkeyPanel.releasePointerCapture?.(event.pointerId);
+    monkeyDrag = null;
+  }
+
+  monkeyPanel.addEventListener('pointerup', finishDrag);
+  monkeyPanel.addEventListener('pointercancel', finishDrag);
 }
 
 function setDecisionButtonsDisabled(disabled) {
@@ -162,6 +259,19 @@ function buildRounds(problems) {
       type: Math.random() < 0.5 ? 'open' : 'close',
       problem,
     }));
+}
+
+function placeholderCandle(prevClose) {
+  const span = Math.max(Math.abs(prevClose) * 0.004, 1);
+  return {
+    value: [prevClose - span * 0.35, prevClose + span * 0.35, prevClose - span, prevClose + span],
+    itemStyle: {
+      color: '#c4ccd6',
+      color0: '#c4ccd6',
+      borderColor: '#8e9baa',
+      borderColor0: '#8e9baa',
+    }
+  };
 }
 
 function getChartData(round, reveal = false) {
@@ -210,7 +320,7 @@ function getChartData(round, reveal = false) {
     showVolume: true,
     percentBase: null,
     categoryData: candles.map(d => d.date),
-    candleValues: candles.map(d => (d.open == null ? '-' : [Number(d.open), Number(d.close), Number(d.low), Number(d.high)])),
+    candleValues: candles.map(d => (d.open == null ? placeholderCandle(prevClose) : [Number(d.open), Number(d.close), Number(d.low), Number(d.high)])),
     volumeValues: candles.map(d => (d.volume == null ? '-' : Number(d.volume))),
     volumeDirections: candles.map(d => (d.close == null || d.open == null ? 0 : (Number(d.close) >= Number(d.open) ? 1 : -1))),
     targetDate: target.date,
@@ -221,82 +331,47 @@ function getChartData(round, reveal = false) {
   };
 }
 
-function buildGraphicOverlay(round, reveal = false, outcome = null) {
-  if (reveal) {
-    if (!outcome) return [];
-    return [
-      {
-        type: 'group',
-        right: 22,
-        top: 18,
-        z: 120,
-        children: [
-          {
-            type: 'rect',
-            shape: { x: 0, y: 0, width: 160, height: 54, r: 14 },
-            style: {
-              fill: 'rgba(255,255,255,0.94)',
-              stroke: outcome.playerCorrect ? '#9bd8b7' : '#f0b8c2',
-              lineWidth: 1,
-              shadowBlur: 12,
-              shadowColor: 'rgba(31, 43, 58, 0.10)'
-            }
-          },
-          {
-            type: 'text',
-            style: {
-              x: 14,
-              y: 21,
-              text: outcome.playerCorrect ? '정답입니다' : '오답입니다',
-              fill: outcome.playerCorrect ? '#0d8b59' : '#c7374f',
-              fontSize: 15,
-              fontWeight: 800
-            }
-          },
-          {
-            type: 'text',
-            style: {
-              x: 14,
-              y: 42,
-              text: `실제 방향: ${directionText(outcome.actualDirection)}`,
-              fill: '#66758a',
-              fontSize: 12,
-              fontWeight: 700
-            }
-          }
-        ]
-      }
-    ];
-  }
-
-  if (round.type !== 'open') return [];
+function buildGraphicOverlay(reveal = false, outcome = null) {
+  if (!reveal || !outcome) return [];
 
   return [
     {
       type: 'group',
-      right: 32,
-      top: '32%',
-      z: 130,
+      right: 22,
+      top: 18,
+      z: 120,
       children: [
         {
-          type: 'circle',
-          shape: { cx: 30, cy: 30, r: 26 },
+          type: 'rect',
+          shape: { x: 0, y: 0, width: 160, height: 54, r: 14 },
           style: {
-            fill: 'rgba(36, 91, 219, 0.10)',
-            stroke: '#245bdb',
-            lineWidth: 2
+            fill: 'rgba(255,255,255,0.94)',
+            stroke: outcome.playerCorrect ? '#9bd8b7' : '#f0b8c2',
+            lineWidth: 1,
+            shadowBlur: 12,
+            shadowColor: 'rgba(31, 43, 58, 0.10)'
           }
         },
         {
           type: 'text',
           style: {
-            x: 30,
-            y: 40,
-            text: '?',
-            fill: '#245bdb',
-            fontSize: 32,
-            fontWeight: 900,
-            align: 'center'
+            x: 14,
+            y: 21,
+            text: outcome.playerCorrect ? '정답입니다' : '오답입니다',
+            fill: outcome.playerCorrect ? '#0d8b59' : '#c7374f',
+            fontSize: 15,
+            fontWeight: 800
+          }
+        },
+        {
+          type: 'text',
+          style: {
+            x: 14,
+            y: 42,
+            text: `실제 방향: ${directionText(outcome.actualDirection)}`,
+            fill: '#66758a',
+            fontSize: 12,
+            fontWeight: 700
           }
         }
       ]
@@ -419,8 +494,9 @@ function buildChartOption(round, reveal = false, outcome = null) {
           : undefined,
       markPoint: markPoints.length
         ? {
-            symbol: reveal ? 'pin' : 'star',
-            symbolSize: reveal ? 34 : 28,
+            symbol: reveal ? 'pin' : 'arrow',
+            symbolSize: reveal ? 34 : 16,
+            symbolRotate: reveal ? 0 : 180,
             itemStyle: { color: reveal ? '#f5be3b' : '#245bdb' },
             label: { show: false },
             data: markPoints
@@ -465,7 +541,7 @@ function buildChartOption(round, reveal = false, outcome = null) {
     backgroundColor: '#ffffff',
     tooltip: reveal ? { trigger: 'axis', axisPointer: { type: 'cross' } } : { show: false },
     axisPointer: { link: showVolume ? [{ xAxisIndex: [0, 1] }] : undefined },
-    graphic: buildGraphicOverlay(round, reveal, outcome),
+    graphic: buildGraphicOverlay(reveal, outcome),
     grid: grids,
     xAxis,
     yAxis,
@@ -531,6 +607,7 @@ function renderProblem() {
   resultPanel.hidden = true;
   openHintBox.hidden = true;
   setPlayViewVisible(true);
+  restoreMonkeyPanelPosition();
   setDecisionButtonsDisabled(false);
   setDecisionMode('question');
 
@@ -538,7 +615,7 @@ function renderProblem() {
   marketText.textContent = problem.market;
   questionTypeText.textContent = typeLabel(type);
   questionTitle.textContent = type === 'open' ? '다음 날 시가 방향을 고르세요' : '해당일 종가 방향을 고르세요';
-  questionGuide.textContent = questionPrompt(type);
+  questionGuide.textContent = questionPrompt(round);
 
   const chartInstance = ensureChart();
   chartInstance.clear();
@@ -546,8 +623,8 @@ function renderProblem() {
   chartInstance.resize();
 
   chartNote.textContent = type === 'open'
-    ? '오른쪽 물음표 구간은 아직 숨겨진 다음 거래일 시가입니다.'
-    : '별표가 당일 시가 위치입니다. 이 시가를 기준으로 종가 방향을 판단해 보세요.';
+    ? '오른쪽 회색 캔들은 아직 숨겨진 다음 거래일 시가를 표시하는 예측 구간입니다.'
+    : '작은 화살표가 당일 시가 위치입니다.';
 }
 
 function renderResults() {
@@ -697,6 +774,13 @@ resetBtn.addEventListener('click', startGame);
 buyBtn.addEventListener('click', () => resolveDecision('up'));
 sellBtn.addEventListener('click', () => resolveDecision('down'));
 nextBtn.addEventListener('click', goNext);
-window.addEventListener('resize', () => { if (chart) chart.resize(); });
+window.addEventListener('resize', () => {
+  if (chart) chart.resize();
+  if (!monkeyPanel.hidden && monkeyPanel.dataset.moved === 'true') {
+    const rect = monkeyPanel.getBoundingClientRect();
+    setMonkeyPanelPosition(rect.left, rect.top, true);
+  }
+});
 window.addEventListener('pageshow', () => { if (chart) chart.resize(); });
+initMonkeyDrag();
 updateBalanceTexts();
