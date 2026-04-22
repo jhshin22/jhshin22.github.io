@@ -9,76 +9,41 @@
 </head>
 <body>
   <div class="app">
-    <header class="hero">
-      <div>
+    <section class="intro-screen" id="introScreen">
+      <div class="intro-card">
         <p class="eyebrow">Stock Game v2</p>
-        <h1>차트 보고 롱/숏 결정하기</h1>
-        <p class="subtitle">문제를 더 직관적으로 나누고, 매 문제를 실제 투자 의사결정처럼 체감할 수 있게 개선한 버전입니다.</p>
-      </div>
-      <button id="resetBtn" class="ghost-btn">새 게임</button>
-    </header>
-
-    <section class="panel status-panel">
-      <div class="status-card user">
-        <div class="status-title">🙋 플레이어</div>
-        <div class="status-value" id="userBalanceText">₩1,000,000</div>
-        <div class="status-sub" id="userReturnText">수익률 0.00%</div>
-      </div>
-      <div class="status-card monkey">
-        <div class="status-title">🐵 원숭이</div>
-        <div class="status-value" id="monkeyBalanceText">₩1,000,000</div>
-        <div class="status-sub" id="monkeyReturnText">수익률 0.00%</div>
-      </div>
-      <div class="status-card info">
-        <div class="status-title">📊 진행 현황</div>
-        <div class="mini-grid">
-          <div><span>문제</span><strong id="progressText">-</strong></div>
-          <div><span>유형</span><strong id="questionTypeText">-</strong></div>
-          <div><span>시장</span><strong id="marketText">-</strong></div>
+        <h1>차트 보고 매수 / 매도 결정하기</h1>
+        <p class="intro-text">모바일에서도 한눈에 보이도록 구조를 단순화했습니다. 시작하면 바로 얇은 상태바와 차트 중심 화면으로 들어갑니다.</p>
+        <div class="intro-list">
+          <div>유형 1 · 전날까지 차트만 보고 다음 날 시가 방향 예측</div>
+          <div>유형 2 · 해당일 시가 정보만 추가로 받고 종가 방향 예측</div>
+          <div>100만원으로 시작해 매수 / 매도 수익률 반영</div>
+          <div>원숭이의 무작위 매매와 성과 비교</div>
         </div>
+        <button id="startBtn" class="primary-btn start-btn">게임 시작</button>
       </div>
     </section>
 
-    <section class="panel chart-panel">
-      <div id="chart" class="chart"></div>
-      <div class="chart-note" id="chartNote">문제 데이터를 불러오는 중...</div>
-    </section>
+    <section class="game-screen" id="gameScreen" hidden>
+      <header class="status-bar panel">
+        <div class="status-item"><span>내 수익률</span><strong id="userReturnText">0.00%</strong></div>
+        <div class="status-item"><span>원숭이</span><strong id="monkeyReturnText">0.00%</strong></div>
+        <div class="status-item"><span>남은 문제</span><strong id="remainingText">-</strong></div>
+        <div class="status-item compact"><span>내 잔고</span><strong id="userBalanceText">₩1,000,000</strong></div>
+        <div class="status-item compact"><span>원숭이 잔고</span><strong id="monkeyBalanceText">₩1,000,000</strong></div>
+        <button id="resetBtn" class="ghost-btn reset-small">새 게임</button>
+      </header>
 
-    <section class="panel question-panel" id="questionPanel">
-      <h2 id="questionTitle">문제</h2>
-      <p class="question-guide" id="questionGuide"></p>
+      <section class="panel chart-panel">
+        <div id="chart" class="chart"></div>
+        <div class="chart-note" id="chartNote">문제 데이터를 불러오는 중...</div>
+      </section>
 
-      <div class="open-hint" id="openHintBox" hidden>
-        <span class="hint-label">해당일 시가</span>
-        <strong id="openHintValue">-</strong>
-      </div>
-
-      <div class="choice-group" data-question="decision">
-        <button class="choice-btn up" data-value="up">상승 예상 · Long</button>
-        <button class="choice-btn down" data-value="down">하락 예상 · Short</button>
-      </div>
-
-      <div class="action-row">
-        <button id="submitBtn" class="primary-btn">의사결정 제출</button>
-        <button id="nextBtn" class="secondary-btn" hidden>다음 문제</button>
-      </div>
-      <p id="feedbackText" class="feedback"></p>
-      <div id="tradeSummary" class="trade-summary"></div>
-    </section>
-
-    <section class="panel monkey-panel">
-      <h2>원숭이의 결정</h2>
-      <p class="monkey-desc">같은 문제를 원숭이도 완전 무작위로 Long / Short 중 하나를 고릅니다.</p>
-      <div id="monkeyDecisionBox" class="monkey-box">이번 문제 시작 전입니다.</div>
-    </section>
-
-    <section class="panel result-panel" id="resultPanel" hidden>
-      <h2>최종 결과</h2>
-      <p id="finalSummary" class="final-summary"></p>
-      <div id="resultList" class="result-list"></div>
-    </section>
-  </div>
-
-  <script type="module" src="./app.js"></script>
-</body>
-</html>
+      <section class="panel question-panel" id="questionPanel">
+        <div class="question-topline">
+          <strong id="questionTypeText">-</strong>
+          <span id="marketText">-</span>
+        </div>
+        <h2 id="questionTitle">문제</h2>
+        <p class="question-guide" id="questionGuide"></p>
+        <div class="open-hint
