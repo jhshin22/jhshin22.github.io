@@ -33,6 +33,11 @@ body {
   box-shadow: var(--shadow);
 }
 
+.intro-screen[hidden],
+.game-screen[hidden] {
+  display: none !important;
+}
+
 .eyebrow {
   margin: 0 0 8px;
   font-size: 13px;
@@ -222,6 +227,10 @@ h2 { font-size: 22px; margin-bottom: 10px; }
   margin-bottom: 12px;
 }
 
+.decision-bar.result-mode {
+  grid-template-columns: 1fr;
+}
+
 .decision-btn {
   padding: 16px 14px;
   font-size: 18px;
@@ -239,6 +248,12 @@ h2 { font-size: 22px; margin-bottom: 10px; }
   border-color: #f7d3da;
   background: #fff1f3;
   color: var(--red);
+}
+
+.next-btn {
+  border-color: #d5e3ff;
+  background: #eef4ff;
+  color: var(--primary);
 }
 
 .primary-btn {
