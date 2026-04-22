@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>내일 주가 맞추기 게임 v2</title>
-  <link rel="stylesheet" href="./style.css?v=20260422b" />
+  <link rel="stylesheet" href="./style.css?v=20260422c" />
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 </head>
 <body>
@@ -25,7 +25,7 @@
     </section>
 
     <section class="game-screen" id="gameScreen" hidden>
-      <header class="status-bar panel">
+      <header class="status-bar panel" id="statusBar">
         <div class="status-item"><span>내 수익률</span><strong id="userReturnText">0.00%</strong></div>
         <div class="status-item"><span>원숭이</span><strong id="monkeyReturnText">0.00%</strong></div>
         <div class="status-item"><span>남은 문제</span><strong id="remainingText">-</strong></div>
@@ -34,7 +34,7 @@
         <button id="resetBtn" class="ghost-btn reset-small">새 게임</button>
       </header>
 
-      <section class="panel chart-panel">
+      <section class="panel chart-panel" id="chartPanel">
         <div id="chart" class="chart"></div>
         <div class="chart-note" id="chartNote">문제 데이터를 불러오는 중...</div>
       </section>
@@ -54,7 +54,7 @@
         <div id="tradeSummary" class="trade-summary"></div>
       </section>
 
-      <section class="panel monkey-panel">
+      <section class="panel monkey-panel" id="monkeyPanel">
         <h2>원숭이의 결정</h2>
         <div id="monkeyDecisionBox" class="monkey-box">이번 문제 시작 전입니다.</div>
       </section>
@@ -73,6 +73,6 @@
     </section>
   </div>
 
-  <script type="module" src="./app.js?v=20260422b"></script>
+  <script type="module" src="./app.js?v=20260422c"></script>
 </body>
 </html>
