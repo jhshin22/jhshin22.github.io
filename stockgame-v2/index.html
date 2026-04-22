@@ -13,12 +13,12 @@
       <div class="intro-card">
         <p class="eyebrow">Stock Game v2</p>
         <h1>차트 보고 매수 / 매도 결정하기</h1>
-        <p class="intro-text">모바일에서도 한눈에 보이도록 구조를 단순화했습니다. 시작하면 바로 얇은 상태바와 차트 중심 화면으로 들어갑니다.</p>
+        <p class="intro-text">모바일에서 차트가 바로 보이도록 게임 소개와 플레이 화면을 분리했습니다.</p>
         <div class="intro-list">
           <div>유형 1 · 전날까지 차트만 보고 다음 날 시가 방향 예측</div>
-          <div>유형 2 · 해당일 시가 정보만 추가로 받고 종가 방향 예측</div>
-          <div>100만원으로 시작해 매수 / 매도 수익률 반영</div>
-          <div>원숭이의 무작위 매매와 성과 비교</div>
+          <div>유형 2 · 해당일 시가 정보만 받고 종가 방향 예측</div>
+          <div>100만원으로 시작해 매수 / 매도 성과 반영</div>
+          <div>원숭이의 무작위 매매와 결과 비교</div>
         </div>
         <button id="startBtn" class="primary-btn start-btn">게임 시작</button>
       </div>
@@ -46,4 +46,32 @@
         </div>
         <h2 id="questionTitle">문제</h2>
         <p class="question-guide" id="questionGuide"></p>
-        <div class="open-hint
+        <div class="open-hint" id="openHintBox" hidden>
+          <span class="hint-label">해당일 시가</span>
+          <strong id="openHintValue">-</strong>
+        </div>
+        <p id="feedbackText" class="feedback"></p>
+        <div id="tradeSummary" class="trade-summary"></div>
+      </section>
+
+      <section class="panel monkey-panel">
+        <h2>원숭이의 결정</h2>
+        <div id="monkeyDecisionBox" class="monkey-box">이번 문제 시작 전입니다.</div>
+      </section>
+
+      <section class="decision-bar panel" id="decisionBar">
+        <button id="buyBtn" class="decision-btn buy-btn">매수</button>
+        <button id="sellBtn" class="decision-btn sell-btn">매도</button>
+      </section>
+
+      <section class="panel result-panel" id="resultPanel" hidden>
+        <h2>최종 결과</h2>
+        <p id="finalSummary" class="final-summary"></p>
+        <div id="resultList" class="result-list"></div>
+      </section>
+    </section>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
