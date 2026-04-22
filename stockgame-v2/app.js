@@ -19,8 +19,6 @@ const resultPanel = document.getElementById('resultPanel');
 const resetBtn = document.getElementById('resetBtn');
 const chartNote = document.getElementById('chartNote');
 const openHintBox = document.getElementById('openHintBox');
-const openHintLabel = openHintBox.querySelector('.hint-label');
-const openHintValue = document.getElementById('openHintValue');
 const userBalanceText = document.getElementById('userBalanceText');
 const userReturnText = document.getElementById('userReturnText');
 const monkeyBalanceText = document.getElementById('monkeyBalanceText');
@@ -101,7 +99,7 @@ function typeLabel(type) {
 function questionPrompt(type) {
   return type === 'open'
     ? '전날까지의 차트만 보고 다음 거래일 시가가 전날 종가보다 위에서 시작할지 아래에서 시작할지 고르세요.'
-    : '당일 시가만 공개된 상태입니다. 이 시가를 기준으로 종가가 위에서 끝날지 아래에서 끝날지 고르세요.';
+    : '별표로 표시된 당일 시가를 기준으로 종가가 위에서 끝날지 아래에서 끝날지 고르세요.';
 }
 
 function clearAnswerFeedback() {
@@ -116,15 +114,17 @@ function applyAnswerFeedback(isCorrect) {
 function resetMonkeyState() {
   monkeyCharacter.classList.remove('correct', 'wrong', 'buy', 'sell');
   monkeyCharacter.classList.add('thinking');
-  monkeyMoodText.textContent = '원숭이도 차트를 보는 중';
+  monkeyMoodText.textContent = '차트보고 생각중';
+  monkeyDecisionBox.textContent = '아직 안 골랐어';
   monkeyBadge.textContent = '대기';
 }
 
 function setMonkeyResult(decision, isCorrect) {
   monkeyCharacter.classList.remove('thinking', 'correct', 'wrong', 'buy', 'sell');
   monkeyCharacter.classList.add(isCorrect ? 'correct' : 'wrong', decision === 'up' ? 'buy' : 'sell');
-  monkeyMoodText.textContent = `원숭이는 ${positionText(decision)} 선택`;
-  monkeyBadge.textContent = isCorrect ? '적중' : '실패';
+  monkeyMoodText.textContent = `${positionText(decision)} 골랐어`;
+  monkeyDecisionBox.textContent = isCorrect ? '예측 성공!' : '예측 실패...';
+  monkeyBadge.textContent = isCorrect ? '성공' : '실패';
 }
 
 function setDecisionButtonsDisabled(disabled) {
@@ -194,6 +194,7 @@ function getChartData(round, reveal = false) {
       volumeValues: [],
       volumeDirections: [],
       targetDate: target.date,
+      targetOpen: Number(target.open),
       targetHigh: Number(target.high),
       targetLow: Number(target.low),
       openPercent: ((Number(target.open) / prevClose) - 1) * 100,
@@ -213,13 +214,14 @@ function getChartData(round, reveal = false) {
     volumeValues: candles.map(d => (d.volume == null ? '-' : Number(d.volume))),
     volumeDirections: candles.map(d => (d.close == null || d.open == null ? 0 : (Number(d.close) >= Number(d.open) ? 1 : -1))),
     targetDate: target.date,
+    targetOpen: Number(target.open),
     targetHigh: Number(target.high),
     targetLow: Number(target.low),
     openPercent: null,
   };
 }
 
-function buildGraphicOverlay(round, reveal = false, outcome = null, chartData = null) {
+function buildGraphicOverlay(round, reveal = false, outcome = null) {
   if (reveal) {
     if (!outcome) return [];
     return [
@@ -267,97 +269,32 @@ function buildGraphicOverlay(round, reveal = false, outcome = null, chartData = 
     ];
   }
 
-  if (round.type === 'open') {
-    return [
-      {
-        type: 'group',
-        right: 24,
-        top: '30%',
-        z: 130,
-        children: [
-          {
-            type: 'circle',
-            shape: { cx: 36, cy: 30, r: 28 },
-            style: {
-              fill: 'rgba(36, 91, 219, 0.12)',
-              stroke: '#245bdb',
-              lineWidth: 2
-            }
-          },
-          {
-            type: 'text',
-            style: {
-              x: 36,
-              y: 40,
-              text: '?',
-              fill: '#245bdb',
-              fontSize: 32,
-              fontWeight: 900,
-              align: 'center'
-            }
-          },
-          {
-            type: 'rect',
-            shape: { x: 0, y: 68, width: 92, height: 28, r: 14 },
-            style: { fill: 'rgba(36, 91, 219, 0.92)' }
-          },
-          {
-            type: 'text',
-            style: {
-              x: 46,
-              y: 87,
-              text: '다음 시가?',
-              fill: '#ffffff',
-              fontSize: 12,
-              fontWeight: 800,
-              align: 'center'
-            }
-          }
-        ]
-      }
-    ];
-  }
+  if (round.type !== 'open') return [];
 
-  const openPercent = chartData?.openPercent ?? 0;
-  const openText = `${openPercent >= 0 ? '+' : ''}${openPercent.toFixed(2)}%`;
   return [
     {
       type: 'group',
-      right: 18,
-      top: 46,
+      right: 32,
+      top: '32%',
       z: 130,
       children: [
         {
-          type: 'rect',
-          shape: { x: 0, y: 0, width: 130, height: 64, r: 16 },
+          type: 'circle',
+          shape: { cx: 30, cy: 30, r: 26 },
           style: {
-            fill: 'rgba(255,255,255,0.96)',
+            fill: 'rgba(36, 91, 219, 0.10)',
             stroke: '#245bdb',
-            lineWidth: 1.5,
-            shadowBlur: 10,
-            shadowColor: 'rgba(36, 91, 219, 0.12)'
+            lineWidth: 2
           }
         },
         {
           type: 'text',
           style: {
-            x: 65,
-            y: 24,
-            text: '당일 시가 공개',
+            x: 30,
+            y: 40,
+            text: '?',
             fill: '#245bdb',
-            fontSize: 13,
-            fontWeight: 900,
-            align: 'center'
-          }
-        },
-        {
-          type: 'text',
-          style: {
-            x: 65,
-            y: 48,
-            text: openText,
-            fill: openPercent >= 0 ? '#d9485f' : '#11a36a',
-            fontSize: 18,
+            fontSize: 32,
             fontWeight: 900,
             align: 'center'
           }
@@ -369,7 +306,7 @@ function buildGraphicOverlay(round, reveal = false, outcome = null, chartData = 
 
 function buildChartOption(round, reveal = false, outcome = null) {
   const chartData = getChartData(round, reveal);
-  const { showVolume, percentBase, categoryData, candleValues, volumeValues, volumeDirections, targetDate, targetHigh, targetLow } = chartData;
+  const { showVolume, percentBase, categoryData, candleValues, volumeValues, volumeDirections, targetDate, targetOpen, targetHigh, targetLow } = chartData;
   const predictionBandData = !reveal ? [[{ xAxis: categoryData[categoryData.length - 1] }, { xAxis: categoryData[categoryData.length - 1] }]] : [];
   const revealBandData = reveal && targetDate ? [[{ xAxis: targetDate }, { xAxis: targetDate }]] : [];
   const targetMid = targetHigh != null && targetLow != null ? (Number(targetHigh) + Number(targetLow)) / 2 : null;
@@ -450,6 +387,20 @@ function buildChartOption(round, reveal = false, outcome = null) {
         }
       ];
 
+  const markPoints = [];
+  if (!reveal && round.type === 'close') {
+    markPoints.push({
+      coord: [targetDate, targetOpen],
+      value: '시가'
+    });
+  }
+  if (reveal && targetDate && targetHigh != null) {
+    markPoints.push({
+      coord: [targetDate, Number(targetHigh)],
+      value: '정답'
+    });
+  }
+
   const series = [
     {
       name: '일봉',
@@ -466,13 +417,13 @@ function buildChartOption(round, reveal = false, outcome = null) {
         : revealBandData.length
           ? { itemStyle: { color: 'rgba(245, 190, 59, 0.22)' }, data: revealBandData }
           : undefined,
-      markPoint: reveal && targetDate && targetHigh != null
+      markPoint: markPoints.length
         ? {
-            symbol: 'pin',
-            symbolSize: 34,
-            itemStyle: { color: '#f5be3b' },
+            symbol: reveal ? 'pin' : 'star',
+            symbolSize: reveal ? 34 : 28,
+            itemStyle: { color: reveal ? '#f5be3b' : '#245bdb' },
             label: { show: false },
-            data: [{ coord: [targetDate, Number(targetHigh)], value: '정답' }]
+            data: markPoints
           }
         : undefined,
       markLine: reveal && targetDate && targetMid != null
@@ -514,7 +465,7 @@ function buildChartOption(round, reveal = false, outcome = null) {
     backgroundColor: '#ffffff',
     tooltip: reveal ? { trigger: 'axis', axisPointer: { type: 'cross' } } : { show: false },
     axisPointer: { link: showVolume ? [{ xAxisIndex: [0, 1] }] : undefined },
-    graphic: buildGraphicOverlay(round, reveal, outcome, chartData),
+    graphic: buildGraphicOverlay(round, reveal, outcome),
     grid: grids,
     xAxis,
     yAxis,
@@ -578,6 +529,7 @@ function renderProblem() {
   feedbackText.textContent = '';
   tradeSummary.innerHTML = '';
   resultPanel.hidden = true;
+  openHintBox.hidden = true;
   setPlayViewVisible(true);
   setDecisionButtonsDisabled(false);
   setDecisionMode('question');
@@ -588,26 +540,14 @@ function renderProblem() {
   questionTitle.textContent = type === 'open' ? '다음 날 시가 방향을 고르세요' : '해당일 종가 방향을 고르세요';
   questionGuide.textContent = questionPrompt(type);
 
-  if (type === 'close') {
-    const prevClose = Number(problem.visibleCandles[problem.visibleCandles.length - 1].close);
-    const openPercent = ((Number(problem.targetCandle.open) / prevClose) - 1) * 100;
-    openHintBox.hidden = false;
-    openHintLabel.textContent = '당일 시가 공개 · 전일 종가 대비';
-    openHintValue.textContent = `${openPercent >= 0 ? '+' : ''}${openPercent.toFixed(2)}%`;
-  } else {
-    openHintBox.hidden = true;
-  }
-
-  monkeyDecisionBox.textContent = '원숭이도 아직 고민 중입니다. 당신이 먼저 매수/매도를 누르면 원숭이의 무작위 선택이 공개됩니다.';
-
   const chartInstance = ensureChart();
   chartInstance.clear();
   chartInstance.setOption(buildChartOption(round, false, null), true);
   chartInstance.resize();
 
   chartNote.textContent = type === 'open'
-    ? '오른쪽 물음표 구간은 아직 숨겨진 다음 거래일 시가입니다. 과거 캔들과 거래량만 보고 시가 방향을 판단해 보세요.'
-    : '오른쪽 마지막 캔들은 전날 캔들이 아니라 당일 시가만 공개된 캔들입니다. 이 시가를 기준으로 종가 방향을 판단해 보세요.';
+    ? '오른쪽 물음표 구간은 아직 숨겨진 다음 거래일 시가입니다.'
+    : '별표가 당일 시가 위치입니다. 이 시가를 기준으로 종가 방향을 판단해 보세요.';
 }
 
 function renderResults() {
@@ -675,7 +615,6 @@ function resolveDecision(playerDecision) {
     원숭이는 <strong>${positionText(monkeyDecision)}</strong>로 ${formatPercent(monkeyTrade.signedReturn)} 수익률, 손익 ${formatMoney(monkeyTrade.pnl)}, 잔고 ${formatMoney(monkeyBalance)}
   `;
 
-  monkeyDecisionBox.textContent = `원숭이는 이번 문제에서 ${positionText(monkeyDecision)}를 골랐고, 결과는 ${monkeyCorrect ? '적중' : '실패'}입니다.`;
   chartNote.textContent = `정답 공개 완료 · ${problem.company} (${problem.symbol}) · ${problem.targetCandle.date}`;
 
   results.push({
