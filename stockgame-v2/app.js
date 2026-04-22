@@ -1,6 +1,10 @@
 const introScreen = document.getElementById('introScreen');
 const gameScreen = document.getElementById('gameScreen');
 const startBtn = document.getElementById('startBtn');
+const statusBar = document.getElementById('statusBar');
+const chartPanel = document.getElementById('chartPanel');
+const questionPanel = document.getElementById('questionPanel');
+const monkeyPanel = document.getElementById('monkeyPanel');
 const chartEl = document.getElementById('chart');
 const remainingText = document.getElementById('remainingText');
 const marketText = document.getElementById('marketText');
@@ -12,7 +16,6 @@ const tradeSummary = document.getElementById('tradeSummary');
 const finalSummary = document.getElementById('finalSummary');
 const resultList = document.getElementById('resultList');
 const resultPanel = document.getElementById('resultPanel');
-const questionPanel = document.getElementById('questionPanel');
 const resetBtn = document.getElementById('resetBtn');
 const chartNote = document.getElementById('chartNote');
 const openHintBox = document.getElementById('openHintBox');
@@ -116,6 +119,14 @@ function setDecisionMode(mode) {
   }
 }
 
+function setPlayViewVisible(visible) {
+  statusBar.hidden = !visible;
+  chartPanel.hidden = !visible;
+  questionPanel.hidden = !visible;
+  monkeyPanel.hidden = !visible;
+  decisionBar.hidden = !visible;
+}
+
 function buildRounds(problems) {
   return shuffle(problems)
     .slice(0, Math.min(GAME_ROUND_COUNT, problems.length))
@@ -187,7 +198,7 @@ function buildGraphicOverlay() {
 
 function buildChartOption(round, reveal = false, outcome = null) {
   const chartData = getChartData(round, reveal);
-  const { isPercentMode, showVolume, percentBase, categoryData, candleValues, volumeValues, volumeDirections, targetDate, targetHigh, targetLow } = chartData;
+  const { showVolume, percentBase, categoryData, candleValues, volumeValues, volumeDirections, targetDate, targetHigh, targetLow } = chartData;
   const predictionBandData = !reveal ? [[{ xAxis: categoryData[categoryData.length - 1] }, { xAxis: categoryData[categoryData.length - 1] }]] : [];
   const revealBandData = reveal && targetDate ? [[{ xAxis: targetDate }, { xAxis: targetDate }]] : [];
   const targetMid = targetHigh != null && targetLow != null ? (Number(targetHigh) + Number(targetLow)) / 2 : null;
@@ -394,8 +405,7 @@ function renderProblem() {
   feedbackText.textContent = '';
   tradeSummary.innerHTML = '';
   resultPanel.hidden = true;
-  questionPanel.hidden = false;
-  decisionBar.hidden = false;
+  setPlayViewVisible(true);
   setDecisionButtonsDisabled(false);
   setDecisionMode('question');
 
@@ -427,8 +437,7 @@ function renderProblem() {
 }
 
 function renderResults() {
-  questionPanel.hidden = true;
-  decisionBar.hidden = true;
+  setPlayViewVisible(false);
   resultPanel.hidden = false;
 
   const playerReturn = playerBalance / INITIAL_BALANCE - 1;
@@ -539,16 +548,14 @@ async function loadRounds() {
 
 function showEmptyState(message) {
   disposeChart();
-  chartEl.innerHTML = `<div class="empty-state">${message}</div>`;
-  chartNote.textContent = message;
-  questionPanel.hidden = true;
-  decisionBar.hidden = true;
+  setPlayViewVisible(false);
   resultPanel.hidden = false;
   finalSummary.textContent = '게임을 시작할 수 없습니다.';
-  resultList.innerHTML = '<div class="result-card">stockgame-v2는 기존 stockgame/data/problems.json을 참조합니다. 원본 데이터 파일 또는 경로를 확인해 주세요.</div>';
+  resultList.innerHTML = `<div class="result-card">${message}</div>`;
 }
 
 async function startGame() {
+  resultPanel.hidden = true;
   rounds = await loadRounds().catch(err => {
     introScreen.hidden = true;
     gameScreen.hidden = false;
