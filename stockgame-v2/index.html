@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>내일 주가 맞추기 게임 v2</title>
-  <link rel="stylesheet" href="./style.css?v=20260422d" />
+  <link rel="stylesheet" href="./style.css?v=20260422e" />
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 </head>
 <body>
@@ -54,8 +54,8 @@
         <div id="tradeSummary" class="trade-summary"></div>
       </section>
 
-      <section class="panel monkey-panel" id="monkeyPanel">
-        <h2>원숭이의 결정</h2>
+      <section class="monkey-panel" id="monkeyPanel">
+        <h2 class="sr-only">원숭이의 결정</h2>
         <div class="monkey-rival">
           <div id="monkeyCharacter" class="monkey-character thinking" aria-label="경쟁 상대 원숭이">
             <span class="monkey-ear left"></span>
@@ -69,8 +69,8 @@
             <span id="monkeyBadge" class="monkey-badge">대기</span>
           </div>
           <div class="monkey-copy">
-            <strong id="monkeyMoodText">원숭이도 차트를 보는 중</strong>
-            <div id="monkeyDecisionBox" class="monkey-box">이번 문제 시작 전입니다.</div>
+            <strong id="monkeyMoodText">차트보고 생각중</strong>
+            <div id="monkeyDecisionBox" class="monkey-box">아직 안 골랐어</div>
           </div>
         </div>
       </section>
@@ -89,6 +89,6 @@
     </section>
   </div>
 
-  <script type="module" src="./app.js?v=20260422d"></script>
+  <script type="module" src="./app.js?v=20260422e"></script>
 </body>
 </html>
