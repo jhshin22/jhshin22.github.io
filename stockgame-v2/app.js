@@ -25,10 +25,10 @@ const monkeyDecisionBox = document.getElementById('monkeyDecisionBox');
 const decisionBar = document.getElementById('decisionBar');
 const buyBtn = document.getElementById('buyBtn');
 const sellBtn = document.getElementById('sellBtn');
+const nextBtn = document.getElementById('nextBtn');
 
 const INITIAL_BALANCE = 1000000;
 const GAME_ROUND_COUNT = 6;
-const AUTO_NEXT_DELAY_MS = 1400;
 
 let chart = null;
 let rounds = [];
@@ -37,7 +37,6 @@ let answered = false;
 let playerBalance = INITIAL_BALANCE;
 let monkeyBalance = INITIAL_BALANCE;
 let results = [];
-let autoNextTimer = null;
 
 function ensureChart() {
   if (!window.echarts) throw new Error('ECharts 라이브러리를 불러오지 못했습니다.');
@@ -98,10 +97,17 @@ function setDecisionButtonsDisabled(disabled) {
   sellBtn.disabled = disabled;
 }
 
-function clearAutoNextTimer() {
-  if (autoNextTimer) {
-    clearTimeout(autoNextTimer);
-    autoNextTimer = null;
+function setDecisionMode(mode) {
+  if (mode === 'question') {
+    buyBtn.hidden = false;
+    sellBtn.hidden = false;
+    nextBtn.hidden = true;
+    decisionBar.classList.remove('result-mode');
+  } else {
+    buyBtn.hidden = true;
+    sellBtn.hidden = true;
+    nextBtn.hidden = false;
+    decisionBar.classList.add('result-mode');
   }
 }
 
@@ -160,7 +166,6 @@ function getChartData(round, reveal = false) {
       targetHigh: toPercentValue(target.high, prevClose),
       targetLow: toPercentValue(target.low, prevClose),
       openPercent: toPercentValue(target.open, prevClose),
-      prevClose,
     };
   }
 
@@ -179,156 +184,11 @@ function getChartData(round, reveal = false) {
     targetHigh: target.high,
     targetLow: target.low,
     openPercent: null,
-    prevClose,
   };
 }
 
-function buildGraphicOverlay(round, reveal = false, outcome = null, chartData = null) {
-  if (!reveal) {
-    if (round.type === 'open') {
-      return [
-        {
-          type: 'text',
-          right: '6.5%',
-          top: '33%',
-          z: 121,
-          style: {
-            text: '?',
-            fill: 'rgba(36, 91, 219, 0.55)',
-            fontSize: 28,
-            fontWeight: 800,
-            textAlign: 'center'
-          }
-        },
-        {
-          type: 'text',
-          right: '4.7%',
-          top: '42%',
-          z: 121,
-          style: {
-            text: '다음 날 시가 예측',
-            fill: 'rgba(36, 91, 219, 0.72)',
-            fontSize: 11,
-            fontWeight: 700,
-            textAlign: 'center'
-          }
-        }
-      ];
-    }
-
-    const pctText = chartData ? `${chartData.openPercent >= 0 ? '+' : ''}${chartData.openPercent.toFixed(2)}%` : '-';
-    return [
-      {
-        type: 'group',
-        right: 18,
-        top: 16,
-        z: 120,
-        children: [
-          {
-            type: 'rect',
-            shape: { x: 0, y: 0, width: 190, height: 96, r: 16 },
-            style: {
-              fill: 'rgba(255,255,255,0.97)',
-              stroke: '#bcd3ff',
-              lineWidth: 2,
-              shadowBlur: 14,
-              shadowColor: 'rgba(31, 43, 58, 0.10)'
-            }
-          },
-          {
-            type: 'text',
-            style: {
-              x: 14,
-              y: 22,
-              text: '해당일 시가 공개',
-              fill: '#245bdb',
-              fontSize: 13,
-              fontWeight: 800
-            }
-          },
-          {
-            type: 'text',
-            style: {
-              x: 14,
-              y: 53,
-              text: pctText,
-              fill: '#245bdb',
-              fontSize: 28,
-              fontWeight: 900
-            }
-          },
-          {
-            type: 'text',
-            style: {
-              x: 14,
-              y: 78,
-              text: '전일 종가 대비',
-              fill: '#66758a',
-              fontSize: 12,
-              fontWeight: 700
-            }
-          }
-        ]
-      }
-    ];
-  }
-
-  if (!outcome) return [];
-
-  return [
-    {
-      type: 'group',
-      right: 18,
-      top: 16,
-      z: 120,
-      children: [
-        {
-          type: 'rect',
-          shape: { x: 0, y: 0, width: 220, height: 88, r: 14 },
-          style: {
-            fill: 'rgba(255,255,255,0.95)',
-            stroke: '#d9e2ef',
-            lineWidth: 1,
-            shadowBlur: 12,
-            shadowColor: 'rgba(31, 43, 58, 0.10)'
-          }
-        },
-        {
-          type: 'text',
-          style: {
-            x: 14,
-            y: 24,
-            text: `실제 방향: ${directionText(outcome.actualDirection)}`,
-            fill: outcome.actualDirection === 'up' ? '#11a36a' : '#d9485f',
-            fontSize: 14,
-            fontWeight: 800
-          }
-        },
-        {
-          type: 'text',
-          style: {
-            x: 14,
-            y: 48,
-            text: `플레이어: ${positionText(outcome.playerDecision)} · ${outcome.playerCorrect ? '적중' : '실패'}`,
-            fill: outcome.playerCorrect ? '#11a36a' : '#d9485f',
-            fontSize: 13,
-            fontWeight: 700
-          }
-        },
-        {
-          type: 'text',
-          style: {
-            x: 14,
-            y: 70,
-            text: `원숭이: ${positionText(outcome.monkeyDecision)} · ${outcome.monkeyCorrect ? '적중' : '실패'}`,
-            fill: outcome.monkeyCorrect ? '#11a36a' : '#d9485f',
-            fontSize: 13,
-            fontWeight: 700
-          }
-        }
-      ]
-    }
-  ];
+function buildGraphicOverlay() {
+  return [];
 }
 
 function buildChartOption(round, reveal = false, outcome = null) {
@@ -528,7 +388,6 @@ function simulateTrade(balance, decision, entryPrice, exitPrice) {
 }
 
 function renderProblem() {
-  clearAutoNextTimer();
   const round = rounds[currentIndex];
   const { problem, type } = round;
 
@@ -539,6 +398,7 @@ function renderProblem() {
   questionPanel.hidden = false;
   decisionBar.hidden = false;
   setDecisionButtonsDisabled(false);
+  setDecisionMode('question');
 
   remainingText.textContent = `${rounds.length - currentIndex}`;
   marketText.textContent = problem.market;
@@ -563,8 +423,8 @@ function renderProblem() {
   chartInstance.resize();
 
   chartNote.textContent = type === 'open'
-    ? '과거 캔들과 거래량만 보고 다음 거래일 시가 방향을 판단해 보세요.'
-    : '유형 2는 거래량을 숨기고, 가격도 전일 종가 대비 등락률 기준으로만 보여줍니다.';
+    ? '과거 캔들과 거래량만 보고 다음 거래일 시가 방향을 판단해 보세요. 차트 안 겹침을 막기 위해 안내 패널은 차트 밖에서만 표시합니다.'
+    : '유형 2는 거래량을 숨기고, 가격도 전일 종가 대비 등락률 기준으로만 보여줍니다. 시가 정보는 차트 밖 패널에서 강조됩니다.';
 }
 
 function renderResults() {
@@ -615,6 +475,7 @@ function resolveDecision(playerDecision) {
   updateBalanceTexts();
   answered = true;
   setDecisionButtonsDisabled(true);
+  setDecisionMode('result');
 
   const outcome = { actualDirection, playerDecision, monkeyDecision, playerCorrect, monkeyCorrect };
   const chartInstance = ensureChart();
@@ -626,8 +487,7 @@ function resolveDecision(playerDecision) {
   tradeSummary.innerHTML = `
     <strong>수익 계산 기준</strong>: ${label}<br>
     플레이어는 <strong>${positionText(playerDecision)}</strong>로 ${formatPercent(playerTrade.signedReturn)} 수익률, 손익 ${formatMoney(playerTrade.pnl)}, 잔고 ${formatMoney(playerBalance)}<br>
-    원숭이는 <strong>${positionText(monkeyDecision)}</strong>로 ${formatPercent(monkeyTrade.signedReturn)} 수익률, 손익 ${formatMoney(monkeyTrade.pnl)}, 잔고 ${formatMoney(monkeyBalance)}<br>
-    <span>다음 문제로 곧 자동 이동합니다.</span>
+    원숭이는 <strong>${positionText(monkeyDecision)}</strong>로 ${formatPercent(monkeyTrade.signedReturn)} 수익률, 손익 ${formatMoney(monkeyTrade.pnl)}, 잔고 ${formatMoney(monkeyBalance)}
   `;
 
   monkeyDecisionBox.textContent = `🐵 원숭이는 이번 문제에서 ${positionText(monkeyDecision)}를 골랐고, 결과는 ${monkeyCorrect ? '적중' : '실패'}입니다.`;
@@ -652,16 +512,15 @@ function resolveDecision(playerDecision) {
     monkeyBalanceAfter: monkeyBalance,
     referenceLabel: label,
   });
+}
 
-  clearAutoNextTimer();
-  autoNextTimer = setTimeout(() => {
-    currentIndex += 1;
-    if (currentIndex >= rounds.length) {
-      renderResults();
-      return;
-    }
-    renderProblem();
-  }, AUTO_NEXT_DELAY_MS);
+function goNext() {
+  currentIndex += 1;
+  if (currentIndex >= rounds.length) {
+    renderResults();
+    return;
+  }
+  renderProblem();
 }
 
 async function loadRounds() {
@@ -713,6 +572,7 @@ startBtn.addEventListener('click', startGame);
 resetBtn.addEventListener('click', startGame);
 buyBtn.addEventListener('click', () => resolveDecision('up'));
 sellBtn.addEventListener('click', () => resolveDecision('down'));
+nextBtn.addEventListener('click', goNext);
 window.addEventListener('resize', () => { if (chart) chart.resize(); });
 window.addEventListener('pageshow', () => { if (chart) chart.resize(); });
 updateBalanceTexts();
