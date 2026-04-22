@@ -245,24 +245,32 @@ h2 { font-size: 22px; margin-bottom: 10px; }
 .monkey-panel {
   position: fixed;
   right: max(14px, calc((100vw - 980px) / 2 + 14px));
-  bottom: 92px;
+  bottom: 150px;
   z-index: 19;
-  width: min(360px, calc(100vw - 28px));
-  pointer-events: none;
+  width: min(310px, calc(100vw - 28px));
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+}
+
+.monkey-panel.dragging {
+  cursor: grabbing;
+  z-index: 30;
 }
 
 .monkey-rival {
   display: grid;
-  grid-template-columns: 82px minmax(0, 1fr);
-  gap: 10px;
+  grid-template-columns: 78px minmax(0, 1fr);
+  gap: 2px;
   align-items: end;
   justify-items: end;
 }
 
 .monkey-character {
   position: relative;
-  width: 82px;
-  height: 82px;
+  width: 78px;
+  height: 78px;
   filter: drop-shadow(0 8px 18px rgba(36, 58, 92, 0.16));
 }
 
@@ -286,9 +294,9 @@ h2 { font-size: 22px; margin-bottom: 10px; }
 }
 
 .monkey-ear {
-  width: 25px;
-  height: 30px;
-  top: 27px;
+  width: 24px;
+  height: 29px;
+  top: 26px;
   border-radius: 50%;
   background: #8f5b36;
   border: 2px solid #704426;
@@ -309,26 +317,26 @@ h2 { font-size: 22px; margin-bottom: 10px; }
 .monkey-eye {
   width: 7px;
   height: 9px;
-  top: 23px;
+  top: 22px;
   border-radius: 50%;
   background: #1f2b3a;
 }
 
-.monkey-eye.left { left: 19px; }
-.monkey-eye.right { right: 19px; }
+.monkey-eye.left { left: 18px; }
+.monkey-eye.right { right: 18px; }
 
 .monkey-muzzle {
   left: 14px;
   right: 14px;
   bottom: 12px;
-  height: 27px;
+  height: 26px;
   border-radius: 45% 45% 50% 50%;
   background: #f1c8a8;
 }
 
 .monkey-mouth {
-  left: 29px;
-  bottom: 22px;
+  left: 28px;
+  bottom: 21px;
   width: 13px;
   height: 6px;
   border-bottom: 2px solid #704426;
@@ -338,7 +346,7 @@ h2 { font-size: 22px; margin-bottom: 10px; }
 
 .monkey-badge {
   right: -4px;
-  bottom: 1px;
+  bottom: 0;
   z-index: 4;
   min-width: 38px;
   padding: 4px 7px;
@@ -354,7 +362,7 @@ h2 { font-size: 22px; margin-bottom: 10px; }
 .monkey-character.thinking .monkey-mouth {
   width: 11px;
   height: 3px;
-  left: 30px;
+  left: 29px;
   border-bottom-width: 2px;
 }
 
@@ -378,7 +386,7 @@ h2 { font-size: 22px; margin-bottom: 10px; }
 .monkey-character.wrong .monkey-mouth {
   width: 14px;
   height: 6px;
-  left: 28px;
+  left: 27px;
   bottom: 18px;
   border-top: 2px solid var(--red);
   border-bottom: 0;
@@ -395,7 +403,7 @@ h2 { font-size: 22px; margin-bottom: 10px; }
 
 .monkey-copy {
   position: relative;
-  max-width: 230px;
+  max-width: 220px;
   padding: 10px 12px;
   border: 1px solid #d9e2ef;
   border-radius: 14px;
@@ -406,10 +414,10 @@ h2 { font-size: 22px; margin-bottom: 10px; }
 .monkey-copy::after {
   content: '';
   position: absolute;
-  left: -7px;
-  bottom: 18px;
-  width: 12px;
-  height: 12px;
+  left: -6px;
+  bottom: 17px;
+  width: 10px;
+  height: 10px;
   background: rgba(255, 255, 255, 0.96);
   border-left: 1px solid #d9e2ef;
   border-bottom: 1px solid #d9e2ef;
@@ -525,19 +533,19 @@ h2 { font-size: 22px; margin-bottom: 10px; }
   }
   .monkey-panel {
     right: 10px;
-    bottom: 88px;
-    width: min(320px, calc(100vw - 20px));
+    bottom: 142px;
+    width: min(282px, calc(100vw - 20px));
   }
   .monkey-rival {
-    grid-template-columns: 70px minmax(0, 1fr);
-    gap: 8px;
+    grid-template-columns: 68px minmax(0, 1fr);
+    gap: 1px;
   }
   .monkey-character {
-    width: 72px;
-    height: 72px;
+    width: 70px;
+    height: 70px;
   }
   .monkey-copy {
-    max-width: 210px;
+    max-width: 196px;
     padding: 9px 11px;
   }
   .result-grid {
