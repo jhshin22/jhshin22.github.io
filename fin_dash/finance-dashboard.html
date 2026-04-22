@@ -199,16 +199,16 @@
   </div>
 
   <script>
-    const DATA_FILE = './articles_detailed_2026-04-21.json';
+    const DATA_FILE = './articles_detailed_2026-04-22.json';
 
     const categoryConfig = [
-      { title: '① 대출 관련 정책/규제 변화', desc: '정책 변화나 규제 완화·강화가 직접적으로 대출 실행 환경에 영향을 주는 기사', ids: [6, 7] },
-      { title: '② 금리/지표 변화', desc: '대출 금리, 상품 간 격차, 가계대출 흐름 등 수요와 실행에 영향을 주는 지표성 기사', ids: [8, 9] },
+      { title: '① 정책/규제 변화', desc: '정책 변화나 규제 완화·강화가 직접적으로 대출 실행 환경에 영향을 주는 기사', ids: [6, 7] },
+      { title: '② 금리/지표 변화', desc: '대출 금리, 중금리 공급, 업권별 여신 흐름 등 수요와 실행에 영향을 주는 기사', ids: [8, 9] },
       { title: '③ 시장 방향성 (부동산/대출 수요)', desc: '부동산·생활자금 수요 변화로 인해 대출 수요가 바뀔 수 있는 기사', ids: [10, 11] },
       { title: '④ 리스크/연체/NPL', desc: '연체채권, 부실 위험, 자산건전성 저하 가능성을 보여주는 기사', ids: [12, 13] },
-      { title: '⑤ 금융사 소매 대출 전략/상품 (특히 삼성생명, 한화생명 포함)', desc: '소매대출 채널, 전략, 구조금융, 고객 접점 변화 등 금융사 실행 관점 기사', ids: [14, 15] },
-      { title: '⑥ 보험사 관련 이슈', desc: '보험사 제도, 소비자보호, 채널 운영 등 보험업 전반의 주요 이슈', ids: [16, 17] },
-      { title: '⑦ AI 동향 (금융 AI 포함)', desc: '금융권 AI 도입과 AI 보안 역량 강화 흐름을 보여주는 기사', ids: [18, 19] }
+      { title: '⑤ 금융사 소매 대출 전략/상품 (특히 삼성생명, 한화생명 포함)', desc: '소매대출 채널, 전략, 플랫폼, 포트폴리오 재배치 등 금융사 실행 관점 기사', ids: [14, 15] },
+      { title: '⑥ 보험사 관련 이슈', desc: '보험금 지급, 손해율, 채널과 수익성 등 보험업 전반의 주요 이슈', ids: [16, 17] },
+      { title: '⑦ AI 동향 (금융 AI 포함)', desc: '금융권 AI 인프라와 생성형 AI 실행 전략을 보여주는 기사', ids: [18, 19] }
     ];
 
     function escapeHtml(value) {
@@ -218,6 +218,10 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+    }
+
+    function getArticleLink(article) {
+      return article.URL || article.url || '#';
     }
 
     function buildKeywords(article) {
@@ -233,7 +237,7 @@
     }
 
     function renderOriginalLink(article) {
-      return `<a class="link-hint" href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a>`;
+      return `<a class="link-hint" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a>`;
     }
 
     function renderTopArticle(article, rank) {
@@ -241,7 +245,7 @@
         <article class="article-card">
           <span class="rank">${rank}</span>
           ${renderKeywords(article)}
-          <a class="article-title" href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
+          <a class="article-title" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
           <div class="article-meta">
             <span>${escapeHtml(article.publisher)}</span>
             <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
@@ -256,7 +260,7 @@
       return `
         <div class="small-card">
           ${renderKeywords(article)}
-          <a href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
+          <a href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
           <div class="article-meta">
             <span>${escapeHtml(article.publisher)}</span>
             <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
