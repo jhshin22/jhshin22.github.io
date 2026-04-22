@@ -1,5 +1,8 @@
+const introScreen = document.getElementById('introScreen');
+const gameScreen = document.getElementById('gameScreen');
+const startBtn = document.getElementById('startBtn');
 const chartEl = document.getElementById('chart');
-const progressText = document.getElementById('progressText');
+const remainingText = document.getElementById('remainingText');
 const marketText = document.getElementById('marketText');
 const questionTypeText = document.getElementById('questionTypeText');
 const questionTitle = document.getElementById('questionTitle');
@@ -10,8 +13,6 @@ const finalSummary = document.getElementById('finalSummary');
 const resultList = document.getElementById('resultList');
 const resultPanel = document.getElementById('resultPanel');
 const questionPanel = document.getElementById('questionPanel');
-const submitBtn = document.getElementById('submitBtn');
-const nextBtn = document.getElementById('nextBtn');
 const resetBtn = document.getElementById('resetBtn');
 const chartNote = document.getElementById('chartNote');
 const openHintBox = document.getElementById('openHintBox');
@@ -21,23 +22,25 @@ const userReturnText = document.getElementById('userReturnText');
 const monkeyBalanceText = document.getElementById('monkeyBalanceText');
 const monkeyReturnText = document.getElementById('monkeyReturnText');
 const monkeyDecisionBox = document.getElementById('monkeyDecisionBox');
+const decisionBar = document.getElementById('decisionBar');
+const buyBtn = document.getElementById('buyBtn');
+const sellBtn = document.getElementById('sellBtn');
 
 const INITIAL_BALANCE = 1000000;
 const GAME_ROUND_COUNT = 6;
+const AUTO_NEXT_DELAY_MS = 1400;
 
 let chart = null;
 let rounds = [];
 let currentIndex = 0;
 let answered = false;
-let selectedDecision = null;
 let playerBalance = INITIAL_BALANCE;
 let monkeyBalance = INITIAL_BALANCE;
 let results = [];
+let autoNextTimer = null;
 
 function ensureChart() {
-  if (!window.echarts) {
-    throw new Error('ECharts 라이브러리를 불러오지 못했습니다.');
-  }
+  if (!window.echarts) throw new Error('ECharts 라이브러리를 불러오지 못했습니다.');
   if (chart) return chart;
   chartEl.innerHTML = '';
   chart = window.echarts.init(chartEl, null, { renderer: 'canvas' });
@@ -77,86 +80,110 @@ function directionText(v) {
 }
 
 function positionText(v) {
-  return v === 'up' ? 'Long' : 'Short';
+  return v === 'up' ? '매수' : '매도';
 }
 
 function typeLabel(type) {
-  return type === 'open'
-    ? '유형 1 · 시가 예측'
-    : '유형 2 · 종가 예측';
+  return type === 'open' ? '유형 1 · 시가 예측' : '유형 2 · 종가 예측';
 }
 
 function questionPrompt(type) {
   return type === 'open'
-    ? '전날 종가 대비 다음 날 시가가 상승할지, 하락할지 맞혀보세요.'
-    : '해당일 시가가 주어진 상태에서, 그 시가 대비 종가가 상승할지 하락할지 맞혀보세요.';
+    ? '전날까지의 차트만 보고 다음 거래일 시가가 전날 종가보다 위에서 시작할지 아래에서 시작할지 고르세요.'
+    : '해당일 시가가 공개된 상태입니다. 그 시가를 기준으로 종가가 위에서 끝날지 아래에서 끝날지 고르세요.';
+}
+
+function setDecisionButtonsDisabled(disabled) {
+  buyBtn.disabled = disabled;
+  sellBtn.disabled = disabled;
+}
+
+function clearAutoNextTimer() {
+  if (autoNextTimer) {
+    clearTimeout(autoNextTimer);
+    autoNextTimer = null;
+  }
 }
 
 function buildRounds(problems) {
-  const shuffled = shuffle(problems);
-  return shuffled.slice(0, Math.min(GAME_ROUND_COUNT, shuffled.length)).map((problem, idx) => ({
-    id: `${problem.id}-${idx}`,
-    type: Math.random() < 0.5 ? 'open' : 'close',
-    problem,
-  }));
+  return shuffle(problems)
+    .slice(0, Math.min(GAME_ROUND_COUNT, problems.length))
+    .map((problem, idx) => ({
+      id: `${problem.id}-${idx}`,
+      type: Math.random() < 0.5 ? 'open' : 'close',
+      problem,
+    }));
 }
 
-function resetChoiceButtons() {
-  document.querySelectorAll('.choice-btn').forEach(btn => btn.classList.remove('active'));
-  selectedDecision = null;
-}
-
-function bindChoiceButtons() {
-  document.querySelectorAll('.choice-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (answered) return;
-      document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedDecision = btn.dataset.value;
-    });
-  });
+function toPercentValue(value, base) {
+  return ((Number(value) / Number(base)) - 1) * 100;
 }
 
 function getChartData(round, reveal = false) {
   const { problem, type } = round;
   const visible = Array.isArray(problem.visibleCandles) ? problem.visibleCandles : [];
   const target = problem.targetCandle;
+  const prevClose = Number(visible[visible.length - 1].close);
 
-  let candles;
-  if (!reveal) {
-    if (type === 'open') {
-      candles = [...visible, { date: '?', open: null, close: null, low: null, high: null, volume: null }];
-    } else {
-      candles = [
-        ...visible,
-        {
-          date: target.date,
-          open: target.open,
-          close: target.open,
-          low: target.open,
-          high: target.open,
-          volume: target.volume,
-        }
-      ];
-    }
-  } else {
-    candles = [...visible, target];
+  if (type === 'close') {
+    const normalize = candle => ({
+      date: candle.date,
+      open: toPercentValue(candle.open, prevClose),
+      close: toPercentValue(candle.close, prevClose),
+      low: toPercentValue(candle.low, prevClose),
+      high: toPercentValue(candle.high, prevClose),
+      volume: candle.volume,
+    });
+
+    const candles = reveal
+      ? [...visible.map(normalize), normalize(target)]
+      : [
+          ...visible.map(normalize),
+          {
+            date: target.date,
+            open: toPercentValue(target.open, prevClose),
+            close: toPercentValue(target.open, prevClose),
+            low: toPercentValue(target.open, prevClose),
+            high: toPercentValue(target.open, prevClose),
+            volume: target.volume,
+          }
+        ];
+
+    return {
+      isPercentMode: true,
+      showVolume: false,
+      categoryData: candles.map(d => d.date),
+      candleValues: candles.map(d => [d.open, d.close, d.low, d.high]),
+      volumeValues: [],
+      volumeDirections: [],
+      targetDate: target.date,
+      targetHigh: toPercentValue(target.high, prevClose),
+      targetLow: toPercentValue(target.low, prevClose),
+      openPercent: toPercentValue(target.open, prevClose),
+      prevClose,
+    };
   }
 
+  const candles = reveal
+    ? [...visible, target]
+    : [...visible, { date: '?', open: null, close: null, low: null, high: null, volume: null }];
+
   return {
+    isPercentMode: false,
+    showVolume: true,
     categoryData: candles.map(d => d.date),
-    candleValues: candles.map(d => (
-      d.open == null ? '-' : [Number(d.open), Number(d.close), Number(d.low), Number(d.high)]
-    )),
+    candleValues: candles.map(d => (d.open == null ? '-' : [Number(d.open), Number(d.close), Number(d.low), Number(d.high)])),
     volumeValues: candles.map(d => (d.volume == null ? '-' : Number(d.volume))),
     volumeDirections: candles.map(d => (d.close == null || d.open == null ? 0 : (Number(d.close) >= Number(d.open) ? 1 : -1))),
-    targetDate: target?.date ?? null,
-    targetHigh: target?.high ?? null,
-    targetLow: target?.low ?? null,
+    targetDate: target.date,
+    targetHigh: target.high,
+    targetLow: target.low,
+    openPercent: null,
+    prevClose,
   };
 }
 
-function buildGraphicOverlay(round, reveal = false, outcome = null) {
+function buildGraphicOverlay(round, reveal = false, outcome = null, chartData = null) {
   if (!reveal) {
     if (round.type === 'open') {
       return [
@@ -189,21 +216,22 @@ function buildGraphicOverlay(round, reveal = false, outcome = null) {
       ];
     }
 
+    const pctText = chartData ? `${chartData.openPercent >= 0 ? '+' : ''}${chartData.openPercent.toFixed(2)}%` : '-';
     return [
       {
         type: 'group',
-        right: 20,
-        top: 18,
+        right: 18,
+        top: 16,
         z: 120,
         children: [
           {
             type: 'rect',
-            shape: { x: 0, y: 0, width: 178, height: 70, r: 14 },
+            shape: { x: 0, y: 0, width: 190, height: 96, r: 16 },
             style: {
-              fill: 'rgba(255,255,255,0.95)',
-              stroke: '#d9e2ef',
-              lineWidth: 1,
-              shadowBlur: 12,
+              fill: 'rgba(255,255,255,0.97)',
+              stroke: '#bcd3ff',
+              lineWidth: 2,
+              shadowBlur: 14,
               shadowColor: 'rgba(31, 43, 58, 0.10)'
             }
           },
@@ -211,7 +239,7 @@ function buildGraphicOverlay(round, reveal = false, outcome = null) {
             type: 'text',
             style: {
               x: 14,
-              y: 24,
+              y: 22,
               text: '해당일 시가 공개',
               fill: '#245bdb',
               fontSize: 13,
@@ -222,8 +250,19 @@ function buildGraphicOverlay(round, reveal = false, outcome = null) {
             type: 'text',
             style: {
               x: 14,
-              y: 48,
-              text: '이 시가 대비 종가 방향을 예측',
+              y: 53,
+              text: pctText,
+              fill: '#245bdb',
+              fontSize: 28,
+              fontWeight: 900
+            }
+          },
+          {
+            type: 'text',
+            style: {
+              x: 14,
+              y: 78,
+              text: '전일 종가 대비',
               fill: '#66758a',
               fontSize: 12,
               fontWeight: 700
@@ -239,15 +278,15 @@ function buildGraphicOverlay(round, reveal = false, outcome = null) {
   return [
     {
       type: 'group',
-      right: 22,
-      top: 18,
+      right: 18,
+      top: 16,
       z: 120,
       children: [
         {
           type: 'rect',
           shape: { x: 0, y: 0, width: 220, height: 88, r: 14 },
           style: {
-            fill: 'rgba(255,255,255,0.94)',
+            fill: 'rgba(255,255,255,0.95)',
             stroke: '#d9e2ef',
             lineWidth: 1,
             shadowBlur: 12,
@@ -293,124 +332,155 @@ function buildGraphicOverlay(round, reveal = false, outcome = null) {
 }
 
 function buildChartOption(round, reveal = false, outcome = null) {
-  const { categoryData, candleValues, volumeValues, volumeDirections, targetDate, targetHigh, targetLow } = getChartData(round, reveal);
-
-  const predictionBandData = !reveal
-    ? [[{ xAxis: categoryData[categoryData.length - 1] }, { xAxis: categoryData[categoryData.length - 1] }]]
-    : [];
-
-  const revealBandData = reveal && targetDate
-    ? [[{ xAxis: targetDate }, { xAxis: targetDate }]]
-    : [];
-
+  const chartData = getChartData(round, reveal);
+  const { isPercentMode, showVolume, categoryData, candleValues, volumeValues, volumeDirections, targetDate, targetHigh, targetLow } = chartData;
+  const predictionBandData = !reveal ? [[{ xAxis: categoryData[categoryData.length - 1] }, { xAxis: categoryData[categoryData.length - 1] }]] : [];
+  const revealBandData = reveal && targetDate ? [[{ xAxis: targetDate }, { xAxis: targetDate }]] : [];
   const targetMid = targetHigh != null && targetLow != null ? (Number(targetHigh) + Number(targetLow)) / 2 : null;
+
+  const grids = showVolume
+    ? [
+        { left: '8%', right: '4%', top: 24, height: '58%' },
+        { left: '8%', right: '4%', top: '74%', height: '14%' }
+      ]
+    : [
+        { left: '8%', right: '4%', top: 24, bottom: 38 }
+      ];
+
+  const xAxis = showVolume
+    ? [
+        {
+          type: 'category',
+          data: categoryData,
+          scale: true,
+          boundaryGap: true,
+          axisLine: { lineStyle: { color: '#9fb0c7' } },
+          axisLabel: { color: '#66758a', formatter: value => (reveal ? value : '') },
+          axisTick: { show: reveal },
+          splitLine: { show: false }
+        },
+        {
+          type: 'category',
+          gridIndex: 1,
+          data: categoryData,
+          scale: true,
+          boundaryGap: true,
+          axisLine: { lineStyle: { color: '#9fb0c7' } },
+          axisLabel: { show: false },
+          axisTick: { show: false },
+          splitLine: { show: false }
+        }
+      ]
+    : [
+        {
+          type: 'category',
+          data: categoryData,
+          scale: true,
+          boundaryGap: true,
+          axisLine: { lineStyle: { color: '#9fb0c7' } },
+          axisLabel: { color: '#66758a', formatter: value => (reveal ? value : '') },
+          axisTick: { show: reveal },
+          splitLine: { show: false }
+        }
+      ];
+
+  const yAxis = showVolume
+    ? [
+        {
+          scale: true,
+          axisLine: { show: false },
+          axisLabel: { color: '#66758a', formatter: value => (reveal ? (isPercentMode ? `${value.toFixed(1)}%` : formatNumber(value)) : '') },
+          splitLine: { lineStyle: { color: '#edf2f8' } }
+        },
+        {
+          gridIndex: 1,
+          scale: true,
+          axisLine: { show: false },
+          axisLabel: { color: '#66758a', formatter: value => (reveal ? formatNumber(value) : '') },
+          splitLine: { show: false }
+        }
+      ]
+    : [
+        {
+          scale: true,
+          axisLine: { show: false },
+          axisLabel: { color: '#66758a', formatter: value => (reveal ? `${value.toFixed(1)}%` : '') },
+          splitLine: { lineStyle: { color: '#edf2f8' } }
+        }
+      ];
+
+  const series = [
+    {
+      name: '일봉',
+      type: 'candlestick',
+      data: candleValues,
+      itemStyle: {
+        color: '#d9485f',
+        color0: '#11a36a',
+        borderColor: '#d9485f',
+        borderColor0: '#11a36a'
+      },
+      markArea: predictionBandData.length
+        ? { itemStyle: { color: 'rgba(36, 91, 219, 0.10)' }, data: predictionBandData }
+        : revealBandData.length
+          ? { itemStyle: { color: 'rgba(245, 190, 59, 0.22)' }, data: revealBandData }
+          : undefined,
+      markPoint: reveal && targetDate && targetHigh != null
+        ? {
+            symbol: 'pin',
+            symbolSize: 34,
+            itemStyle: { color: '#f5be3b' },
+            label: { show: false },
+            data: [{ coord: [targetDate, Number(targetHigh)], value: '정답' }]
+          }
+        : undefined,
+      markLine: reveal && targetDate && targetMid != null
+        ? {
+            symbol: ['none', 'none'],
+            label: { show: false },
+            lineStyle: { color: '#f5be3b', type: 'dashed', width: 1.5 },
+            data: [{ xAxis: targetDate }]
+          }
+        : undefined
+    }
+  ];
+
+  if (showVolume) {
+    series.push({
+      name: '거래량',
+      type: 'bar',
+      xAxisIndex: 1,
+      yAxisIndex: 1,
+      data: volumeValues,
+      itemStyle: {
+        color: params => {
+          const dir = volumeDirections[params.dataIndex];
+          if (dir === 1) return '#d9485f';
+          if (dir === -1) return '#11a36a';
+          return 'rgba(36, 91, 219, 0.12)';
+        }
+      },
+      markArea: predictionBandData.length
+        ? { itemStyle: { color: 'rgba(36, 91, 219, 0.08)' }, data: predictionBandData }
+        : revealBandData.length
+          ? { itemStyle: { color: 'rgba(245, 190, 59, 0.16)' }, data: revealBandData }
+          : undefined
+    });
+  }
 
   return {
     animation: false,
     backgroundColor: '#ffffff',
     tooltip: reveal ? { trigger: 'axis', axisPointer: { type: 'cross' } } : { show: false },
-    axisPointer: { link: [{ xAxisIndex: [0, 1] }] },
-    graphic: buildGraphicOverlay(round, reveal, outcome),
-    grid: [
-      { left: '8%', right: '4%', top: 24, height: '58%' },
-      { left: '8%', right: '4%', top: '74%', height: '14%' }
-    ],
-    xAxis: [
-      {
-        type: 'category',
-        data: categoryData,
-        scale: true,
-        boundaryGap: true,
-        axisLine: { lineStyle: { color: '#9fb0c7' } },
-        axisLabel: { color: '#66758a', formatter: value => (reveal ? value : '') },
-        axisTick: { show: reveal },
-        splitLine: { show: false }
-      },
-      {
-        type: 'category',
-        gridIndex: 1,
-        data: categoryData,
-        scale: true,
-        boundaryGap: true,
-        axisLine: { lineStyle: { color: '#9fb0c7' } },
-        axisLabel: { show: false },
-        axisTick: { show: false },
-        splitLine: { show: false }
-      }
-    ],
-    yAxis: [
-      {
-        scale: true,
-        axisLine: { show: false },
-        axisLabel: { color: '#66758a', formatter: value => (reveal ? formatNumber(value) : '') },
-        splitLine: { lineStyle: { color: '#edf2f8' } }
-      },
-      {
-        gridIndex: 1,
-        scale: true,
-        axisLine: { show: false },
-        axisLabel: { color: '#66758a', formatter: value => (reveal ? formatNumber(value) : '') },
-        splitLine: { show: false }
-      }
-    ],
+    axisPointer: { link: showVolume ? [{ xAxisIndex: [0, 1] }] : undefined },
+    graphic: buildGraphicOverlay(round, reveal, outcome, chartData),
+    grid: grids,
+    xAxis,
+    yAxis,
     dataZoom: [
-      { type: 'inside', xAxisIndex: [0, 1], start: 0, end: 100, disabled: !reveal }
+      { type: 'inside', xAxisIndex: showVolume ? [0, 1] : [0], start: 0, end: 100, disabled: !reveal }
     ],
-    series: [
-      {
-        name: '일봉',
-        type: 'candlestick',
-        data: candleValues,
-        itemStyle: {
-          color: '#d9485f',
-          color0: '#11a36a',
-          borderColor: '#d9485f',
-          borderColor0: '#11a36a'
-        },
-        markArea: predictionBandData.length
-          ? { itemStyle: { color: 'rgba(36, 91, 219, 0.10)' }, data: predictionBandData }
-          : revealBandData.length
-            ? { itemStyle: { color: 'rgba(245, 190, 59, 0.22)' }, data: revealBandData }
-            : undefined,
-        markPoint: reveal && targetDate && targetHigh != null
-          ? {
-              symbol: 'pin',
-              symbolSize: 34,
-              itemStyle: { color: '#f5be3b' },
-              label: { show: false },
-              data: [{ coord: [targetDate, Number(targetHigh)], value: '정답' }]
-            }
-          : undefined,
-        markLine: reveal && targetDate && targetMid != null
-          ? {
-              symbol: ['none', 'none'],
-              label: { show: false },
-              lineStyle: { color: '#f5be3b', type: 'dashed', width: 1.5 },
-              data: [{ xAxis: targetDate }]
-            }
-          : undefined
-      },
-      {
-        name: '거래량',
-        type: 'bar',
-        xAxisIndex: 1,
-        yAxisIndex: 1,
-        data: volumeValues,
-        itemStyle: {
-          color: params => {
-            const dir = volumeDirections[params.dataIndex];
-            if (dir === 1) return '#d9485f';
-            if (dir === -1) return '#11a36a';
-            return 'rgba(36, 91, 219, 0.12)';
-          }
-        },
-        markArea: predictionBandData.length
-          ? { itemStyle: { color: 'rgba(36, 91, 219, 0.08)' }, data: predictionBandData }
-          : revealBandData.length
-            ? { itemStyle: { color: 'rgba(245, 190, 59, 0.16)' }, data: revealBandData }
-            : undefined
-      }
-    ]
+    series
   };
 }
 
@@ -418,9 +488,9 @@ function updateBalanceTexts() {
   const userReturn = playerBalance / INITIAL_BALANCE - 1;
   const monkeyReturn = monkeyBalance / INITIAL_BALANCE - 1;
   userBalanceText.textContent = formatMoney(playerBalance);
-  userReturnText.textContent = `수익률 ${formatPercent(userReturn)}`;
+  userReturnText.textContent = formatPercent(userReturn);
   monkeyBalanceText.textContent = formatMoney(monkeyBalance);
-  monkeyReturnText.textContent = `수익률 ${formatPercent(monkeyReturn)}`;
+  monkeyReturnText.textContent = formatPercent(monkeyReturn);
 }
 
 function getRoundReferencePrices(round) {
@@ -441,7 +511,7 @@ function getRoundReferencePrices(round) {
   return {
     entryPrice: targetOpen,
     exitPrice: targetClose,
-    actualDirection: problem.targetCandle.close >= problem.targetCandle.open ? 'up' : 'down',
+    actualDirection: targetClose >= targetOpen ? 'up' : 'down',
     label: '해당일 시가 → 해당일 종가'
   };
 }
@@ -458,32 +528,34 @@ function simulateTrade(balance, decision, entryPrice, exitPrice) {
 }
 
 function renderProblem() {
+  clearAutoNextTimer();
   const round = rounds[currentIndex];
   const { problem, type } = round;
 
   answered = false;
-  resetChoiceButtons();
   feedbackText.textContent = '';
   tradeSummary.innerHTML = '';
   resultPanel.hidden = true;
   questionPanel.hidden = false;
-  submitBtn.hidden = false;
-  nextBtn.hidden = true;
+  decisionBar.hidden = false;
+  setDecisionButtonsDisabled(false);
 
-  progressText.textContent = `${currentIndex + 1} / ${rounds.length}`;
+  remainingText.textContent = `${rounds.length - currentIndex}`;
   marketText.textContent = problem.market;
   questionTypeText.textContent = typeLabel(type);
-  questionTitle.textContent = type === 'open' ? '유형 1 · 다음 날 시가 예측' : '유형 2 · 해당일 종가 예측';
+  questionTitle.textContent = type === 'open' ? '다음 날 시가 방향을 고르세요' : '해당일 종가 방향을 고르세요';
   questionGuide.textContent = questionPrompt(type);
 
   if (type === 'close') {
+    const prevClose = Number(problem.visibleCandles[problem.visibleCandles.length - 1].close);
+    const openPercent = ((Number(problem.targetCandle.open) / prevClose) - 1) * 100;
     openHintBox.hidden = false;
-    openHintValue.textContent = `${formatNumber(problem.targetCandle.open)}`;
+    openHintValue.textContent = `${openPercent >= 0 ? '+' : ''}${openPercent.toFixed(2)}%`;
   } else {
     openHintBox.hidden = true;
   }
 
-  monkeyDecisionBox.textContent = '원숭이도 아직 고민 중입니다... 제출하면 무작위 포지션이 공개됩니다.';
+  monkeyDecisionBox.textContent = '원숭이도 아직 고민 중입니다. 당신이 먼저 매수/매도를 누르면 원숭이의 무작위 선택이 공개됩니다.';
 
   const chartInstance = ensureChart();
   chartInstance.clear();
@@ -491,12 +563,13 @@ function renderProblem() {
   chartInstance.resize();
 
   chartNote.textContent = type === 'open'
-    ? '과거 캔들과 거래량만 보고, 다음 거래일 시가가 전날 종가보다 위에서 시작할지 아래에서 시작할지 판단해 보세요.'
-    : '과거 캔들과 거래량, 그리고 해당일 시가가 주어집니다. 이 시가를 기준으로 종가가 위에서 끝날지 아래에서 끝날지 판단해 보세요.';
+    ? '과거 캔들과 거래량만 보고 다음 거래일 시가 방향을 판단해 보세요.'
+    : '유형 2는 거래량을 숨기고, 가격도 전일 종가 대비 등락률 기준으로만 보여줍니다.';
 }
 
 function renderResults() {
   questionPanel.hidden = true;
+  decisionBar.hidden = true;
   resultPanel.hidden = false;
 
   const playerReturn = playerBalance / INITIAL_BALANCE - 1;
@@ -518,57 +591,47 @@ function renderResults() {
         <div><strong>실제 방향</strong>: <span class="${item.actualDirection === 'up' ? 'correct' : 'wrong'}">${directionText(item.actualDirection)}</span></div>
         <div><strong>플레이어</strong>: ${positionText(item.playerDecision)} / ${formatPercent(item.playerReturn)} / ${formatMoney(item.playerBalanceAfter)}</div>
         <div><strong>원숭이</strong>: ${positionText(item.monkeyDecision)} / ${formatPercent(item.monkeyReturn)} / ${formatMoney(item.monkeyBalanceAfter)}</div>
-        <div><strong>가격 구간</strong>: ${formatNumber(item.entryPrice)} → ${formatNumber(item.exitPrice)}</div>
+        <div><strong>기준 구간</strong>: ${item.referenceLabel}</div>
+        <div><strong>가격 이동</strong>: ${formatNumber(item.entryPrice)} → ${formatNumber(item.exitPrice)}</div>
       </div>
     </article>
   `).join('');
 }
 
-function submitAnswer() {
-  if (!selectedDecision) {
-    feedbackText.textContent = '상승(Long) 또는 하락(Short) 중 하나를 선택해 주세요.';
-    return;
-  }
+function resolveDecision(playerDecision) {
+  if (answered) return;
 
   const round = rounds[currentIndex];
   const { problem, type } = round;
   const monkeyDecision = Math.random() < 0.5 ? 'up' : 'down';
   const { entryPrice, exitPrice, actualDirection, label } = getRoundReferencePrices(round);
-
-  const playerTrade = simulateTrade(playerBalance, selectedDecision, entryPrice, exitPrice);
+  const playerTrade = simulateTrade(playerBalance, playerDecision, entryPrice, exitPrice);
   const monkeyTrade = simulateTrade(monkeyBalance, monkeyDecision, entryPrice, exitPrice);
-  const playerCorrect = selectedDecision === actualDirection;
+  const playerCorrect = playerDecision === actualDirection;
   const monkeyCorrect = monkeyDecision === actualDirection;
 
   playerBalance = playerTrade.nextBalance;
   monkeyBalance = monkeyTrade.nextBalance;
   updateBalanceTexts();
   answered = true;
+  setDecisionButtonsDisabled(true);
 
-  const outcome = {
-    actualDirection,
-    playerDecision: selectedDecision,
-    monkeyDecision,
-    playerCorrect,
-    monkeyCorrect,
-  };
-
+  const outcome = { actualDirection, playerDecision, monkeyDecision, playerCorrect, monkeyCorrect };
   const chartInstance = ensureChart();
   chartInstance.clear();
   chartInstance.setOption(buildChartOption(round, true, outcome), true);
   chartInstance.resize();
 
-  feedbackText.textContent = `${type === 'open' ? '시가' : '종가'} 실제 방향은 ${directionText(actualDirection)}입니다. 플레이어 ${playerCorrect ? '적중' : '실패'}, 원숭이 ${monkeyCorrect ? '적중' : '실패'}.`;
-
+  feedbackText.textContent = `${type === 'open' ? '시가' : '종가'} 실제 방향은 ${directionText(actualDirection)}입니다. ${positionText(playerDecision)} 선택은 ${playerCorrect ? '적중' : '실패'}입니다.`;
   tradeSummary.innerHTML = `
     <strong>수익 계산 기준</strong>: ${label}<br>
-    플레이어는 <strong>${positionText(selectedDecision)}</strong> 포지션으로 ${formatPercent(playerTrade.signedReturn)} 수익률, 손익 ${formatMoney(playerTrade.pnl)}, 잔고 ${formatMoney(playerBalance)}<br>
-    원숭이는 <strong>${positionText(monkeyDecision)}</strong> 포지션으로 ${formatPercent(monkeyTrade.signedReturn)} 수익률, 손익 ${formatMoney(monkeyTrade.pnl)}, 잔고 ${formatMoney(monkeyBalance)}
+    플레이어는 <strong>${positionText(playerDecision)}</strong>로 ${formatPercent(playerTrade.signedReturn)} 수익률, 손익 ${formatMoney(playerTrade.pnl)}, 잔고 ${formatMoney(playerBalance)}<br>
+    원숭이는 <strong>${positionText(monkeyDecision)}</strong>로 ${formatPercent(monkeyTrade.signedReturn)} 수익률, 손익 ${formatMoney(monkeyTrade.pnl)}, 잔고 ${formatMoney(monkeyBalance)}<br>
+    <span>다음 문제로 곧 자동 이동합니다.</span>
   `;
 
-  monkeyDecisionBox.textContent = `🐵 원숭이는 이번 문제에서 ${positionText(monkeyDecision)} (${directionText(monkeyDecision)} 예상)을 골랐습니다.`;
-
-  chartNote.textContent = `정답 공개 완료 · ${problem.company} (${problem.symbol}) · ${problem.targetCandle.date} · 실제 가격 구간 ${formatNumber(entryPrice)} → ${formatNumber(exitPrice)}`;
+  monkeyDecisionBox.textContent = `🐵 원숭이는 이번 문제에서 ${positionText(monkeyDecision)}를 골랐고, 결과는 ${monkeyCorrect ? '적중' : '실패'}입니다.`;
+  chartNote.textContent = `정답 공개 완료 · ${problem.company} (${problem.symbol}) · ${problem.targetCandle.date}`;
 
   results.push({
     type,
@@ -577,7 +640,7 @@ function submitAnswer() {
     market: problem.market,
     targetDate: problem.targetCandle.date,
     actualDirection,
-    playerDecision: selectedDecision,
+    playerDecision,
     monkeyDecision,
     playerCorrect,
     monkeyCorrect,
@@ -587,37 +650,32 @@ function submitAnswer() {
     monkeyReturn: monkeyTrade.signedReturn,
     playerBalanceAfter: playerBalance,
     monkeyBalanceAfter: monkeyBalance,
+    referenceLabel: label,
   });
 
-  submitBtn.hidden = true;
-  nextBtn.hidden = false;
-}
-
-function goNext() {
-  currentIndex += 1;
-  if (currentIndex >= rounds.length) {
-    renderResults();
-    return;
-  }
-  renderProblem();
+  clearAutoNextTimer();
+  autoNextTimer = setTimeout(() => {
+    currentIndex += 1;
+    if (currentIndex >= rounds.length) {
+      renderResults();
+      return;
+    }
+    renderProblem();
+  }, AUTO_NEXT_DELAY_MS);
 }
 
 async function loadRounds() {
   chartNote.textContent = '문제 데이터를 불러오는 중...';
   const res = await fetch('../stockgame/data/problems.json', { cache: 'no-store' });
-  if (!res.ok) {
-    throw new Error(`문제 데이터를 불러오지 못했습니다. (HTTP ${res.status})`);
-  }
+  if (!res.ok) throw new Error(`문제 데이터를 불러오지 못했습니다. (HTTP ${res.status})`);
 
   const data = await res.json();
   const candidates = Array.isArray(data.problems) ? data.problems : [];
   const valid = candidates.filter(p => Array.isArray(p.visibleCandles) && p.visibleCandles.length > 5 && p.targetCandle);
-  if (!valid.length) {
-    throw new Error('사용 가능한 문제가 없습니다. 기존 stockgame/data/problems.json을 확인해 주세요.');
-  }
+  if (!valid.length) throw new Error('사용 가능한 문제가 없습니다. 기존 stockgame/data/problems.json을 확인해 주세요.');
 
   const built = buildRounds(valid);
-  chartNote.textContent = `기존 stockgame 데이터 ${valid.length}문제를 활용해, 개선판 ${built.length}문제를 구성했습니다.`;
+  chartNote.textContent = `기존 stockgame 데이터 ${valid.length}문제를 활용해 개선판 ${built.length}문제를 구성했습니다.`;
   return built;
 }
 
@@ -626,13 +684,16 @@ function showEmptyState(message) {
   chartEl.innerHTML = `<div class="empty-state">${message}</div>`;
   chartNote.textContent = message;
   questionPanel.hidden = true;
+  decisionBar.hidden = true;
   resultPanel.hidden = false;
   finalSummary.textContent = '게임을 시작할 수 없습니다.';
   resultList.innerHTML = '<div class="result-card">stockgame-v2는 기존 stockgame/data/problems.json을 참조합니다. 원본 데이터 파일 또는 경로를 확인해 주세요.</div>';
 }
 
-resetBtn.addEventListener('click', async () => {
+async function startGame() {
   rounds = await loadRounds().catch(err => {
+    introScreen.hidden = true;
+    gameScreen.hidden = false;
     showEmptyState(err.message);
     return null;
   });
@@ -643,18 +704,15 @@ resetBtn.addEventListener('click', async () => {
   playerBalance = INITIAL_BALANCE;
   monkeyBalance = INITIAL_BALANCE;
   updateBalanceTexts();
+  introScreen.hidden = true;
+  gameScreen.hidden = false;
   renderProblem();
-});
+}
 
-submitBtn.addEventListener('click', submitAnswer);
-nextBtn.addEventListener('click', goNext);
-window.addEventListener('resize', () => {
-  if (chart) chart.resize();
-});
-window.addEventListener('pageshow', () => {
-  if (chart) chart.resize();
-});
-
-bindChoiceButtons();
+startBtn.addEventListener('click', startGame);
+resetBtn.addEventListener('click', startGame);
+buyBtn.addEventListener('click', () => resolveDecision('up'));
+sellBtn.addEventListener('click', () => resolveDecision('down'));
+window.addEventListener('resize', () => { if (chart) chart.resize(); });
+window.addEventListener('pageshow', () => { if (chart) chart.resize(); });
 updateBalanceTexts();
-resetBtn.click();
