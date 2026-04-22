@@ -19,12 +19,16 @@ const resultPanel = document.getElementById('resultPanel');
 const resetBtn = document.getElementById('resetBtn');
 const chartNote = document.getElementById('chartNote');
 const openHintBox = document.getElementById('openHintBox');
+const openHintLabel = openHintBox.querySelector('.hint-label');
 const openHintValue = document.getElementById('openHintValue');
 const userBalanceText = document.getElementById('userBalanceText');
 const userReturnText = document.getElementById('userReturnText');
 const monkeyBalanceText = document.getElementById('monkeyBalanceText');
 const monkeyReturnText = document.getElementById('monkeyReturnText');
 const monkeyDecisionBox = document.getElementById('monkeyDecisionBox');
+const monkeyCharacter = document.getElementById('monkeyCharacter');
+const monkeyMoodText = document.getElementById('monkeyMoodText');
+const monkeyBadge = document.getElementById('monkeyBadge');
 const decisionBar = document.getElementById('decisionBar');
 const buyBtn = document.getElementById('buyBtn');
 const sellBtn = document.getElementById('sellBtn');
@@ -97,7 +101,30 @@ function typeLabel(type) {
 function questionPrompt(type) {
   return type === 'open'
     ? '전날까지의 차트만 보고 다음 거래일 시가가 전날 종가보다 위에서 시작할지 아래에서 시작할지 고르세요.'
-    : '해당일 시가가 공개된 상태입니다. 그 시가를 기준으로 종가가 위에서 끝날지 아래에서 끝날지 고르세요.';
+    : '당일 시가만 공개된 상태입니다. 이 시가를 기준으로 종가가 위에서 끝날지 아래에서 끝날지 고르세요.';
+}
+
+function clearAnswerFeedback() {
+  document.body.classList.remove('answer-correct', 'answer-wrong');
+}
+
+function applyAnswerFeedback(isCorrect) {
+  clearAnswerFeedback();
+  document.body.classList.add(isCorrect ? 'answer-correct' : 'answer-wrong');
+}
+
+function resetMonkeyState() {
+  monkeyCharacter.classList.remove('correct', 'wrong', 'buy', 'sell');
+  monkeyCharacter.classList.add('thinking');
+  monkeyMoodText.textContent = '원숭이도 차트를 보는 중';
+  monkeyBadge.textContent = '대기';
+}
+
+function setMonkeyResult(decision, isCorrect) {
+  monkeyCharacter.classList.remove('thinking', 'correct', 'wrong', 'buy', 'sell');
+  monkeyCharacter.classList.add(isCorrect ? 'correct' : 'wrong', decision === 'up' ? 'buy' : 'sell');
+  monkeyMoodText.textContent = `원숭이는 ${positionText(decision)} 선택`;
+  monkeyBadge.textContent = isCorrect ? '적중' : '실패';
 }
 
 function setDecisionButtonsDisabled(disabled) {
@@ -192,8 +219,152 @@ function getChartData(round, reveal = false) {
   };
 }
 
-function buildGraphicOverlay() {
-  return [];
+function buildGraphicOverlay(round, reveal = false, outcome = null, chartData = null) {
+  if (reveal) {
+    if (!outcome) return [];
+    return [
+      {
+        type: 'group',
+        right: 22,
+        top: 18,
+        z: 120,
+        children: [
+          {
+            type: 'rect',
+            shape: { x: 0, y: 0, width: 160, height: 54, r: 14 },
+            style: {
+              fill: 'rgba(255,255,255,0.94)',
+              stroke: outcome.playerCorrect ? '#9bd8b7' : '#f0b8c2',
+              lineWidth: 1,
+              shadowBlur: 12,
+              shadowColor: 'rgba(31, 43, 58, 0.10)'
+            }
+          },
+          {
+            type: 'text',
+            style: {
+              x: 14,
+              y: 21,
+              text: outcome.playerCorrect ? '정답입니다' : '오답입니다',
+              fill: outcome.playerCorrect ? '#0d8b59' : '#c7374f',
+              fontSize: 15,
+              fontWeight: 800
+            }
+          },
+          {
+            type: 'text',
+            style: {
+              x: 14,
+              y: 42,
+              text: `실제 방향: ${directionText(outcome.actualDirection)}`,
+              fill: '#66758a',
+              fontSize: 12,
+              fontWeight: 700
+            }
+          }
+        ]
+      }
+    ];
+  }
+
+  if (round.type === 'open') {
+    return [
+      {
+        type: 'group',
+        right: 24,
+        top: '30%',
+        z: 130,
+        children: [
+          {
+            type: 'circle',
+            shape: { cx: 36, cy: 30, r: 28 },
+            style: {
+              fill: 'rgba(36, 91, 219, 0.12)',
+              stroke: '#245bdb',
+              lineWidth: 2
+            }
+          },
+          {
+            type: 'text',
+            style: {
+              x: 36,
+              y: 40,
+              text: '?',
+              fill: '#245bdb',
+              fontSize: 32,
+              fontWeight: 900,
+              align: 'center'
+            }
+          },
+          {
+            type: 'rect',
+            shape: { x: 0, y: 68, width: 92, height: 28, r: 14 },
+            style: { fill: 'rgba(36, 91, 219, 0.92)' }
+          },
+          {
+            type: 'text',
+            style: {
+              x: 46,
+              y: 87,
+              text: '다음 시가?',
+              fill: '#ffffff',
+              fontSize: 12,
+              fontWeight: 800,
+              align: 'center'
+            }
+          }
+        ]
+      }
+    ];
+  }
+
+  const openPercent = chartData?.openPercent ?? 0;
+  const openText = `${openPercent >= 0 ? '+' : ''}${openPercent.toFixed(2)}%`;
+  return [
+    {
+      type: 'group',
+      right: 18,
+      top: 46,
+      z: 130,
+      children: [
+        {
+          type: 'rect',
+          shape: { x: 0, y: 0, width: 130, height: 64, r: 16 },
+          style: {
+            fill: 'rgba(255,255,255,0.96)',
+            stroke: '#245bdb',
+            lineWidth: 1.5,
+            shadowBlur: 10,
+            shadowColor: 'rgba(36, 91, 219, 0.12)'
+          }
+        },
+        {
+          type: 'text',
+          style: {
+            x: 65,
+            y: 24,
+            text: '당일 시가 공개',
+            fill: '#245bdb',
+            fontSize: 13,
+            fontWeight: 900,
+            align: 'center'
+          }
+        },
+        {
+          type: 'text',
+          style: {
+            x: 65,
+            y: 48,
+            text: openText,
+            fill: openPercent >= 0 ? '#d9485f' : '#11a36a',
+            fontSize: 18,
+            fontWeight: 900,
+            align: 'center'
+          }
+        }
+      ]
+    }
+  ];
 }
 
 function buildChartOption(round, reveal = false, outcome = null) {
@@ -402,6 +573,8 @@ function renderProblem() {
   const { problem, type } = round;
 
   answered = false;
+  clearAnswerFeedback();
+  resetMonkeyState();
   feedbackText.textContent = '';
   tradeSummary.innerHTML = '';
   resultPanel.hidden = true;
@@ -419,6 +592,7 @@ function renderProblem() {
     const prevClose = Number(problem.visibleCandles[problem.visibleCandles.length - 1].close);
     const openPercent = ((Number(problem.targetCandle.open) / prevClose) - 1) * 100;
     openHintBox.hidden = false;
+    openHintLabel.textContent = '당일 시가 공개 · 전일 종가 대비';
     openHintValue.textContent = `${openPercent >= 0 ? '+' : ''}${openPercent.toFixed(2)}%`;
   } else {
     openHintBox.hidden = true;
@@ -432,11 +606,12 @@ function renderProblem() {
   chartInstance.resize();
 
   chartNote.textContent = type === 'open'
-    ? '과거 캔들과 거래량만 보고 다음 거래일 시가 방향을 판단해 보세요. 차트 안 겹침을 막기 위해 안내 패널은 차트 밖에서만 표시합니다.'
-    : '유형 2는 실제 가격 데이터로 차트를 그리되, 사용자에게는 전일 종가 대비 등락률 기준으로만 보이게 처리했습니다.';
+    ? '오른쪽 물음표 구간은 아직 숨겨진 다음 거래일 시가입니다. 과거 캔들과 거래량만 보고 시가 방향을 판단해 보세요.'
+    : '오른쪽 마지막 캔들은 전날 캔들이 아니라 당일 시가만 공개된 캔들입니다. 이 시가를 기준으로 종가 방향을 판단해 보세요.';
 }
 
 function renderResults() {
+  clearAnswerFeedback();
   setPlayViewVisible(false);
   resultPanel.hidden = false;
 
@@ -484,6 +659,8 @@ function resolveDecision(playerDecision) {
   answered = true;
   setDecisionButtonsDisabled(true);
   setDecisionMode('result');
+  applyAnswerFeedback(playerCorrect);
+  setMonkeyResult(monkeyDecision, monkeyCorrect);
 
   const outcome = { actualDirection, playerDecision, monkeyDecision, playerCorrect, monkeyCorrect };
   const chartInstance = ensureChart();
@@ -498,7 +675,7 @@ function resolveDecision(playerDecision) {
     원숭이는 <strong>${positionText(monkeyDecision)}</strong>로 ${formatPercent(monkeyTrade.signedReturn)} 수익률, 손익 ${formatMoney(monkeyTrade.pnl)}, 잔고 ${formatMoney(monkeyBalance)}
   `;
 
-  monkeyDecisionBox.textContent = `🐵 원숭이는 이번 문제에서 ${positionText(monkeyDecision)}를 골랐고, 결과는 ${monkeyCorrect ? '적중' : '실패'}입니다.`;
+  monkeyDecisionBox.textContent = `원숭이는 이번 문제에서 ${positionText(monkeyDecision)}를 골랐고, 결과는 ${monkeyCorrect ? '적중' : '실패'}입니다.`;
   chartNote.textContent = `정답 공개 완료 · ${problem.company} (${problem.symbol}) · ${problem.targetCandle.date}`;
 
   results.push({
@@ -547,6 +724,7 @@ async function loadRounds() {
 }
 
 function showEmptyState(message) {
+  clearAnswerFeedback();
   disposeChart();
   setPlayViewVisible(false);
   resultPanel.hidden = false;
@@ -555,6 +733,7 @@ function showEmptyState(message) {
 }
 
 async function startGame() {
+  clearAnswerFeedback();
   resultPanel.hidden = true;
   rounds = await loadRounds().catch(err => {
     introScreen.hidden = true;
