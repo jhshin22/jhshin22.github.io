@@ -13,93 +13,58 @@
       color: #0f172a;
       line-height: 1.6;
     }
-    .container {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 32px 20px 60px;
-    }
+    .container { max-width: 1240px; margin: 0 auto; padding: 32px 20px 60px; }
     .hero {
-      background: linear-gradient(135deg, #0f172a, #1d4ed8 65%, #60a5fa);
+      background: linear-gradient(135deg, #0f766e, #2563eb 72%, #38bdf8);
       color: #fff;
-      border-radius: 28px;
-      padding: 32px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
       margin-bottom: 28px;
     }
     .hero h1 { margin: 0 0 12px; font-size: 34px; }
-    .hero p { margin: 0; opacity: 0.92; font-size: 15px; }
+    .hero p { margin: 0; opacity: 0.94; font-size: 15px; }
     .meta { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
     .chip {
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 8px;
       padding: 8px 14px;
       font-size: 14px;
       font-weight: 700;
     }
     .section { margin-top: 28px; }
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 16px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
     .section h2 { margin: 0; font-size: 28px; }
     .section-desc { color: #475569; font-size: 15px; }
-    .top-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-    }
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 18px;
-    }
+    .top-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
     .category-card, .article-card {
-      background: #ffffff;
+      background: #fff;
       border: 1px solid #e2e8f0;
-      border-radius: 22px;
+      border-radius: 8px;
       box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
     }
-    .article-card {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .article-card { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
     .rank {
       width: 36px;
       height: 36px;
-      border-radius: 50%;
+      border-radius: 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: #dbeafe;
-      color: #1d4ed8;
+      background: #ccfbf1;
+      color: #0f766e;
       font-weight: 800;
       font-size: 15px;
     }
-    .article-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: #0f172a;
-      text-decoration: none;
-    }
+    .article-title { font-size: 18px; font-weight: 800; color: #0f172a; text-decoration: none; }
     .article-title:hover { text-decoration: underline; }
-    .article-meta, .keyword-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      color: #475569;
-      font-size: 14px;
-    }
+    .article-meta, .keyword-row { display: flex; flex-wrap: wrap; gap: 8px; color: #475569; font-size: 14px; }
     .badge {
       display: inline-flex;
       align-items: center;
-      border-radius: 999px;
+      border-radius: 8px;
       padding: 6px 10px;
       background: #eff6ff;
       color: #1d4ed8;
@@ -109,7 +74,7 @@
     .keyword {
       display: inline-flex;
       align-items: center;
-      border-radius: 999px;
+      border-radius: 8px;
       padding: 6px 10px;
       background: #f1f5f9;
       color: #334155;
@@ -124,19 +89,19 @@
       gap: 6px;
       align-self: flex-start;
       padding: 8px 12px;
-      border-radius: 10px;
-      background: #eff6ff;
-      color: #1d4ed8;
+      border-radius: 8px;
+      background: #ecfeff;
+      color: #0e7490;
       text-decoration: none;
       font-size: 13px;
       font-weight: 800;
-      border: 1px solid #bfdbfe;
+      border: 1px solid #a5f3fc;
     }
-    .link-hint:hover { background: #dbeafe; }
+    .link-hint:hover { background: #cffafe; }
     .guide-banner {
       margin: 0 0 22px;
       padding: 14px 16px;
-      border-radius: 16px;
+      border-radius: 8px;
       background: #eef6ff;
       border: 1px solid #cfe0ff;
       color: #1e40af;
@@ -144,40 +109,21 @@
       font-weight: 700;
     }
     .category-card { overflow: hidden; }
-    .category-header { padding: 18px 20px; border-bottom: 1px solid #e2e8f0; }
+    .category-header { padding: 18px 20px; border-bottom: 1px solid #e2e8f0; background: #f8fafc; }
     .category-header h3 { margin: 0 0 6px; font-size: 20px; }
     .category-header p { margin: 0; color: #475569; font-size: 14px; }
-    .cat-0 .category-header { background: linear-gradient(135deg, #dbeafe, #eff6ff); }
-    .cat-1 .category-header { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); }
-    .cat-2 .category-header { background: linear-gradient(135deg, #dcfce7, #f0fdf4); }
-    .cat-3 .category-header { background: linear-gradient(135deg, #fee2e2, #fff1f2); }
-    .cat-4 .category-header { background: linear-gradient(135deg, #fef3c7, #fffbeb); }
-    .cat-5 .category-header { background: linear-gradient(135deg, #ede9fe, #f5f3ff); }
-    .cat-6 .category-header { background: linear-gradient(135deg, #fce7f3, #fdf2f8); }
     .category-body { padding: 14px; display: grid; gap: 12px; }
-    .small-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 14px;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .small-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
     .small-card a { text-decoration: none; color: #0f172a; font-weight: 700; display: block; }
     .small-card a:hover { text-decoration: underline; }
     .footer-note { margin-top: 30px; font-size: 13px; color: #64748b; text-align: center; }
-    .loading, .error {
-      padding: 24px;
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      color: #475569;
-    }
+    .loading, .error { padding: 24px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; color: #475569; }
     @media (max-width: 768px) {
-      .hero { padding: 24px; }
+      .container { padding: 22px 14px 44px; }
+      .hero { padding: 22px; }
       .hero h1 { font-size: 28px; }
       .section h2 { font-size: 24px; }
+      .category-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -186,29 +132,24 @@
     <section class="hero">
       <h1>소매여신 기사 대시보드</h1>
       <p>전반부는 오늘 가장 중요한 이슈 Top 5, 후반부는 주제별 대표 기사로 구성했습니다.</p>
-      <div class="meta" id="metaChips">
-        <span class="chip">JSON 기반 자동 렌더링</span>
-      </div>
+      <div class="meta" id="metaChips"><span class="chip">JSON 기반 자동 렌더링</span></div>
     </section>
 
-    <div id="app">
-      <div class="loading">데이터를 불러오는 중입니다...</div>
-    </div>
-
-    <div class="footer-note">JSON 데이터 기반으로 자동 생성된 대시보드입니다.</div>
+    <div id="app"><div class="loading">데이터를 불러오는 중입니다...</div></div>
+    <div class="footer-note">JSON 데이터 기반으로 자동 생성된 대시보드입니다. 실무 검토용 reason 필드는 화면에 표시하지 않습니다.</div>
   </div>
 
   <script>
-    const DATA_FILE = './articles_detailed_2026-04-22.json';
-
-    const categoryConfig = [
-      { title: '① 정책/규제 변화', desc: '정책 변화나 규제 완화·강화가 직접적으로 대출 실행 환경에 영향을 주는 기사', ids: [6] },
-      { title: '② 금리/지표 변화', desc: '금리와 업권별 여신 흐름, 중금리 공급 변화를 보여주는 기사', ids: [7] },
-      { title: '③ 시장 방향성 (부동산/증권 등)', desc: '주거비와 수요 구조 변화로 인해 대출 수요가 바뀔 수 있는 기사', ids: [8] },
-      { title: '④ 리스크/연체/NPL', desc: '다중채무, 부실 위험, 상환능력 저하 가능성을 보여주는 기사', ids: [9] },
-      { title: '⑤ 금융사 소매 대출 전략/상품', desc: '수신·대출 전략과 재원 조달 변화 등 금융사 실행 관점 기사', ids: [10] },
-      { title: '⑥ 보험사관련 이슈(타사 포함)', desc: '보험사 손해율과 비용 압박 등 보험업 주요 이슈', ids: [11] },
-      { title: '⑦ AI 동향 (금융 AI 포함)', desc: '금융권 생성형 AI와 AX 실행 흐름을 보여주는 기사', ids: [12] }
+    const params = new URLSearchParams(window.location.search);
+    const DATA_FILE = params.get('data') || './finance_articles_2026-04-23.json';
+    const CATEGORY_ORDER = [
+      '대출 관련 정책/규제 변화',
+      '금리/지표 변화',
+      '시장 방향성',
+      '리스크/연체/NPL',
+      '금융사 소매 대출 전략/상품',
+      '보험사 관련 이슈',
+      'AI 동향'
     ];
 
     function escapeHtml(value) {
@@ -220,13 +161,11 @@
         .replace(/'/g, '&#39;');
     }
 
-    function getArticleLink(article) {
-      return article.URL || article.url || '#';
-    }
+    function getArticleLink(article) { return article.URL || article.url || '#'; }
 
     function buildKeywords(article) {
-      if (Array.isArray(article.keywords)) return article.keywords.slice(0, 4);
-      if (typeof article.keywords === 'string') return article.keywords.split(',').map(v => v.trim()).filter(Boolean).slice(0, 4);
+      if (Array.isArray(article.keywords)) return article.keywords.slice(0, 5);
+      if (typeof article.keywords === 'string') return article.keywords.split(',').map(v => v.trim()).filter(Boolean).slice(0, 5);
       return [];
     }
 
@@ -245,7 +184,7 @@
         <div class="article-meta">
           <span>${escapeHtml(article.publisher)}</span>
           <span>${escapeHtml(article.udate || '')}</span>
-          <span class="badge">추천도 ${escapeHtml(article.rating)}</span>
+          <span class="badge">추천도 ${escapeHtml(article.rating || '')}</span>
         </div>
       `;
     }
@@ -275,14 +214,38 @@
       `;
     }
 
+    function normalizeData(data) {
+      const articles = Array.isArray(data.articles) ? data.articles : [];
+      const topArticles = articles.filter(article => article.section === 'top5').slice(0, 5);
+      const categoryArticles = articles.filter(article => article.section !== 'top5');
+      const grouped = new Map();
+
+      categoryArticles.forEach(article => {
+        const category = article.category || '기타';
+        if (!grouped.has(category)) grouped.set(category, []);
+        grouped.get(category).push(article);
+      });
+
+      const orderedCategories = [];
+      CATEGORY_ORDER.forEach(category => {
+        if (grouped.has(category)) orderedCategories.push([category, grouped.get(category)]);
+      });
+      grouped.forEach((items, category) => {
+        if (!CATEGORY_ORDER.includes(category)) orderedCategories.push([category, items]);
+      });
+
+      return { articles, topArticles, orderedCategories };
+    }
+
     function renderDashboard(data) {
-      const articleMap = new Map((data.articles || []).map(article => [article.id, article]));
-      const topArticles = [1, 2, 3, 4, 5].map(id => articleMap.get(id)).filter(Boolean);
+      const normalized = normalizeData(data);
+      const date = data.base_date || data.date || '';
+      const count = data.validation?.article_count || data.count || normalized.articles.length;
 
       document.getElementById('metaChips').innerHTML = `
-        <span class="chip">기준일: ${escapeHtml(data.date)}</span>
-        <span class="chip">Top 5 + 카테고리 7개</span>
-        <span class="chip">총 ${escapeHtml(data.count)}개 기사 기반</span>
+        <span class="chip">기준일: ${escapeHtml(date)}</span>
+        <span class="chip">총 ${escapeHtml(count)}개 기사</span>
+        <span class="chip">데이터: ${escapeHtml(DATA_FILE)}</span>
       `;
 
       const guideBanner = `<div class="guide-banner">기사 제목이나 <strong>원문 보기 ↗</strong> 버튼을 누르면 해당 기사 원문으로 이동합니다.</div>`;
@@ -290,34 +253,31 @@
         <section class="section">
           <div class="section-head">
             <div>
-              <h2>🔹 오늘 가장 중요한 이슈 (Top 5)</h2>
+              <h2>오늘 가장 중요한 이슈 Top 5</h2>
               <div class="section-desc">당일/전일 기준 가장 영향력 큰 이슈 5개</div>
             </div>
           </div>
-          <div class="top-grid">${topArticles.map((article, index) => renderTopArticle(article, index + 1)).join('')}</div>
+          <div class="top-grid">${normalized.topArticles.map((article, index) => renderTopArticle(article, index + 1)).join('')}</div>
         </section>
       `;
       const categorySection = `
         <section class="section">
           <div class="section-head">
             <div>
-              <h2>🔹 주제별 대표 기사</h2>
-              <div class="section-desc">카테고리별 대표 기사 1건씩 선정</div>
+              <h2>주제별 대표 기사</h2>
+              <div class="section-desc">카테고리별 대표 기사 2건씩 구성</div>
             </div>
           </div>
           <div class="category-grid">
-            ${categoryConfig.map((category, categoryIndex) => {
-              const items = category.ids.map(id => articleMap.get(id)).filter(Boolean);
-              return `
-                <section class="category-card cat-${categoryIndex}">
-                  <div class="category-header">
-                    <h3>${escapeHtml(category.title)}</h3>
-                    <p>${escapeHtml(category.desc)}</p>
-                  </div>
-                  <div class="category-body">${items.map(renderCategoryArticle).join('')}</div>
-                </section>
-              `;
-            }).join('')}
+            ${normalized.orderedCategories.map(([category, items]) => `
+              <section class="category-card">
+                <div class="category-header">
+                  <h3>${escapeHtml(category)}</h3>
+                  <p>${escapeHtml(items.length)}개 기사</p>
+                </div>
+                <div class="category-body">${items.map(renderCategoryArticle).join('')}</div>
+              </section>
+            `).join('')}
           </div>
         </section>
       `;
