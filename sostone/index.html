@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOSTONE - 브라우저 카드 배틀</title>
+  <style>
+    :root {
+      --bg1: #0f172a;
+      --bg2: #1e293b;
+      --panel: rgba(15, 23, 42, 0.84);
+      --line: rgba(255,255,255,0.16);
+      --text: #e5eefc;
+      --muted: #9fb0d1;
+      --gold: #f8d26a;
+      --red: #ef5350;
+      --green: #66bb6a;
+      --blue: #5dade2;
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Pretendard, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(93,173,226,.18), transparent 25%),
+        radial-gradient(circle at bottom, rgba(248,210,106,.12), transparent 28%),
+        linear-gradient(180deg, var(--bg2), var(--bg1));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .game {
+      width: min(1440px, 100%);
+      margin: 0 auto;
+      padding: 10px 14px 18px;
+      user-select: none;
+    }
+    .topbar {
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .logo h1 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: .06em;
+    }
+    .logo p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 14px;
+      background: linear-gradient(180deg, #334155, #1f2937);
+      color: var(--text);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      font-weight: 700;
+    }
+    button.primary { background: linear-gradient(180deg, #3b82f6, #1d4ed8); }
+    button.endturn.ready { background: linear-gradient(180deg, #f59e0b, #d97706); }
+    .statusline {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
+      margin-bottom: 10px;
+    }
+    .message { font-size: 14px; color: var(--muted); }
+    .mana-pill, .turn-pill {
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .board {
+      position: relative;
+      display: grid;
+      grid-template-rows: auto auto 120px auto auto;
+      gap: 8px;
+      min-height: calc(100vh - 150px);
+    }
+    .hero-row, .field-row, .hand-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      position: relative;
+    }
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 120px 1fr 120px;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+    }
+    .deckbox, .gravebox {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      height: 112px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: var(--muted);
+      box-shadow: var(--shadow);
+      text-align: center;
+      font-size: 13px;
+    }
+    .deckcount {
+      font-size: 26px;
+      color: var(--gold);
+      font-weight: 900;
+    }
+    .hero {
+      width: 220px;
+      height: 112px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(30,41,59,.95), rgba(15,23,42,.95));
+      border: 2px solid rgba(255,255,255,.16);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 12px;
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero.active-turn { outline: 3px solid rgba(248,210,106,.72); }
+    .hero-face {
+      width: 86px;
+      height: 86px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,.3), rgba(255,255,255,0) 40%), linear-gradient(180deg, #5b7cff, #233876);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      border: 2px solid rgba(255,255,255,.16);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-face.enemy { background: radial-gradient(circle at 35% 35%, rgba(255,255,255,.3), rgba(255,255,255,0) 40%), linear-gradient(180deg, #ef5350, #7f1d1d); }
+    .hero-face svg { width: 80%; height: 80%; opacity: .9; }
+    .hero-info h2 {
+      margin: 0 0 4px;
+      font-size: 20px;
+    }
+    .hero-info .sub {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .stats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      min-width: 44px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--line);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .field-row {
+      min-height: 180px;
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 22px;
+      padding: 16px;
+      overflow-x: auto;
+      overflow-y: visible;
+    }
+    .field-row.enemy { background: linear-gradient(180deg, rgba(239,83,80,.05), rgba(255,255,255,.02)); }
+    .field-row.player { background: linear-gradient(180deg, rgba(93,173,226,.08), rgba(255,255,255,.02)); }
+    .slot {
+      width: 108px;
+      height: 146px;
+      border: 2px dashed rgba(255,255,255,.08);
+      border-radius: 18px;
+      flex: 0 0 auto;
+    }
+    .divider {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .divider:before, .divider:after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,.08);
+      margin: 0 10px;
+    }
+    .hand-row {
+      min-height: 180px;
+      overflow-x: auto;
+      padding: 16px 8px 8px;
+      align-items: flex-end;
+    }
+    .card {
+      width: 112px;
+      height: 156px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #faf7ef, #d8d0bf);
+      color: #1f2937;
+      box-shadow: 0 10px 24px rgba(0,0,0,.26);
+      border: 3px solid #c8b07a;
+      position: relative;
+      flex: 0 0 auto;
+      overflow: hidden;
+      transform-origin: center bottom;
+      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+    }
+    .card.hand:hover { transform: translateY(-8px) scale(1.03); }
+    .card.dragging { opacity: .55; }
+    .card.disabled { filter: grayscale(.35); opacity: .7; }
+    .card.spell { border-color: #60a5fa; background: linear-gradient(180deg, #eef7ff, #cbdcf8); }
+    .card.minion { border-color: #d4af37; }
+    .card.tauntGlow { box-shadow: 0 0 0 3px rgba(248,210,106,.45), 0 10px 24px rgba(0,0,0,.3); }
+    .mana {
+      position: absolute;
+      top: 6px; left: 6px;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #60a5fa, #1d4ed8);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900;
+      border: 2px solid rgba(255,255,255,.8);
+      z-index: 2;
+    }
+    .titlebar {
+      position: absolute;
+      top: 4px; left: 38px; right: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .art {
+      position: absolute;
+      top: 24px;
+      left: 8px; right: 8px;
+      height: 62px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.25));
+      border: 1px solid rgba(0,0,0,.08);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .art svg { width: 90%; height: 90%; }
+    .text {
+      position: absolute;
+      left: 8px; right: 8px; bottom: 30px;
+      font-size: 10px;
+      line-height: 1.2;
+      min-height: 38px;
+      color: #334155;
+      font-weight: 700;
+    }
+    .atk, .hp {
+      position: absolute;
+      bottom: 6px;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-weight: 900;
+      border: 2px solid rgba(255,255,255,.8);
+    }
+    .atk { left: 6px; background: linear-gradient(180deg, #f59e0b, #b45309); }
+    .hp { right: 6px; background: linear-gradient(180deg, #ef5350, #b91c1c); }
+    .sleep {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font-size: 11px;
+      background: rgba(15,23,42,.75);
+      color: white;
+      border-radius: 999px;
+      padding: 4px 7px;
+    }
+    .keywords {
+      position: absolute;
+      top: 88px;
+      left: 8px;
+      right: 8px;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .kw {
+      font-size: 9px;
+      background: rgba(255,255,255,.7);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 999px;
+      padding: 1px 5px;
+    }
+    .card.field-card.ready { cursor: grab; }
+    .card.field-card.can-attack { box-shadow: 0 0 0 3px rgba(102,187,106,.45), 0 12px 24px rgba(0,0,0,.3); }
+    .card.field-card.selected { outline: 4px solid rgba(255,255,255,.8); }
+    .drop-target { outline: 4px solid rgba(93,173,226,.8); }
+    .attack-line {
+      position: fixed;
+      height: 4px;
+      background: linear-gradient(90deg, rgba(248,210,106,0.2), rgba(248,210,106,1));
+      transform-origin: 0 50%;
+      pointer-events: none;
+      z-index: 200;
+      box-shadow: 0 0 16px rgba(248,210,106,.7);
+      display: none;
+    }
+    .projectile {
+      position: fixed;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff, #60a5fa 55%, #1d4ed8);
+      pointer-events: none;
+      z-index: 220;
+      box-shadow: 0 0 20px rgba(96,165,250,.8);
+    }
+    .impact {
+      animation: impact .28s ease;
+    }
+    @keyframes impact {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.08) translateX(8px); }
+      100% { transform: scale(1); }
+    }
+    .shake { animation: shake .3s ease; }
+    @keyframes shake {
+      0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(8px)}75%{transform:translateX(-5px)}
+    }
+    .winner {
+      position: fixed;
+      inset: 0;
+      background: rgba(2,6,23,.78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+      padding: 20px;
+    }
+    .winner.show { display: flex; }
+    .winner-card {
+      width: min(520px, 100%);
+      background: linear-gradient(180deg, #1e293b, #0f172a);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 26px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .winner-card h2 { margin-top: 0; font-size: 32px; }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    @media (max-width: 960px) {
+      .hero-wrap { grid-template-columns: 84px 1fr 84px; }
+      .deckbox, .gravebox { height: 98px; }
+      .hero { width: 100%; max-width: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="game">
+    <div class="topbar">
+      <div class="logo">
+        <h1>SOSTONE</h1>
+        <p>하스스톤 풍 싱글플레이 카드 배틀 · 드래그 소환 · 드래그 공격</p>
+      </div>
+      <div class="controls">
+        <button id="resetBtn">새 게임</button>
+        <button id="endTurnBtn" class="endturn ready">턴 종료</button>
+      </div>
+    </div>
+
+    <div class="statusline">
+      <div id="message" class="message">게임을 시작합니다. 카드로 상대 영웅의 체력을 0으로 만드세요.</div>
+      <div id="turnPill" class="turn-pill">플레이어 턴</div>
+      <div id="manaPill" class="mana-pill">마나 1 / 1</div>
+    </div>
+
+    <div class="board">
+      <div class="hero-row">
+        <div class="hero-wrap">
+          <div class="deckbox"><div>상대 덱</div><div id="aiDeck" class="deckcount">30</div></div>
+          <div id="aiHero" class="hero">
+            <div class="hero-face enemy" id="aiHeroFace"></div>
+            <div class="hero-info">
+              <h2>붉은 성기사</h2>
+              <div class="sub">AI 영웅 · 공격적인 중립/화염 덱</div>
+              <div class="stats">
+                <div class="badge">❤ <span id="aiHealth">30</span></div>
+                <div class="badge">🛡 <span id="aiArmor">0</span></div>
+                <div class="badge">✋ <span id="aiHand">0</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="gravebox"><div>상대 손패</div><div id="aiHandBox" class="deckcount">3</div></div>
+        </div>
+      </div>
+
+      <div id="aiField" class="field-row enemy"></div>
+      <div class="divider">전장</div>
+      <div id="playerField" class="field-row player"></div>
+
+      <div class="hero-row">
+        <div class="hero-wrap">
+          <div class="deckbox"><div>내 덱</div><div id="playerDeck" class="deckcount">30</div></div>
+          <div id="playerHero" class="hero active-turn">
+            <div class="hero-face" id="playerHeroFace"></div>
+            <div class="hero-info">
+              <h2>푸른 비전술사</h2>
+              <div class="sub">플레이어 영웅 · 보호/비전 덱</div>
+              <div class="stats">
+                <div class="badge">❤ <span id="playerHealth">30</span></div>
+                <div class="badge">🛡 <span id="playerArmor">0</span></div>
+                <div class="badge">✋ <span id="playerHand">0</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="gravebox"><div>내 손패</div><div id="playerHandBox" class="deckcount">3</div></div>
+        </div>
+      </div>
+
+      <div id="playerHand" class="hand-row"></div>
+    </div>
+  </div>
+
+  <div id="attackLine" class="attack-line"></div>
+  <div id="winner" class="winner">
+    <div class="winner-card">
+      <h2 id="winnerTitle">승리</h2>
+      <p id="winnerText"></p>
+      <div class="legend">
+        <span>구현 키워드: 도발, 돌진, 천보, 죽메, 주문</span>
+        <span>주문 예시: 피해, 드로우, 버프, 광역, 방어도</span>
+      </div>
+      <div style="margin-top:16px"><button class="primary" onclick="window.game.reset()">다시 하기</button></div>
+    </div>
+  </div>
+
+  <script>
+    const ART = {
+      shield: (a='#60a5fa', b='#1d4ed8') => `<svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><path d="M50 6 L84 18 v24c0 23-13 39-34 52C29 81 16 65 16 42V18L50 6z" fill="url(#g1)" stroke="rgba(255,255,255,.65)" stroke-width="4"/><path d="M50 18v56" stroke="rgba(255,255,255,.75)" stroke-width="6"/><path d="M30 40h40" stroke="rgba(255,255,255,.75)" stroke-width="6"/></svg>`,
+      sword: (a='#f59e0b', b='#b45309') => `<svg viewBox="0 0 100 100"><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><path d="M64 9l10 10-8 8 9 9-9 9-9-9-8 8-10-10z" fill="url(#g2)"/><rect x="18" y="57" width="12" height="26" rx="4" fill="#6b4f1d" transform="rotate(-45 24 70)"/><rect x="8" y="66" width="30" height="8" rx="4" fill="#cbd5e1" transform="rotate(-45 23 70)"/></svg>`,
+      flame: (a='#fb7185', b='#f59e0b') => `<svg viewBox="0 0 100 100"><defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><path d="M59 9c5 20-9 18-5 33 2 8 13 8 12 22-1 16-13 27-30 27S8 81 8 64c0-17 12-24 24-33 8-6 14-12 16-22 2 0 7 0 11 0z" fill="url(#g3)"/><path d="M49 44c4 8-3 8-1 15 2 5 8 6 8 13 0 10-8 16-18 16S20 82 20 72c0-11 7-15 13-20 6-5 10-8 13-16 1 1 2 4 3 8z" fill="rgba(255,255,255,.45)"/></svg>`,
+      crystal: (a='#7dd3fc', b='#2563eb') => `<svg viewBox="0 0 100 100"><defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><polygon points="50,6 83,37 67,92 33,92 17,37" fill="url(#g4)" stroke="rgba(255,255,255,.7)" stroke-width="4"/><polyline points="50,6 50,92 83,37 17,37" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="4"/></svg>`,
+      skull: (a='#cbd5e1', b='#64748b') => `<svg viewBox="0 0 100 100"><defs><linearGradient id="g5" x1="0" y1="0" x2="0" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><path d="M50 10c20 0 32 14 32 31 0 11-5 16-10 21v12H60V62H40v12H28V62c-5-5-10-10-10-21C18 24 30 10 50 10z" fill="url(#g5)"/><circle cx="38" cy="40" r="7" fill="#0f172a"/><circle cx="62" cy="40" r="7" fill="#0f172a"/><polygon points="50,46 43,58 57,58" fill="#0f172a"/></svg>`,
+      leaf: (a='#86efac', b='#16a34a') => `<svg viewBox="0 0 100 100"><defs><linearGradient id="g6" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><path d="M85 15C43 17 17 43 15 85c42-2 68-28 70-70z" fill="url(#g6)"/><path d="M24 76C40 58 54 44 76 24" stroke="rgba(255,255,255,.7)" stroke-width="5" fill="none"/></svg>`,
+      star: (a='#fde68a', b='#f59e0b') => `<svg viewBox="0 0 100 100"><defs><linearGradient id="g7" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><polygon points="50,8 61,36 92,36 67,54 77,84 50,66 23,84 33,54 8,36 39,36" fill="url(#g7)" stroke="rgba(255,255,255,.65)" stroke-width="3"/></svg>`
+    };
+
+    const HERO_SVG = {
+      player: `<svg viewBox="0 0 100 100"><circle cx="50" cy="34" r="16" fill="#fff" opacity=".92"/><path d="M20 84c2-18 13-28 30-28s28 10 30 28" fill="#fff" opacity=".92"/><path d="M21 76c12-15 46-15 58 0" stroke="#93c5fd" stroke-width="6" fill="none"/><path d="M50 18l8 10 12 2-8 8 2 12-14-7-14 7 2-12-8-8 12-2z" fill="#bfdbfe" opacity=".9"/></svg>`,
+      ai: `<svg viewBox="0 0 100 100"><circle cx="50" cy="30" r="15" fill="#fff" opacity=".92"/><path d="M24 84c4-16 15-26 26-26s22 10 26 26" fill="#fff" opacity=".92"/><path d="M18 23l16-10 6 12-16 10zM82 23L66 13l-6 12 16 10z" fill="#fecaca"/><path d="M32 60h36l8 20H24z" fill="#fecaca" opacity=".8"/></svg>`
+    };
+
+    const shuffle = arr => {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    };
+
+    let uid = 1;
+    const nextId = () => `c${uid++}`;
+
+    function createCard(base, owner) {
+      return {
+        id: nextId(),
+        owner,
+        name: base.name,
+        type: base.type,
+        cost: base.cost,
+        attack: base.attack || 0,
+        health: base.health || 0,
+        maxHealth: base.health || 0,
+        text: base.text || '',
+        art: base.art || 'star',
+        artColors: base.artColors || ['#7dd3fc','#2563eb'],
+        tribe: base.tribe || '',
+        charge: !!base.charge,
+        taunt: !!base.taunt,
+        divine: !!base.divine,
+        deathrattle: base.deathrattle || null,
+        spell: base.spell || null,
+        battlecry: base.battlecry || null,
+        asleep: base.type === 'minion' ? !base.charge : false,
+        exhausted: false,
+        canAttackHero: true,
+      };
+    }
+
+    const PLAYER_POOL = [
+      { name:'수호 신병', type:'minion', cost:1, attack:1, health:3, taunt:true, text:'도발', art:'shield', artColors:['#93c5fd','#1d4ed8'] },
+      { name:'비전 검사', type:'minion', cost:1, attack:2, health:1, text:'기본 하수인', art:'sword', artColors:['#fde68a','#f59e0b'] },
+      { name:'별빛 수습생', type:'minion', cost:2, attack:2, health:2, divine:true, text:'천보', art:'star', artColors:['#fde68a','#fbbf24'] },
+      { name:'마나 정령', type:'minion', cost:2, attack:2, health:3, text:'기본 하수인', art:'crystal', artColors:['#7dd3fc','#2563eb'] },
+      { name:'질주 매', type:'minion', cost:3, attack:3, health:1, charge:true, text:'돌진', art:'leaf', artColors:['#86efac','#16a34a'] },
+      { name:'방패 수호자', type:'minion', cost:3, attack:2, health:5, taunt:true, text:'도발', art:'shield', artColors:['#60a5fa','#1e40af'] },
+      { name:'영혼 파수꾼', type:'minion', cost:4, attack:4, health:3, deathrattle:{type:'summon', card:{name:'유령 조각', type:'minion', cost:1, attack:1, health:1, text:'죽음의 메아리로 소환', art:'skull', artColors:['#cbd5e1','#64748b']}}, text:'죽음의 메아리: 1/1 유령 소환', art:'skull', artColors:['#e2e8f0','#64748b'] },
+      { name:'대법관', type:'minion', cost:5, attack:4, health:6, text:'기본 하수인', art:'crystal', artColors:['#93c5fd','#4338ca'] },
+      { name:'비전 화살', type:'spell', cost:1, text:'피해 2', spell:{type:'damage', amount:2, target:'any'}, art:'crystal', artColors:['#7dd3fc','#1d4ed8'] },
+      { name:'신성 보호', type:'spell', cost:2, text:'아군 하수인 하나에게 +2/+2', spell:{type:'buff', attack:2, health:2, target:'friendlyMinion'}, art:'shield', artColors:['#93c5fd','#3b82f6'] },
+      { name:'지식의 샘', type:'spell', cost:3, text:'카드 2장 뽑기', spell:{type:'draw', amount:2, target:'none'}, art:'star', artColors:['#fde68a','#f59e0b'] },
+      { name:'얼음 방벽', type:'spell', cost:2, text:'방어도 +4', spell:{type:'armor', amount:4, target:'hero'}, art:'shield', artColors:['#bfdbfe','#2563eb'] },
+      { name:'비전 폭발', type:'spell', cost:4, text:'적 전체에 피해 2', spell:{type:'aoeEnemy', amount:2, target:'enemyBoard'}, art:'flame', artColors:['#fda4af','#f59e0b'] },
+    ];
+
+    const AI_POOL = [
+      { name:'광전사', type:'minion', cost:1, attack:2, health:1, text:'기본 하수인', art:'sword', artColors:['#fdba74','#c2410c'] },
+      { name:'붉은 수호병', type:'minion', cost:1, attack:1, health:3, taunt:true, text:'도발', art:'shield', artColors:['#fca5a5','#b91c1c'] },
+      { name:'불꽃 수련생', type:'minion', cost:2, attack:3, health:2, text:'기본 하수인', art:'flame', artColors:['#fb7185','#f59e0b'] },
+      { name:'돌진 늑대', type:'minion', cost:3, attack:3, health:1, charge:true, text:'돌진', art:'leaf', artColors:['#fca5a5','#ef4444'] },
+      { name:'피의 기사', type:'minion', cost:3, attack:3, health:4, text:'기본 하수인', art:'sword', artColors:['#fdba74','#ea580c'] },
+      { name:'붉은 벽', type:'minion', cost:4, attack:2, health:6, taunt:true, text:'도발', art:'shield', artColors:['#fda4af','#b91c1c'] },
+      { name:'해골 소환사', type:'minion', cost:4, attack:4, health:3, deathrattle:{type:'summon', card:{name:'해골 병사', type:'minion', cost:1, attack:1, health:1, text:'죽음의 메아리로 소환', art:'skull', artColors:['#e2e8f0','#475569']}}, text:'죽음의 메아리: 1/1 해골 소환', art:'skull', artColors:['#e5e7eb','#6b7280'] },
+      { name:'전쟁 군주', type:'minion', cost:5, attack:5, health:5, text:'기본 하수인', art:'star', artColors:['#fca5a5','#ef4444'] },
+      { name:'화염탄', type:'spell', cost:1, text:'피해 2', spell:{type:'damage', amount:2, target:'any'}, art:'flame', artColors:['#fb7185','#f59e0b'] },
+      { name:'피의 갈증', type:'spell', cost:2, text:'아군 하수인 하나에게 +2/+2', spell:{type:'buff', attack:2, health:2, target:'friendlyMinion'}, art:'sword', artColors:['#fdba74','#ea580c'] },
+      { name:'보급 요청', type:'spell', cost:3, text:'카드 2장 뽑기', spell:{type:'draw', amount:2, target:'none'}, art:'star', artColors:['#fde68a','#d97706'] },
+      { name:'불기둥', type:'spell', cost:4, text:'적 전체에 피해 2', spell:{type:'aoeEnemy', amount:2, target:'enemyBoard'}, art:'flame', artColors:['#fca5a5','#dc2626'] },
+      { name:'철갑 강화', type:'spell', cost:2, text:'방어도 +4', spell:{type:'armor', amount:4, target:'hero'}, art:'shield', artColors:['#fecaca','#dc2626'] },
+    ];
+
+    function buildDeck(pool) {
+      const deck = [];
+      while (deck.length < 30) {
+        for (const card of pool) {
+          if (deck.length >= 30) break;
+          deck.push(createCard(card, null));
+        }
+      }
+      return shuffle(deck.slice(0, 30));
+    }
+
+    const game = {
+      state: null,
+      selectedAttackerId: null,
+      attackDrag: null,
+      reset() {
+        uid = 1;
+        this.state = {
+          turn: 'player',
+          turnCount: 1,
+          ended: false,
+          player: { hero:{health:30, armor:0, maxMana:1, mana:1}, deck: buildDeck(PLAYER_POOL).map(c => ({...c, owner:'player'})), hand:[], field:[] },
+          ai: { hero:{health:30, armor:0, maxMana:1, mana:1}, deck: buildDeck(AI_POOL).map(c => ({...c, owner:'ai'})), hand:[], field:[] },
+        };
+        document.getElementById('playerHeroFace').innerHTML = HERO_SVG.player;
+        document.getElementById('aiHeroFace').innerHTML = HERO_SVG.ai;
+        for (let i=0;i<3;i++) this.drawCard('player');
+        for (let i=0;i<3;i++) this.drawCard('ai');
+        this.setMessage('플레이어 턴입니다. 손패를 드래그해서 전장에 내려놓으세요. 하수인을 드래그해 적을 공격할 수 있습니다.');
+        document.getElementById('winner').classList.remove('show');
+        this.selectedAttackerId = null;
+        this.attackDrag = null;
+        this.render();
+      },
+      setMessage(msg) { document.getElementById('message').textContent = msg; },
+      getSide(side){ return this.state[side]; },
+      getOpponent(side){ return side === 'player' ? this.state.ai : this.state.player; },
+      drawCard(side, amount=1) {
+        const actor = this.getSide(side);
+        for (let i=0;i<amount;i++) {
+          if (!actor.deck.length) return;
+          const c = actor.deck.shift();
+          if (actor.hand.length < 10) actor.hand.push(c);
+        }
+      },
+      startTurn(side) {
+        const actor = this.getSide(side);
+        actor.hero.maxMana = Math.min(10, actor.hero.maxMana + (side === 'player' && this.state.turnCount === 1 ? 0 : 1));
+        if (side === 'player' && this.state.turnCount === 1) actor.hero.maxMana = 1;
+        actor.hero.mana = actor.hero.maxMana;
+        this.drawCard(side, 1);
+        actor.field.forEach(m => {
+          if (m.asleep) m.asleep = false;
+          m.exhausted = false;
+        });
+        this.state.turn = side;
+        this.selectedAttackerId = null;
+        this.render();
+      },
+      endTurn() {
+        if (this.state.ended) return;
+        if (this.state.turn === 'player') {
+          this.state.turn = 'ai';
+          this.setMessage('상대 턴입니다. AI가 행동 중입니다.');
+          this.render();
+          setTimeout(() => this.aiTurn(), 450);
+        }
+      },
+      aiTurn() {
+        if (this.state.ended) return;
+        const ai = this.state.ai;
+        const player = this.state.player;
+        ai.hero.maxMana = Math.min(10, ai.hero.maxMana + 1);
+        ai.hero.mana = ai.hero.maxMana;
+        this.drawCard('ai', 1);
+        ai.field.forEach(m => { if (m.asleep) m.asleep = false; m.exhausted = false; });
+        this.render();
+
+        const steps = [];
+
+        const playable = () => ai.hand.filter(c => c.cost <= ai.hero.mana);
+
+        const chooseSpellTarget = (card) => {
+          if (card.spell.type === 'damage') {
+            const taunts = player.field.filter(m => m.taunt);
+            if (taunts.length) return { side:'player', zone:'field', id: taunts[0].id };
+            const killable = player.field.find(m => m.health <= card.spell.amount);
+            if (killable) return { side:'player', zone:'field', id: killable.id };
+            return { side:'player', zone:'hero' };
+          }
+          if (card.spell.type === 'buff') {
+            const best = [...ai.field].sort((a,b)=>(b.attack+b.health)-(a.attack+a.health))[0];
+            return best ? { side:'ai', zone:'field', id: best.id } : null;
+          }
+          return null;
+        };
+
+        let safety = 0;
+        while (playable().length && safety < 10) {
+          safety++;
+          let played = false;
+          const handNow = playable().sort((a,b)=>a.cost-b.cost);
+          for (const card of handNow) {
+            if (card.type === 'minion' && ai.field.length < 7) {
+              steps.push(() => this.playCard('ai', card.id));
+              played = true;
+              break;
+            }
+            if (card.type === 'spell') {
+              const target = chooseSpellTarget(card);
+              if (card.spell.type === 'buff' && !target) continue;
+              steps.push(() => this.playCard('ai', card.id, target));
+              played = true;
+              break;
+            }
+          }
+          if (!played) break;
+          const simulated = steps[steps.length-1];
+          simulated();
+        }
+
+        const attackers = ai.field.filter(m => !m.asleep && !m.exhausted && m.attack > 0);
+        const taunts = () => player.field.filter(m => m.taunt);
+        attackers.forEach(attacker => {
+          if (this.state.ended) return;
+          const validTaunts = taunts();
+          let target;
+          if (validTaunts.length) {
+            target = { side:'player', zone:'field', id: validTaunts.sort((a,b)=>a.health-b.health)[0].id };
+          } else {
+            const trade = player.field.find(m => m.health <= attacker.attack);
+            target = trade ? { side:'player', zone:'field', id: trade.id } : { side:'player', zone:'hero' };
+          }
+          steps.push(() => this.attack('ai', attacker.id, target));
+        });
+
+        let delay = 250;
+        steps.forEach(fn => {
+          setTimeout(() => { if (!this.state.ended) { fn(); this.render(); } }, delay);
+          delay += 520;
+        });
+        setTimeout(() => {
+          if (this.state.ended) return;
+          this.state.turnCount += 1;
+          this.startTurn('player');
+          this.setMessage('플레이어 턴입니다. 행동 후 턴 종료를 누르세요.');
+        }, delay + 150);
+      },
+      spendMana(side, amount) {
+        const hero = this.getSide(side).hero;
+        if (hero.mana < amount) return false;
+        hero.mana -= amount;
+        return true;
+      },
+      playCard(side, cardId, target=null) {
+        if (this.state.ended) return false;
+        const actor = this.getSide(side);
+        if (this.state.turn !== side) return false;
+        const idx = actor.hand.findIndex(c => c.id === cardId);
+        if (idx < 0) return false;
+        const card = actor.hand[idx];
+        if (card.cost > actor.hero.mana) return false;
+        if (card.type === 'minion' && actor.field.length >= 7) return false;
+        if (!this.spendMana(side, card.cost)) return false;
+        actor.hand.splice(idx,1);
+        if (card.type === 'minion') {
+          card.asleep = !card.charge;
+          card.exhausted = false;
+          actor.field.push(card);
+          if (card.battlecry) this.resolveEffect(side, card.battlecry, target, card);
+          if (side === 'player') this.setMessage(`${card.name} 소환!`);
+        } else {
+          this.resolveEffect(side, card.spell, target, card);
+          if (side === 'player') this.setMessage(`${card.name} 시전!`);
+        }
+        this.cleanupDead();
+        this.checkWinner();
+        this.render();
+        return true;
+      },
+      resolveEffect(side, effect, target, sourceCard=null) {
+        const actor = this.getSide(side);
+        const opponent = this.getOpponent(side);
+        if (!effect) return;
+        if (effect.type === 'damage') {
+          if (!target) target = { side: side === 'player' ? 'ai' : 'player', zone:'hero' };
+          this.dealDamageTarget(target, effect.amount);
+        }
+        if (effect.type === 'buff') {
+          const targetField = this.getSide(target.side).field;
+          const minion = targetField.find(m => m.id === target.id);
+          if (minion) {
+            minion.attack += effect.attack;
+            minion.health += effect.health;
+            minion.maxHealth += effect.health;
+          }
+        }
+        if (effect.type === 'draw') this.drawCard(side, effect.amount);
+        if (effect.type === 'armor') actor.hero.armor += effect.amount;
+        if (effect.type === 'aoeEnemy') {
+          opponent.field.slice().forEach(m => this.damageMinion(m, effect.amount));
+        }
+        if (effect.type === 'summon') {
+          const hostSide = this.getSide(side);
+          if (hostSide.field.length < 7) {
+            const token = createCard(effect.card, side);
+            token.owner = side;
+            token.asleep = true;
+            hostSide.field.push(token);
+          }
+        }
+        this.cleanupDead();
+      },
+      dealDamageTarget(target, amount) {
+        if (target.zone === 'hero') {
+          const hero = this.getSide(target.side).hero;
+          let dmg = amount;
+          if (hero.armor > 0) {
+            const blocked = Math.min(hero.armor, dmg);
+            hero.armor -= blocked;
+            dmg -= blocked;
+          }
+          if (dmg > 0) hero.health -= dmg;
+          this.bumpHero(target.side);
+        } else {
+          const field = this.getSide(target.side).field;
+          const m = field.find(x => x.id === target.id);
+          if (m) this.damageMinion(m, amount);
+        }
+      },
+      damageMinion(minion, amount) {
+        if (minion.divine) {
+          minion.divine = false;
+          return;
+        }
+        minion.health -= amount;
+      },
+      attack(side, attackerId, target) {
+        if (this.state.ended) return false;
+        const actor = this.getSide(side);
+        if (this.state.turn !== side) return false;
+        const attacker = actor.field.find(m => m.id === attackerId);
+        if (!attacker || attacker.asleep || attacker.exhausted || attacker.attack <= 0) return false;
+        const opponent = this.getOpponent(side);
+        const enemyTaunts = opponent.field.filter(m => m.taunt);
+        if (enemyTaunts.length && !(target.zone === 'field' && enemyTaunts.some(m => m.id === target.id))) {
+          if (side === 'player') this.setMessage('도발 하수인을 먼저 공격해야 합니다.');
+          return false;
+        }
+        this.animateAttack(attackerId, target, () => {
+          if (target.zone === 'hero') {
+            this.dealDamageTarget(target, attacker.attack);
+          } else {
+            const targetMinion = this.getSide(target.side).field.find(m => m.id === target.id);
+            if (!targetMinion) return;
+            const retaliation = targetMinion.attack;
+            this.damageMinion(targetMinion, attacker.attack);
+            this.damageMinion(attacker, retaliation);
+          }
+          attacker.exhausted = true;
+          this.cleanupDead();
+          this.checkWinner();
+          this.render();
+        });
+        return true;
+      },
+      cleanupDead() {
+        ['player','ai'].forEach(side => {
+          const actor = this.getSide(side);
+          const dead = actor.field.filter(m => m.health <= 0);
+          actor.field = actor.field.filter(m => m.health > 0);
+          dead.forEach(d => { if (d.deathrattle) this.resolveEffect(side, d.deathrattle, null, d); });
+        });
+      },
+      checkWinner() {
+        if (this.state.player.hero.health <= 0 || this.state.ai.hero.health <= 0) {
+          this.state.ended = true;
+          const playerWon = this.state.ai.hero.health <= 0 && this.state.player.hero.health > 0;
+          document.getElementById('winnerTitle').textContent = playerWon ? '승리!' : (this.state.player.hero.health <= 0 && this.state.ai.hero.health <= 0 ? '무승부' : '패배');
+          document.getElementById('winnerText').textContent = playerWon ? '붉은 성기사를 쓰러뜨렸습니다.' : '전투에서 패배했습니다. 다시 도전해보세요.';
+          document.getElementById('winner').classList.add('show');
+        }
+      },
+      bumpHero(side) {
+        const el = document.getElementById(side === 'player' ? 'playerHero' : 'aiHero');
+        el.classList.remove('shake');
+        void el.offsetWidth;
+        el.classList.add('shake');
+      },
+      animateAttack(attackerId, target, onHit) {
+        const attackerEl = document.querySelector(`[data-id="${attackerId}"]`);
+        const targetEl = target.zone === 'hero'
+          ? document.getElementById(target.side === 'player' ? 'playerHero' : 'aiHero')
+          : document.querySelector(`[data-id="${target.id}"]`);
+        if (!attackerEl || !targetEl) { onHit(); return; }
+        const a = attackerEl.getBoundingClientRect();
+        const b = targetEl.getBoundingClientRect();
+        const ax = a.left + a.width/2;
+        const ay = a.top + a.height/2;
+        const bx = b.left + b.width/2;
+        const by = b.top + b.height/2;
+        const dx = bx - ax, dy = by - ay;
+        const dist = Math.hypot(dx, dy);
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        const line = document.getElementById('attackLine');
+        line.style.left = ax + 'px';
+        line.style.top = ay + 'px';
+        line.style.width = dist + 'px';
+        line.style.transform = `rotate(${angle}deg)`;
+        line.style.display = 'block';
+        attackerEl.style.transition = 'transform .22s ease';
+        attackerEl.style.transform = `translate(${dx*0.35}px, ${dy*0.35}px) scale(1.05)`;
+        setTimeout(() => {
+          targetEl.classList.remove('impact');
+          void targetEl.offsetWidth;
+          targetEl.classList.add('impact');
+          attackerEl.style.transform = 'translate(0,0) scale(1)';
+          line.style.display = 'none';
+          onHit();
+        }, 230);
+      },
+      getValidPlayerAttackTargets() {
+        const taunts = this.state.ai.field.filter(m => m.taunt).map(m => m.id);
+        return taunts.length ? { hero:false, ids:taunts } : { hero:true, ids:this.state.ai.field.map(m => m.id) };
+      },
+      handleCardDrop(cardId) {
+        if (this.state.turn !== 'player') return;
+        const hand = this.state.player.hand.find(c => c.id === cardId);
+        if (!hand) return;
+        if (hand.type === 'spell') {
+          if (hand.spell.type === 'damage') {
+            const taunts = this.state.ai.field.filter(m => m.taunt);
+            if (taunts.length) this.playCard('player', cardId, { side:'ai', zone:'field', id: taunts[0].id });
+            else this.playCard('player', cardId, { side:'ai', zone:'hero' });
+            return;
+          }
+          if (hand.spell.type === 'buff') {
+            const target = this.state.player.field[0];
+            if (target) this.playCard('player', cardId, { side:'player', zone:'field', id: target.id });
+            else this.setMessage('버프 주문은 아군 하수인이 있어야 합니다.');
+            return;
+          }
+          this.playCard('player', cardId, null);
+        } else {
+          this.playCard('player', cardId);
+        }
+      },
+      beginAttackDrag(attackerId, clientX, clientY) {
+        const card = this.state.player.field.find(m => m.id === attackerId);
+        if (!card || card.asleep || card.exhausted || this.state.turn !== 'player') return;
+        this.selectedAttackerId = attackerId;
+        this.attackDrag = { id: attackerId };
+        this.updateAttackLine(clientX, clientY, attackerId);
+        this.render();
+      },
+      updateAttackLine(clientX, clientY, attackerId=this.selectedAttackerId) {
+        const el = document.querySelector(`[data-id="${attackerId}"]`);
+        const line = document.getElementById('attackLine');
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const ax = rect.left + rect.width/2;
+        const ay = rect.top + rect.height/2;
+        const dx = clientX - ax;
+        const dy = clientY - ay;
+        const dist = Math.hypot(dx, dy);
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        line.style.left = ax + 'px';
+        line.style.top = ay + 'px';
+        line.style.width = dist + 'px';
+        line.style.transform = `rotate(${angle}deg)`;
+        line.style.display = 'block';
+      },
+      endAttackDrag(clientX, clientY) {
+        const line = document.getElementById('attackLine');
+        line.style.display = 'none';
+        if (!this.attackDrag) return;
+        const target = this.pickAttackTarget(clientX, clientY);
+        const attackerId = this.attackDrag.id;
+        this.attackDrag = null;
+        this.selectedAttackerId = null;
+        if (target) this.attack('player', attackerId, target);
+        this.render();
+      },
+      pickAttackTarget(clientX, clientY) {
+        const valid = this.getValidPlayerAttackTargets();
+        const cards = [...document.querySelectorAll('.enemy-target[data-id]')];
+        for (const el of cards) {
+          const r = el.getBoundingClientRect();
+          if (clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom) {
+            const id = el.dataset.id;
+            if (valid.ids.includes(id)) return { side:'ai', zone:'field', id };
+          }
+        }
+        const hero = document.getElementById('aiHero');
+        const rh = hero.getBoundingClientRect();
+        if (valid.hero && clientX >= rh.left && clientX <= rh.right && clientY >= rh.top && clientY <= rh.bottom) return { side:'ai', zone:'hero' };
+        return null;
+      },
+      renderCard(card, zone, side) {
+        const keywords = [];
+        if (card.taunt) keywords.push('도발');
+        if (card.charge) keywords.push('돌진');
+        if (card.divine) keywords.push('천보');
+        if (card.deathrattle) keywords.push('죽메');
+        const artFn = ART[card.art] || ART.star;
+        const artHtml = artFn(card.artColors?.[0], card.artColors?.[1]);
+        const canPlay = side === 'player' && zone === 'hand' && this.state.turn === 'player' && card.cost <= this.state.player.hero.mana && (card.type !== 'minion' || this.state.player.field.length < 7);
+        const canAttack = side === 'player' && zone === 'field' && this.state.turn === 'player' && !card.asleep && !card.exhausted && card.attack > 0;
+        return `
+          <div class="card ${card.type} ${zone === 'hand' ? 'hand' : 'field-card'} ${!canPlay && zone==='hand' ? 'disabled' : ''} ${canAttack ? 'can-attack ready' : ''} ${card.taunt ? 'tauntGlow' : ''} ${this.selectedAttackerId===card.id ? 'selected' : ''} ${side==='ai' && zone==='field' ? 'enemy-target' : ''}" data-id="${card.id}" draggable="${zone==='hand' && side==='player'}">
+            <div class="mana">${card.cost}</div>
+            <div class="titlebar">${card.name}</div>
+            <div class="art">${artHtml}</div>
+            <div class="keywords">${keywords.map(k=>`<span class="kw">${k}</span>`).join('')}</div>
+            <div class="text">${card.text || ''}</div>
+            ${card.type === 'minion' ? `<div class="atk">${card.attack}</div><div class="hp">${card.health}</div>${card.asleep ? '<div class="sleep">대기</div>' : (card.exhausted ? '<div class="sleep">행동</div>' : '')}` : ''}
+          </div>`;
+      },
+      render() {
+        const {player, ai} = this.state;
+        document.getElementById('playerHealth').textContent = player.hero.health;
+        document.getElementById('playerArmor').textContent = player.hero.armor;
+        document.getElementById('playerHand').textContent = player.hand.length;
+        document.getElementById('playerHandBox').textContent = player.hand.length;
+        document.getElementById('playerDeck').textContent = player.deck.length;
+        document.getElementById('aiHealth').textContent = ai.hero.health;
+        document.getElementById('aiArmor').textContent = ai.hero.armor;
+        document.getElementById('aiHand').textContent = ai.hand.length;
+        document.getElementById('aiHandBox').textContent = ai.hand.length;
+        document.getElementById('aiDeck').textContent = ai.deck.length;
+        document.getElementById('manaPill').textContent = `마나 ${player.hero.mana} / ${player.hero.maxMana}`;
+        document.getElementById('turnPill').textContent = this.state.turn === 'player' ? `플레이어 턴 · ${this.state.turnCount}턴` : `상대 턴 · ${this.state.turnCount}턴`;
+        document.getElementById('playerHero').classList.toggle('active-turn', this.state.turn === 'player');
+        document.getElementById('aiHero').classList.toggle('active-turn', this.state.turn === 'ai');
+        document.getElementById('endTurnBtn').classList.toggle('ready', this.state.turn === 'player');
+
+        const aiField = document.getElementById('aiField');
+        aiField.innerHTML = ai.field.map(c => this.renderCard(c, 'field', 'ai')).join('') + Array.from({length: Math.max(0, 7-ai.field.length)}).map(()=>'<div class="slot"></div>').join('');
+        const playerField = document.getElementById('playerField');
+        playerField.innerHTML = player.field.map(c => this.renderCard(c, 'field', 'player')).join('') + Array.from({length: Math.max(0, 7-player.field.length)}).map(()=>'<div class="slot"></div>').join('');
+        const playerHand = document.getElementById('playerHand');
+        playerHand.innerHTML = player.hand.map(c => this.renderCard(c, 'hand', 'player')).join('');
+
+        playerHand.querySelectorAll('.card.hand').forEach(el => {
+          el.addEventListener('dragstart', e => {
+            e.dataTransfer.setData('text/plain', el.dataset.id);
+            el.classList.add('dragging');
+          });
+          el.addEventListener('dragend', () => el.classList.remove('dragging'));
+        });
+
+        playerField.querySelectorAll('.field-card').forEach(el => {
+          const id = el.dataset.id;
+          const onDown = (clientX, clientY) => this.beginAttackDrag(id, clientX, clientY);
+          el.addEventListener('mousedown', e => onDown(e.clientX, e.clientY));
+          el.addEventListener('touchstart', e => {
+            const t = e.touches[0];
+            onDown(t.clientX, t.clientY);
+          }, {passive:true});
+        });
+      }
+    };
+
+    document.addEventListener('dragover', e => e.preventDefault());
+    document.getElementById('playerField').addEventListener('dragover', e => e.preventDefault());
+    document.getElementById('playerField').addEventListener('drop', e => {
+      e.preventDefault();
+      const cardId = e.dataTransfer.getData('text/plain');
+      game.handleCardDrop(cardId);
+    });
+    document.getElementById('endTurnBtn').addEventListener('click', () => game.endTurn());
+    document.getElementById('resetBtn').addEventListener('click', () => game.reset());
+
+    document.addEventListener('mousemove', e => { if (game.attackDrag) game.updateAttackLine(e.clientX, e.clientY); });
+    document.addEventListener('mouseup', e => { if (game.attackDrag) game.endAttackDrag(e.clientX, e.clientY); });
+    document.addEventListener('touchmove', e => { if (game.attackDrag) { const t=e.touches[0]; game.updateAttackLine(t.clientX, t.clientY);} }, {passive:true});
+    document.addEventListener('touchend', e => {
+      if (game.attackDrag) {
+        const t = e.changedTouches[0];
+        game.endAttackDrag(t.clientX, t.clientY);
+      }
+    });
+
+    window.game = game;
+    game.reset();
+  </script>
+</body>
+</html>
