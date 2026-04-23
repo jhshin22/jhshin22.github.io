@@ -83,21 +83,32 @@
       border: 1px solid #e2e8f0;
     }
     .summary { color: #334155; font-size: 14px; margin: 0; }
-    .link-hint {
+    .action-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .link-hint, .share-button {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       align-self: flex-start;
       padding: 8px 12px;
       border-radius: 8px;
-      background: #ecfeff;
-      color: #0e7490;
       text-decoration: none;
       font-size: 13px;
       font-weight: 800;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .link-hint {
+      background: #ecfeff;
+      color: #0e7490;
       border: 1px solid #a5f3fc;
     }
     .link-hint:hover { background: #cffafe; }
+    .share-button {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+    .share-button:hover { background: #dbeafe; }
     .guide-banner {
       margin: 0 0 22px;
       padding: 14px 16px;
@@ -157,7 +168,7 @@
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
+        .replace(/\"/g, '&quot;')
         .replace(/'/g, '&#39;');
     }
 
@@ -179,6 +190,14 @@
       return `<a class="link-hint" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a>`;
     }
 
+    function renderShareButton(article) {
+      return `<button class="share-button" type="button" data-url="${escapeHtml(getArticleLink(article))}" data-title="${escapeHtml(article.title || '')}" onclick="handleShareClick(this)">공유하기</button>`;
+    }
+
+    function renderActionRow(article) {
+      return `<div class="action-row">${renderOriginalLink(article)}${renderShareButton(article)}</div>`;
+    }
+
     function renderMeta(article) {
       return `
         <div class="article-meta">
@@ -189,6 +208,61 @@
       `;
     }
 
+    function setTemporaryButtonLabel(button, label) {
+      const original = button.dataset.originalLabel || button.textContent;
+      button.dataset.originalLabel = original;
+      button.textContent = label;
+      window.clearTimeout(button._labelTimer);
+      button._labelTimer = window.setTimeout(() => {
+        button.textContent = original;
+      }, 1800);
+    }
+
+    async function copyTextFallback(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'absolute';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+
+    async function shareArticle(url, title, button) {
+      try {
+        if (navigator.share) {
+          await navigator.share({ title, url });
+          setTemporaryButtonLabel(button, '공유됨');
+          return;
+        }
+
+        await copyTextFallback(url);
+        setTemporaryButtonLabel(button, 'URL 복사됨');
+      } catch (error) {
+        if (error && error.name === 'AbortError') {
+          return;
+        }
+
+        try {
+          await copyTextFallback(url);
+          setTemporaryButtonLabel(button, 'URL 복사됨');
+        } catch (copyError) {
+          setTemporaryButtonLabel(button, '복사 실패');
+        }
+      }
+    }
+
+    function handleShareClick(button) {
+      shareArticle(button.dataset.url || '', button.dataset.title || '', button);
+    }
+
     function renderTopArticle(article, rank) {
       return `
         <article class="article-card">
@@ -197,7 +271,7 @@
           <a class="article-title" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
           ${renderMeta(article)}
           <p class="summary">${escapeHtml(article.summary)}</p>
-          ${renderOriginalLink(article)}
+          ${renderActionRow(article)}
         </article>
       `;
     }
@@ -209,7 +283,7 @@
           <a href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
           ${renderMeta(article)}
           <p class="summary">${escapeHtml(article.summary)}</p>
-          ${renderOriginalLink(article)}
+          ${renderActionRow(article)}
         </div>
       `;
     }
@@ -245,10 +319,9 @@
       document.getElementById('metaChips').innerHTML = `
         <span class="chip">기준일: ${escapeHtml(date)}</span>
         <span class="chip">총 ${escapeHtml(count)}개 기사</span>
-        <span class="chip">데이터: ${escapeHtml(DATA_FILE)}</span>
       `;
 
-      const guideBanner = `<div class="guide-banner">기사 제목이나 <strong>원문 보기 ↗</strong> 버튼을 누르면 해당 기사 원문으로 이동합니다.</div>`;
+      const guideBanner = `<div class="guide-banner">기사 제목, <strong>원문 보기 ↗</strong>, <strong>공유하기</strong> 버튼으로 바로 활용할 수 있습니다.</div>`;
       const topSection = `
         <section class="section">
           <div class="section-head">
