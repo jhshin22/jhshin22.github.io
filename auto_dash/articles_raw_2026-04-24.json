@@ -1,8 +1,81 @@
 {
   "target_date": "2026-04-24",
-  "updated_at": "2026-04-25T00:56:54+09:00",
-  "count": 329,
+  "updated_at": "2026-04-25T04:43:07+09:00",
+  "count": 385,
   "articles": [
+    {
+      "id": "17573c646a2bb4b1",
+      "title": "효성ITX, 1분기 주당 150원 배당 실시",
+      "source": "fetv.co.kr",
+      "source_domain": "fetv.co.kr",
+      "published_at": "2026-04-24T23:42:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.fetv.co.kr/news/articleView.html?idxno=301177",
+      "naver_link": "https://www.fetv.co.kr/news/articleView.html?idxno=301177",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "효성ITX는 컨택센터 서비스와 IT 솔루션 및 클라우드 사업을 영위하고 있다. 1997년 설립돼 2007년 유가증권시장에 상장됐다. 지난해 기준 한국평가데이터(주)로부터 기업신용평가 A+ 등급을 받아 유지하고 있다.",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "65cabeae3fe6cd65",
+      "title": "[증권 뉴스브리핑] 거래소, 시장경보종목 거래 완화/블랙스톤, 운용자산...",
+      "source": "asiatime.co.kr",
+      "source_domain": "asiatime.co.kr",
+      "published_at": "2026-04-24T23:40:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.asiatime.co.kr/article/20260424500256",
+      "naver_link": "https://www.asiatime.co.kr/article/20260424500256",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "신한투자증권은 이상금융거래 모니터링 및 금융사기 방지를 전담하는 소비자지원부를 통해 이상거래를 탐지하고 피해 노출을 사전에 차단하고 있다. 피해노출 금액은 금융사기 시도가 발생한 계좌의 출금...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
     {
       "id": "cf6b741e031fa2ab",
       "title": "\"청약통장 깨지 말고 일부만 인출\"…이종욱, 주택법 개정안 발의",
@@ -86,11 +159,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -138,15 +217,24 @@
         "연체율"
       ],
       "description": "농협은행 연체율도 0.49%에서 0.55%로 높아졌다. 수익성 지표인 자기자본이익률(ROE·농업지원사업비 부담 전)은 11.85%로, 1년 전보다 1.21%p 상승했다. 계열사별 실적을 보면, NH농협은행의 1분기 순이익은...",
-      "pre_score": 15,
+      "pre_score": 29,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -155,8 +243,8 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 15,
-        "final_score": 15
+        "raw_score": 29,
+        "final_score": 29
       },
       "flags": {
         "trusted_source": false,
@@ -196,11 +284,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -242,19 +336,29 @@
         "대출 금리",
         "보험사 대출",
         "생명보험 대출",
-        "연체율"
+        "연체율",
+        "취약차주"
       ],
       "description": "자산의 질을 보여주는 그룹 고정이하여신 비율은 지난해 말 0.63%에서 올해 1분기 말 0.68%로 올랐고, 은행 연체율은 0.38%, 카드 연체율은 1.80%로 각각 상승했다. 연체율이 높아졌다는 것은 가계와 기업의 상환 여력이 일부...",
-      "pre_score": 40,
+      "pre_score": 60,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9,
           "industry_strategy": 7
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -269,10 +373,10 @@
             }
           ]
         },
-        "keyword_bonus": 24,
+        "keyword_bonus": 30,
         "source_bonus": 0,
-        "raw_score": 40,
-        "final_score": 40
+        "raw_score": 60,
+        "final_score": 60
       },
       "flags": {
         "trusted_source": false,
@@ -296,15 +400,24 @@
         "연체율"
       ],
       "description": "은행 연체율은 0.38%, 카드 연체율은 1.80%로 각각 0.04%p, 0.27%p 보통주자본비율(CET1)은 13.6%로 작년 말(12.9%)보다 0.7%p 상승해 역대 최고치를 기록했다. 국제결제은행(BIS)기준 자본비율은 16.7%으로 1년 전보다 1.0...",
-      "pre_score": 15,
+      "pre_score": 29,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -313,13 +426,44 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 15,
-        "final_score": 15
+        "raw_score": 29,
+        "final_score": 29
       },
       "flags": {
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d3cbd35f25658049",
+      "title": "[리서치 브리핑] 기관 자금 유입과 규제 재편 가속화…웹3 보안·스테이...",
+      "source": "tokenpost.kr",
+      "source_domain": "tokenpost.kr",
+      "published_at": "2026-04-24T22:32:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.tokenpost.kr/news/cryptocurrency/352937",
+      "naver_link": "https://www.tokenpost.kr/news/cryptocurrency/352937",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "미국 소비자물가지수(CPI) 3.3%와 호르무즈 해협 리스크를 감안하면 이는 구조적 강세보다 숏 스퀴즈... 제도권으로…엑시리스트, 금융 인프라 재편 진단 엑시리스트(Exilist)는 국제통화기금(IMF)이 2026년 에너지...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -338,15 +482,24 @@
         "연체율"
       ],
       "description": "은행 연체율은 0.38%, 카드 연체율은 1.80%로 각각 상승했다. 반면 자본 건전성은 개선됐다. 1분기 말 보통주자본비율(CET1)은 13.6%로, 작년 말보다 0.7%포인트 높아지며 역대 최고치를 기록했다. 이는 중장기 목표치인 13...",
-      "pre_score": 15,
+      "pre_score": 29,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -355,8 +508,8 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 15,
-        "final_score": 15
+        "raw_score": 29,
+        "final_score": 29
       },
       "flags": {
         "trusted_source": false,
@@ -380,17 +533,26 @@
         "연체율"
       ],
       "description": "고정이하여신비율은 1.28%로 안정적으로 유지됐고, 연체율은 0.95%로 소폭 상승했다. 중소기업 대출 잔액은 264조 2천억 원으로 집계되며 작년 말보다 2조 4천억 원 증가했다. 기업은행의 중소기업 대출 시장 점유율은 24.4...",
-      "pre_score": 12,
+      "pre_score": 26,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9,
           "industry_strategy": 7,
           "weak_relevance": -10
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -415,8 +577,8 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 12,
-        "final_score": 12
+        "raw_score": 26,
+        "final_score": 26
       },
       "flags": {
         "trusted_source": false,
@@ -499,21 +661,31 @@
       "naver_link": "https://www.thepublic.kr/news/articleView.html?idxno=302494",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "연체율"
+        "연체율",
+        "취약차주"
       ],
       "description": "고정이하여신 비율은 1.28%로 유지됐지만, 연체율은 0.89%에서 0.95%로 상승했다. 이는 경기 둔화와 금리 부담 속에서 취약 차주 리스크가 반영된 결과로 해석된다. 기업은행의 핵심 사업인 중소기업 대출은 확대...",
-      "pre_score": 18,
+      "pre_score": 38,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9,
           "industry_strategy": 7,
           "customer_demand": 6,
           "weak_relevance": -10
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -544,10 +716,10 @@
             }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 18,
-        "final_score": 18
+        "raw_score": 38,
+        "final_score": 38
       },
       "flags": {
         "trusted_source": false,
@@ -615,6 +787,79 @@
         "domestic": true,
         "loan_related": true,
         "possible_ad": true
+      }
+    },
+    {
+      "id": "16f63ac1c27a942a",
+      "title": "“정말 효과 있나요?”…차량 5부제 시행 한 달",
+      "source": "news.kbs.co.kr",
+      "source_domain": "news.kbs.co.kr",
+      "published_at": "2026-04-24T21:47:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8545387&ref=A",
+      "naver_link": "https://n.news.naver.com/mnews/article/056/0012169433?sid=102",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "취약차주"
+      ],
+      "description": "[운행 제한 차량 차주/음성변조 : \"(5부제 때문에 지금 못 들어가시는 거잖아요. 알고 계셨어요?) 아니... \"] 차량 부제나 석유 최고가격제 같은 인위적인 규제 대신 시장의 기능을 살리면서 취약 계층과 생계형 운전자에게...",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "차주",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "2f065c7200d47457",
+      "title": "\"이란發 변동성 여파에도...\" 블랙스톤, 운용자산 1.3조 달러 돌파 [fn마...",
+      "source": "파이낸셜뉴스",
+      "source_domain": "fnnews.com",
+      "published_at": "2026-04-24T21:41:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.fnnews.com/news/202604242136594146",
+      "naver_link": "https://n.news.naver.com/mnews/article/014/0005513038?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "최근 블랙스톤은 인프라, 주거 금융, 소비자금융, 상업금융, 항공기 리스 등 실물 경제 전반에 걸쳐 핵심 자본 공급자로서의 역할을 확대하고 있다. AI 인프라 구축에 필요한 자본 수요가 공개 시장의 공급 능력을...",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 7,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
       }
     },
     {
@@ -719,6 +964,79 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e789e604f0275da7",
+      "title": "고물가에 '가성비' 햄버거 찾는 직장인, 매출도 '쑥'",
+      "source": "todaykorea.co.kr",
+      "source_domain": "todaykorea.co.kr",
+      "published_at": "2026-04-24T21:22:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.todaykorea.co.kr/news/articleView.html?idxno=401098",
+      "naver_link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=401098",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "금융감독원에 따르면 롯데리아 운영사 롯데GRS의 2025년 매출은 1조1189억원으로, 전년 대비 12.4% 늘어났다.... 올해 2월 한국소비자원에 따르면, 지난해 1년 간 소비자가 선호하는 외식 메뉴 8개 물가는 최대 5% 이상 상승한...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융감독원",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "1939a6c7b951c72a",
+      "title": "[월드 e-브리핑] 트럼프, 파산 위기 스피릿항공 정부 인수 검토",
+      "source": "obsnews.co.kr",
+      "source_domain": "obsnews.co.kr",
+      "published_at": "2026-04-24T21:22:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.obsnews.co.kr/news/articleView.html?idxno=1522298",
+      "naver_link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1522298",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "트럼프 대통령은 두 번째 파산 위기에 몰린 저가항공사 스피릿항공에 구제금융을 넘어 정부가 직접... 일본 총무성은 3월 근원 소비자물가지수가 1년 전보다 1.8% 올랐다고 밝혔습니다. 전기·가스요금 보조와 휘발유...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -855,11 +1173,10 @@
         "가계부채"
       ],
       "description": "정부의 가계부채 총량 관리로 가계대출이 제한적인 상황에서도 시장 금리 상승으로 순이자마진(NIM)이 개선된 영향이다. 5대 금융의 1분기 이자이익은 13조3817억원으로 지난해 1분기(12조761억원)보다 6756억원...",
-      "pre_score": 8,
+      "pre_score": 26,
       "score_detail": {
         "groups": {
-          "direct_loan": 14,
-          "market_noise": -18
+          "direct_loan": 14
         },
         "matched_terms": {
           "direct_loan": [
@@ -869,26 +1186,80 @@
               "in_description": true,
               "weight": 1.0
             }
-          ],
-          "market_noise": [
-            {
-              "term": "증시",
-              "in_title": true,
-              "in_description": false,
-              "weight": 2.0
-            }
           ]
         },
         "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 8,
-        "final_score": 8
+        "raw_score": 26,
+        "final_score": 26
       },
       "flags": {
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
         "possible_ad": true
+      }
+    },
+    {
+      "id": "2b4c9174bc653ae0",
+      "title": "경기농협, 경기도 우수 농산물 특판전 열어",
+      "source": "한국금융신문",
+      "source_domain": "fntimes.com",
+      "published_at": "2026-04-24T20:52:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.fntimes.com/html/view.php?ud=202604242049065686dd55077bc2_18",
+      "naver_link": "http://www.fntimes.com/html/view.php?ud=202604242049065686dd55077bc2_18",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "“경기도 농산물의 우수성 홍보를 위해 마련된 행사임을 강조하며, 농심천심(農心天心)의 마음으로 농가와 소비자가 상생할 수 있는 농산물 소비촉진 행사를 지속 추진하겠다”고 전했다. 이동규 한국금융신문 기자",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 7,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "c280e8b899f6c052",
+      "title": "농협경제지주, ‘중동전쟁 대응 비상대책TF 3차 회의' 개최",
+      "source": "한국금융신문",
+      "source_domain": "fntimes.com",
+      "published_at": "2026-04-24T20:50:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.fntimes.com/html/view.php?ud=202604242044321083dd55077bc2_18",
+      "naver_link": "http://www.fntimes.com/html/view.php?ud=202604242044321083dd55077bc2_18",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "등 소비자 지원 방안을 집중 논의했다. 농협경제지주는 '중동전쟁 대응 비상대책TF'와 함께 '비료 수급동향... 진행하는 등 물가안정과 민생 지원을 위해 지속적인 노력을 기울이고 있다. 이동규 한국금융신문 기자",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 7,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
       }
     },
     {
@@ -937,15 +1308,24 @@
         "연체율"
       ],
       "description": "02%포인트 상승했고, 농협은행 연체율도 0.49%에서 0.55%로 높아졌다. 다만 자기자본이익률(ROE·자기자본... 다만 연체율과 부실채권 비율이 소폭 오르고 있어 향후에는 자산 건전성 관리가 실적 지속 여부를 가를...",
-      "pre_score": 15,
+      "pre_score": 29,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -960,8 +1340,8 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 15,
-        "final_score": 15
+        "raw_score": 29,
+        "final_score": 29
       },
       "flags": {
         "trusted_source": false,
@@ -1040,6 +1420,37 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ebaf2a427dab2adb",
+      "title": "[고유가 3.0] 이란 전쟁이 증명한 '초격차'…K-방산 빅4, 실전 훈장 달고...",
+      "source": "financialpost.co.kr",
+      "source_domain": "financialpost.co.kr",
+      "published_at": "2026-04-24T20:32:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.financialpost.co.kr/news/articleView.html?idxno=256766",
+      "naver_link": "https://www.financialpost.co.kr/news/articleView.html?idxno=256766",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "0% 이상의 높은 소비자물가 상승률(인플레이션)을 유발하고 있다. 이에 정부는 20조원대 추가경정예산... 24일 금융계 및 업계가 추산한 한화에어로스페이스의 올해 1분기 영업이익은 7000억원 내외로 컨센서스...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -1199,12 +1610,14 @@
       "origin": "naver_news_api",
       "matched_keywords": [
         "가계대출",
+        "금융소비자",
         "대출 규제",
+        "신용평가",
         "연체율",
         "저축은행 대출"
       ],
       "description": "대출 규제로 신규 취급이 어려워진 만큼, 가계대출 중심 비즈니스 모델을 고도화로 수익성을 끌어올린다는 계획이다. 새로운 CSS모델 도입을 통해 우량 차주 중심으로 여신 포트폴리오 재편도 추진한다. KB저축은행은...",
-      "pre_score": 83,
+      "pre_score": 89,
       "score_detail": {
         "groups": {
           "direct_loan": 14,
@@ -1252,10 +1665,10 @@
             }
           ]
         },
-        "keyword_bonus": 24,
+        "keyword_bonus": 30,
         "source_bonus": 7,
-        "raw_score": 83,
-        "final_score": 83
+        "raw_score": 89,
+        "final_score": 89
       },
       "flags": {
         "trusted_source": true,
@@ -1276,14 +1689,14 @@
       "naver_link": "https://www.tokenpost.kr/news/policy/353059",
       "origin": "naver_news_api",
       "matched_keywords": [
+        "금융소비자",
         "은행권 대출"
       ],
       "description": "하지만, 은행권의 반발로 일정이 4월 말에서 5월 둘째 주로 미뤄질 가능성이 거론된다. 특히 톰 틸리스... 반대로 일정 지연이나 강경한 제한 조항이 부각되면, 스테이블코인·거래소·대출/예치형 서비스 등 특정...",
-      "pre_score": 0,
+      "pre_score": 19,
       "score_detail": {
         "groups": {
-          "industry_strategy": 7,
-          "market_noise": -27
+          "industry_strategy": 7
         },
         "matched_terms": {
           "industry_strategy": [
@@ -1293,20 +1706,12 @@
               "in_description": true,
               "weight": 1.0
             }
-          ],
-          "market_noise": [
-            {
-              "term": "코인",
-              "in_title": true,
-              "in_description": true,
-              "weight": 3.0
-            }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": -14,
-        "final_score": 0
+        "raw_score": 19,
+        "final_score": 19
       },
       "flags": {
         "trusted_source": false,
@@ -1327,14 +1732,14 @@
       "naver_link": "https://www.tokenpost.kr/news/cryptocurrency/353051",
       "origin": "naver_news_api",
       "matched_keywords": [
+        "금융소비자",
         "주택담보대출"
       ],
       "description": "2~4단계는 BTC 투입→수익 생성→배당…7.5~11.5% 환원 언급 두 번째 단계에서 전통 금융이 주택담보대출이나 자동차 대출을 내주듯, 스트레티지는 해당 자본을 비트코인 관련 기회로 배치해 고수익 노출을 노린다. 레...",
-      "pre_score": 0,
+      "pre_score": 26,
       "score_detail": {
         "groups": {
-          "direct_loan": 14,
-          "market_noise": -27
+          "direct_loan": 14
         },
         "matched_terms": {
           "direct_loan": [
@@ -1344,26 +1749,12 @@
               "in_description": true,
               "weight": 1.0
             }
-          ],
-          "market_noise": [
-            {
-              "term": "코인",
-              "in_title": true,
-              "in_description": true,
-              "weight": 3.0
-            },
-            {
-              "term": "비트코인",
-              "in_title": true,
-              "in_description": true,
-              "weight": 3.0
-            }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": -7,
-        "final_score": 0
+        "raw_score": 26,
+        "final_score": 26
       },
       "flags": {
         "trusted_source": false,
@@ -1522,15 +1913,24 @@
         "연체율"
       ],
       "description": "2% 올랐다. 현대카드 관계자는 \"영업이익과 당기순이익이 4분기 연속 전년 동기 대비 성장하고 있다\"고 말했다. 한편 현대카드의 대환 대출을 포함한 실질 연체율은 1.21%다. 대환 대출을 제외하면 연체율은 0.85%다.",
-      "pre_score": 21,
+      "pre_score": 35,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -1539,8 +1939,8 @@
         },
         "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 21,
-        "final_score": 21
+        "raw_score": 35,
+        "final_score": 35
       },
       "flags": {
         "trusted_source": false,
@@ -1616,15 +2016,24 @@
         "연체율"
       ],
       "description": "증가는 우량 제휴사와의 제휴 확대를 통해 상품경쟁력을 강화해 회원수와 인당 이용금액이 증가한 영향\"이라고 말했다. 한편 삼성카드의 1개월 이상 연체율은 0.92%로 전년 말과 비교해 소폭 개선됐다.",
-      "pre_score": 15,
+      "pre_score": 29,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -1633,8 +2042,8 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 15,
-        "final_score": 15
+        "raw_score": 29,
+        "final_score": 29
       },
       "flags": {
         "trusted_source": false,
@@ -1658,15 +2067,24 @@
         "연체율"
       ],
       "description": "농협은행 연체율 역시 0.49%에서 0.55%로 높아졌다. 수익성 지표인 자기자본이익률(ROE·농업지원사업비 부담 전)은 11.85%로, 전년 대비 1.21%포인트 상승했다. 계열사별로 보면, NH농협은행의 1분기 순이익은...",
-      "pre_score": 15,
+      "pre_score": 29,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -1675,8 +2093,8 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 15,
-        "final_score": 15
+        "raw_score": 29,
+        "final_score": 29
       },
       "flags": {
         "trusted_source": false,
@@ -1733,6 +2151,48 @@
       },
       "flags": {
         "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ec3e6c143425293c",
+      "title": "[마켓인] 빚더미 속 '골프장 쇼핑'…투심 얼어붙은 동화기업 조달 '가시...",
+      "source": "이데일리",
+      "source_domain": "edaily.co.kr",
+      "published_at": "2026-04-24T18:55:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=05848246645419400",
+      "naver_link": "https://n.news.naver.com/mnews/article/018/0006265632?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "통상 신용평가업계에서 적정 단기차입금 비중을 50%로 판단한다는 점을 고려하면 관리가 필요하다는 지적이다. 상황이 이렇다 보니 이번 400억원 규모의 회사채 발행에 성공하더라도 전체 조달 구조 개선에 미치는...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 8,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": true,
         "domestic": true,
         "loan_related": true,
         "possible_ad": false
@@ -1848,15 +2308,24 @@
         "연체율"
       ],
       "description": "3월 말 기준 연체율은 1.80%로 전년 동기(1.87%) 대비 0.07%포인트 하락했다. 독자카드 확대가 실적 개선의 핵심 요인으로 작용했다. BC카드 의존에서 벗어나 자체 결제망과 가맹점을 확보하면서 독자카드 매출 비중은 37.8...",
-      "pre_score": 15,
+      "pre_score": 29,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -1865,8 +2334,8 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 15,
-        "final_score": 15
+        "raw_score": 29,
+        "final_score": 29
       },
       "flags": {
         "trusted_source": false,
@@ -1891,17 +2360,26 @@
         "연체율"
       ],
       "description": "다만 환율 상승과 채권 운용 부진으로 비이자이익은 감소했으며 연체율과 고정이하여신비율도 상승해... 연체율 역시 0.61%를 달성, 전 분기(0.52%)보다 0.09%p, 작년 1분기보다 0.02%p 올랐다. 자본 비율은 목표 구간...",
-      "pre_score": 23,
+      "pre_score": 37,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9,
           "industry_strategy": 7,
           "weak_relevance": -5
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -1926,8 +2404,8 @@
         },
         "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 23,
-        "final_score": 23
+        "raw_score": 37,
+        "final_score": 37
       },
       "flags": {
         "trusted_source": false,
@@ -2055,15 +2533,24 @@
         "연체율"
       ],
       "description": "연체율도 0.61%로 전 분기보다 0.09%포인트, 지난해 같은 기간보다 0.02%포인트 상승했다. 보통주자본비율(CET1·위기 때 손실을 흡수할 수 있는 핵심 자본의 비율) 추정치는 13.09%로 지난해 같은 기간보다 0.15%포인트...",
-      "pre_score": 15,
+      "pre_score": 29,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -2072,8 +2559,8 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 15,
-        "final_score": 15
+        "raw_score": 29,
+        "final_score": 29
       },
       "flags": {
         "trusted_source": false,
@@ -2139,15 +2626,24 @@
         "연체율"
       ],
       "description": "은행 연체율도 0.34%에서 0.38%로 올랐다. 자기자본이익률(ROE)은 6.53%로 작년 말 대비 2.48%포인트 내렸다. 같은 기간 총자산순이익률(ROA)은 0.58%에서 0.42%로 0.16%포인트 하락했다. 보통주자본비율(CET1)은 13.6%로 작년...",
-      "pre_score": 22,
+      "pre_score": 36,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -2156,8 +2652,8 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 7,
-        "raw_score": 22,
-        "final_score": 22
+        "raw_score": 36,
+        "final_score": 36
       },
       "flags": {
         "trusted_source": true,
@@ -2299,16 +2795,25 @@
         "연체율"
       ],
       "description": "4개사의 평균 연체율은 1.07%로 1년 전보다 낮아졌으나 전 분기 대비로는 소폭 상승했으며, 현대카드가 가장 낮은 수준을 유지했고 신한카드가 상대적으로 높은 편이었다. 조달비용 부담과 비용 증가가 업계 전반의...",
-      "pre_score": 29,
+      "pre_score": 43,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9,
           "industry_strategy": 14
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -2325,8 +2830,8 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 29,
-        "final_score": 29
+        "raw_score": 43,
+        "final_score": 43
       },
       "flags": {
         "trusted_source": false,
@@ -2365,11 +2870,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -2397,6 +2908,48 @@
       }
     },
     {
+      "id": "7e385484f764ad4a",
+      "title": "[금융 게시판] 은행권 '투자·연금·디지털' 전방위 경쟁…고객 확보 전...",
+      "source": "lcnews.co.kr",
+      "source_domain": "lcnews.co.kr",
+      "published_at": "2026-04-24T18:32:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.lcnews.co.kr/news/articleView.html?idxno=201308",
+      "naver_link": "https://www.lcnews.co.kr/news/articleView.html?idxno=201308",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "이번 회의에서는 1분기 성과 점검과 함께 2분기 사업 전략이 공유됐으며, 개인·기업금융과 비이자사업 확대, 금융소비자 보호 등이 주요 의제로 논의됐다. 수협은행은 1분기 총자산 64조7천억원, 세전 순이익 986억원을...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 14
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "은행권",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "cfd5e7a0dcc8fdf5",
       "title": "은행이 끌고 증권이 밀었다…4대 금융, 1분기 순익 5.3조 '역대 최대'(종...",
       "source": "아시아경제",
@@ -2412,11 +2965,10 @@
         "대출 금리"
       ],
       "description": "이자이익이 늘어난 것은 가계대출 감소에도 기업대출을 중심으로 대출 자산이 늘었고, 시장금리 상승을 반영해 대출금리가 오르면서 순이자마진(NIM)이 개선된 결과다. 이런 가운데 증시 활황에 따라...",
-      "pre_score": 24,
+      "pre_score": 33,
       "score_detail": {
         "groups": {
-          "direct_loan": 14,
-          "market_noise": -9
+          "direct_loan": 14
         },
         "matched_terms": {
           "direct_loan": [
@@ -2426,20 +2978,12 @@
               "in_description": true,
               "weight": 1.0
             }
-          ],
-          "market_noise": [
-            {
-              "term": "증시",
-              "in_title": false,
-              "in_description": true,
-              "weight": 1.0
-            }
           ]
         },
         "keyword_bonus": 12,
         "source_bonus": 7,
-        "raw_score": 24,
-        "final_score": 24
+        "raw_score": 33,
+        "final_score": 33
       },
       "flags": {
         "trusted_source": true,
@@ -2619,6 +3163,68 @@
       }
     },
     {
+      "id": "789a4db317329f1d",
+      "title": "[농심 집중 분석] ②농심, 스테디 辛라면 이어갈 新전략 필요…돌파구 ...",
+      "source": "kfenews.co.kr",
+      "source_domain": "kfenews.co.kr",
+      "published_at": "2026-04-24T18:18:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.kfenews.co.kr/news/articleView.html?idxno=657307",
+      "naver_link": "https://www.kfenews.co.kr/news/articleView.html?idxno=657307",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "사진=SBS 캡처 한국금융경제신문=허지현 기자 | 대한민국 라면 산업의 상징이자 농심이 1986년 출시한 이후... 농심은 미국 시장에서 신라면의 매운맛을 정체성으로 내세웠으, 이제 현지 소비자들에게 신라면은 새로울 것...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ecb770e04837981c",
+      "title": "﻿한화피플라이프, '고객가치Plus' 실천 서약 실시",
+      "source": "popcornnews.net",
+      "source_domain": "popcornnews.net",
+      "published_at": "2026-04-24T18:18:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.popcornnews.net/news/articleView.html?idxno=119407",
+      "naver_link": "http://www.popcornnews.net/news/articleView.html?idxno=119407",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "이번 서약은 지난 1일 사명 및 CI 변경 이후 고객만족과 금융소비자보호를 최우선 가치로 삼는 경영문화를 확립하기 위해 마련됐다. 회사는 최근 강화된 금융소비자보호법 등 변화하는 시장 환경에 맞춰 고객 신뢰를 핵심...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "53120ef5ce7562ca",
       "title": "\"월급 얼마 받는데 생활비 이게 다야?\" 맞벌이 부부의 돈 싸움 [그래도 ...",
       "source": "파이낸셜뉴스",
@@ -2666,6 +3272,54 @@
         "trusted_source": true,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "3870c43d77a5b46b",
+      "title": "1분기 성적표 받은 KB·신한금융지주, 비은행부문 희비 교차",
+      "source": "topdaily.kr",
+      "source_domain": "topdaily.kr",
+      "published_at": "2026-04-24T18:17:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.topdaily.kr/articles/109849",
+      "naver_link": "https://www.topdaily.kr/articles/109849",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "직전 분기까지 한화생명과 교보생명의 순이익을 바짝 추격해 왔지만, 금리 상승과 보험금 예실차 반영 등의 영향으로 수익성이 급감했다. 신한라이프는 올 초 국내 최초 톤틴연금보험을 출시하는 등 신상품과...",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "한화생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -3260,10 +3914,11 @@
       "naver_link": "https://n.news.naver.com/mnews/article/469/0000927403?sid=101",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "금융감독원 대출"
+        "금융감독원 대출",
+        "신용평가"
       ],
       "description": "자금 절반 이상이 기업대출(5,982억 원)에 배분됐고 수익증권에도 4,540억 원가량이 투입됐다. 적극적... 금융감독원은 21일 종투사 7곳에 기업신용공여 심사 강화와 신용위험 관리 수준 고도화를 주문했다. 특히 IMA...",
-      "pre_score": 17,
+      "pre_score": 23,
       "score_detail": {
         "groups": {
           "policy_regulation": 11
@@ -3278,10 +3933,10 @@
             }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 17,
-        "final_score": 17
+        "raw_score": 23,
+        "final_score": 23
       },
       "flags": {
         "trusted_source": false,
@@ -3403,6 +4058,90 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ca62d29377163e1c",
+      "title": "한신평 \"NS쇼핑-홈플러스 인수, 하림지주 참여 변수\"",
+      "source": "news.dealsitetv.com",
+      "source_domain": "news.dealsitetv.com",
+      "published_at": "2026-04-24T17:56:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://news.dealsitetv.com/articles/169273",
+      "naver_link": "https://news.dealsitetv.com/articles/169273",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "한국신용평가(이하 한신평)는 24일 보고서를 통해 \"인수자금 부담 주체에 따라 하림지주의 재무부담 변동 가능성이 내재돼 있다\"며 \"인수가액 및 진행 경과 등을 모니터링할 예정\"이라고 밝혔다. 앞서 NS쇼핑은 지난 21일...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e995523d50e56a83",
+      "title": "LG화학 등급전망 ‘부정적’ 하향…한신평 “이익·재무 이중 부담”",
+      "source": "etoday.co.kr",
+      "source_domain": "etoday.co.kr",
+      "published_at": "2026-04-24T17:54:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.etoday.co.kr/news/view/2579089",
+      "naver_link": "https://www.etoday.co.kr/news/view/2579089",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "이투데이=김남현 기자 | 한국신용평가가 24일 LG화학의 신용전망을 기존 ‘안정적’에서 ‘부정적’으로 하향 조정했다. 다만, LG화학의 무보증사채 신용등급은 AA+를 유지했다. 주력 사업 수익성 둔화와 투자 확대에 따른...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
         "possible_ad": false
       }
     },
@@ -3625,9 +4364,12 @@
         "대출 금리",
         "대환대출",
         "신용대출",
+        "신용점수",
         "연체율",
         "은행권 대출",
+        "저신용자",
         "저축은행 대출",
+        "취약차주",
         "카드론",
         "카드사 대출",
         "현금서비스"
@@ -3784,25 +4526,14 @@
         "현금서비스"
       ],
       "description": "4월 24일 16시 10분 기준 1만2990원이며, 전일 대비 100원(+0.78%) 상승했다. 효성 ITX는 2007년 10월 25일 코스피 시장에 상장된 기타 사업지원 서비스업체다. 현금ㆍ현물배당결정 【종류주식에 대한 배당 관련 사항】",
-      "pre_score": 0,
+      "pre_score": 6,
       "score_detail": {
-        "groups": {
-          "market_noise": -9
-        },
-        "matched_terms": {
-          "market_noise": [
-            {
-              "term": "코스피",
-              "in_title": false,
-              "in_description": true,
-              "weight": 1.0
-            }
-          ]
-        },
+        "groups": {},
+        "matched_terms": {},
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": -3,
-        "final_score": 0
+        "raw_score": 6,
+        "final_score": 6
       },
       "flags": {
         "trusted_source": false,
@@ -3915,13 +4646,16 @@
       "naver_link": "https://news.mtn.co.kr/news-detail/2026042416394440257",
       "origin": "naver_news_api",
       "matched_keywords": [
+        "가계대출",
+        "고신용자",
         "보험계약대출",
         "약관대출",
         "은행권 대출",
+        "취약차주",
         "카드론"
       ],
       "description": "불황형 대출은 곳곳에서 감지됩니다.지난달 5대 시중은행의 예금·청약 담보대출 역시 6조2천억원을 넘겼고, 보험계약을 담보로 대출을 받는 약관대출도 55조원을 넘어섰습니다.반대로 최근 5대 시중은행의 중금리 대출...",
-      "pre_score": 38,
+      "pre_score": 44,
       "score_detail": {
         "groups": {
           "direct_loan": 14
@@ -3936,10 +4670,10 @@
             }
           ]
         },
-        "keyword_bonus": 24,
+        "keyword_bonus": 30,
         "source_bonus": 0,
-        "raw_score": 38,
-        "final_score": 38
+        "raw_score": 44,
+        "final_score": 44
       },
       "flags": {
         "trusted_source": false,
@@ -3964,15 +4698,24 @@
         "연체율"
       ],
       "description": "대환 대출을 포함한 실질 연체율은 1.21%로 전년과 유사한 수준이었으며 이를 제외한 연체율은 0.85%로 전년 대비 개선됐다. 현대카드 관계자는 \"상품 경쟁력 강화로 주요 지표가 성장세를 이어가고 있다\"며...",
-      "pre_score": 21,
+      "pre_score": 35,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -3981,8 +4724,8 @@
         },
         "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 21,
-        "final_score": 21
+        "raw_score": 35,
+        "final_score": 35
       },
       "flags": {
         "trusted_source": false,
@@ -4102,6 +4845,12 @@
               "in_title": true,
               "in_description": true,
               "weight": 3.0
+            },
+            {
+              "term": "2금융",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ]
         },
@@ -4114,6 +4863,132 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "16c0a118a496c1ae",
+      "title": "나신평 \"삼성전자 실적 성장, 그룹 이익창출력 견인\"",
+      "source": "dealsite.co.kr",
+      "source_domain": "dealsite.co.kr",
+      "published_at": "2026-04-24T17:38:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://dealsite.co.kr/articles/160827",
+      "naver_link": "https://dealsite.co.kr/articles/160827",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "삼성그룹 지난해 영업이익 49조원, 삼성전자가 89% 창출 나이스신용평가가 삼성전자의 실적 성장이 그룹 전체 이익창출력을 견인할 것으로 내다봤다. 인공지능(AI) 확산에 따른 메모리 반도체 수요 급증으로 삼성전자가...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "1a2dc6608e4224d4",
+      "title": "‘사상 첫 적자’에 빚 22조…LG화학, 신용등급 '빨간불'[마켓인]",
+      "source": "이데일리",
+      "source_domain": "edaily.co.kr",
+      "published_at": "2026-04-24T17:37:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=05598966645419400",
+      "naver_link": "https://n.news.naver.com/mnews/article/018/0006265606?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "한국신용평가(한신평)는 24일 LG화학(051910)의 무보증사채 신용등급 전망을 기존 ‘안정적’에서 ‘부정적’으로 하향 조정한다고 밝혔다. 주력 사업부문의 이익창출력 약화와 대규모 투자에 따른 과중한 차입금 부담...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 8,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ecb7c216210fbf48",
+      "title": "[크레딧뷰어] KCC건설, 안정적 매출 기조 유지…재무구조 일부 개선",
+      "source": "kfenews.co.kr",
+      "source_domain": "kfenews.co.kr",
+      "published_at": "2026-04-24T17:36:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.kfenews.co.kr/news/articleView.html?idxno=657305",
+      "naver_link": "https://www.kfenews.co.kr/news/articleView.html?idxno=657305",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "한국신용평가는 건축부문 중심의 양호한 사업기반을 바탕으로 원가율 개선을 통한 영업실적 회복, 영업현금 창출에 따른 차입부담 일부 축소를 등급 유지의 핵심 근거로 제시했다. ◆ 매출 비중 건축 76.6%·토목...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
         "possible_ad": false
       }
     },
@@ -4164,16 +5039,26 @@
       "origin": "naver_news_api",
       "matched_keywords": [
         "금융감독원 대출",
+        "신용평가",
         "연체율"
       ],
       "description": "지난달 금융감독원이 국회 허영 더불어민주당 의원실에 제출한 자료에 따르면 지난해 말 기준 국내은행의 개인사업자 대출 연체율은 0.63%로 집계됐다. 같은 기간 카카오뱅크의 개인사업자 대출 연체율(1.50%)은 2배...",
-      "pre_score": 32,
+      "pre_score": 52,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "policy_regulation": 11,
           "risk_repayment": 9
         },
         "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
           "policy_regulation": [
             {
               "term": "금융감독원",
@@ -4184,17 +5069,17 @@
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
             }
           ]
         },
-        "keyword_bonus": 12,
+        "keyword_bonus": 18,
         "source_bonus": 0,
-        "raw_score": 32,
-        "final_score": 32
+        "raw_score": 52,
+        "final_score": 52
       },
       "flags": {
         "trusted_source": false,
@@ -4219,15 +5104,24 @@
         "연체율"
       ],
       "description": "다만, 대환 대출을 제외할 경우 연체율은 0.85%로 전년 동기(0.90%) 대비 0.05%포인트 하락했다는게 현대카드측 설명이다. 현대카드 관계자는 \"상품경쟁력 강화를 통해 회원수, 신용판매 취급액을 비롯한 모든...",
-      "pre_score": 21,
+      "pre_score": 35,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -4236,8 +5130,8 @@
         },
         "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 21,
-        "final_score": 21
+        "raw_score": 35,
+        "final_score": 35
       },
       "flags": {
         "trusted_source": false,
@@ -4276,11 +5170,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -4313,10 +5213,11 @@
       "matched_keywords": [
         "대출 금리",
         "전세대출",
-        "주택담보대출"
+        "주택담보대출",
+        "취약차주"
       ],
       "description": "한국주택금융공사가 5월 1일부터 보금자리론 금리를 0.25%포인트 올리면서, 정책형 주택담보대출을 이용하려는 실수요자의 이자 부담이 또 한 번 커지게 됐다. 24일 한국주택금융공사 발표를 보면 이번 조정은 올해 들어...",
-      "pre_score": 59,
+      "pre_score": 65,
       "score_detail": {
         "groups": {
           "direct_loan": 14,
@@ -4349,10 +5250,10 @@
             }
           ]
         },
-        "keyword_bonus": 18,
+        "keyword_bonus": 24,
         "source_bonus": 0,
-        "raw_score": 59,
-        "final_score": 59
+        "raw_score": 65,
+        "final_score": 65
       },
       "flags": {
         "trusted_source": false,
@@ -4556,11 +5457,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -4670,11 +5577,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -4694,6 +5607,79 @@
       }
     },
     {
+      "id": "35e1a5bf5674b794",
+      "title": "법원, 교보증권 4천500억 유상증자 2심도 '적법'…일반주주 항소 기각",
+      "source": "news.einfomax.co.kr",
+      "source_domain": "news.einfomax.co.kr",
+      "published_at": "2026-04-24T17:24:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://news.einfomax.co.kr/news/articleView.html?idxno=4411603",
+      "naver_link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4411603",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "이 사건은 교보증권이 2020년 2천억 원, 2023년 2천500억 원 등 두 차례에 걸쳐 최대주주인 교보생명만을 대상으로 총 4천500억 원 규모의 제3자배정 유상증자를 단행하면서 시작됐다. 원고 측은 해당 증자로 인해...",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "5cd5cae6090615c0",
+      "title": "[AI 브리프] 정부, 공공문서 10월부터 'hwp 첨부' 제한…\"개방형 hwpx 전환...",
+      "source": "itdaily.kr",
+      "source_domain": "itdaily.kr",
+      "published_at": "2026-04-24T17:24:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.itdaily.kr/news/articleView.html?idxno=239048",
+      "naver_link": "http://www.itdaily.kr/news/articleView.html?idxno=239048",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "유라클, 한국평가데이터 AI 개발플랫폼·KMS 구축 사업 수주 유라클이 국내 기업신용조사기관 한국평가데이터(KODATA)의 'AI 개발플랫폼 및 지식관리시스템(KMS) 구축 사업'을 수주했다. 이번 프로젝트는...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "bc357f33dacf8e31",
       "title": "대출금리 오르고 증시 훈풍에…4대 금융 1분기 순익 5조원↑",
       "source": "joongang.co.kr",
@@ -4709,25 +5695,14 @@
         "보험사 대출"
       ],
       "description": "4대 금융지주(KB·신한·하나·우리)가 1분기 5조원이 넘는 순이익을 거뒀다. KB·신한·하나금융은 나란히 분기 기준 역대 최대 실적을 새로 썼다. 증시 호황으로 비이자이익과 비은행 부문 실적까지 개선된 영향이...",
-      "pre_score": 0,
+      "pre_score": 12,
       "score_detail": {
-        "groups": {
-          "market_noise": -27
-        },
-        "matched_terms": {
-          "market_noise": [
-            {
-              "term": "증시",
-              "in_title": true,
-              "in_description": true,
-              "weight": 3.0
-            }
-          ]
-        },
+        "groups": {},
+        "matched_terms": {},
         "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": -15,
-        "final_score": 0
+        "raw_score": 12,
+        "final_score": 12
       },
       "flags": {
         "trusted_source": false,
@@ -4788,6 +5763,48 @@
         "source_bonus": 0,
         "raw_score": 44,
         "final_score": 44
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b272181b741af26c",
+      "title": "[이슈분석-한화솔루션 유상증자①] 테슬라·알스톰도 유증 후 '점프'··...",
+      "source": "greenpostkorea.co.kr",
+      "source_domain": "greenpostkorea.co.kr",
+      "published_at": "2026-04-24T17:22:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.greenpostkorea.co.kr/news/articleView.html?idxno=306584",
+      "naver_link": "https://www.greenpostkorea.co.kr/news/articleView.html?idxno=306584",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "당시 주가 회복은 즉각적이지 않았지만 신용평가사와 채권은행의 신뢰를 회복하는 데는 효과적이었다는 평가가 나왔다. 프랑스 알스톰도 2024년 유상증자와 자산매각, 하이브리드채를 결합한 약 24억 유로 규모의...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
       },
       "flags": {
         "trusted_source": false,
@@ -4948,6 +5965,48 @@
       }
     },
     {
+      "id": "61e6ef73849a868b",
+      "title": "유라클, 한국평가데이터 'AI 개발플랫폼 및 KMS' 사업 수주 ··· 신용평...",
+      "source": "datanet.co.kr",
+      "source_domain": "datanet.co.kr",
+      "published_at": "2026-04-24T17:16:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.datanet.co.kr/news/articleView.html?idxno=211235",
+      "naver_link": "https://www.datanet.co.kr/news/articleView.html?idxno=211235",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "특히 이번 수주는 유라클이 최근 수주한 코리아크레딧뷰로(KCB) 전사 AI 서비스 플랫폼 구축 사업에 이은 성과로, 유라클이 국내 주요 신용평가 기관의 AI 디지털 전환(DX) 파트너로서 독보적인 입지를 굳혔다는 평가를...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "9dff041317e05797",
       "title": "[단독] “고려아연 ‘차입처 정정공시’ 단순 실수 아냐” 영풍, 금감원...",
       "source": "서울경제",
@@ -5093,11 +6152,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -5151,11 +6216,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -5280,11 +6351,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -5439,6 +6516,37 @@
       }
     },
     {
+      "id": "2407167d285cd465",
+      "title": "한화피플라이프, 금소법 대응 고객보호·영업 전 과정 관리 강화",
+      "source": "g-enews.com",
+      "source_domain": "g-enews.com",
+      "published_at": "2026-04-24T17:04:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.g-enews.com/view.php?ud=202604241546217248e30fcb1ba8_1",
+      "naver_link": "https://www.g-enews.com/view.php?ud=202604241546217248e30fcb1ba8_1",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금소법"
+      ],
+      "description": "한화피플라이프가 새 CI 선포를 계기로 고객 중심 경영 강화에 나섰다. 24일 한화피플라이프에 따르면 전 임직원과 FA를 대상으로 ‘고객가치Plus’ 실천 서약을 진행한다. 이번 서약은 지난 4월 사명 및 CI 변경 이후...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "2fe971a479c2a29c",
       "title": "동탄·구리·남양주·고양…비규제지역, 너나 할 것 없이 올랐다 [부동산...",
       "source": "헤럴드경제",
@@ -5578,15 +6686,25 @@
       "naver_link": "http://www.suhyupnews.co.kr/news/articleView.html?idxno=34562",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "소상공인 대출"
+        "소상공인 대출",
+        "신용평가"
       ],
       "description": "낮추고 대출 절차는 간소화한 것이 특징이다. 특히 기존 농림수산업자신용보증기금(농신보) 보증한도와 별도로 지원이 가능해, 금융 사각지대에 놓인 어업인과 영세 소상공인들에게 실질적인 도움이 될 것으로 기대된다....",
-      "pre_score": 24,
+      "pre_score": 44,
       "score_detail": {
         "groups": {
+          "industry_strategy": 14,
           "customer_demand": 18
         },
         "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "상호금융",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ],
           "customer_demand": [
             {
               "term": "소상공인",
@@ -5596,10 +6714,10 @@
             }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 24,
-        "final_score": 24
+        "raw_score": 44,
+        "final_score": 44
       },
       "flags": {
         "trusted_source": false,
@@ -5726,6 +6844,48 @@
       }
     },
     {
+      "id": "54f4ff638b45596d",
+      "title": "신종자본증권 활용도 ↑…짧은 스텝업에 '자본의 부채화' 우려 [fn마켓워...",
+      "source": "파이낸셜뉴스",
+      "source_domain": "fnnews.com",
+      "published_at": "2026-04-24T16:53:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.fnnews.com/news/202604241646298823",
+      "naver_link": "https://n.news.naver.com/mnews/article/014/0005512975?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "24일 한국신용평가가 발표한 '하이브리드증권 2.0, 자본인가 부채인가' 보고서에 따르면 한화·SK그룹의 신종자본증권 발행잔액은 각각 2조원을 웃도는 것으로 집계됐다. CJ·롯데·신세계그룹도 1조원 이상을 기록했고...",
+      "pre_score": 27,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 7,
+        "raw_score": 27,
+        "final_score": 27
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "4d34053a65001a44",
       "title": "하나금융, 1분기 순이익 1.2조원…이자·수수료이익 덕분",
       "source": "비즈워치",
@@ -5768,6 +6928,48 @@
       },
       "flags": {
         "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "5153c3203d55322e",
+      "title": "[더벨][Rating Watch] 턴어라운드 마친 파라다이스, 6년만 'A+' 복귀 영향...",
+      "source": "thebell.co.kr",
+      "source_domain": "thebell.co.kr",
+      "published_at": "2026-04-24T16:52:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202604221304212320103041",
+      "naver_link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202604221304212320103041",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "선제적으로 등급 상향을 마친 나이스신용평가에 이어 한국기업평가 역시 움직이면서 파라다이스는 등급 스플릿(불일치)에서 벗어났다. 이로써 코로나19 시절 A급 끝선까지 밀렸던 파라다이스가 약 6년 만에 A+급에...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
         "domestic": true,
         "loan_related": true,
         "possible_ad": false
@@ -5952,31 +7154,62 @@
         "현금서비스"
       ],
       "description": "이외에도 내재가치 대비 저평가된 기업들을 발굴하기 위해 현재 기업가치가 개발하고 있는 제품 혹은 서비스의 미래 현금흐름의 위험조정 순현재 가치 대비 70% 이하이거나 시장 내 경쟁사 대비 기업 가치가 70...",
-      "pre_score": 0,
+      "pre_score": 6,
       "score_detail": {
-        "groups": {
-          "market_noise": -18
-        },
-        "matched_terms": {
-          "market_noise": [
-            {
-              "term": "코스닥",
-              "in_title": true,
-              "in_description": false,
-              "weight": 2.0
-            }
-          ]
-        },
+        "groups": {},
+        "matched_terms": {},
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": -12,
-        "final_score": 0
+        "raw_score": 6,
+        "final_score": 6
       },
       "flags": {
         "trusted_source": false,
         "domestic": true,
         "loan_related": false,
         "possible_ad": true
+      }
+    },
+    {
+      "id": "cdc7cee06cf4ae23",
+      "title": "유라클, KCB 이어 한국평가데이터…신용평가업계 AI 인프라 수주",
+      "source": "zdnet.co.kr",
+      "source_domain": "zdnet.co.kr",
+      "published_at": "2026-04-24T16:48:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://zdnet.co.kr/view?no=20260424164739",
+      "naver_link": "https://n.news.naver.com/mnews/article/092/0002420100?sid=105",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "유라클(대표 조준희·권태일)이 국내 주요 신용평가 시장의 인공지능(AI) 전환을 주도하는 핵심 파트너로 자리매김하고 있다. 유라클은 한국평가데이터(KODATA)가 발주한 대규모 'AI 개발플랫폼 및 지식관리시스템(KMS) 구축...",
+      "pre_score": 48,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 42
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 48,
+        "final_score": 48
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
       }
     },
     {
@@ -6085,13 +7318,14 @@
       "matched_keywords": [
         "개인회생",
         "신용대출",
+        "신용점수",
         "저축은행 대출"
       ],
       "description": "이를 통해 기존 신용점수로는 대출이 거절될 고객 중 상환 능력이 충분한 우량 고객을 선별하고 있다. 덕분에 해당 모델을 도입한 저축은행들은 대출 승인율을 60% 이상으로 높이면서도 불량률은 4%대로 낮추는 성과를...",
-      "pre_score": 32,
+      "pre_score": 45,
       "score_detail": {
         "groups": {
-          "industry_strategy": 7
+          "industry_strategy": 14
         },
         "matched_terms": {
           "industry_strategy": [
@@ -6100,13 +7334,19 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "2금융",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
             }
           ]
         },
-        "keyword_bonus": 18,
+        "keyword_bonus": 24,
         "source_bonus": 7,
-        "raw_score": 32,
-        "final_score": 32
+        "raw_score": 45,
+        "final_score": 45
       },
       "flags": {
         "trusted_source": true,
@@ -6304,10 +7544,11 @@
       "naver_link": "http://www.srtimes.kr/news/articleView.html?idxno=202032",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "금융감독원 대출"
+        "금융감독원 대출",
+        "신용평가"
       ],
       "description": "이에 SR타임스는 금융감독원에 제출된 사업보고서를 토대로 국내 10대 건설사(2025년 시공능력평가 순위... 연결기업 분 기준 정비사업(19건)·기타사업(1건) 합산 약정금액은 7조9,575억원, 대출잔액은 2조6...",
-      "pre_score": 17,
+      "pre_score": 23,
       "score_detail": {
         "groups": {
           "policy_regulation": 11
@@ -6322,10 +7563,10 @@
             }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 17,
-        "final_score": 17
+        "raw_score": 23,
+        "final_score": 23
       },
       "flags": {
         "trusted_source": false,
@@ -7037,6 +8278,48 @@
       }
     },
     {
+      "id": "3e748bf002282988",
+      "title": "이란 전쟁이 빅테크 AI 데이터센터 투자도 위협, 무디스 \"헬륨과 LNG 공급...",
+      "source": "businesspost.co.kr",
+      "source_domain": "businesspost.co.kr",
+      "published_at": "2026-04-24T16:20:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.businesspost.co.kr/BP?command=article_view&num=436500",
+      "naver_link": "https://www.businesspost.co.kr/BP?command=article_view&num=436500",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "신용평가사 무디스는 이와 관련해 \"데이터센터 투자는 필수 공급망이 안정적으로 유지된다는 가정을 바탕으로 하고 있다\"며 중동 지정학적 리스크를 변수로 꼽았다. 인공지능 연산에 필수인 반도체가 카타르산 헬륨과...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "c34b42e6624fcb34",
       "title": "카드론 잔액 '사상 최대'...'불황·규제·전략' 삼박자 영향",
       "source": "hansbiz.co.kr",
@@ -7053,7 +8336,10 @@
         "대출 규제",
         "대환대출",
         "신용대출",
+        "신용점수",
+        "연체율",
         "은행권 대출",
+        "저신용자",
         "주택담보대출",
         "카드론",
         "카드사 대출",
@@ -7112,6 +8398,12 @@
           "industry_strategy": [
             {
               "term": "은행권",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "2금융",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -7410,11 +8702,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -7436,6 +8734,48 @@
       },
       "flags": {
         "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "2da13d58298c5c8a",
+      "title": "[격변하는 IB㊦] 증권사 IB 자금, 모험투자로 이동 본격화",
+      "source": "insightkorea.co.kr",
+      "source_domain": "insightkorea.co.kr",
+      "published_at": "2026-04-24T16:14:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.insightkorea.co.kr/news/articleView.html?idxno=245357",
+      "naver_link": "https://www.insightkorea.co.kr/news/articleView.html?idxno=245357",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "나이스신용평가는 보고서를 통해 \"모험자본은 사업 불확실성과 신용위험이 높은 성장 초기 기업 중심의 투자로 자본성 투자 비중이 높아 손익 변동성도 커진다\"며 \"금리 상승이나 차환 여건 악화 시 손익 저하와...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
         "domestic": true,
         "loan_related": true,
         "possible_ad": false
@@ -7526,6 +8866,48 @@
         "source_bonus": 0,
         "raw_score": 6,
         "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9923df64d9dd9a39",
+      "title": "'우리동네 무장애 지도'가 바꾸는 일상 : 사회적 약자의 '이동의 문턱' ...",
+      "source": "huffingtonpost.kr",
+      "source_domain": "huffingtonpost.kr",
+      "published_at": "2026-04-24T16:10:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.huffingtonpost.kr/article/256837",
+      "naver_link": "https://www.huffingtonpost.kr/article/256837",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "바로 교보생명 공익재단인 교보교육재단과 전국 각지의 시민들이 함께 그려나가는 '우리동네 무장애 지도'다. 누군가에게는 대수롭지 않은 1cm의 문턱이 누군가에게는 거대한 절벽이 되기도 한다. 우리동네 무장애...",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
       },
       "flags": {
         "trusted_source": false,
@@ -7916,6 +9298,54 @@
       }
     },
     {
+      "id": "3229546d108d6f7d",
+      "title": "보험사 '속도가 생명이다'..보험금 지급 AI 자동화 급물살",
+      "source": "pinpointnews.co.kr",
+      "source_domain": "pinpointnews.co.kr",
+      "published_at": "2026-04-24T15:58:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=448279",
+      "naver_link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=448279",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "24일 생명·손해보험협회에 따르면 지난해 하반기 기준 장기보험 평균 지급 기간이 가장 짧은 곳은 교보생명과 흥국화재로 나타났다. 양사 모두 0.22일을 기록하며 보험금 청구 후 수 시간 내에 지급을 완료하고 있다....",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 14
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            },
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "f24aea4d345e3160",
       "title": "금융시장, KB금융·신한금융 밸류업 정책 및 1분기 실적에 '호평'",
       "source": "sports.hankooki.com",
@@ -8130,25 +9560,14 @@
         "현금서비스"
       ],
       "description": "4월 24일 15시 39분 기준 25만3500원이며, 전일 대비 2만5500원(+11.18%) 상승했다. HD현대마린솔루션은 2024년 5월 8일 코스피시장에 상장된 건축기술 엔지니어링 및 관련 기술 서비스업 업체다. 현금ㆍ현물배당결정",
-      "pre_score": 0,
+      "pre_score": 6,
       "score_detail": {
-        "groups": {
-          "market_noise": -9
-        },
-        "matched_terms": {
-          "market_noise": [
-            {
-              "term": "코스피",
-              "in_title": false,
-              "in_description": true,
-              "weight": 1.0
-            }
-          ]
-        },
+        "groups": {},
+        "matched_terms": {},
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": -3,
-        "final_score": 0
+        "raw_score": 6,
+        "final_score": 6
       },
       "flags": {
         "trusted_source": false,
@@ -8359,6 +9778,8 @@
         "금융감독원 대출",
         "대출 규제",
         "은행권 대출",
+        "저신용자",
+        "취약차주",
         "카드론",
         "카드사 대출",
         "현금서비스"
@@ -8514,11 +9935,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -8589,6 +10016,49 @@
       }
     },
     {
+      "id": "bd6caca075233931",
+      "title": "Sh수협은행, 1분기 세전익 986억…IRB 승인으로 성장 기반 다졌다",
+      "source": "sentv.co.kr",
+      "source_domain": "sentv.co.kr",
+      "published_at": "2026-04-24T15:50:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.sentv.co.kr/article/view/sentv202604240108",
+      "naver_link": "https://www.sentv.co.kr/article/view/sentv202604240108",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수",
+        "신용평가"
+      ],
+      "description": "내부등급법은 은행이 자체 신용평가모형을 활용해 위험가중자산을 산출하는 방식이다. 승인 이후에는... 회사 측은 시중은행 중 가장 높은 점수를 기록하며 AI 부문 경쟁력을 입증했다고 설명했다. 신학기...",
+      "pre_score": 26,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 26,
+        "final_score": 26
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "16b096f54069c51b",
       "title": "현대카드 1분기 순익 647억…전년 대비 5.4% 증가",
       "source": "매일경제",
@@ -8617,11 +10087,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -8676,11 +10152,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -9304,12 +10786,11 @@
         "생명보험 대출"
       ],
       "description": "계열사별로는 농협은행이 5577억원, NH투자증권이 4757억원의 순이익을 기록했고, 농협생명과 손해보험도... 농협금융은 가계대출 규제와 머니무브 등으로 이자이익 성장 둔화 우려가 있었음에도 핵심예금 확대와...",
-      "pre_score": 25,
+      "pre_score": 43,
       "score_detail": {
         "groups": {
           "direct_loan": 14,
-          "policy_regulation": 11,
-          "market_noise": -18
+          "policy_regulation": 11
         },
         "matched_terms": {
           "direct_loan": [
@@ -9327,20 +10808,12 @@
               "in_description": true,
               "weight": 1.0
             }
-          ],
-          "market_noise": [
-            {
-              "term": "증시",
-              "in_title": true,
-              "in_description": false,
-              "weight": 2.0
-            }
           ]
         },
         "keyword_bonus": 18,
         "source_bonus": 0,
-        "raw_score": 25,
-        "final_score": 25
+        "raw_score": 43,
+        "final_score": 43
       },
       "flags": {
         "trusted_source": false,
@@ -9427,11 +10900,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -9668,10 +11147,11 @@
       "naver_link": "https://www.mediapen.com/news/view/1095457",
       "origin": "naver_news_api",
       "matched_keywords": [
+        "교보생명",
         "저축은행 대출"
       ],
       "description": "또 교보생명에서 대출이 거절된 중신용 고객을 저축은행으로 연계해 가계여신 잔액을 1조6000억원 이상으로 확대한다는 목표도 세웠다. 이번 인사를 두고 업계에서는 경영 승계 작업의 포석이라는 분석도 나온다....",
-      "pre_score": 27,
+      "pre_score": 33,
       "score_detail": {
         "groups": {
           "industry_strategy": 21
@@ -9689,13 +11169,19 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 27,
-        "final_score": 27
+        "raw_score": 33,
+        "final_score": 33
       },
       "flags": {
         "trusted_source": false,
@@ -9720,15 +11206,24 @@
         "연체율"
       ],
       "description": "1분기 대환 대출을 포함한 실질 연체율은 1.21%로 전년 동기와 비슷한 수준을 유지했지만, 대환 대출을 제외할 경우 연체율은 0.85%로 전년 동기(0.90%) 대비 0.05%포인트 하락했다. 현대카드 관계자는 “상품 경쟁력...",
-      "pre_score": 21,
+      "pre_score": 35,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -9737,13 +11232,55 @@
         },
         "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 21,
-        "final_score": 21
+        "raw_score": 35,
+        "final_score": 35
       },
       "flags": {
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "f3b980e55d226742",
+      "title": "교보증권, 신주발행 무효소송 2심도 승소",
+      "source": "inews24.com",
+      "source_domain": "inews24.com",
+      "published_at": "2026-04-24T15:14:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.inews24.com/view/1963292",
+      "naver_link": "https://n.news.naver.com/mnews/article/031/0001024583?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "소송의 쟁점은 교보증권의 교보생명을 상대로 한 제3자 배정 유상증자가 일반주주의 권익을 부당하게 침해했는지 여부였다. 교보증권은 지난 2020년과 2023년 각각 2000억원, 2500억원 등 총 4500억원 규모의 제3자배정...",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -9776,11 +11313,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -10071,6 +11614,102 @@
       }
     },
     {
+      "id": "719e46a6192676d5",
+      "title": "장민영 기업은행장, 수도권 아파트 다주택자 … 재산 16억 신고",
+      "source": "biz.newdaily.co.kr",
+      "source_domain": "biz.newdaily.co.kr",
+      "published_at": "2026-04-24T15:06:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://biz.newdaily.co.kr/site/data/html/2026/04/24/2026042400217.html",
+      "naver_link": "https://biz.newdaily.co.kr/site/data/html/2026/04/24/2026042400217.html",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "예금은 본인 소유의 기업은행 1억4651만원, 교보생명보험 2580만원, 토스뱅크 1301만원 등 총 1억8617만원을 들고 있다. 증권은 장 행장 본인이 상장주인 HD현대중공업 보통주 439주, 기업은행 보통주 196주 등...",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "생명보험",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "c026ad290e51dcab",
+      "title": "보금자리론 금리 또 오른다…5월부터 0.25%p 인상",
+      "source": "youthdaily.co.kr",
+      "source_domain": "youthdaily.co.kr",
+      "published_at": "2026-04-24T15:06:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.youthdaily.co.kr/news/article.html?no=218111",
+      "naver_link": "https://www.youthdaily.co.kr/news/article.html?no=218111",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "취약차주"
+      ],
+      "description": "다만 기존 금리를 적용받고자 하는 차주는 이달 30일까지 신청을 완료하면 된다. 금리 인상에도 불구하고 서민·취약계층 지원은 유지된다. 저소득 청년, 신혼부부, 전세사기 피해자, 장애인 및 한부모 가정 등 사회적...",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "청년",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "차주",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "15c07c752a055423",
       "title": "현대카드, 1분기 순익 647억…외형 성장 속 수익성 개선",
       "source": "m-i.kr",
@@ -10099,11 +11738,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -10119,6 +11764,52 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "62d4dcea20a8b4b5",
+      "title": "미래에셋·한화·토스·해시드, 제도화 전야에 벌어진 '포지션 선점전'...",
+      "source": "tokenpost.kr",
+      "source_domain": "tokenpost.kr",
+      "published_at": "2026-04-24T15:02:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T00:56:25+09:00",
+      "url": "https://www.tokenpost.kr/news/insights/352936",
+      "naver_link": "https://www.tokenpost.kr/news/insights/352936",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 금리",
+        "소상공인 대출",
+        "신용대출",
+        "신용점수",
+        "신용평가"
+      ],
+      "description": "토스의 개인사업자 신용평가모형 소호스코어(SohoScore)와 블록체인 스마트 컨트랙트를 결합해, 대출 실행 후 신용점수가 개선되면 별도 금리인하요구권 행사 없이도 대출 금리가 자동 인하되는 구조다....",
+      "pre_score": 44,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 44,
+        "final_score": 44
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -10158,11 +11849,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -10178,39 +11875,6 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
-        "possible_ad": false
-      }
-    },
-    {
-      "id": "62d4dcea20a8b4b5",
-      "title": "미래에셋·한화·토스·해시드, 제도화 전야에 벌어진 '포지션 선점전'...",
-      "source": "tokenpost.kr",
-      "source_domain": "tokenpost.kr",
-      "published_at": "2026-04-24T15:02:00+09:00",
-      "published_date": "2026-04-24",
-      "collected_at": "2026-04-25T00:56:25+09:00",
-      "url": "https://www.tokenpost.kr/news/insights/352936",
-      "naver_link": "https://www.tokenpost.kr/news/insights/352936",
-      "origin": "naver_news_api",
-      "matched_keywords": [
-        "대출 금리",
-        "소상공인 대출",
-        "신용대출"
-      ],
-      "description": "토스의 개인사업자 신용평가모형 소호스코어(SohoScore)와 블록체인 스마트 컨트랙트를 결합해, 대출 실행 후 신용점수가 개선되면 별도 금리인하요구권 행사 없이도 대출 금리가 자동 인하되는 구조다....",
-      "pre_score": 18,
-      "score_detail": {
-        "groups": {},
-        "matched_terms": {},
-        "keyword_bonus": 18,
-        "source_bonus": 0,
-        "raw_score": 18,
-        "final_score": 18
-      },
-      "flags": {
-        "trusted_source": false,
-        "domestic": true,
-        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -10379,15 +12043,17 @@
       "origin": "naver_news_api",
       "matched_keywords": [
         "신용대출",
+        "신용점수",
+        "저신용자",
         "저축은행 대출"
       ],
       "description": "저축은행 관계자는 \"신용대출 한도가 연소득 이내로 제한됨에 따라 기존에 대출이 가능했던 차주들마저 취급 대상에서 제외되면서 전체적인 대출 취급이 줄어들었다\"며 \"과거에는 카드사 이용 후 추가 대출 수요가...",
-      "pre_score": 53,
+      "pre_score": 71,
       "score_detail": {
         "groups": {
           "direct_loan": 14,
           "industry_strategy": 21,
-          "customer_demand": 6
+          "customer_demand": 12
         },
         "matched_terms": {
           "direct_loan": [
@@ -10418,13 +12084,19 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "저신용자",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
             }
           ]
         },
-        "keyword_bonus": 12,
+        "keyword_bonus": 24,
         "source_bonus": 0,
-        "raw_score": 53,
-        "final_score": 53
+        "raw_score": 71,
+        "final_score": 71
       },
       "flags": {
         "trusted_source": false,
@@ -10741,11 +12413,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -10883,11 +12561,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -11021,10 +12705,11 @@
       "naver_link": "https://www.straightnews.co.kr/news/articleView.html?idxno=300999",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "소상공인 대출"
+        "소상공인 대출",
+        "취약차주"
       ],
       "description": "화물 차주 송남석 씨는 \"저희는 특수 차주로 유류비가 특히 크다\"며 저리 대출 등 구체적인 지원을... 연 매출 30억원 이하 소상공인 가맹점에서만 쓸 수 있으며, 사용 기한은 8월 31일까지다. 기한을 넘기면 잔액은 자동...",
-      "pre_score": 12,
+      "pre_score": 18,
       "score_detail": {
         "groups": {
           "customer_demand": 6
@@ -11045,10 +12730,10 @@
             }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 12,
-        "final_score": 12
+        "raw_score": 18,
+        "final_score": 18
       },
       "flags": {
         "trusted_source": false,
@@ -11069,10 +12754,11 @@
       "naver_link": "https://n.news.naver.com/mnews/article/586/0000127749?sid=101",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "개인회생"
+        "개인회생",
+        "취약차주"
       ],
       "description": "이 중 1973억원은 개인사업자 대상 이자 캐시백으로 활용해 실질적인 이자 부담을 낮췄으며, 청년과 서민 등... 단순한 이자 경감을 넘어, 경제적 회생이 불가능한 한계 차주들에게는 '재기의 기회'를 열어줬다....",
-      "pre_score": 21,
+      "pre_score": 27,
       "score_detail": {
         "groups": {
           "risk_repayment": 9,
@@ -11102,15 +12788,67 @@
             }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 21,
-        "final_score": 21
+        "raw_score": 27,
+        "final_score": 27
       },
       "flags": {
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d3158d07c0e3c99c",
+      "title": "IBK기업은행·교보생명·배민, AI 활용 교육 서비스 제공···상생경영 ...",
+      "source": "wsobi.com",
+      "source_domain": "wsobi.com",
+      "published_at": "2026-04-24T13:58:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.wsobi.com/news/articleView.html?idxno=310990",
+      "naver_link": "http://www.wsobi.com/news/articleView.html?idxno=310990",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "교보생명"
+      ],
+      "description": "IBK기업은행, 교보생명, 배달의민족(배민)이 중소기업ㆍ소상공인을 대상으로 인공지능(AI)을 활용한 교육 서비스를 제공하며 상생경영 실천에 나섰다. 24일 IBK기업은행에 따르면 지난 23일 중소기업 근로자ㆍ소상공인의...",
+      "pre_score": 39,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 21,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "소상공인",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 39,
+        "final_score": 39
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -11202,12 +12940,11 @@
         "채무조정"
       ],
       "description": "[사진=금융위원회] 금융위원회가 새도약기금·새출발기금 등 정부 채무조정기구의 상환능력 심사에 금융자산·가상자산 보유 내역까지 활용할 수 있도록 한 신용정보법 개정안이 23일 국회 본회의를 통과했다. 매입채권...",
-      "pre_score": 17,
+      "pre_score": 44,
       "score_detail": {
         "groups": {
           "policy_regulation": 11,
-          "risk_repayment": 27,
-          "market_noise": -27
+          "risk_repayment": 27
         },
         "matched_terms": {
           "policy_regulation": [
@@ -11231,20 +12968,12 @@
               "in_description": true,
               "weight": 3.0
             }
-          ],
-          "market_noise": [
-            {
-              "term": "가상자산",
-              "in_title": true,
-              "in_description": true,
-              "weight": 3.0
-            }
           ]
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 17,
-        "final_score": 17
+        "raw_score": 44,
+        "final_score": 44
       },
       "flags": {
         "trusted_source": false,
@@ -11325,11 +13054,17 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
             }
           ],
           "risk_repayment": [
             {
-              "term": "연체율",
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -11443,6 +13178,74 @@
       }
     },
     {
+      "id": "fe7fab770976cd49",
+      "title": "불황형 대출 잡으려다 서민 잡는 금융당국[기자수첩]",
+      "source": "newsway.co.kr",
+      "source_domain": "newsway.co.kr",
+      "published_at": "2026-04-24T13:20:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.newsway.co.kr/news/view?ud=2026042412285643559",
+      "naver_link": "https://www.newsway.co.kr/news/view?ud=2026042412285643559",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "은행권 대출",
+        "저신용자",
+        "카드론"
+      ],
+      "description": "은행권 대출 문턱이 높아지자 밀려난 중·저신용자들이 카드론으로 향하면서 잔액이 가파르게 불어난... 금융당국은 중·저신용자 대상 자금 공급을 별도로 마련하는 정책에 대해 고심하고 있는 것으로 알려진다. 카드사가...",
+      "pre_score": 45,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "industry_strategy": 7,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "카드론",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "은행권",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "카드사",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 45,
+        "final_score": 45
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "a86fa188931fa020",
       "title": "금융업 확대·진출 지렛대 된 저축은행 M&A 시장",
       "source": "naeil.com",
@@ -11455,11 +13258,12 @@
       "origin": "naver_news_api",
       "matched_keywords": [
         "가계부채",
+        "교보생명",
         "대출 규제",
         "저축은행 대출"
       ],
       "description": "저축은행 업계는 각종 규제와 정부의 가계부채 대책에 따른 대출 규제까지 겹치며 먹거리 부족에 직면해 있지만, 최근 M&A는 잇따라 진행되고 있다. 시장에서는 수익성이 둔화되는 흐름 속에서도 저축은행 인수가...",
-      "pre_score": 50,
+      "pre_score": 56,
       "score_detail": {
         "groups": {
           "policy_regulation": 11,
@@ -11483,10 +13287,10 @@
             }
           ]
         },
-        "keyword_bonus": 18,
+        "keyword_bonus": 24,
         "source_bonus": 0,
-        "raw_score": 50,
-        "final_score": 50
+        "raw_score": 56,
+        "final_score": 56
       },
       "flags": {
         "trusted_source": false,
@@ -11507,11 +13311,12 @@
       "naver_link": "https://n.news.naver.com/mnews/article/117/0004057634?sid=103",
       "origin": "naver_news_api",
       "matched_keywords": [
+        "교보생명",
         "신용대출",
         "저축은행 대출"
       ],
       "description": "전체 대출에서 신용대출 비중도 63.62%에 달한다. 이는 부동산 프로젝트파이낸싱(PF) 등 기업금융 리스크를 줄이고, 상대적으로 관리가 용이한 개인대출 중심으로 구조를 재편한 결과다. 업계 특성상 PF 비중이 높은...",
-      "pre_score": 40,
+      "pre_score": 46,
       "score_detail": {
         "groups": {
           "direct_loan": 14,
@@ -11535,10 +13340,10 @@
             }
           ]
         },
-        "keyword_bonus": 12,
+        "keyword_bonus": 18,
         "source_bonus": 0,
-        "raw_score": 40,
-        "final_score": 40
+        "raw_score": 46,
+        "final_score": 46
       },
       "flags": {
         "trusted_source": false,
@@ -11653,10 +13458,11 @@
         "채무조정"
       ],
       "description": "특히 채무조정제도를 이용하지 않은 비율이 67%에 달해, 제도 접근성 부족과 정보 격차가 피해를 키우는 주요 원인으로 지목된다. ■ 지역 편중도 지속 도시·산단 중심 피해 집중 지역별로는 수원(38명), 평택(31명)...",
-      "pre_score": 15,
+      "pre_score": 29,
       "score_detail": {
         "groups": {
-          "risk_repayment": 9
+          "risk_repayment": 9,
+          "industry_strategy": 14
         },
         "matched_terms": {
           "risk_repayment": [
@@ -11666,12 +13472,20 @@
               "in_description": true,
               "weight": 1.0
             }
+          ],
+          "industry_strategy": [
+            {
+              "term": "사금융",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
           ]
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 15,
-        "final_score": 15
+        "raw_score": 29,
+        "final_score": 29
       },
       "flags": {
         "trusted_source": false,
@@ -12000,10 +13814,11 @@
       "naver_link": "https://www.newsworks.co.kr/news/articleView.html?idxno=838874",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "신용대출"
+        "신용대출",
+        "신용점수"
       ],
       "description": "소비, 투자, 대출, 신용, 디지털 금융 이용 과정에서 자기 기준을 가지고 판단할 수 있게 해야 한다. 생산적 금융과 포용적 금융도 결국 국민이 이해하고 활용할 수 있어야 작동한다. 금융교육은 정책을 삶의 변화로 연결하는...",
-      "pre_score": 18,
+      "pre_score": 24,
       "score_detail": {
         "groups": {
           "customer_demand": 12
@@ -12018,10 +13833,112 @@
             }
           ]
         },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 24,
+        "final_score": 24
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "3e715d359c6fdb75",
+      "title": "헬스케어 키우는 보험사…의료법·데이터 활용 장벽 여전",
+      "source": "financialpost.co.kr",
+      "source_domain": "financialpost.co.kr",
+      "published_at": "2026-04-24T12:00:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.financialpost.co.kr/news/articleView.html?idxno=256695",
+      "naver_link": "https://www.financialpost.co.kr/news/articleView.html?idxno=256695",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "교보생명은 지난 2020년 헬스케어와 인슈어테크를 결합한 고객 서비스 앱 '케어(Kare)'를 출시하며 관련 사업에 뛰어들었고, 2024년에는 생명보험업계 최초로 헬스케어 자회사인 교보다솜케어를 설립했다. 삼성생명도 2022년...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 14
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            },
+            {
+              "term": "생명보험",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "삼성생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 18,
-        "final_score": 18
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "494dc403bd9d00ff",
+      "title": "산은, KDB생명 7번째 매각 추진...한투지주 행보에 관심",
+      "source": "raonnews.com",
+      "source_domain": "raonnews.com",
+      "published_at": "2026-04-24T11:56:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.raonnews.com/news/article.html?no=57724",
+      "naver_link": "https://www.raonnews.com/news/article.html?no=57724",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "데 이어 예금보험공사가 지난 16일 진행한 예별손보 공개매각 본입찰에서 인수제안서를 제출하기도 했다. 또한 산은은 지난해부터 교보생명, 태광그룹 등 잠재 인수 후보군과도 접촉해 온 것으로 알려졌다. 사진=KDB생명",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
       },
       "flags": {
         "trusted_source": false,
@@ -12117,6 +14034,102 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "f63aa592ee8442a2",
+      "title": "장민영 기업은행장, 수도권 아파트 포함 재산 17억 신고",
+      "source": "뉴시스",
+      "source_domain": "newsis.com",
+      "published_at": "2026-04-24T11:41:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.newsis.com/view/NISX20260424_0003605142",
+      "naver_link": "https://n.news.naver.com/mnews/article/003/0013907777?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "장 행장 본인 예금으로 기업은행 1억4651만원, 교보생명보험 2580만원, 토스뱅크 1301만원 등 총 1억8617만원을 들고 있다. 배우자는 농협은행 5755만원 등 7785만원, 차녀는 우리은행 2697만원, 한국교직원공제회...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "생명보험",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 7,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b861ea404c99101f",
+      "title": "산은의 ‘아픈 손가락’ KDB생명 7번째 매각 절차 개시",
+      "source": "seoul.co.kr",
+      "source_domain": "seoul.co.kr",
+      "published_at": "2026-04-24T11:39:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.seoul.co.kr/news/economy/finance/2026/04/24/20260424500122?wlog_tag3=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/081/0003638428?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "이에 산은은 지난해부터 한국투자금융지주와 교보생명, 태광그룹 등 잠재 인수 후보군을 접촉해온 것으로 전해진다. 보험사 인수 의사를 밝힌 한국투자금융지주가 유력 원매자로 거론된다.",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -12261,10 +14274,11 @@
         "소상공인 대출",
         "신용대출",
         "자영업자 대출",
-        "채무조정"
+        "채무조정",
+        "취약차주"
       ],
       "description": "우리금융의 경우 은행 개인신용대출 1년 이상 이용 고객을 대상으로 7% 금리 상한제를 적용해 중금리대출의 부담을 줄였다는 점이 눈에 띈다. 기존 최고금리가 12% 수준이라는 점을 고려하면 최대 5%포인트의 금리 인하...",
-      "pre_score": 45,
+      "pre_score": 51,
       "score_detail": {
         "groups": {
           "direct_loan": 14
@@ -12279,10 +14293,10 @@
             }
           ]
         },
-        "keyword_bonus": 24,
+        "keyword_bonus": 30,
         "source_bonus": 7,
-        "raw_score": 45,
-        "final_score": 45
+        "raw_score": 51,
+        "final_score": 51
       },
       "flags": {
         "trusted_source": true,
@@ -12307,6 +14321,7 @@
         "소상공인 대출",
         "신용대출",
         "자영업자 대출",
+        "저신용자",
         "채무조정"
       ],
       "description": "상환 의지가 강했던 그는 KB국민은행의 채무조정을 통해 만기일시상환대출을 장기분할상환대출로 대환했고 의무상환비율도 15%에서 5%로 낮출 수 있었다. #2. 서울 종로 일대에서 샌드위치 가게를 운영하는 정승희...",
@@ -12398,6 +14413,7 @@
       "naver_link": "https://www.asiatime.co.kr/article/20260424500058",
       "origin": "naver_news_api",
       "matched_keywords": [
+        "교보생명",
         "보험사 대출"
       ],
       "description": "케이뱅크, 인벤테라 등 주요 기업공개와 서울국제금융센터(SIFC) 담보대출 리파이낸싱 등 대형 딜도... 장기적으로 안정적인 자산 확보가 필수적인 보험사의 자산운용 전략을 고려한 것이다. 이 구조는 투자자가...",
@@ -12405,7 +14421,7 @@
       "score_detail": {
         "groups": {
           "industry_strategy": 7,
-          "market_noise": -18
+          "market_noise": -25
         },
         "matched_terms": {
           "industry_strategy": [
@@ -12425,9 +14441,9 @@
             }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": -5,
+        "raw_score": -6,
         "final_score": 0
       },
       "flags": {
@@ -12579,6 +14595,56 @@
       }
     },
     {
+      "id": "ba0faad9c3d61afc",
+      "title": "[더벨][Policy Radar] 길어지는 홍콩 ELS 과징금 결론, 5월로 넘어가나",
+      "source": "thebell.co.kr",
+      "source_domain": "thebell.co.kr",
+      "published_at": "2026-04-24T11:02:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T00:56:25+09:00",
+      "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202604230425311760109230",
+      "naver_link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202604230425311760109230",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금소법",
+        "금융감독원 대출",
+        "금융소비자"
+      ],
+      "description": "금융회사 제재는 금융감독원의 제재심의위원회와 금융위의 증선위, 안건소위 심의, 정례회의 의결 순으로... RWA가 늘어나면 보통주자본비율이 낮아져 대출 및 투자 여력이 감소한다. 결국 정부가 역점을 두고 있는...",
+      "pre_score": 29,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융위",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "금융감독원",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 29,
+        "final_score": 29
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "9de41f512efd7378",
       "title": "[더벨][저축은행경영분석] 신한저축, 정책·기업대출 덕에 자산 성장",
       "source": "thebell.co.kr",
@@ -12627,35 +14693,29 @@
       }
     },
     {
-      "id": "ba0faad9c3d61afc",
-      "title": "[더벨][Policy Radar] 길어지는 홍콩 ELS 과징금 결론, 5월로 넘어가나",
+      "id": "79b96dff5a8a097f",
+      "title": "[더벨]SBI·교보 끈끈한 동맹, 2차 동남아 벤처펀드 결성",
       "source": "thebell.co.kr",
       "source_domain": "thebell.co.kr",
       "published_at": "2026-04-24T11:02:00+09:00",
       "published_date": "2026-04-24",
-      "collected_at": "2026-04-25T00:56:25+09:00",
-      "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202604230425311760109230",
-      "naver_link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202604230425311760109230",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202604221635071240107043",
+      "naver_link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202604221635071240107043",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "금융감독원 대출"
+        "교보생명"
       ],
-      "description": "금융회사 제재는 금융감독원의 제재심의위원회와 금융위의 증선위, 안건소위 심의, 정례회의 의결 순으로... RWA가 늘어나면 보통주자본비율이 낮아져 대출 및 투자 여력이 감소한다. 결국 정부가 역점을 두고 있는...",
-      "pre_score": 17,
+      "description": "SBI홀딩스와 교보생명 간 협력이 빠르게 확대되고 있다. 교보증권을 통해 동남아시아 디지털 플랫폼에 투자하는 공동 펀드 ‘DIF II’를 결성하며 스타트업 투자에 나섰다. 2022년 조성한 1호 펀드의 후속 성격으로 최대...",
+      "pre_score": 13,
       "score_detail": {
         "groups": {
-          "policy_regulation": 11
+          "industry_strategy": 7
         },
         "matched_terms": {
-          "policy_regulation": [
+          "industry_strategy": [
             {
-              "term": "금융위",
-              "in_title": false,
-              "in_description": true,
-              "weight": 1.0
-            },
-            {
-              "term": "금융감독원",
+              "term": "교보생명",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -12664,13 +14724,13 @@
         },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 17,
-        "final_score": 17
+        "raw_score": 13,
+        "final_score": 13
       },
       "flags": {
         "trusted_source": false,
         "domestic": true,
-        "loan_related": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -12734,6 +14794,84 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "f416688bbe77f93d",
+      "title": "[포커스] 신한 줄고 KB·현대카드는 반등... '수익성 관리'에 1분기 희비",
+      "source": "startuptoday.co.kr",
+      "source_domain": "startuptoday.co.kr",
+      "published_at": "2026-04-24T10:56:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.startuptoday.co.kr/news/articleView.html?idxno=611009",
+      "naver_link": "https://www.startuptoday.co.kr/news/articleView.html?idxno=611009",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "취약차주"
+      ],
+      "description": "내수 회복이 뚜렷하지 않고, 취약차주 연체 우려도 남아 있다. 외형 경쟁만으로는 실적을 설명하기 어려워졌다. 올해 카드사 성적도 결제액 확대보다 비용 절감과 부실 관리에서 차이가 날 가능성이 크다. 오늘경제",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "risk_repayment": 9,
+          "industry_strategy": 7,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "부실",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "취약차주",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "카드사",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "차주",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "취약차주",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
         "possible_ad": false
       }
     },
@@ -12886,6 +15024,12 @@
           ],
           "risk_repayment": [
             {
+              "term": "연체",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
               "term": "채무조정",
               "in_title": false,
               "in_description": true,
@@ -13001,6 +15145,85 @@
       }
     },
     {
+      "id": "fa5dddf82a811d12",
+      "title": "산은, KDB생명 7번째 매각 시동…연내 새 주인 찾는다",
+      "source": "news.einfomax.co.kr",
+      "source_domain": "news.einfomax.co.kr",
+      "published_at": "2026-04-24T10:16:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://news.einfomax.co.kr/news/articleView.html?idxno=4411472",
+      "naver_link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4411472",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "이에 산은은 지난해부터 한국투자금융지주와 교보생명, 태광그룹 등 잠재 인수 후보군을 접촉해 왔다. 현재는 보험사 인수 의사를 밝힌 한투가 유력 원매자로 거론된다.",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "8e0cb9972c5da0cd",
+      "title": "올라핀테크, 다이소 입점 판매자 대상 선정산 서비스 출시",
+      "source": "한국경제",
+      "source_domain": "hankyung.com",
+      "published_at": "2026-04-24T10:12:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.hankyung.com/article/202604243872O",
+      "naver_link": "https://n.news.naver.com/mnews/article/015/0005279184?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수"
+      ],
+      "description": "올라 선정산은 쇼핑몰 관리자 계정 연동만으로 신청이 가능하며, 신용점수 영향없이 신청부터 정산금 지급까지 평균 하루 안에 처리가 이뤄지는 것이 특징이다. 김상수 대표는 “이번 다이소 선정산 서비스 출시는...",
+      "pre_score": 15,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 9,
+        "raw_score": 15,
+        "final_score": 15
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "ca107f822bcf2e6c",
       "title": "내수시장 회복 열쇠, 중국 부동산 아파트 경기 '꿈틀'",
       "source": "newspim.com",
@@ -13084,6 +15307,12 @@
         },
         "matched_terms": {
           "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            },
             {
               "term": "채무조정",
               "in_title": true,
@@ -13308,10 +15537,11 @@
       "matched_keywords": [
         "신용대출",
         "자영업자 대출",
+        "저신용자",
         "채무조정"
       ],
       "description": "KB희망금융센터는 취약계층의 경제적 재기를 지원하기 위해 맞춤형 채무조정상담을 제공한다. [김은희 기자] [헤럴드경제=김은희·유혜림 기자] #1. 사회초년생 A씨는 100만원 내외의 소액 신용대출을 여러 건 보유하고...",
-      "pre_score": 48,
+      "pre_score": 54,
       "score_detail": {
         "groups": {
           "direct_loan": 14,
@@ -13335,10 +15565,10 @@
             }
           ]
         },
-        "keyword_bonus": 18,
+        "keyword_bonus": 24,
         "source_bonus": 7,
-        "raw_score": 48,
-        "final_score": 48
+        "raw_score": 54,
+        "final_score": 54
       },
       "flags": {
         "trusted_source": true,
@@ -13360,10 +15590,11 @@
       "origin": "naver_news_api",
       "matched_keywords": [
         "자영업자 대출",
-        "채무조정"
+        "채무조정",
+        "취약차주"
       ],
       "description": "5대 지주는 단순 대출을 넘어 금융 접근성 개선이나 채무조정 안내, 소상공인·자영업자를 위한 경영·재무 컨설팅, 심리상담 등 비금전 지원 프로그램을 다양하게 전개하고 있다. 특히 빚·고금리·휴폐업 위험 등으로...",
-      "pre_score": 34,
+      "pre_score": 40,
       "score_detail": {
         "groups": {
           "risk_repayment": 9,
@@ -13393,10 +15624,10 @@
             }
           ]
         },
-        "keyword_bonus": 12,
+        "keyword_bonus": 18,
         "source_bonus": 7,
-        "raw_score": 34,
-        "final_score": 34
+        "raw_score": 40,
+        "final_score": 40
       },
       "flags": {
         "trusted_source": true,
@@ -13448,6 +15679,60 @@
       }
     },
     {
+      "id": "abacb0aca1844537",
+      "title": "보험금 지급 '속도 경쟁' 격화…AI 도입에 '반나절' 시대",
+      "source": "seoulwire.com",
+      "source_domain": "seoulwire.com",
+      "published_at": "2026-04-24T09:48:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.seoulwire.com/news/articleView.html?idxno=718597",
+      "naver_link": "http://www.seoulwire.com/news/articleView.html?idxno=718597",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "반면 삼성·한화·교보생명 등 3대 생명보험사의 평균 신속 지급 비율은 92.3%로 전년과 유사한 수준을 유지했다. 생보사의 지급 속도가 상대적으로 느린 것은 상품 구조 차이 영향이 크다. 일부 고액 장기보험의 경우...",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "생명보험",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "38e98ea1dd5e521f",
       "title": "\"내 명의로 1100만원 빚\"...대출 받은 적 없는 억울한 피해자",
       "source": "lawtalknews.co.kr",
@@ -13486,6 +15771,37 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9045657ffbab22f6",
+      "title": "올라핀테크, 다이소 입점 판매자 대상 선정산 서비스 오픈",
+      "source": "stardailynews.co.kr",
+      "source_domain": "stardailynews.co.kr",
+      "published_at": "2026-04-24T09:38:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.stardailynews.co.kr/news/articleView.html?idxno=533083",
+      "naver_link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=533083",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수"
+      ],
+      "description": "회사 측에 따르면 신청부터 지급까지는 평균 하루 정도 소요되며, 별도의 신용점수 영향 없이 이용 가능하다. 올라핀테크는 이번 서비스를 통해 기존 온라인 중심의 선정산 영역을 오프라인 유통 채널까지 확장했다는 점에...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -13620,6 +15936,127 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "bce6bf77736ec6c1",
+      "title": "산업은행, KDB생명 7번째 매각 시동…연내 매각 가능성",
+      "source": "nocutnews.co.kr",
+      "source_domain": "nocutnews.co.kr",
+      "published_at": "2026-04-24T09:20:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.nocutnews.co.kr/news/6507478",
+      "naver_link": "https://n.news.naver.com/mnews/article/079/0004140257?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "이밖에 흥국생명과 교보생명 등도 잠재적 매수자로 언급된다. ※CBS노컷뉴스는 여러분의 제보로 함께 세상을 바꿉니다. 각종 비리와 부당대우, 사건사고와 미담 등 모든 얘깃거리를 알려주세요.이메일 : 카카오톡...",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "347d018012753a21",
+      "title": "신용보증기금, 4월 보증보험 브랜드평판 1위 수성… HUG·기보 뒤이어",
+      "source": "popcornnews.net",
+      "source_domain": "popcornnews.net",
+      "published_at": "2026-04-24T09:20:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.popcornnews.net/news/articleView.html?idxno=119323",
+      "naver_link": "http://www.popcornnews.net/news/articleView.html?idxno=119323",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수"
+      ],
+      "description": "신용보증기금이 올해 4월 보증보험 브랜드평판 빅데이터 분석 결과, 1위를 차지했다. 이어... 세부 항목 중 특히 소통지수(1,101,811)에서 높은 점수를 얻었으며, 지난 3월 대비 지수가 16.30% 상승하며 1위와의...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "fa3028e55cf4b09a",
+      "title": "KDB생명, 12년 만에 새 주인 찾나…'7전 8기' 매각 재추진",
+      "source": "thebigdata.co.kr",
+      "source_domain": "thebigdata.co.kr",
+      "published_at": "2026-04-24T09:16:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.thebigdata.co.kr/view.php?ud=202604240913325782c808fa9903_23",
+      "naver_link": "http://www.thebigdata.co.kr/view.php?ud=202604240913325782c808fa9903_23",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "기존 보험사를 보유한 교보생명과 태광그룹도 후보군에 이름을 올리고 있다. 그러나 보험 M&A 시장 전반의 냉각이 변수다. 최근 예별손해보험 본입찰에 한 곳만 참여해 유찰된 사례에서 드러나듯 인수 수요 자체가...",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -13771,6 +16208,67 @@
       }
     },
     {
+      "id": "37998754a9bf454c",
+      "title": "[오늘의 브릿지경제 1면] SK하이닉스 ‘환호’ 한 날, 삼성전자 노조 ‘...",
+      "source": "viva100.com",
+      "source_domain": "viva100.com",
+      "published_at": "2026-04-24T08:54:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.viva100.com/article/20260423501260",
+      "naver_link": "https://www.viva100.com/article/20260423501260",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "저신용자",
+        "카드론"
+      ],
+      "description": "저축은행이 건전성 관리를 위해 중금리대출 공급을 40% 이상 줄이자, 갈 곳 잃은 중·저신용자들이 더 높은 금리의 카드론으로 내몰리는 금융 절벽 현상이 심화되고 있다. ◆인하 여력에도 ‘민생 안정’... 정부, 석유...",
+      "pre_score": 39,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "industry_strategy": 7,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "카드론",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "저축은행",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 39,
+        "final_score": 39
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "ab58fc886e7db0b0",
       "title": "美 금융당국, 3조달러 사모대출 리스크 정조준",
       "source": "한국경제",
@@ -13882,6 +16380,48 @@
         "trusted_source": true,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d590d9f8f6024d7f",
+      "title": "[패트롤] 과천시-광명시-군포시-시흥시-안양시",
+      "source": "ekn.kr",
+      "source_domain": "ekn.kr",
+      "published_at": "2026-04-24T08:26:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.ekn.kr/web/view.php?key=20260424028499638",
+      "naver_link": "https://www.ekn.kr/web/view.php?key=20260424028499638",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수"
+      ],
+      "description": "온라인 신청은 경기지역화폐 앱 또는 각 신용-체크 카드사 누리집에서 가능하다. 온라인 신청이 어려운... 시흥시는 이번 평가에서 적극적인 체납관리와 부서 간 긴밀한 협조를 통한 적시 부과로 높은 점수를 받았다....",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "카드사",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -14161,15 +16701,18 @@
         "가계대출",
         "대출 규제",
         "부동산 대출",
+        "저신용자",
         "주담대",
-        "주택담보대출"
+        "주택담보대출",
+        "취약차주"
       ],
       "description": "주택담보대출(주담대) 우대금리 혜택 제공도 중단할 방침이다. 지난 2월 중도금·이주비·분양잔금 등 집단대출을 전면 중단한 데 이어, 일반 주담대까지 조이면서 부동산 관련 대출을 전방위 축소하는 분위기다. 농협은...",
-      "pre_score": 78,
+      "pre_score": 92,
       "score_detail": {
         "groups": {
           "direct_loan": 14,
           "policy_regulation": 22,
+          "industry_strategy": 14,
           "customer_demand": 12
         },
         "matched_terms": {
@@ -14195,6 +16738,14 @@
               "weight": 2.0
             }
           ],
+          "industry_strategy": [
+            {
+              "term": "대부업",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ],
           "customer_demand": [
             {
               "term": "실수요자",
@@ -14206,8 +16757,8 @@
         },
         "keyword_bonus": 30,
         "source_bonus": 0,
-        "raw_score": 78,
-        "final_score": 78
+        "raw_score": 92,
+        "final_score": 92
       },
       "flags": {
         "trusted_source": false,
@@ -14228,10 +16779,12 @@
       "naver_link": "https://www.news2day.co.kr/article/20260424500020",
       "origin": "naver_news_api",
       "matched_keywords": [
+        "가계대출",
+        "신용점수",
         "주담대"
       ],
       "description": "반면 KB국민·신한·하나·우리은행 등 4대 시중은행의 주담대 금리는 3.71~6.07% 수준으로 형성돼 있다. 중동발 지정학적 리스크가 완화되며 은행채 금리가 안정되자 시중은행 주담대 금리는 한때 7%대를 웃돌던 상단이 6...",
-      "pre_score": 48,
+      "pre_score": 60,
       "score_detail": {
         "groups": {
           "direct_loan": 42
@@ -14246,10 +16799,10 @@
             }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 18,
         "source_bonus": 0,
-        "raw_score": 48,
-        "final_score": 48
+        "raw_score": 60,
+        "final_score": 60
       },
       "flags": {
         "trusted_source": false,
@@ -14393,6 +16946,77 @@
       }
     },
     {
+      "id": "d58abf7dfc43969b",
+      "title": "가계대출 규제에 카드사 ‘포용금융’ 확대…롯데카드 2배 ‘껑충’",
+      "source": "ceoscoredaily.com",
+      "source_domain": "ceoscoredaily.com",
+      "published_at": "2026-04-24T07:00:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.ceoscoredaily.com/page/view/2026042315164674317",
+      "naver_link": "https://www.ceoscoredaily.com/page/view/2026042315164674317",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "대출 규제",
+        "저신용자"
+      ],
+      "description": "가계대출 규제 강화와 금리 부담 완화, 정부의 포용금융 기조가 맞물리면서 중·저신용자를 중심으로... 이처럼 금리 부담이 줄면서 중·저신용자들의 수요도 높아진 것으로 풀이된다. 향후 카드사의 중금리대출...",
+      "pre_score": 120,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 42,
+          "policy_regulation": 33,
+          "industry_strategy": 21,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ],
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "카드사",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 120,
+        "final_score": 120
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "4f1bf7569cbf5d47",
       "title": "은행 대출 막히자 카드론 43조 역대 최대…2금융권 풍선효과 뚜렷",
       "source": "대한경제",
@@ -14406,14 +17030,16 @@
       "matched_keywords": [
         "가계대출",
         "가계부채",
+        "저신용자",
+        "취약차주",
         "카드론"
       ],
       "description": "당국은 가계부채 관리를 이유로 최근 국내 카드사에 올해 가계대출 잔액 증가율을 전년 말 대비 1~1.5% 수준으로 제한하도록 하는 방침을 전달했다. 이는 지난해 카드사에 부여됐던 증가율 목표치(3~5%)의 절반에도 못...",
-      "pre_score": 59,
+      "pre_score": 78,
       "score_detail": {
         "groups": {
           "direct_loan": 28,
-          "industry_strategy": 7
+          "industry_strategy": 14
         },
         "matched_terms": {
           "direct_loan": [
@@ -14436,13 +17062,19 @@
               "in_title": false,
               "in_description": true,
               "weight": 1.0
+            },
+            {
+              "term": "2금융",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
             }
           ]
         },
-        "keyword_bonus": 18,
+        "keyword_bonus": 30,
         "source_bonus": 6,
-        "raw_score": 59,
-        "final_score": 59
+        "raw_score": 78,
+        "final_score": 78
       },
       "flags": {
         "trusted_source": true,
@@ -14468,12 +17100,11 @@
         "생명보험 대출"
       ],
       "description": "가계대출 규제와 중동 사태에 따른 대내외적인 압박 요인 속에서도 증시 호조에 따른 비이자이익이... KB금융의 경우 KB손해보험과 KB라이프생명의 당기순이익이 전년 동기 대비 36%, 8.2% 하락했다. 신한금융에서 과거...",
-      "pre_score": 43,
+      "pre_score": 52,
       "score_detail": {
         "groups": {
           "direct_loan": 14,
-          "policy_regulation": 11,
-          "market_noise": -9
+          "policy_regulation": 11
         },
         "matched_terms": {
           "direct_loan": [
@@ -14491,20 +17122,12 @@
               "in_description": true,
               "weight": 1.0
             }
-          ],
-          "market_noise": [
-            {
-              "term": "증시",
-              "in_title": false,
-              "in_description": true,
-              "weight": 1.0
-            }
           ]
         },
         "keyword_bonus": 18,
         "source_bonus": 9,
-        "raw_score": 43,
-        "final_score": 43
+        "raw_score": 52,
+        "final_score": 52
       },
       "flags": {
         "trusted_source": true,
@@ -14692,6 +17315,37 @@
       }
     },
     {
+      "id": "2f31563c5c4694b4",
+      "title": "[단독] 부산시, 싱크홀 탐사 현장 테스트 배점 축소 도마에",
+      "source": "대한경제",
+      "source_domain": "dnews.co.kr",
+      "published_at": "2026-04-24T06:22:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202604230949286040338",
+      "naver_link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202604230949286040338",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수"
+      ],
+      "description": "전체 배점 중 ‘참여 기술자 능력’ 점수는 지난해 56점에서 올해 53점으로 줄어든 반면, ‘업체 능력 및 신용도’ 점수는 38점에서 41점으로 상향 조정됐다. 특히 기술 검증의 핵심인 ‘공동탐사능력 현장 테스트’...",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 6,
+        "raw_score": 12,
+        "final_score": 12
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "157ecf8d269734b7",
       "title": "서울 정비사업 수주전, 추가 이주비 대출 역량에 달렸다",
       "source": "news.mtn.co.kr",
@@ -14745,18 +17399,24 @@
       "naver_link": "https://n.news.naver.com/mnews/article/022/0004123335?sid=100",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "채무조정"
+        "채무조정",
+        "취약차주"
       ],
       "description": "장기연체자의 채무조정을 위해 채무조정기구가 차주 동의 없이 금융자산정보를 수집할 수 있는 법적 근거도 마련됐다. 채무자의 사전 동의 없이도 숨겨진 재산(가상자산과 예·적금 등)을 파악해 부당한 채무 감면을...",
-      "pre_score": 12,
+      "pre_score": 27,
       "score_detail": {
         "groups": {
           "risk_repayment": 9,
-          "customer_demand": 6,
-          "market_noise": -9
+          "customer_demand": 6
         },
         "matched_terms": {
           "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
             {
               "term": "채무조정",
               "in_title": false,
@@ -14771,20 +17431,12 @@
               "in_description": true,
               "weight": 1.0
             }
-          ],
-          "market_noise": [
-            {
-              "term": "가상자산",
-              "in_title": false,
-              "in_description": true,
-              "weight": 1.0
-            }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 12,
-        "final_score": 12
+        "raw_score": 27,
+        "final_score": 27
       },
       "flags": {
         "trusted_source": false,
@@ -14910,6 +17562,37 @@
       }
     },
     {
+      "id": "e42f8e2632ebccfc",
+      "title": "엄주성 \"키움, 개인투자자 부 늘려주는 플랫폼으로 거듭나겠다\"[만났습...",
+      "source": "이데일리",
+      "source_domain": "edaily.co.kr",
+      "published_at": "2026-04-24T06:02:00+09:00",
+      "published_date": "2026-04-24",
+      "collected_at": "2026-04-25T04:42:25+09:00",
+      "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=02105766645419400",
+      "naver_link": "https://n.news.naver.com/mnews/article/018/0006264894?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수"
+      ],
+      "description": "엄 사장은 “리스크관리팀을 리스크기획·시장리스크·신용리스크 등으로 세분화했고, 리스크감리파트를... AI도 단순히 점수나 결과만 보여주는 것이 아니라 왜 그런 결과가 나왔는지, 어떤 로직으로 판단했는지를...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 8,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "a52161b3e9c8c4fd",
       "title": "AI·슈퍼앱 전쟁 격화…모바일뱅킹 앱 판 뒤집히나",
       "source": "한국경제",
@@ -14921,17 +17604,19 @@
       "naver_link": "https://n.news.naver.com/mnews/article/050/0000105286?sid=101",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "보험계약대출"
+        "보험계약대출",
+        "신용대출",
+        "신용점수"
       ],
       "description": "한 손에 든 스마트폰으로 계좌를 열고 돈을 보내고 대출 한도를 확인한다. 창구를 찾을 일도 영업시간을... 우리WON뱅킹에서 보험 계약 조회는 물론 간편 보험금 청구, 보장 분석, 신규 가입까지 이어지는 통합...",
-      "pre_score": 15,
+      "pre_score": 27,
       "score_detail": {
         "groups": {},
         "matched_terms": {},
-        "keyword_bonus": 6,
+        "keyword_bonus": 18,
         "source_bonus": 9,
-        "raw_score": 15,
-        "final_score": 15
+        "raw_score": 27,
+        "final_score": 27
       },
       "flags": {
         "trusted_source": true,
@@ -14954,14 +17639,18 @@
       "matched_keywords": [
         "보험계약대출",
         "약관대출",
+        "연체율",
+        "저신용자",
         "채무조정",
+        "취약차주",
         "카드론"
       ],
       "description": "결국 카드론과 보험계약대출로 급한 불을 껐다. 정상적인 사업자금이 '급전'으로 대체되는 전형적인 경로다. 최근 금융당국이 중저신용자 대출 문을 일부 다시 열어주는 방안을 검토하는 것도 같은 맥락이다. 그러나 이...",
-      "pre_score": 38,
+      "pre_score": 50,
       "score_detail": {
         "groups": {
-          "direct_loan": 14
+          "direct_loan": 14,
+          "customer_demand": 6
         },
         "matched_terms": {
           "direct_loan": [
@@ -14977,12 +17666,20 @@
               "in_description": true,
               "weight": 1.0
             }
+          ],
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
           ]
         },
-        "keyword_bonus": 24,
+        "keyword_bonus": 30,
         "source_bonus": 0,
-        "raw_score": 38,
-        "final_score": 38
+        "raw_score": 50,
+        "final_score": 50
       },
       "flags": {
         "trusted_source": false,
