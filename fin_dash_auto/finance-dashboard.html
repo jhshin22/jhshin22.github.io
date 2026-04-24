@@ -152,15 +152,17 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const DATA_FILE = params.get('data') || './finance_articles_2026-04-23.json';
+    const DATA_FILE = params.get('data') || './finance_articles_2026-04-24.json';
     const CATEGORY_ORDER = [
       '대출 관련 정책/규제 변화',
       '금리/지표 변화',
       '시장 방향성',
+      '시장 방향성(부동산/증권시장 등 대출수요 변동 가능 이슈)',
       '리스크/연체/NPL',
       '금융사 소매 대출 전략/상품',
       '보험사 관련 이슈',
-      'AI 동향'
+      'AI 동향',
+      'AI 동향(금융 AI 포함)'
     ];
 
     function escapeHtml(value) {
