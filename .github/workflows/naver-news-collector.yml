@@ -43,14 +43,15 @@ jobs:
 
       - name: Commit and push if JSON changed
         run: |
-          if git diff --quiet -- auto_dash/articles_raw.json; then
+          git add auto_dash/articles_raw.json
+
+          if git diff --cached --quiet; then
             echo "No article changes to commit."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add auto_dash/articles_raw.json
           git commit -m "Update raw Naver news articles"
           git pull --rebase origin main
           git push
