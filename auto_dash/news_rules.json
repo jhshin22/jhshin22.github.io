@@ -1,0 +1,99 @@
+{
+  "search_keywords": [
+    "가계대출",
+    "신용대출",
+    "주택담보대출",
+    "주담대",
+    "전세대출",
+    "보험계약대출",
+    "약관대출",
+    "대환대출",
+    "카드론",
+    "현금서비스",
+    "마이너스통장",
+    "DSR",
+    "DTI",
+    "LTV",
+    "가계부채",
+    "연체율",
+    "대출 규제",
+    "대출 금리",
+    "대출 갈아타기",
+    "채무조정",
+    "개인회생",
+    "소상공인 대출",
+    "자영업자 대출",
+    "금융위원회 대출",
+    "금융감독원 대출",
+    "은행권 대출",
+    "보험사 대출",
+    "생명보험 대출",
+    "저축은행 대출",
+    "카드사 대출",
+    "부동산 대출",
+    "주택시장 대출"
+  ],
+  "score_options": {
+    "title_weight": 2.0,
+    "description_weight": 1.0,
+    "matched_keyword_bonus_per_keyword": 6,
+    "matched_keyword_bonus_max": 30,
+    "minimum_score": 0,
+    "maximum_score": 150
+  },
+  "positive_groups": {
+    "direct_loan": {
+      "score": 28,
+      "terms": ["가계대출", "신용대출", "주택담보대출", "주담대", "전세대출", "보험계약대출", "약관대출", "대환대출", "카드론", "현금서비스", "마이너스통장"]
+    },
+    "policy_regulation": {
+      "score": 22,
+      "terms": ["DSR", "DTI", "LTV", "대출 규제", "금융위원회", "금융위", "금융감독원", "금감원", "스트레스 DSR", "총부채원리금상환비율"]
+    },
+    "risk_repayment": {
+      "score": 18,
+      "terms": ["연체율", "부실", "채무조정", "개인회생", "대출 상환", "상환 부담", "이자 부담", "다중채무자", "취약차주"]
+    },
+    "industry_strategy": {
+      "score": 14,
+      "terms": ["은행권", "보험사", "생명보험", "저축은행", "카드사", "대출 포트폴리오", "여신", "리스크 관리", "대출 영업"]
+    },
+    "customer_demand": {
+      "score": 12,
+      "terms": ["소상공인", "자영업자", "청년", "고령층", "주부", "무직", "실수요자", "차주", "서민금융"]
+    }
+  },
+  "negative_groups": {
+    "ad_promo_noise": {
+      "score": -30,
+      "terms": ["분양 홍보", "모집공고", "입주자 모집", "모델하우스", "이벤트", "특가", "광고", "협찬"]
+    },
+    "market_noise": {
+      "score": -18,
+      "terms": ["추천주", "증시", "코스피", "코스닥", "목표가", "공모주", "코인", "비트코인", "가상자산"]
+    },
+    "weak_relevance": {
+      "score": -10,
+      "terms": ["단순 금리 전망", "채권금리", "환율", "원달러", "미국 증시"]
+    }
+  },
+  "trusted_domains": {
+    "yna.co.kr": { "name": "연합뉴스", "score": 10 },
+    "hankyung.com": { "name": "한국경제", "score": 9 },
+    "mk.co.kr": { "name": "매일경제", "score": 9 },
+    "edaily.co.kr": { "name": "이데일리", "score": 8 },
+    "sedaily.com": { "name": "서울경제", "score": 8 },
+    "fnnews.com": { "name": "파이낸셜뉴스", "score": 7 },
+    "mt.co.kr": { "name": "머니투데이", "score": 8 },
+    "news1.kr": { "name": "뉴스1", "score": 7 },
+    "newsis.com": { "name": "뉴시스", "score": 7 },
+    "bizwatch.co.kr": { "name": "비즈워치", "score": 8 },
+    "chosunbiz.com": { "name": "조선비즈", "score": 8 },
+    "asiae.co.kr": { "name": "아시아경제", "score": 7 },
+    "heraldcorp.com": { "name": "헤럴드경제", "score": 7 },
+    "dt.co.kr": { "name": "디지털타임스", "score": 6 },
+    "etnews.com": { "name": "전자신문", "score": 6 },
+    "fntimes.com": { "name": "한국금융신문", "score": 7 },
+    "dnews.co.kr": { "name": "대한경제", "score": 6 }
+  }
+}
