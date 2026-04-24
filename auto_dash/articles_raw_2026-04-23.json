@@ -1,7 +1,7 @@
 {
   "target_date": "2026-04-23",
-  "updated_at": "2026-04-25T00:54:00+09:00",
-  "count": 75,
+  "updated_at": "2026-04-25T04:41:31+09:00",
+  "count": 91,
   "articles": [
     {
       "id": "affb4c0d37f1b57d",
@@ -213,15 +213,15 @@
       "naver_link": "https://www.tokenpost.kr/news/policy/352626",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "채무조정"
+        "채무조정",
+        "취약차주"
       ],
       "description": "정부가 채무조정 심사의 사각지대를 줄이기 위해 관련 법을 손보면서, 앞으로는 새도약기금과 새출발기금 같은 채무조정 기구가 채무자의 금융자산과 가상자산 보유 내역까지 확인할 수 있게 됐다. 금융위원회는 23일 이런...",
-      "pre_score": 39,
+      "pre_score": 72,
       "score_detail": {
         "groups": {
           "policy_regulation": 33,
-          "risk_repayment": 27,
-          "market_noise": -27
+          "risk_repayment": 27
         },
         "matched_terms": {
           "policy_regulation": [
@@ -245,20 +245,12 @@
               "in_description": true,
               "weight": 3.0
             }
-          ],
-          "market_noise": [
-            {
-              "term": "가상자산",
-              "in_title": true,
-              "in_description": true,
-              "weight": 3.0
-            }
           ]
         },
-        "keyword_bonus": 6,
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 39,
-        "final_score": 39
+        "raw_score": 72,
+        "final_score": 72
       },
       "flags": {
         "trusted_source": false,
@@ -352,6 +344,48 @@
         "source_bonus": 0,
         "raw_score": 6,
         "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "c8dae97c2caad4f8",
+      "title": "【위클리 ESG 행사】 4월 5주차",
+      "source": "impacton.net",
+      "source_domain": "impacton.net",
+      "published_at": "2026-04-23T21:42:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "http://www.impacton.net/news/articleView.html?idxno=18646",
+      "naver_link": "http://www.impacton.net/news/articleView.html?idxno=18646",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "취약차주"
+      ],
+      "description": "◆ 차주 ESG 행사_4월 5주차 4월 28일(화) 에코디자인 포럼 출범행사 기후에너지환경부와... 이번 행사에서는 협의체 연간 운영계획과 글로벌 기후공시 동향, 산업계 기후위기 취약성 평가, 정책 제언 방향 등을 다룬다....",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "차주",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
       },
       "flags": {
         "trusted_source": false,
@@ -907,11 +941,12 @@
         "전세대출"
       ],
       "description": "LTV 40% 제한, 시가 구간별 대출 한도(15억 이하 6억, 15~25억 4억, 25억 초과 2억), 스트레스 DSR 상향, 전세대출 DSR 차단 등이 이뤄졌다. 세금 규제도 한층 강화됐다. 5월 9일 이후 조정지역 내 다주택자 양도세는 기본세율...",
-      "pre_score": 43,
+      "pre_score": 57,
       "score_detail": {
         "groups": {
           "direct_loan": 14,
-          "policy_regulation": 11
+          "policy_regulation": 11,
+          "industry_strategy": 14
         },
         "matched_terms": {
           "direct_loan": [
@@ -941,15 +976,86 @@
               "in_description": true,
               "weight": 1.0
             }
+          ],
+          "industry_strategy": [
+            {
+              "term": "한화생명",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
           ]
         },
         "keyword_bonus": 18,
         "source_bonus": 0,
-        "raw_score": 43,
-        "final_score": 43
+        "raw_score": 57,
+        "final_score": 57
       },
       "flags": {
         "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "3701f8031768d942",
+      "title": "조달금리 상승에 카드론 금리인상 압박",
+      "source": "서울경제",
+      "source_domain": "sedaily.com",
+      "published_at": "2026-04-23T18:22:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.sedaily.com/article/20036433?ref=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/011/0004614066?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "고신용자",
+        "신용점수",
+        "저신용자",
+        "카드론"
+      ],
+      "description": "신용점수 900점을 넘는 고신용자 금리가 11.06%에서 11.59%로 0.53% 올랐다. 중저신용자에 해당하는 700점 이하 금리는 0.04%포인트 소폭 오른 18.29%를 기록했다. 카드사들은 대출 총량 규제에 따라 고신용자 카드론 금리를...",
+      "pre_score": 87,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 42,
+          "industry_strategy": 7,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "카드론",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "카드사",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 24,
+        "source_bonus": 8,
+        "raw_score": 87,
+        "final_score": 87
+      },
+      "flags": {
+        "trusted_source": true,
         "domestic": true,
         "loan_related": true,
         "possible_ad": false
@@ -2216,6 +2322,119 @@
       }
     },
     {
+      "id": "21526bed0d15a0df",
+      "title": "카드사 가계대출 1.5% 이내 관리…중금리대출 확대 압박도",
+      "source": "이데일리",
+      "source_domain": "edaily.co.kr",
+      "published_at": "2026-04-23T16:23:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=05120086645419072",
+      "naver_link": "https://n.news.naver.com/mnews/article/018/0006264471?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "가계부채",
+        "저신용자"
+      ],
+      "description": "금융당국은 가계부채 관리 강화 조치로 인해 중·저신용자의 금융 접근성이 위축되지 않도록 중금리대출... 결국 가계대출 총량은 묶고 상대적으로 리스크가 높은 중·저신용자 대상 대출은 늘리는 구조가 형성되며...",
+      "pre_score": 88,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 42,
+          "industry_strategy": 14,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "카드사",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 8,
+        "raw_score": 88,
+        "final_score": 88
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "0250c7c452f52d85",
+      "title": "\"불법사채, 사후 처벌보다 사전 차단이 우선\"…한국 TI 인권시민연대 제...",
+      "source": "sisunnews.co.kr",
+      "source_domain": "sisunnews.co.kr",
+      "published_at": "2026-04-23T16:16:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "http://www.sisunnews.co.kr/news/articleView.html?idxno=237401",
+      "naver_link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=237401",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "저신용자"
+      ],
+      "description": "저신용자들이 제도권 금융에서 소외되어 불법사금융으로 유입되는 구조를 개선하기 위해 정부 직접 대출을 확대해야 한다는 설명이다. 또한 재무 개선 프로그램을 통해 서민들의 금융 접근성을 근본적으로 제고해야...",
+      "pre_score": 19,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "사금융",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 19,
+        "final_score": 19
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "787af36970851e46",
       "title": "SC제일銀·주금공, 주담대 활성화 ‘커버드본드 지급보증’ MOU",
       "source": "디지털타임스",
@@ -2325,22 +2544,153 @@
       "naver_link": "http://www.newswatch.kr/news/articleView.html?idxno=79367",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "부동산 대출"
+        "가계대출",
+        "대출 규제",
+        "부동산 대출",
+        "저신용자"
       ],
       "description": "또한 개인사업자 신용 대출의 한도를 3억원으로 높이고, '개인사업자 부동산담보대출'을 출시하기도 했다. 이 은행의 지난해 개인사업자대출 잔액은 3조1000억원으로 전년(1조9000억원) 대비 63.2% 증가했다. 윤 대표의...",
-      "pre_score": 6,
+      "pre_score": 24,
       "score_detail": {
         "groups": {},
         "matched_terms": {},
-        "keyword_bonus": 6,
+        "keyword_bonus": 24,
         "source_bonus": 0,
-        "raw_score": 6,
-        "final_score": 6
+        "raw_score": 24,
+        "final_score": 24
       },
       "flags": {
         "trusted_source": false,
         "domestic": true,
         "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "cbad1023a5ebf95f",
+      "title": "[ET톡]스타트업 매출 깎아 이자 줄이는 모순",
+      "source": "전자신문",
+      "source_domain": "etnews.com",
+      "published_at": "2026-04-23T16:01:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.etnews.com/20260423000269",
+      "naver_link": "https://n.news.naver.com/mnews/article/030/0003421150?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "저신용자"
+      ],
+      "description": "핀테크 플랫폼은 중·저신용자가 비대면으로 조건을 비교하고 대출을 갈아탈 수 있는 환경을 만들었다. 저축은행도 대면 영업에서 벗어나 고객을 확보해왔다. 중소 핀테크사가 적자로 이탈하면, 고객 접점이 그만큼...",
+      "pre_score": 25,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "저축은행",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 6,
+        "raw_score": 25,
+        "final_score": 25
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "52ec00c7a7f23044",
+      "title": "저축은행서 밀려 카드론으로⋯'중금리 사다리' 끊긴 서민들",
+      "source": "viva100.com",
+      "source_domain": "viva100.com",
+      "published_at": "2026-04-23T15:36:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.viva100.com/article/20260423501052",
+      "naver_link": "https://www.viva100.com/article/20260423501052",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "연체율",
+        "저신용자",
+        "카드론"
+      ],
+      "description": "저축은행이 건전성 관리를 위해 중금리대출 공급을 40% 이상 줄이자, 갈 곳 잃은 중·저신용자들이 더 높은... 중·저신용자 대상 대출은 연체율 상승과 대손충당금 부담으로 직결되는 만큼, 수익성 대비 리스크가 크다는...",
+      "pre_score": 82,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 28,
+          "risk_repayment": 9,
+          "industry_strategy": 21,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "카드론",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "저축은행",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 82,
+        "final_score": 82
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
         "possible_ad": false
       }
     },
@@ -2464,16 +2814,25 @@
         "자영업자 대출"
       ],
       "description": "반면, 대출 관련 취급액은 전반적으로 감소했다. 장기카드대출과 단기카드대출은 전년 동기 대비 각각 0.1... 지난해 1분기에는 국내 정치적 이슈 등의 영향으로 자영업자들의 어려움이 커지며 연체율이 상승해 연중...",
-      "pre_score": 34,
+      "pre_score": 48,
       "score_detail": {
         "groups": {
+          "direct_loan": 14,
           "risk_repayment": 9,
           "customer_demand": 6
         },
         "matched_terms": {
-          "risk_repayment": [
+          "direct_loan": [
             {
               "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
               "in_title": false,
               "in_description": true,
               "weight": 1.0
@@ -2490,8 +2849,8 @@
         },
         "keyword_bonus": 12,
         "source_bonus": 7,
-        "raw_score": 34,
-        "final_score": 34
+        "raw_score": 48,
+        "final_score": 48
       },
       "flags": {
         "trusted_source": true,
@@ -2678,6 +3037,79 @@
       }
     },
     {
+      "id": "9bf5a727a765aa0d",
+      "title": "신용대출 막히자 차 맡겼다…40·60대 고액 대출에 차담대 시장 ‘풍선...",
+      "source": "viva100.com",
+      "source_domain": "viva100.com",
+      "published_at": "2026-04-23T14:42:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.viva100.com/article/20260423500624",
+      "naver_link": "https://www.viva100.com/article/20260423500624",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "신용대출",
+        "저신용자",
+        "주택담보대출",
+        "카드론"
+      ],
+      "description": "흔히 차담대는 자금 마련이 어려운 중‧저신용자들의 급전 창구로 인식돼 왔다. 지난해 6‧27 대책 이후 주택담보대출이나 신용대출, 카드론 등이 가계대출 총량 규제에 묶이면서 하반기부터 차담대 약정 총액이...",
+      "pre_score": 78,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 42,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "신용대출",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            },
+            {
+              "term": "주택담보대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "카드론",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 78,
+        "final_score": 78
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "33d2880d654ea762",
       "title": "생산적금융 자본규제 완화해놓고 \"정부 정책사업 우선 강요\"",
       "source": "newstomato.com",
@@ -2724,11 +3156,10 @@
         "약관대출"
       ],
       "description": "국내 주식시장 강세가 이어지고 있는 가운데 보험계약대출이 2분기 연속 늘어났다[출처=Pixabay] 대표적 불황형 대출로 꼽히는 보험계약대출(약관대출)이 2분기 연속 늘어난 것으로 집계됐다. 보험계약을 담보로 돈을...",
-      "pre_score": 36,
+      "pre_score": 54,
       "score_detail": {
         "groups": {
-          "direct_loan": 42,
-          "market_noise": -18
+          "direct_loan": 42
         },
         "matched_terms": {
           "direct_loan": [
@@ -2744,26 +3175,61 @@
               "in_description": true,
               "weight": 3.0
             }
-          ],
-          "market_noise": [
-            {
-              "term": "코스피",
-              "in_title": true,
-              "in_description": false,
-              "weight": 2.0
-            }
           ]
         },
         "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 36,
-        "final_score": 36
+        "raw_score": 54,
+        "final_score": 54
       },
       "flags": {
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
         "possible_ad": true
+      }
+    },
+    {
+      "id": "7c998e48a2261ad4",
+      "title": "[아주사설 | 기본·원칙·상식] 반도체 착시'에 가려진 한국 경제의 외날...",
+      "source": "ajunews.com",
+      "source_domain": "ajunews.com",
+      "published_at": "2026-04-23T14:12:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.ajunews.com/view/20260423140455260",
+      "naver_link": "https://www.ajunews.com/view/20260423140455260",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "고신용자",
+        "카드론"
+      ],
+      "description": "신용융자 잔고가 사상 최고치를 경신하는 가운데, 고신용자들까지 고금리 카드론에 손을 뻗는 기현상이 나타나고 있다. 주가 6500선이라는 화려한 성곽이 빚으로 쌓아 올린 사상누각일 가능성을 배제하기 어렵다는...",
+      "pre_score": 26,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "카드론",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 26,
+        "final_score": 26
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
       }
     },
     {
@@ -2805,6 +3271,49 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "99ba139acaae8f96",
+      "title": "\"사장님, 전화 없어요?\"…편의점에서 멈춘 신용카드 심사",
+      "source": "ntoday.co.kr",
+      "source_domain": "ntoday.co.kr",
+      "published_at": "2026-04-23T13:46:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.ntoday.co.kr/news/articleView.html?idxno=126714",
+      "naver_link": "https://www.ntoday.co.kr/news/articleView.html?idxno=126714",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수",
+        "저신용자"
+      ],
+      "description": "일부 간편결제 사업자는 통신·쇼핑 데이터를 결합한 자체 평가 모형을 바탕으로 중·저신용자 대상 서비스를 확대하고 있으며, 소액 후불결제(BNPL)를 통해 초기 금융 이용 경험을 제공하고 있다. 이 과정에서 기존 카드...",
+      "pre_score": 18,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 18,
+        "final_score": 18
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -2867,25 +3376,14 @@
         "약관대출"
       ],
       "description": "재개하고 대출 금리 인하까지 단행하면서 개인투자자들의 빚투는 더 증가할 전망이다. 금융투자업계에 따르면 메리츠증권은 지난 20일 신용거래약관 개정 내용을 고객들에게 안내했다. 주요 사항은 신용거래융자...",
-      "pre_score": 0,
+      "pre_score": 12,
       "score_detail": {
-        "groups": {
-          "market_noise": -18
-        },
-        "matched_terms": {
-          "market_noise": [
-            {
-              "term": "증시",
-              "in_title": true,
-              "in_description": false,
-              "weight": 2.0
-            }
-          ]
-        },
+        "groups": {},
+        "matched_terms": {},
         "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": -6,
-        "final_score": 0
+        "raw_score": 12,
+        "final_score": 12
       },
       "flags": {
         "trusted_source": false,
@@ -2909,14 +3407,25 @@
         "부동산 대출"
       ],
       "description": "애큐온캐피탈의 부동산 PF대출 규모는 약 5491억원으로 동종 업계 대비 크지 않은 수준에 머물렀다. 애큐온캐피탈이 수익성 확보가 녹록지 않은 리테일 금융에서 벗어나 기업금융 확대를 통한 돌파구 마련에 나서왔다는...",
-      "pre_score": 6,
+      "pre_score": 20,
       "score_detail": {
-        "groups": {},
-        "matched_terms": {},
+        "groups": {
+          "industry_strategy": 14
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "한화생명",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
         "keyword_bonus": 6,
         "source_bonus": 0,
-        "raw_score": 6,
-        "final_score": 6
+        "raw_score": 20,
+        "final_score": 20
       },
       "flags": {
         "trusted_source": false,
@@ -3019,6 +3528,37 @@
       }
     },
     {
+      "id": "97c6bcefe2e59e9a",
+      "title": "[재정칼럼] 자녀를 자산가로 키우는 방법",
+      "source": "koreadaily.com",
+      "source_domain": "koreadaily.com",
+      "published_at": "2026-04-23T10:50:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.koreadaily.com/article/20260422184919106",
+      "naver_link": "https://www.koreadaily.com/article/20260422184919106",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수"
+      ],
+      "description": "복잡한 경제 이론보다 당장 사회에 나가 맞닥뜨릴 학자금 융자, 신용카드 이자, 은퇴 투자 같은 실질적인... 한국의 교육제도는 여전히 ‘국영수’ 점수에 모든 에너지를 쏟는다. 그러니 대기업에 취직해도, 본인의...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
       "id": "d1a2201d423d1621",
       "title": "[생산적금융 대전환⑤] 신한, 핵심은 ‘성장성 신용평가’ 개발",
       "source": "byline.network",
@@ -3030,17 +3570,29 @@
       "naver_link": "https://byline.network/?p=9004111222600216",
       "origin": "naver_news_api",
       "matched_keywords": [
-        "부동산 대출"
+        "부동산 대출",
+        "신용평가"
       ],
       "description": "한국 금융은 언젠가부터 부동산 담보 대출과 가계 신용으로 몸집을 키워왔다. 금융권 입장에서는 안전하고, 수익도 났지만, 그 돈이 경제를 성장시켰느냐는 질문 앞에서는 답이 궁색해진다. 정부는 방향을 틀겠다고 했다....",
-      "pre_score": 6,
+      "pre_score": 40,
       "score_detail": {
-        "groups": {},
-        "matched_terms": {},
-        "keyword_bonus": 6,
+        "groups": {
+          "direct_loan": 28
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
         "source_bonus": 0,
-        "raw_score": 6,
-        "final_score": 6
+        "raw_score": 40,
+        "final_score": 40
       },
       "flags": {
         "trusted_source": false,
@@ -3072,6 +3624,105 @@
         "source_bonus": 0,
         "raw_score": 6,
         "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b7e63b3d564cffad",
+      "title": "저축은행 중금리대출 1조원 급감…서민대출 절벽",
+      "source": "cstimes.com",
+      "source_domain": "cstimes.com",
+      "published_at": "2026-04-23T09:10:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.cstimes.com/news/articleView.html?idxno=703020",
+      "naver_link": "https://www.cstimes.com/news/articleView.html?idxno=703020",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "저신용자"
+      ],
+      "description": "중·저신용자 대출에 보다 보수적으로 나섰다는 분석이다. 여기에 부동산 경기 침체와 내수 부진으로... 민간 중금리대출은 신용 하위 50% 이하 차주 등 중·저신용자의 제도권 금융 접근성을 높이기 위해 도입된...",
+      "pre_score": 26,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 14,
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "저축은행",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "차주",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 26,
+        "final_score": 26
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "447f90c8c87c64b9",
+      "title": "메리츠금융, 애큐온 인수전 등판…'조달 리스크' 해소 목적 [넘버스]",
+      "source": "bloter.net",
+      "source_domain": "bloter.net",
+      "published_at": "2026-04-23T09:04:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.bloter.net/news/articleView.html?idxno=660311",
+      "naver_link": "https://n.news.naver.com/mnews/article/293/0000083275?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "저신용자"
+      ],
+      "description": "메리츠 특유의 공격적인 영업 방식과 소매 금융이 결합할 경우 중·저신용자 대상 고금리 대출 사업이 비대해질 수 있다는 우려도 적지 않다. IB 업계 관계자는 \"메리츠는 높은 조달 금리라는 고질병을 고치고 리테일...",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 6
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
       },
       "flags": {
         "trusted_source": false,
@@ -3114,6 +3765,63 @@
         "source_bonus": 0,
         "raw_score": 20,
         "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d04202d5665d0269",
+      "title": "[풍전등화 광명전기]② 최대주주 4번 교체…인수자 자금조달 실패 반복...",
+      "source": "bloter.net",
+      "source_domain": "bloter.net",
+      "published_at": "2026-04-23T08:57:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.bloter.net/news/articleView.html?idxno=660309",
+      "naver_link": "https://n.news.naver.com/mnews/article/293/0000083272?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금소법"
+      ],
+      "description": "당시 금융위원회는 하도급이 원도급사(시행사)에 PF 연대 보증 책임을 제공하는 것은 '금융 소비자 보호에 관한 법률'(금소법) 위배란 유권 해석을 내놨다. 광명전기로선 부실이 발생한 경기도 양주 등지의 PF 사업들에...",
+      "pre_score": 26,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11,
+          "risk_repayment": 9
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융위원회",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "금융위",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "부실",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 26,
+        "final_score": 26
       },
       "flags": {
         "trusted_source": false,
@@ -3241,6 +3949,90 @@
         "trusted_source": false,
         "domestic": true,
         "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ff778c6b47005721",
+      "title": "[투데이 Pick] 은행권 ‘금고 쟁탈전’ 재점화…서울·인천 대형 입찰 줄...",
+      "source": "news2day.co.kr",
+      "source_domain": "news2day.co.kr",
+      "published_at": "2026-04-23T07:02:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.news2day.co.kr/article/20260422500242",
+      "naver_link": "https://www.news2day.co.kr/article/20260422500242",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수"
+      ],
+      "description": "금융기관의 신용도 및 재무 안정성(25점), 금고 업무 관리 능력(28점) 등 핵심 항목에서 은행 간 점수 차이가 크지 않은 만큼 금리와 출연금이 당락을 가를 것이라는 관측이 나온다. 특히 수시입출금식 예금 금리 배점이...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 14
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "은행권",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "7d897965975fde10",
+      "title": "NH농협, AI로 467개 항목 분석…기업 선별부터 금리 산정까지",
+      "source": "서울경제",
+      "source_domain": "sedaily.com",
+      "published_at": "2026-04-23T06:31:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.sedaily.com/article/20035887?ref=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/011/0004613682?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수"
+      ],
+      "description": "업체의 매출 결제 방법과 계좌 수, 신용공여 금액 등과 상품 거래 정보, 만기 이력을 반영했다. 개별 기업의 여신과 수신, 퇴직연금 등 상품 가입 가능성을 점수화(0~100점)했다. 1개월과 3개월, 6개월 등 기간을 정해...",
+      "pre_score": 21,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 7
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "여신",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 8,
+        "raw_score": 21,
+        "final_score": 21
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
         "possible_ad": false
       }
     },
@@ -3409,6 +4201,58 @@
         "source_bonus": 0,
         "raw_score": 27,
         "final_score": 27
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "c2c653a2f541194c",
+      "title": "불황형 대출 급증에… 중저 신용자, 규제 제외 검토",
+      "source": "donga.com",
+      "source_domain": "donga.com",
+      "published_at": "2026-04-23T04:35:00+09:00",
+      "published_date": "2026-04-23",
+      "collected_at": "2026-04-25T04:41:00+09:00",
+      "url": "https://www.donga.com/news/Economy/article/all/20260423/133795320/2",
+      "naver_link": "https://n.news.naver.com/mnews/article/020/0003714659?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "고신용자",
+        "신용대출"
+      ],
+      "description": "대출 여력이 줄어든 금융사들은 연체 위험이 적은 고신용자에게 먼저 대출을 내주기 때문이다. 실제 5대 시중은행(KB국민·신한·하나·우리·NH농협)의 중금리 대출 비중은 감소 추세다. 은행연합회의 2월 기준 신용대출...",
+      "pre_score": 35,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "risk_repayment": 9
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 35,
+        "final_score": 35
       },
       "flags": {
         "trusted_source": false,
