@@ -1,0 +1,56 @@
+name: Collect Naver News
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub Actions cron uses UTC. This runs every hour at minute 5.
+    # KST = UTC+9, so it runs at HH:05 every hour in Korea.
+    - cron: '5 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: naver-news-collector
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Collect Naver News articles
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+        run: |
+          python auto_dash/naver_news_collector.py \
+            --output auto_dash/articles_raw.json \
+            --days 2 \
+            --display 20 \
+            --pages 1 \
+            --sort date
+
+      - name: Commit and push if JSON changed
+        run: |
+          if git diff --quiet -- auto_dash/articles_raw.json; then
+            echo "No article changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add auto_dash/articles_raw.json
+          git commit -m "Update raw Naver news articles"
+          git pull --rebase origin main
+          git push
