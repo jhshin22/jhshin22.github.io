@@ -1,0 +1,82 @@
+name: Manual Naver News Collector
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_date:
+        description: 'KST target date: today, yesterday, or YYYY-MM-DD'
+        required: true
+        default: 'today'
+      pages:
+        description: 'Pages per keyword'
+        required: true
+        default: '1'
+      display:
+        description: 'Results per page, max 100'
+        required: true
+        default: '20'
+      output:
+        description: 'Optional output path. Leave blank for auto_dash/articles_raw_YYYY-MM-DD.json'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: naver-news-mamul
+  cancel-in-progress: false
+
+jobs:
+  collect-manual:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run manual Naver News collector
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          TARGET_DATE: ${{ github.event.inputs.target_date }}
+          PAGES: ${{ github.event.inputs.pages }}
+          DISPLAY: ${{ github.event.inputs.display }}
+          OUTPUT: ${{ github.event.inputs.output }}
+        run: |
+          if [ -z "$OUTPUT" ]; then
+            python auto_dash/naver_news_collector_mamul.py \
+              --target-date "$TARGET_DATE" \
+              --pages "$PAGES" \
+              --display "$DISPLAY" \
+              --sort date
+          else
+            python auto_dash/naver_news_collector_mamul.py \
+              --target-date "$TARGET_DATE" \
+              --pages "$PAGES" \
+              --display "$DISPLAY" \
+              --output "$OUTPUT" \
+              --sort date
+          fi
+
+      - name: Commit and push manual output if changed
+        run: |
+          git add auto_dash/*.json
+
+          if git diff --cached --quiet; then
+            echo "No JSON changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update manual Naver news articles"
+          git pull --rebase origin main
+          git push
