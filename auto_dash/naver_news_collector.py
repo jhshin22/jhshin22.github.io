@@ -177,9 +177,6 @@ def save_articles(path: Path, articles: list[dict[str, Any]]) -> None:
 
 
 def source_from_item(item: dict[str, Any]) -> str:
-    # Naver News API does not provide a clean media name field.
-    # For now, infer from originallink domain when possible and keep source as unknown.
-    # ChatGPT/future enrichment can classify the source later.
     url = item.get("originallink") or item.get("link") or ""
     host = urllib.parse.urlsplit(url).netloc.lower().replace("www.", "")
     return host or "unknown"
@@ -212,11 +209,15 @@ def pre_score(title: str, description: str, source: str, keywords: list[str]) ->
     return max(score, 0)
 
 
+def validate_env() -> None:
+    missing = [name for name in ["NAVER_CLIENT_ID", "NAVER_CLIENT_SECRET"] if not os.environ.get(name)]
+    if missing:
+        raise RuntimeError(f"Missing required GitHub Secrets/env vars: {', '.join(missing)}")
+
+
 def search_naver(keyword: str, display: int, start: int, sort: str) -> list[dict[str, Any]]:
-    client_id = os.environ.get("NAVER_CLIENT_ID")
-    client_secret = os.environ.get("NAVER_CLIENT_SECRET")
-    if not client_id or not client_secret:
-        raise RuntimeError("NAVER_CLIENT_ID and NAVER_CLIENT_SECRET environment variables are required.")
+    client_id = os.environ["NAVER_CLIENT_ID"]
+    client_secret = os.environ["NAVER_CLIENT_SECRET"]
 
     params = urllib.parse.urlencode(
         {
@@ -237,6 +238,7 @@ def search_naver(keyword: str, display: int, start: int, sort: str) -> list[dict
 
 
 def collect(output_path: Path, days: int, display: int, pages: int, sleep_seconds: float, sort: str) -> tuple[int, int]:
+    validate_env()
     now = datetime.now(KST)
     cutoff = now - timedelta(days=days)
 
@@ -245,6 +247,10 @@ def collect(output_path: Path, days: int, display: int, pages: int, sleep_second
     existing_urls = {normalize_url(a.get("url", "")) for a in articles if a.get("url")}
     added = 0
     seen_in_run: set[str] = set()
+    error_count = 0
+
+    # Create an empty JSON file early, so a successful run always leaves a visible output.
+    save_articles(output_path, articles)
 
     for keyword in KEYWORDS:
         for page in range(pages):
@@ -252,6 +258,7 @@ def collect(output_path: Path, days: int, display: int, pages: int, sleep_second
             try:
                 items = search_naver(keyword=keyword, display=display, start=start, sort=sort)
             except Exception as exc:
+                error_count += 1
                 print(f"[WARN] keyword={keyword!r} start={start}: {exc}")
                 continue
 
@@ -272,7 +279,6 @@ def collect(output_path: Path, days: int, display: int, pages: int, sleep_second
                 source = source_from_item(item)
                 aid = article_id(norm_url, title, source, published_at)
                 if aid in existing_ids or norm_url in existing_urls or aid in seen_in_run:
-                    # Existing article: add newly matched keyword if needed.
                     for article in articles:
                         if article.get("id") == aid or normalize_url(article.get("url", "")) == norm_url:
                             kws = set(article.get("matched_keywords", []))
@@ -309,6 +315,9 @@ def collect(output_path: Path, days: int, display: int, pages: int, sleep_second
 
             if sleep_seconds > 0:
                 time.sleep(sleep_seconds)
+
+    if error_count == len(KEYWORDS) * pages:
+        raise RuntimeError("All Naver API calls failed. Check NAVER_CLIENT_ID, NAVER_CLIENT_SECRET, and API activation settings.")
 
     articles.sort(key=lambda x: (x.get("published_at", ""), x.get("pre_score", 0)), reverse=True)
     save_articles(output_path, articles)
