@@ -3,7 +3,9 @@
 Naver News API collector for loan/finance dashboard.
 
 - Searches Naver News API with predefined loan/finance keywords.
-- Appends newly discovered articles to one JSON file only once.
+- Saves articles into a daily JSON file based on Korean date.
+- Keeps only articles whose published date matches the target Korean date.
+- Appends newly discovered articles to that daily file only once.
 - Deduplicates by normalized URL first, then by title/source/date fallback.
 
 Required environment variables:
@@ -11,7 +13,7 @@ Required environment variables:
   NAVER_CLIENT_SECRET
 
 Default output:
-  auto_dash/articles_raw.json
+  auto_dash/articles_raw_YYYY-MM-DD.json
 """
 
 from __future__ import annotations
@@ -25,7 +27,7 @@ import re
 import time
 import urllib.parse
 import urllib.request
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any
@@ -129,10 +131,9 @@ def normalize_url(url: str) -> str:
         if k.lower() not in TRACKING_QUERY_KEYS
     ]
     query = urllib.parse.urlencode(query_pairs, doseq=True)
-    normalized = urllib.parse.urlunsplit(
+    return urllib.parse.urlunsplit(
         (parsed.scheme.lower(), parsed.netloc.lower(), parsed.path.rstrip("/"), query, "")
     )
-    return normalized
 
 
 def article_id(url: str, title: str, source: str, published_at: str) -> str:
@@ -148,6 +149,18 @@ def parse_naver_pubdate(pubdate: str) -> str | None:
         return dt.astimezone(KST).isoformat(timespec="seconds")
     except Exception:
         return None
+
+
+def resolve_target_date(value: str | None) -> date:
+    if not value or value == "today":
+        return datetime.now(KST).date()
+    if value == "yesterday":
+        return datetime.now(KST).date() - timedelta(days=1)
+    return date.fromisoformat(value)
+
+
+def default_output_path(target_date: date) -> Path:
+    return Path(f"auto_dash/articles_raw_{target_date.isoformat()}.json")
 
 
 def load_articles(path: Path) -> list[dict[str, Any]]:
@@ -166,9 +179,10 @@ def load_articles(path: Path) -> list[dict[str, Any]]:
     return []
 
 
-def save_articles(path: Path, articles: list[dict[str, Any]]) -> None:
+def save_articles(path: Path, articles: list[dict[str, Any]], target_date: date) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
+        "target_date": target_date.isoformat(),
         "updated_at": datetime.now(KST).isoformat(timespec="seconds"),
         "count": len(articles),
         "articles": articles,
@@ -219,14 +233,7 @@ def search_naver(keyword: str, display: int, start: int, sort: str) -> list[dict
     client_id = os.environ["NAVER_CLIENT_ID"]
     client_secret = os.environ["NAVER_CLIENT_SECRET"]
 
-    params = urllib.parse.urlencode(
-        {
-            "query": keyword,
-            "display": display,
-            "start": start,
-            "sort": sort,
-        }
-    )
+    params = urllib.parse.urlencode({"query": keyword, "display": display, "start": start, "sort": sort})
     request = urllib.request.Request(f"{NAVER_NEWS_API_URL}?{params}")
     request.add_header("X-Naver-Client-Id", client_id)
     request.add_header("X-Naver-Client-Secret", client_secret)
@@ -237,20 +244,19 @@ def search_naver(keyword: str, display: int, start: int, sort: str) -> list[dict
     return data.get("items", [])
 
 
-def collect(output_path: Path, days: int, display: int, pages: int, sleep_seconds: float, sort: str) -> tuple[int, int]:
+def collect(output_path: Path, target_date: date, display: int, pages: int, sleep_seconds: float, sort: str) -> tuple[int, int]:
     validate_env()
     now = datetime.now(KST)
-    cutoff = now - timedelta(days=days)
 
     articles = load_articles(output_path)
+    articles = [a for a in articles if str(a.get("published_at", ""))[:10] == target_date.isoformat()]
     existing_ids = {a.get("id") for a in articles if a.get("id")}
     existing_urls = {normalize_url(a.get("url", "")) for a in articles if a.get("url")}
     added = 0
     seen_in_run: set[str] = set()
     error_count = 0
 
-    # Create an empty JSON file early, so a successful run always leaves a visible output.
-    save_articles(output_path, articles)
+    save_articles(output_path, articles, target_date)
 
     for keyword in KEYWORDS:
         for page in range(pages):
@@ -272,8 +278,7 @@ def collect(output_path: Path, days: int, display: int, pages: int, sleep_second
                 if not title or not norm_url or not published_at:
                     continue
 
-                published_dt = datetime.fromisoformat(published_at)
-                if published_dt < cutoff:
+                if datetime.fromisoformat(published_at).date() != target_date:
                     continue
 
                 source = source_from_item(item)
@@ -293,6 +298,7 @@ def collect(output_path: Path, days: int, display: int, pages: int, sleep_second
                     "title": title,
                     "source": source,
                     "published_at": published_at,
+                    "published_date": target_date.isoformat(),
                     "collected_at": now.isoformat(timespec="seconds"),
                     "url": norm_url,
                     "naver_link": naver_link,
@@ -320,28 +326,33 @@ def collect(output_path: Path, days: int, display: int, pages: int, sleep_second
         raise RuntimeError("All Naver API calls failed. Check NAVER_CLIENT_ID, NAVER_CLIENT_SECRET, and API activation settings.")
 
     articles.sort(key=lambda x: (x.get("published_at", ""), x.get("pre_score", 0)), reverse=True)
-    save_articles(output_path, articles)
+    save_articles(output_path, articles, target_date)
     return added, len(articles)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Collect Naver News API articles into a single deduplicated JSON file.")
-    parser.add_argument("--output", default="auto_dash/articles_raw.json", help="Output JSON path")
-    parser.add_argument("--days", type=int, default=2, help="Collect articles newer than now - DAYS")
+    parser = argparse.ArgumentParser(description="Collect Naver News API articles into a daily deduplicated JSON file.")
+    parser.add_argument("--target-date", default="today", help="KST date to collect: today, yesterday, or YYYY-MM-DD")
+    parser.add_argument("--output", default=None, help="Output JSON path. Default: auto_dash/articles_raw_YYYY-MM-DD.json")
     parser.add_argument("--display", type=int, default=20, help="Naver API results per page, max 100")
     parser.add_argument("--pages", type=int, default=1, help="Pages per keyword")
     parser.add_argument("--sleep", type=float, default=0.2, help="Sleep seconds between API calls")
     parser.add_argument("--sort", choices=["date", "sim"], default="date", help="Naver API sort mode")
     args = parser.parse_args()
 
+    target_date = resolve_target_date(args.target_date)
+    output_path = Path(args.output) if args.output else default_output_path(target_date)
+
     added, total = collect(
-        output_path=Path(args.output),
-        days=args.days,
+        output_path=output_path,
+        target_date=target_date,
         display=min(max(args.display, 1), 100),
         pages=max(args.pages, 1),
         sleep_seconds=max(args.sleep, 0),
         sort=args.sort,
     )
+    print(f"Target date: {target_date.isoformat()}")
+    print(f"Output: {output_path}")
     print(f"Added {added} new articles. Total: {total}")
 
 
