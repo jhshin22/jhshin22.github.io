@@ -34,6 +34,9 @@
     .query { grid-column: span 4; }
     .load { grid-column: span 1; }
     .copyall { grid-column: span 2; }
+    .label-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .label-tab { height: 34px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: #374151; padding: 0 12px; font-size: 13px; font-weight: 700; }
+    .label-tab.active { background: #eff6ff; border-color: #93c5fd; color: #1d4ed8; }
     .status { margin-top: 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: var(--muted); font-size: 14px; }
     main .wrap { padding-top: 14px; }
     .article { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin: 12px 0; box-shadow: 0 2px 10px rgba(17, 24, 39, 0.04); }
@@ -51,7 +54,7 @@
     .actions a, .actions button { display: inline-flex; align-items: center; justify-content: center; height: 36px; border-radius: 10px; border: 1px solid var(--line); padding: 0 12px; background: #fff; color: var(--text); text-decoration: none; font-weight: 650; font-size: 14px; }
     .actions a.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
     .empty { padding: 40px 18px; text-align: center; color: var(--muted); }
-    @media (max-width: 760px) { .controls { grid-template-columns: 1fr; } .date, .sort, .query, .load, .copyall { grid-column: span 1; } .topline { flex-direction: column; } .score { min-width: auto; } }
+    @media (max-width: 760px) { .controls { grid-template-columns: 1fr; } .date, .sort, .query, .load, .copyall { grid-column: span 1; } .topline { flex-direction: column; } .score { min-width: auto; } .label-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; } .label-tab { flex: 0 0 auto; } }
   </style>
 </head>
 <body>
@@ -66,12 +69,24 @@
         <div class="control load"><label>&nbsp;</label><button class="primary" id="loadBtn">불러오기</button></div>
         <div class="control copyall"><label>&nbsp;</label><button class="ghost" id="copyAllBtn">전체 복사</button></div>
       </div>
+      <div class="label-tabs" id="labelTabs" aria-label="라벨 필터"></div>
       <div class="status" id="status">날짜를 선택한 뒤 불러오기를 누르세요.</div>
     </div>
   </header>
   <main><div class="wrap" id="list"></div></main>
 
   <script>
+    const LABEL_RULE_PATH = 'config/label_rules.json';
+    const FALLBACK_LABELS = [
+      {id:'policy_regulation', name:'정책/규제', keywords:['DSR','DTI','LTV','대출 규제','금융위원회 대출','금융감독원 대출','금융소비자','금소법']},
+      {id:'rate_indicator', name:'금리/지표', keywords:['대출 금리','가계부채','연체율','신용점수','신용평가']},
+      {id:'market_direction', name:'시장방향', keywords:['부동산 대출','주택시장 대출','주택담보대출','주담대','전세대출','가계대출','가계부채']},
+      {id:'risk_npl', name:'리스크/연체', keywords:['연체율','채무조정','개인회생','취약차주','저신용자','가계부채']},
+      {id:'retail_lending_strategy', name:'소매대출전략', keywords:['신용대출','대환대출','대출 갈아타기','카드론','현금서비스','마이너스통장','소상공인 대출','자영업자 대출','은행권 대출','저축은행 대출','카드사 대출','고신용자','저신용자','신용점수','신용평가']},
+      {id:'insurance_issue', name:'보험사', keywords:['보험계약대출','약관대출','보험사 대출','생명보험 대출','교보생명']},
+      {id:'ai_trend', name:'AI', keywords:['금융 AI','AI 활용']}
+    ];
+
     const dateInput = document.getElementById('dateInput');
     const sortSelect = document.getElementById('sortSelect');
     const searchInput = document.getElementById('searchInput');
@@ -79,9 +94,12 @@
     const copyAllBtn = document.getElementById('copyAllBtn');
     const statusEl = document.getElementById('status');
     const listEl = document.getElementById('list');
+    const labelTabsEl = document.getElementById('labelTabs');
     let rawArticles = [];
     let currentPayload = null;
     let loadedPath = '';
+    let selectedLabel = '';
+    let labelRules = FALLBACK_LABELS;
 
     function todayKstString() { const now = new Date(); const kst = new Date(now.getTime() + 9 * 60 * 60 * 1000); return kst.toISOString().slice(0, 10); }
     function dataPathFromDate(date) { const [year, month] = String(date).split('-'); return `data/raw/${year}/${month}/articles_raw_${date}.json`; }
@@ -96,19 +114,46 @@
       try { await navigator.clipboard.writeText(text); const original = button.textContent; button.textContent = '복사 완료'; setTimeout(() => button.textContent = original, 900); }
       catch (err) { const area = document.createElement('textarea'); area.value = text; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); }
     }
+    async function fetchJson(path) { const response = await fetch(`${path}?ts=${Date.now()}`); if (!response.ok) throw new Error(`HTTP ${response.status}`); return await response.json(); }
+    async function loadLabelRules() {
+      try {
+        const data = await fetchJson(LABEL_RULE_PATH);
+        if (Array.isArray(data.labels) && data.labels.length) {
+          labelRules = data.labels.slice().sort((a, b) => (a.order || 0) - (b.order || 0));
+        }
+      } catch (err) {
+        labelRules = FALLBACK_LABELS;
+      }
+      renderLabelTabs();
+    }
+    function matchedKeywordSet(article) { return new Set((article.matched_keywords || []).map(k => String(k).toLowerCase())); }
+    function articleMatchesLabel(article, labelId) {
+      if (!labelId) return true;
+      const rule = labelRules.find(item => item.id === labelId);
+      if (!rule) return true;
+      const keywords = matchedKeywordSet(article);
+      return (rule.keywords || []).some(keyword => keywords.has(String(keyword).toLowerCase()));
+    }
+    function renderLabelTabs() {
+      const tabs = [{id: '', name: '전체', full_name: '전체 기사'}, ...labelRules];
+      labelTabsEl.innerHTML = tabs.map(tab => `<button type="button" class="label-tab ${tab.id === selectedLabel ? 'active' : ''}" data-label="${escapeHtml(tab.id)}" title="${escapeHtml(tab.full_name || tab.name)}">${escapeHtml(tab.name)}</button>`).join('');
+    }
     function filteredAndSorted() {
       const query = searchInput.value.trim().toLowerCase();
       let items = rawArticles.slice();
+      items = items.filter(article => articleMatchesLabel(article, selectedLabel));
       if (query) items = items.filter(article => { const keywords = Array.isArray(article.matched_keywords) ? article.matched_keywords.join(' ') : ''; const text = `${article.title || ''} ${article.description || ''} ${article.source || ''} ${keywords}`.toLowerCase(); return text.includes(query); });
       const sort = sortSelect.value;
       items.sort((a, b) => { if (sort === 'asc') return (a.pre_score ?? 0) - (b.pre_score ?? 0); if (sort === 'time_desc') return String(b.published_at || '').localeCompare(String(a.published_at || '')); if (sort === 'time_asc') return String(a.published_at || '').localeCompare(String(b.published_at || '')); return (b.pre_score ?? 0) - (a.pre_score ?? 0); });
       return items;
     }
     function render() {
+      renderLabelTabs();
       const items = filteredAndSorted();
       const total = rawArticles.length;
       const targetDate = currentPayload?.target_date || dateInput.value || 'legacy';
-      statusEl.textContent = `${targetDate} 기준 / 전체 ${total.toLocaleString()}건 / 현재 표시 ${items.length.toLocaleString()}건 / 파일: ${loadedPath}`;
+      const selectedLabelName = selectedLabel ? (labelRules.find(item => item.id === selectedLabel)?.name || selectedLabel) : '전체';
+      statusEl.textContent = `${targetDate} 기준 / 라벨: ${selectedLabelName} / 전체 ${total.toLocaleString()}건 / 현재 표시 ${items.length.toLocaleString()}건 / 파일: ${loadedPath}`;
       if (!items.length) { listEl.innerHTML = '<div class="empty">표시할 기사가 없습니다.</div>'; return; }
       listEl.innerHTML = items.map((article, index) => {
         const keywords = Array.isArray(article.matched_keywords) ? article.matched_keywords : [];
@@ -125,7 +170,6 @@
       }).join('');
       document.querySelectorAll('[data-copy-index]').forEach(button => { button.addEventListener('click', () => copyText(articleUrl(items[Number(button.dataset.copyIndex)]), button)); });
     }
-    async function fetchJson(path) { const response = await fetch(`${path}?ts=${Date.now()}`); if (!response.ok) throw new Error(`HTTP ${response.status}`); return await response.json(); }
     async function loadArticles() {
       const date = dateInput.value || todayKstString(); dateInput.value = date;
       const dailyPath = dataPathFromDate(date); const legacyDailyPath = legacyPathFromDate(date); const legacyPath = 'articles_raw.json';
@@ -145,7 +189,9 @@
     loadBtn.addEventListener('click', loadArticles);
     sortSelect.addEventListener('change', render);
     searchInput.addEventListener('input', render);
+    labelTabsEl.addEventListener('click', event => { const tab = event.target.closest('[data-label]'); if (!tab) return; selectedLabel = tab.dataset.label; render(); });
     dateInput.value = todayKstString();
+    loadLabelRules();
     loadArticles();
   </script>
 </body>
