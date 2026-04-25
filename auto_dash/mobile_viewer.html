@@ -148,7 +148,8 @@
     ];
 
     function byId(id){return document.getElementById(id)}
-    function fileFromDate(date){return `articles_raw_${date}.json`}
+    function fileFromDate(date){const [year, month] = String(date).split('-'); return `data/raw/${year}/${month}/articles_raw_${date}.json`}
+    function legacyFileFromDate(date){return `articles_raw_${date}.json`}
     function dateFromFile(file){const m = String(file || '').match(/articles_raw_(\d{4}-\d{2}-\d{2})\.json/); return m ? m[1] : ''}
     function textOf(a){return [a.title,a.description,a.source,...(a.matched_keywords||[])].filter(Boolean).join(' ').toLowerCase()}
     function safeDate(a){return a.published_at || a.published_date || ''}
@@ -157,6 +158,8 @@
     function getLink(a){return a.naver_link || a.url || '#'}
     function escapeHtml(v){return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
     function escapeAttr(v){return escapeHtml(v).replace(/`/g,'&#96;')}
+
+    async function fetchJson(file){const response = await fetch(file, {cache:'no-store'}); if(!response.ok) throw new Error(`HTTP ${response.status}`); return await response.json();}
 
     function compareValue(a){
       if(state.sort === 'score') return score(a);
@@ -242,21 +245,28 @@
       el.subtitle.textContent = `${state.selectedDate || ''} · JSON 불러오는 중...`;
       el.list.innerHTML = '<div class="loading">기사 데이터를 불러오고 있습니다.</div>';
       try{
-        const response = await fetch(file, {cache:'no-store'});
-        if(!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
+        let data;
+        let loadedFile = file;
+        try{
+          data = await fetchJson(file);
+        }catch(primaryError){
+          const legacyFile = legacyFileFromDate(state.selectedDate || dateFromFile(file));
+          if(file === legacyFile) throw primaryError;
+          data = await fetchJson(legacyFile);
+          loadedFile = legacyFile;
+        }
         state.articles = Array.isArray(data.articles) ? data.articles : [];
-        const loadedDate = data.target_date || dateFromFile(file) || state.selectedDate;
+        const loadedDate = data.target_date || dateFromFile(loadedFile) || state.selectedDate;
         state.selectedDate = loadedDate;
-        el.subtitle.textContent = `${loadedDate || ''} · ${state.articles.length}건 수집 · ${data.updated_at ? '업데이트 ' + data.updated_at.slice(0,16).replace('T',' ') : file}`;
+        el.subtitle.textContent = `${loadedDate || ''} · ${state.articles.length}건 수집 · ${data.updated_at ? '업데이트 ' + data.updated_at.slice(0,16).replace('T',' ') : loadedFile}`;
         const url = new URL(location.href);
-        url.searchParams.set('data', file);
+        url.searchParams.set('data', loadedFile);
         url.searchParams.set('date', state.selectedDate);
         history.replaceState(null, '', url);
         applyFilters();
       }catch(error){
         el.subtitle.textContent = 'JSON 로드 실패';
-        el.list.innerHTML = `<div class="error">데이터를 불러오지 못했습니다.<br>${escapeHtml(error.message)}<br><br>${escapeHtml(file)} 파일이 같은 폴더에 있는지 확인해주세요.</div>`;
+        el.list.innerHTML = `<div class="error">데이터를 불러오지 못했습니다.<br>${escapeHtml(error.message)}<br><br>${escapeHtml(file)} 또는 기존 루트 JSON 파일이 있는지 확인해주세요.</div>`;
       }
     }
 
