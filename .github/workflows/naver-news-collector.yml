@@ -37,15 +37,21 @@ jobs:
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
         run: |
+          TARGET_DATE=$(TZ=Asia/Seoul date +%F)
+          YEAR=$(TZ=Asia/Seoul date +%Y)
+          MONTH=$(TZ=Asia/Seoul date +%m)
+          OUTPUT_PATH="auto_dash/data/raw/${YEAR}/${MONTH}/articles_raw_${TARGET_DATE}.json"
+
           python auto_dash/naver_news_collector.py \
             --target-date today \
+            --output "$OUTPUT_PATH" \
             --display 20 \
             --pages 1 \
             --sort date
 
       - name: Commit and push if daily JSON changed
         run: |
-          git add auto_dash/articles_raw_*.json
+          git add auto_dash/data/raw/**/*.json
 
           if git diff --cached --quiet; then
             echo "No article changes to commit."
