@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "description": "Mobile viewer label rules. Articles are included in a label when any matched_keywords value equals one of the label keywords.",
+  "labels": [
+    {
+      "id": "policy_regulation",
+      "name": "정책/규제",
+      "full_name": "대출 관련 정책/규제 변화",
+      "order": 1,
+      "keywords": [
+        "DSR",
+        "DTI",
+        "LTV",
+        "대출 규제",
+        "금융위원회 대출",
+        "금융감독원 대출",
+        "금융소비자",
+        "금소법"
+      ]
+    },
+    {
+      "id": "rate_indicator",
+      "name": "금리/지표",
+      "full_name": "금리/지표 변화",
+      "order": 2,
+      "keywords": [
+        "대출 금리",
+        "가계부채",
+        "연체율",
+        "신용점수",
+        "신용평가"
+      ]
+    },
+    {
+      "id": "market_direction",
+      "name": "시장방향",
+      "full_name": "시장 방향성 (대출시장뿐만 아닌, 부동산, 증권시장 등)",
+      "order": 3,
+      "keywords": [
+        "부동산 대출",
+        "주택시장 대출",
+        "주택담보대출",
+        "주담대",
+        "전세대출",
+        "가계대출",
+        "가계부채"
+      ]
+    },
+    {
+      "id": "risk_npl",
+      "name": "리스크/연체",
+      "full_name": "리스크/연체/NPL",
+      "order": 4,
+      "keywords": [
+        "연체율",
+        "채무조정",
+        "개인회생",
+        "취약차주",
+        "저신용자",
+        "가계부채"
+      ]
+    },
+    {
+      "id": "retail_lending_strategy",
+      "name": "소매대출전략",
+      "full_name": "금융사 소매 대출 전략/상품 (특히 삼성생명, 한화생명 포함)",
+      "order": 5,
+      "keywords": [
+        "신용대출",
+        "대환대출",
+        "대출 갈아타기",
+        "카드론",
+        "현금서비스",
+        "마이너스통장",
+        "소상공인 대출",
+        "자영업자 대출",
+        "은행권 대출",
+        "저축은행 대출",
+        "카드사 대출",
+        "고신용자",
+        "저신용자",
+        "신용점수",
+        "신용평가"
+      ]
+    },
+    {
+      "id": "insurance_issue",
+      "name": "보험사",
+      "full_name": "보험사 관련 이슈",
+      "order": 6,
+      "keywords": [
+        "보험계약대출",
+        "약관대출",
+        "보험사 대출",
+        "생명보험 대출",
+        "교보생명"
+      ]
+    },
+    {
+      "id": "ai_trend",
+      "name": "AI",
+      "full_name": "AI 동향 (금융 AI 포함)",
+      "order": 7,
+      "keywords": [
+        "금융 AI",
+        "AI 활용"
+      ]
+    }
+  ]
+}
