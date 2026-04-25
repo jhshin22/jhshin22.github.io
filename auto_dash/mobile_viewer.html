@@ -87,30 +87,12 @@
 
         <label>
           검색어
-          <input id="searchInput" type="search" placeholder="제목, 요약, 키워드 검색" />
+          <input id="searchInput" type="search" placeholder="제목, 요약, 출처, 키워드 검색" />
         </label>
 
         <label>
           최소 pre_score
           <input id="minScoreInput" type="number" inputmode="numeric" min="0" step="1" placeholder="예: 30" />
-        </label>
-
-        <label>
-          카테고리 / 키워드
-          <select id="keywordSelect">
-            <option value="">전체</option>
-            <option value="가계대출">가계대출</option>
-            <option value="주택담보대출">주택담보대출</option>
-            <option value="신용대출">신용대출</option>
-            <option value="대출 규제">대출 규제</option>
-            <option value="DSR">DSR</option>
-            <option value="연체율">연체율</option>
-            <option value="대환대출">대환대출</option>
-            <option value="보험사 대출">보험사 대출</option>
-            <option value="생명보험 대출">생명보험 대출</option>
-            <option value="카드론">카드론</option>
-            <option value="AI">AI</option>
-          </select>
         </label>
 
         <div class="two-col">
@@ -137,7 +119,7 @@
         <button id="clearFilter">비우기</button>
         <button class="apply" id="applyFilter">적용</button>
       </div>
-      <p class="small-note">날짜를 바꾸면 같은 폴더의 articles_raw_YYYY-MM-DD.json 파일을 불러옵니다.</p>
+      <p class="small-note">키워드 빠른 선택은 화면 상단 칩에서만 적용됩니다. 검색어 입력창은 자유 검색용입니다.</p>
     </section>
   </div>
 
@@ -148,7 +130,7 @@
     const defaultDate = queryDate || dateFromFile(queryData) || '2026-04-24';
 
     const state = {
-      articles: [], filtered: [], search: '', minScore: '', keyword: '',
+      articles: [], filtered: [], search: '', minScore: '',
       sort: 'score', direction: 'desc', quick: '', selectedDate: defaultDate,
       dataFile: queryData || fileFromDate(defaultDate)
     };
@@ -156,7 +138,7 @@
     const el = {
       subtitle: byId('subtitle'), quickChips: byId('quickChips'), countText: byId('countText'), sortText: byId('sortText'), list: byId('list'),
       openFilter: byId('openFilter'), closeFilter: byId('closeFilter'), drawerBackdrop: byId('drawerBackdrop'),
-      dateInput: byId('dateInput'), searchInput: byId('searchInput'), minScoreInput: byId('minScoreInput'), keywordSelect: byId('keywordSelect'), sortSelect: byId('sortSelect'), directionSelect: byId('directionSelect'),
+      dateInput: byId('dateInput'), searchInput: byId('searchInput'), minScoreInput: byId('minScoreInput'), sortSelect: byId('sortSelect'), directionSelect: byId('directionSelect'),
       clearFilter: byId('clearFilter'), applyFilter: byId('applyFilter'), resetBtn: byId('resetBtn'), highScoreBtn: byId('highScoreBtn'), topBtn: byId('topBtn')
     };
 
@@ -187,13 +169,11 @@
     function applyFilters(){
       const q = [state.search,state.quick].filter(Boolean).join(' ').trim().toLowerCase();
       const minScore = Number(state.minScore || 0);
-      const keyword = state.keyword.toLowerCase();
       let rows = state.articles.filter(a => {
         const haystack = textOf(a);
         const okSearch = !q || q.split(/\s+/).every(term => haystack.includes(term));
         const okScore = score(a) >= minScore;
-        const okKeyword = !keyword || haystack.includes(keyword);
-        return okSearch && okScore && okKeyword;
+        return okSearch && okScore;
       });
 
       rows.sort((a,b) => {
@@ -250,13 +230,12 @@
       el.dateInput.value = state.selectedDate;
       el.searchInput.value = state.search;
       el.minScoreInput.value = state.minScore;
-      el.keywordSelect.value = state.keyword;
       el.sortSelect.value = state.sort;
       el.directionSelect.value = state.direction;
       el.drawerBackdrop.classList.add('open');
     }
     function closeDrawer(){el.drawerBackdrop.classList.remove('open')}
-    function resetFilters(){state.search='';state.minScore='';state.keyword='';state.sort='score';state.direction='desc';state.quick='';applyFilters()}
+    function resetFilters(){state.search='';state.minScore='';state.sort='score';state.direction='desc';state.quick='';applyFilters()}
 
     async function load(file = state.dataFile){
       state.dataFile = file;
@@ -289,7 +268,6 @@
       const nextFile = fileFromDate(nextDate);
       state.search = el.searchInput.value.trim();
       state.minScore = el.minScoreInput.value.trim();
-      state.keyword = el.keywordSelect.value;
       state.sort = el.sortSelect.value;
       state.direction = el.directionSelect.value;
       closeDrawer();
@@ -298,7 +276,7 @@
         await load(nextFile);
       } else applyFilters();
     });
-    el.clearFilter.addEventListener('click', () => {el.searchInput.value='';el.minScoreInput.value='';el.keywordSelect.value='';el.sortSelect.value='score';el.directionSelect.value='desc';});
+    el.clearFilter.addEventListener('click', () => {el.searchInput.value='';el.minScoreInput.value='';el.sortSelect.value='score';el.directionSelect.value='desc';});
     el.resetBtn.addEventListener('click', resetFilters);
     el.highScoreBtn.addEventListener('click', () => {state.minScore='50';state.sort='score';state.direction='desc';applyFilters();window.scrollTo({top:0,behavior:'smooth'});});
     el.topBtn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
