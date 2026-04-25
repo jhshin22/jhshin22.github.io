@@ -6,136 +6,45 @@
   <title>소매여신 기사 대시보드</title>
   <style>
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-      background: #f8fafc;
-      color: #0f172a;
-      line-height: 1.6;
-    }
+    body { margin: 0; font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; }
     .container { max-width: 1240px; margin: 0 auto; padding: 32px 20px 60px; }
-    .hero {
-      background: linear-gradient(135deg, #0f766e, #2563eb 72%, #38bdf8);
-      color: #fff;
-      border-radius: 8px;
-      padding: 30px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
-      margin-bottom: 28px;
-    }
+    .hero { background: linear-gradient(135deg, #0f766e, #2563eb 72%, #38bdf8); color: #fff; border-radius: 12px; padding: 30px; box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14); margin-bottom: 28px; }
     .hero h1 { margin: 0 0 12px; font-size: 34px; }
     .hero p { margin: 0; opacity: 0.94; font-size: 15px; }
     .meta { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
-    .chip {
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.22);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 14px;
-      font-weight: 700;
-    }
+    .chip { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22); border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 700; }
+    .guide-banner { margin: 0 0 22px; padding: 14px 16px; border-radius: 12px; background: #eef6ff; border: 1px solid #cfe0ff; color: #1e40af; font-size: 14px; font-weight: 700; }
     .section { margin-top: 28px; }
     .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
     .section h2 { margin: 0; font-size: 28px; }
     .section-desc { color: #475569; font-size: 15px; }
     .top-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
     .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
-    .category-card, .article-card {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
-    }
+    .category-card, .article-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06); }
     .article-card { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
-    .rank {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #ccfbf1;
-      color: #0f766e;
-      font-weight: 800;
-      font-size: 15px;
-    }
-    .article-title { font-size: 18px; font-weight: 800; color: #0f172a; text-decoration: none; }
-    .article-title:hover { text-decoration: underline; }
+    .rank { width: 36px; height: 36px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; background: #ccfbf1; color: #0f766e; font-weight: 800; font-size: 15px; }
+    .article-title, .small-card a { color: #0f172a; text-decoration: none; font-weight: 800; }
+    .article-title { font-size: 18px; }
+    .article-title:hover, .small-card a:hover { text-decoration: underline; }
     .article-meta, .keyword-row { display: flex; flex-wrap: wrap; gap: 8px; color: #475569; font-size: 14px; }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 8px;
-      padding: 6px 10px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .keyword {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 8px;
-      padding: 6px 10px;
-      background: #f1f5f9;
-      color: #334155;
-      font-size: 12px;
-      font-weight: 700;
-      border: 1px solid #e2e8f0;
-    }
+    .badge { display: inline-flex; align-items: center; border-radius: 999px; padding: 6px 10px; background: #eff6ff; color: #1d4ed8; font-size: 13px; font-weight: 700; }
+    .keyword { display: inline-flex; align-items: center; border-radius: 999px; padding: 6px 10px; background: #f1f5f9; color: #334155; font-size: 12px; font-weight: 700; border: 1px solid #e2e8f0; }
     .summary { color: #334155; font-size: 14px; margin: 0; }
     .action-row { display: flex; flex-wrap: wrap; gap: 10px; }
-    .link-hint, .share-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      align-self: flex-start;
-      padding: 8px 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: background 0.15s ease;
-    }
-    .link-hint {
-      background: #ecfeff;
-      color: #0e7490;
-      border: 1px solid #a5f3fc;
-    }
+    .link-hint, .share-button { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; padding: 8px 12px; border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: 800; cursor: pointer; transition: background 0.15s ease; }
+    .link-hint { background: #ecfeff; color: #0e7490; border: 1px solid #a5f3fc; }
     .link-hint:hover { background: #cffafe; }
-    .share-button {
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 1px solid #bfdbfe;
-    }
+    .share-button { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
     .share-button:hover { background: #dbeafe; }
-    .guide-banner {
-      margin: 0 0 22px;
-      padding: 14px 16px;
-      border-radius: 8px;
-      background: #eef6ff;
-      border: 1px solid #cfe0ff;
-      color: #1e40af;
-      font-size: 14px;
-      font-weight: 700;
-    }
     .category-card { overflow: hidden; }
     .category-header { padding: 18px 20px; border-bottom: 1px solid #e2e8f0; background: #f8fafc; }
     .category-header h3 { margin: 0 0 6px; font-size: 20px; }
     .category-header p { margin: 0; color: #475569; font-size: 14px; }
     .category-body { padding: 14px; display: grid; gap: 12px; }
-    .small-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
-    .small-card a { text-decoration: none; color: #0f172a; font-weight: 700; display: block; }
-    .small-card a:hover { text-decoration: underline; }
+    .small-card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
     .footer-note { margin-top: 30px; font-size: 13px; color: #64748b; text-align: center; }
-    .loading, .error { padding: 24px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; color: #475569; }
-    @media (max-width: 768px) {
-      .container { padding: 22px 14px 44px; }
-      .hero { padding: 22px; }
-      .hero h1 { font-size: 28px; }
-      .section h2 { font-size: 24px; }
-      .category-grid { grid-template-columns: 1fr; }
-    }
+    .loading, .error { padding: 24px; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; color: #475569; }
+    @media (max-width: 768px) { .container { padding: 22px 14px 44px; } .hero { padding: 22px; } .hero h1 { font-size: 28px; } .section h2 { font-size: 24px; } .category-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -145,14 +54,13 @@
       <p>전반부는 오늘 가장 중요한 이슈 Top 5, 후반부는 주제별 대표 기사로 구성했습니다.</p>
       <div class="meta" id="metaChips"><span class="chip">JSON 기반 자동 렌더링</span></div>
     </section>
-
     <div id="app"><div class="loading">데이터를 불러오는 중입니다...</div></div>
     <div class="footer-note">JSON 데이터 기반으로 자동 생성된 대시보드입니다. 실무 검토용 reason 필드는 화면에 표시하지 않습니다.</div>
   </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const DATA_FILE = params.get('data') || './finance_articles_2026-04-24.json';
+    const DATA_FILE = params.get('data') || './finance_articles_2026-04-25.json';
     const CATEGORY_ORDER = [
       '대출 관련 정책/규제 변화',
       '금리/지표 변화',
@@ -160,6 +68,7 @@
       '시장 방향성(부동산/증권시장 등 대출수요 변동 가능 이슈)',
       '리스크/연체/NPL',
       '금융사 소매 대출 전략/상품',
+      '금융사 소매 대출 전략/상품(특히 삼성생명, 한화생명 포함)',
       '보험사 관련 이슈',
       'AI 동향',
       'AI 동향(금융 AI 포함)'
@@ -175,57 +84,35 @@
     }
 
     function getArticleLink(article) { return article.URL || article.url || '#'; }
-
     function buildKeywords(article) {
       if (Array.isArray(article.keywords)) return article.keywords.slice(0, 5);
       if (typeof article.keywords === 'string') return article.keywords.split(',').map(v => v.trim()).filter(Boolean).slice(0, 5);
       return [];
     }
-
     function renderKeywords(article) {
       const keywords = buildKeywords(article);
       if (!keywords.length) return '';
       return `<div class="keyword-row">${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join('')}</div>`;
     }
-
     function renderOriginalLink(article) {
       return `<a class="link-hint" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a>`;
     }
-
     function renderShareButton(article) {
       return `<button class="share-button" type="button" data-url="${escapeHtml(getArticleLink(article))}" data-title="${escapeHtml(article.title || '')}" onclick="handleShareClick(this)">공유하기</button>`;
     }
-
-    function renderActionRow(article) {
-      return `<div class="action-row">${renderOriginalLink(article)}${renderShareButton(article)}</div>`;
-    }
-
+    function renderActionRow(article) { return `<div class="action-row">${renderOriginalLink(article)}${renderShareButton(article)}</div>`; }
     function renderMeta(article) {
-      return `
-        <div class="article-meta">
-          <span>${escapeHtml(article.publisher)}</span>
-          <span>${escapeHtml(article.udate || '')}</span>
-          <span class="badge">추천도 ${escapeHtml(article.rating || '')}</span>
-        </div>
-      `;
+      return `<div class="article-meta"><span>${escapeHtml(article.publisher)}</span><span>${escapeHtml(article.udate || '')}</span><span class="badge">추천도 ${escapeHtml(article.rating || '')}</span></div>`;
     }
-
     function setTemporaryButtonLabel(button, label) {
       const original = button.dataset.originalLabel || button.textContent;
       button.dataset.originalLabel = original;
       button.textContent = label;
       window.clearTimeout(button._labelTimer);
-      button._labelTimer = window.setTimeout(() => {
-        button.textContent = original;
-      }, 1800);
+      button._labelTimer = window.setTimeout(() => { button.textContent = original; }, 1800);
     }
-
     async function copyTextFallback(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        return;
-      }
-
+      if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(text); return; }
       const textarea = document.createElement('textarea');
       textarea.value = text;
       textarea.setAttribute('readonly', '');
@@ -236,141 +123,57 @@
       document.execCommand('copy');
       document.body.removeChild(textarea);
     }
-
     async function shareArticle(url, title, button) {
       try {
-        if (navigator.share) {
-          await navigator.share({ title, url });
-          setTemporaryButtonLabel(button, '공유됨');
-          return;
-        }
-
-        await copyTextFallback(url);
-        setTemporaryButtonLabel(button, 'URL 복사됨');
+        if (navigator.share) { await navigator.share({ title, url }); setTemporaryButtonLabel(button, '공유됨'); return; }
+        await copyTextFallback(url); setTemporaryButtonLabel(button, 'URL 복사됨');
       } catch (error) {
-        if (error && error.name === 'AbortError') {
-          return;
-        }
-
-        try {
-          await copyTextFallback(url);
-          setTemporaryButtonLabel(button, 'URL 복사됨');
-        } catch (copyError) {
-          setTemporaryButtonLabel(button, '복사 실패');
-        }
+        if (error && error.name === 'AbortError') return;
+        try { await copyTextFallback(url); setTemporaryButtonLabel(button, 'URL 복사됨'); }
+        catch (copyError) { setTemporaryButtonLabel(button, '복사 실패'); }
       }
     }
-
-    function handleShareClick(button) {
-      shareArticle(button.dataset.url || '', button.dataset.title || '', button);
-    }
-
+    function handleShareClick(button) { shareArticle(button.dataset.url || '', button.dataset.title || '', button); }
     function renderTopArticle(article, rank) {
-      return `
-        <article class="article-card">
-          <span class="rank">${rank}</span>
-          ${renderKeywords(article)}
-          <a class="article-title" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
-          ${renderMeta(article)}
-          <p class="summary">${escapeHtml(article.summary)}</p>
-          ${renderActionRow(article)}
-        </article>
-      `;
+      return `<article class="article-card"><span class="rank">${rank}</span>${renderKeywords(article)}<a class="article-title" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>${renderMeta(article)}<p class="summary">${escapeHtml(article.summary)}</p>${renderActionRow(article)}</article>`;
     }
-
     function renderCategoryArticle(article) {
-      return `
-        <div class="small-card">
-          ${renderKeywords(article)}
-          <a href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
-          ${renderMeta(article)}
-          <p class="summary">${escapeHtml(article.summary)}</p>
-          ${renderActionRow(article)}
-        </div>
-      `;
+      return `<div class="small-card">${renderKeywords(article)}<a href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>${renderMeta(article)}<p class="summary">${escapeHtml(article.summary)}</p>${renderActionRow(article)}</div>`;
     }
-
     function normalizeData(data) {
       const articles = Array.isArray(data.articles) ? data.articles : [];
       const topArticles = articles.filter(article => article.section === 'top5').slice(0, 5);
       const categoryArticles = articles.filter(article => article.section !== 'top5');
       const grouped = new Map();
-
       categoryArticles.forEach(article => {
         const category = article.category || '기타';
         if (!grouped.has(category)) grouped.set(category, []);
         grouped.get(category).push(article);
       });
-
       const orderedCategories = [];
-      CATEGORY_ORDER.forEach(category => {
-        if (grouped.has(category)) orderedCategories.push([category, grouped.get(category)]);
-      });
-      grouped.forEach((items, category) => {
-        if (!CATEGORY_ORDER.includes(category)) orderedCategories.push([category, items]);
-      });
-
+      CATEGORY_ORDER.forEach(category => { if (grouped.has(category)) orderedCategories.push([category, grouped.get(category)]); });
+      grouped.forEach((items, category) => { if (!CATEGORY_ORDER.includes(category)) orderedCategories.push([category, items]); });
       return { articles, topArticles, orderedCategories };
     }
-
     function renderDashboard(data) {
       const normalized = normalizeData(data);
       const date = data.base_date || data.date || '';
       const count = data.validation?.article_count || data.count || normalized.articles.length;
-
-      document.getElementById('metaChips').innerHTML = `
-        <span class="chip">기준일: ${escapeHtml(date)}</span>
-        <span class="chip">총 ${escapeHtml(count)}개 기사</span>
-      `;
-
+      document.getElementById('metaChips').innerHTML = `<span class="chip">기준일: ${escapeHtml(date)}</span><span class="chip">총 ${escapeHtml(count)}개 기사</span>`;
       const guideBanner = `<div class="guide-banner">기사 제목, <strong>원문 보기 ↗</strong>, <strong>공유하기</strong> 버튼으로 바로 활용할 수 있습니다.</div>`;
-      const topSection = `
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>오늘 가장 중요한 이슈 Top 5</h2>
-              <div class="section-desc">당일/전일 기준 가장 영향력 큰 이슈 5개</div>
-            </div>
-          </div>
-          <div class="top-grid">${normalized.topArticles.map((article, index) => renderTopArticle(article, index + 1)).join('')}</div>
-        </section>
-      `;
-      const categorySection = `
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>주제별 대표 기사</h2>
-              <div class="section-desc">카테고리별 대표 기사 2건씩 구성</div>
-            </div>
-          </div>
-          <div class="category-grid">
-            ${normalized.orderedCategories.map(([category, items]) => `
-              <section class="category-card">
-                <div class="category-header">
-                  <h3>${escapeHtml(category)}</h3>
-                  <p>${escapeHtml(items.length)}개 기사</p>
-                </div>
-                <div class="category-body">${items.map(renderCategoryArticle).join('')}</div>
-              </section>
-            `).join('')}
-          </div>
-        </section>
-      `;
-
+      const topSection = `<section class="section"><div class="section-head"><div><h2>오늘 가장 중요한 이슈 Top 5</h2><div class="section-desc">당일/전일 기준 가장 영향력 큰 이슈 5개</div></div></div><div class="top-grid">${normalized.topArticles.map((article, index) => renderTopArticle(article, index + 1)).join('')}</div></section>`;
+      const categorySection = `<section class="section"><div class="section-head"><div><h2>주제별 대표 기사</h2><div class="section-desc">카테고리별 대표 기사 2건씩 구성</div></div></div><div class="category-grid">${normalized.orderedCategories.map(([category, items]) => `<section class="category-card"><div class="category-header"><h3>${escapeHtml(category)}</h3><p>${escapeHtml(items.length)}개 기사</p></div><div class="category-body">${items.map(renderCategoryArticle).join('')}</div></section>`).join('')}</div></section>`;
       document.getElementById('app').innerHTML = guideBanner + topSection + categorySection;
     }
-
     async function init() {
       try {
         const response = await fetch(DATA_FILE, { cache: 'no-store' });
         if (!response.ok) throw new Error('데이터를 불러오지 못했습니다.');
-        const data = await response.json();
-        renderDashboard(data);
+        renderDashboard(await response.json());
       } catch (error) {
         document.getElementById('app').innerHTML = `<div class="error">대시보드 데이터를 불러오는 데 실패했습니다. JSON 파일 경로와 형식을 확인해주세요.</div>`;
       }
     }
-
     init();
   </script>
 </body>
