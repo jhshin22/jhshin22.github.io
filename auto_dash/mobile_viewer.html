@@ -3,6 +3,9 @@
 <head>
   <meta charset='utf-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover' />
+  <meta http-equiv='Cache-Control' content='no-cache, no-store, must-revalidate' />
+  <meta http-equiv='Pragma' content='no-cache' />
+  <meta http-equiv='Expires' content='0' />
   <title>모바일 기사 뷰어</title>
   <style>
     :root{--bg:#f5f6f8;--card:#fff;--text:#171717;--muted:#6b7280;--line:#e5e7eb;--primary:#1d4ed8;--primary-soft:#eaf1ff;--danger:#dc2626;--radius:16px;--shadow:0 8px 24px rgba(15,23,42,.08);--safe-bottom:env(safe-area-inset-bottom,0px)}
@@ -32,8 +35,8 @@
       <div class='grabber'></div>
       <div class='drawer-title'><h2>필터 설정</h2><button class='close-btn' id='closeFilter' aria-label='닫기'>×</button></div>
       <div class='form-grid'>
-        <label>날짜 선택<input id='dateInput' type='date' /></label>
-        <label>검색어<input id='searchInput' type='search' placeholder='제목, 요약, 출처, 키워드 검색' /></label>
+        <label>날짜 선택<input id='dateInput' type='date' autocomplete='off' /></label>
+        <label>검색어<input id='searchInput' type='search' placeholder='제목, 요약, 출처, 키워드 검색' autocomplete='off' /></label>
         <label>최소 pre_score<input id='minScoreInput' type='number' inputmode='numeric' min='0' step='1' placeholder='예: 30' /></label>
         <div class='two-col'>
           <label>정렬 기준<select id='sortSelect'><option value='score'>pre_score</option><option value='date'>게시일</option><option value='title'>제목</option><option value='source'>출처</option></select></label>
@@ -59,12 +62,15 @@
     const params=new URLSearchParams(location.search);
     const queryData=params.get('data');
     const queryDate=params.get('date');
-    const defaultDate=queryDate||dateFromFile(queryData)||'2026-04-24';
+    const hasFixedQuery=params.has('date')||params.has('data');
+    const defaultDate=initialDateString();
 
     const state={articles:[],filtered:[],search:'',minScore:'',sort:'score',direction:'desc',selectedLabel:'',labelRules:FALLBACK_LABELS,selectedDate:defaultDate,dataFile:queryData||fileFromDate(defaultDate)};
     const el={subtitle:byId('subtitle'),quickChips:byId('quickChips'),countText:byId('countText'),sortText:byId('sortText'),list:byId('list'),openFilter:byId('openFilter'),closeFilter:byId('closeFilter'),drawerBackdrop:byId('drawerBackdrop'),dateInput:byId('dateInput'),searchInput:byId('searchInput'),minScoreInput:byId('minScoreInput'),sortSelect:byId('sortSelect'),directionSelect:byId('directionSelect'),clearFilter:byId('clearFilter'),applyFilter:byId('applyFilter'),resetBtn:byId('resetBtn'),highScoreBtn:byId('highScoreBtn'),topBtn:byId('topBtn')};
 
     function byId(id){return document.getElementById(id)}
+    function todayKstString(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
+    function initialDateString(){if(queryDate==='today')return todayKstString();if(/^\d{4}-\d{2}-\d{2}$/.test(queryDate||''))return queryDate;if(queryData&&dateFromFile(queryData))return dateFromFile(queryData);return todayKstString()}
     function fileFromDate(date){const [year,month]=String(date).split('-');return `data/raw/${year}/${month}/articles_raw_${date}.json`}
     function legacyFileFromDate(date){return `articles_raw_${date}.json`}
     function dateFromFile(file){const m=String(file||'').match(/articles_raw_(\d{4}-\d{2}-\d{2})\.json/);return m?m[1]:''}
@@ -77,7 +83,7 @@
     function getLink(a){return a.url||a.naver_link||'#'}
     function escapeHtml(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;')}
     function escapeAttr(v){return escapeHtml(v).replace(/`/g,'&#96;')}
-    async function fetchJson(file){const response=await fetch(file,{cache:'no-store'});if(!response.ok)throw new Error(`HTTP ${response.status}`);return await response.json()}
+    async function fetchJson(file){const response=await fetch(`${file}?ts=${Date.now()}`,{cache:'no-store'});if(!response.ok)throw new Error(`HTTP ${response.status}`);return await response.json()}
     async function loadLabelRules(){try{const data=await fetchJson(LABEL_RULE_PATH);if(Array.isArray(data.labels)&&data.labels.length){state.labelRules=data.labels.slice().sort((a,b)=>(a.order||0)-(b.order||0))}}catch(e){state.labelRules=FALLBACK_LABELS}renderQuickChips()}
 
     function compareValue(a){if(state.sort==='score')return score(a);if(state.sort==='date')return safeDate(a);if(state.sort==='title')return a.title||'';if(state.sort==='source')return a.source||'';return score(a)}
@@ -90,12 +96,13 @@
     function openDrawer(){el.dateInput.value=state.selectedDate;el.searchInput.value=state.search;el.minScoreInput.value=state.minScore;el.sortSelect.value=state.sort;el.directionSelect.value=state.direction;el.drawerBackdrop.classList.add('open')}
     function closeDrawer(){el.drawerBackdrop.classList.remove('open')}
     function resetFilters(){state.search='';state.minScore='';state.sort='score';state.direction='desc';state.selectedLabel='';applyFilters()}
-    async function load(file=state.dataFile){state.dataFile=file;el.subtitle.textContent=`${state.selectedDate||''} · JSON 불러오는 중...`;el.list.innerHTML='<div class="loading">기사 데이터를 불러오고 있습니다.</div>';try{let data;let loadedFile=file;try{data=await fetchJson(file)}catch(primaryError){const legacyFile=legacyFileFromDate(state.selectedDate||dateFromFile(file));if(file===legacyFile)throw primaryError;data=await fetchJson(legacyFile);loadedFile=legacyFile}state.articles=Array.isArray(data.articles)?data.articles:[];const loadedDate=data.target_date||dateFromFile(loadedFile)||state.selectedDate;state.selectedDate=loadedDate;el.subtitle.textContent=`${loadedDate||''} · ${state.articles.length}건 수집 · ${data.updated_at?'업데이트 '+data.updated_at.slice(0,16).replace('T',' '):loadedFile}`;const url=new URL(location.href);url.searchParams.set('data',loadedFile);url.searchParams.set('date',state.selectedDate);history.replaceState(null,'',url);applyFilters()}catch(error){el.subtitle.textContent='JSON 로드 실패';el.list.innerHTML=`<div class='error'>데이터를 불러오지 못했습니다.<br>${escapeHtml(error.message)}<br><br>${escapeHtml(file)} 또는 기존 루트 JSON 파일이 있는지 확인해주세요.</div>`}}
+    async function load(file=state.dataFile){state.dataFile=file;el.subtitle.textContent=`${state.selectedDate||''} · JSON 불러오는 중...`;el.list.innerHTML='<div class="loading">기사 데이터를 불러오고 있습니다.</div>';try{let data;let loadedFile=file;try{data=await fetchJson(file)}catch(primaryError){const legacyFile=legacyFileFromDate(state.selectedDate||dateFromFile(file));if(file===legacyFile)throw primaryError;data=await fetchJson(legacyFile);loadedFile=legacyFile}state.articles=Array.isArray(data.articles)?data.articles:[];const loadedDate=data.target_date||dateFromFile(loadedFile)||state.selectedDate;state.selectedDate=loadedDate;state.dataFile=loadedFile;el.subtitle.textContent=`${loadedDate||''} · ${state.articles.length}건 수집 · ${data.updated_at?'업데이트 '+data.updated_at.slice(0,16).replace('T',' '):loadedFile}`;applyFilters()}catch(error){el.subtitle.textContent='JSON 로드 실패';el.list.innerHTML=`<div class='error'>데이터를 불러오지 못했습니다.<br>${escapeHtml(error.message)}<br><br>${escapeHtml(file)} 또는 기존 루트 JSON 파일이 있는지 확인해주세요.</div>`}}
 
     el.openFilter.addEventListener('click',openDrawer);el.closeFilter.addEventListener('click',closeDrawer);el.drawerBackdrop.addEventListener('click',e=>{if(e.target===el.drawerBackdrop)closeDrawer()});
     el.applyFilter.addEventListener('click',async()=>{const nextDate=el.dateInput.value||state.selectedDate;const nextFile=fileFromDate(nextDate);state.search=el.searchInput.value.trim();state.minScore=el.minScoreInput.value.trim();state.sort=el.sortSelect.value;state.direction=el.directionSelect.value;closeDrawer();if(nextDate!==state.selectedDate||nextFile!==state.dataFile){state.selectedDate=nextDate;await load(nextFile)}else applyFilters()});
     el.clearFilter.addEventListener('click',()=>{el.searchInput.value='';el.minScoreInput.value='';el.sortSelect.value='score';el.directionSelect.value='desc'});el.resetBtn.addEventListener('click',resetFilters);el.highScoreBtn.addEventListener('click',()=>{state.minScore='50';state.sort='score';state.direction='desc';applyFilters();window.scrollTo({top:0,behavior:'smooth'})});el.topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));el.quickChips.addEventListener('click',e=>{const chip=e.target.closest('[data-label]');if(!chip)return;state.selectedLabel=chip.dataset.label;applyFilters()});el.list.addEventListener('click',e=>{const btn=e.target.closest('.copy-btn');if(!btn)return;copyArticleUrl(state.filtered[Number(btn.dataset.index)])});
     loadLabelRules();load(state.dataFile);
+    window.addEventListener('pageshow',()=>{if(hasFixedQuery)return;const today=todayKstString();if(state.selectedDate!==today){state.selectedDate=today;state.dataFile=fileFromDate(today);load(state.dataFile)}});
   </script>
 </body>
 </html>
