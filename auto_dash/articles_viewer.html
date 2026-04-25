@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>기사 후보 리스트 뷰어</title>
   <style>
     :root {
@@ -63,9 +66,9 @@
       <h1>기사 후보 리스트 뷰어</h1>
       <p class="sub">일자별 raw JSON을 불러와 pre_score 기준으로 정렬하고, 기사 링크를 확인/복사합니다.</p>
       <div class="controls">
-        <div class="control date"><label for="dateInput">기사 날짜</label><input id="dateInput" type="date" /></div>
+        <div class="control date"><label for="dateInput">기사 날짜</label><input id="dateInput" type="date" autocomplete="off" /></div>
         <div class="control sort"><label for="sortSelect">정렬</label><select id="sortSelect"><option value="desc">pre_score 높은 순</option><option value="asc">pre_score 낮은 순</option><option value="time_desc">최신 기사 순</option><option value="time_asc">오래된순</option></select></div>
-        <div class="control query"><label for="searchInput">검색</label><input id="searchInput" type="search" placeholder="제목, 설명, 키워드 검색" /></div>
+        <div class="control query"><label for="searchInput">검색</label><input id="searchInput" type="search" placeholder="제목, 설명, 키워드 검색" autocomplete="off" /></div>
         <div class="control load"><label>&nbsp;</label><button class="primary" id="loadBtn">불러오기</button></div>
         <div class="control copyall"><label>&nbsp;</label><button class="ghost" id="copyAllBtn">전체 복사</button></div>
       </div>
@@ -101,7 +104,18 @@
     let selectedLabel = '';
     let labelRules = FALLBACK_LABELS;
 
-    function todayKstString() { const now = new Date(); const kst = new Date(now.getTime() + 9 * 60 * 60 * 1000); return kst.toISOString().slice(0, 10); }
+    function todayKstString() {
+      const formatter = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' });
+      return formatter.format(new Date());
+    }
+    function initialDateString() {
+      const params = new URLSearchParams(window.location.search);
+      const requestedDate = params.get('date');
+      if (requestedDate === 'today') return todayKstString();
+      if (/^\d{4}-\d{2}-\d{2}$/.test(requestedDate || '')) return requestedDate;
+      return todayKstString();
+    }
+    function hasFixedDateParam() { return new URLSearchParams(window.location.search).has('date'); }
     function dataPathFromDate(date) { const [year, month] = String(date).split('-'); return `data/raw/${year}/${month}/articles_raw_${date}.json`; }
     function legacyPathFromDate(date) { return `articles_raw_${date}.json`; }
     function escapeHtml(value) { return String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;'); }
@@ -171,7 +185,7 @@
       document.querySelectorAll('[data-copy-index]').forEach(button => { button.addEventListener('click', () => copyText(articleUrl(items[Number(button.dataset.copyIndex)]), button)); });
     }
     async function loadArticles() {
-      const date = dateInput.value || todayKstString(); dateInput.value = date;
+      const date = dateInput.value || initialDateString(); dateInput.value = date;
       const dailyPath = dataPathFromDate(date); const legacyDailyPath = legacyPathFromDate(date); const legacyPath = 'articles_raw.json';
       statusEl.textContent = `${dailyPath} 불러오는 중...`; listEl.innerHTML = '';
       try { currentPayload = await fetchJson(dailyPath); loadedPath = dailyPath; }
@@ -190,9 +204,17 @@
     sortSelect.addEventListener('change', render);
     searchInput.addEventListener('input', render);
     labelTabsEl.addEventListener('click', event => { const tab = event.target.closest('[data-label]'); if (!tab) return; selectedLabel = tab.dataset.label; render(); });
-    dateInput.value = todayKstString();
+    dateInput.value = initialDateString();
     loadLabelRules();
     loadArticles();
+    window.addEventListener('pageshow', () => {
+      if (hasFixedDateParam()) return;
+      const today = todayKstString();
+      if (dateInput.value !== today) {
+        dateInput.value = today;
+        loadArticles();
+      }
+    });
   </script>
 </body>
 </html>
