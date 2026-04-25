@@ -1,125 +1,47 @@
 <!doctype html>
-<html lang="ko">
+<html lang='ko'>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover' />
   <title>모바일 기사 뷰어</title>
   <style>
-    :root {
-      --bg:#f5f6f8; --card:#fff; --text:#171717; --muted:#6b7280; --line:#e5e7eb;
-      --primary:#1d4ed8; --primary-soft:#eaf1ff; --danger:#dc2626;
-      --radius:16px; --shadow:0 8px 24px rgba(15,23,42,.08); --safe-bottom:env(safe-area-inset-bottom,0px);
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}
-    a{color:inherit;text-decoration:none} button,input,select{font:inherit}
-    .app{max-width:720px;margin:0 auto;padding-bottom:calc(76px + var(--safe-bottom))}
-    .topbar{position:sticky;top:0;z-index:30;background:rgba(245,246,248,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 14px 8px}
-    .topline{display:flex;align-items:center;gap:10px}.title-wrap{flex:1;min-width:0}
-    .title{font-size:18px;font-weight:800;letter-spacing:-.03em;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .subtitle{margin-top:2px;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .filter-btn{border:0;background:var(--primary);color:white;border-radius:999px;padding:9px 12px;font-weight:800;font-size:13px;box-shadow:0 4px 12px rgba(29,78,216,.22);white-space:nowrap}
-    .quick-row{display:flex;gap:6px;overflow-x:auto;padding-top:9px;scrollbar-width:none}.quick-row::-webkit-scrollbar{display:none}
-    .chip{flex:0 0 auto;border:1px solid var(--line);background:white;color:#374151;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:800}
-    .chip.active{background:var(--primary-soft);border-color:#b9cdfd;color:var(--primary)}
-    .status{padding:10px 14px 0;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:10px}
-    .list{display:grid;gap:10px;padding:12px 12px 18px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:13px;box-shadow:var(--shadow)}
-    .card-head{display:flex;align-items:flex-start;gap:9px}.score{flex:0 0 auto;min-width:42px;text-align:center;background:#111827;color:white;border-radius:12px;padding:7px 6px;line-height:1.05}
-    .score b{display:block;font-size:16px}.score span{font-size:10px;opacity:.78}
-    .headline{margin:0;font-size:16px;line-height:1.34;letter-spacing:-.03em;font-weight:800}.meta{margin-top:7px;display:flex;flex-wrap:wrap;gap:5px 8px;color:var(--muted);font-size:12px}
-    .desc{margin:10px 0 0;color:#374151;font-size:13px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-    .keywords{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}.keyword{font-size:11px;color:#1f2937;background:#f3f4f6;border:1px solid #e5e7eb;padding:4px 7px;border-radius:999px}
-    .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.action{border-radius:12px;border:1px solid var(--line);background:#fff;padding:10px 8px;text-align:center;font-weight:800;font-size:13px}.action.primary{background:var(--primary);color:white;border-color:var(--primary)}
-    .empty,.loading,.error{margin:22px 12px;padding:22px 16px;background:white;border:1px solid var(--line);border-radius:var(--radius);color:var(--muted);text-align:center;box-shadow:var(--shadow)}.error{color:var(--danger)}
-    .bottom-tools{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:9px 12px calc(9px + var(--safe-bottom));background:rgba(255,255,255,.94);border-top:1px solid var(--line);backdrop-filter:blur(10px)}
-    .bottom-tools-inner{max-width:720px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.tool-btn{border:1px solid var(--line);background:#fff;border-radius:14px;padding:10px 6px;font-size:12px;font-weight:800;color:#374151}
-    .drawer-backdrop{position:fixed;inset:0;z-index:80;background:rgba(15,23,42,.42);display:none}.drawer-backdrop.open{display:block}
-    .drawer{position:absolute;left:0;right:0;bottom:0;max-height:min(86vh,680px);background:white;border-radius:24px 24px 0 0;padding:12px 16px calc(16px + var(--safe-bottom));overflow-y:auto;transform:translateY(100%);transition:transform .22s ease}.drawer-backdrop.open .drawer{transform:translateY(0)}
-    .grabber{width:42px;height:5px;background:#d1d5db;border-radius:999px;margin:0 auto 12px}.drawer-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.drawer-title h2{font-size:18px;margin:0;letter-spacing:-.03em}
-    .close-btn{border:0;background:#f3f4f6;border-radius:999px;width:34px;height:34px;font-weight:900;color:#4b5563}.form-grid{display:grid;gap:12px}
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px}label{display:grid;gap:6px;font-size:12px;font-weight:800;color:#374151}input,select{width:100%;border:1px solid var(--line);border-radius:13px;padding:11px 12px;background:#fff;color:var(--text);outline:none}input:focus,select:focus{border-color:#93b4ff;box-shadow:0 0 0 3px var(--primary-soft)}
-    .drawer-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.drawer-actions button{border:1px solid var(--line);border-radius:14px;padding:12px 10px;background:#fff;font-weight:900}.drawer-actions .apply{background:var(--primary);color:white;border-color:var(--primary)}.small-note{margin-top:10px;color:var(--muted);font-size:12px}
+    :root{--bg:#f5f6f8;--card:#fff;--text:#171717;--muted:#6b7280;--line:#e5e7eb;--primary:#1d4ed8;--primary-soft:#eaf1ff;--danger:#dc2626;--radius:16px;--shadow:0 8px 24px rgba(15,23,42,.08);--safe-bottom:env(safe-area-inset-bottom,0px)}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,Apple SD Gothic Neo,Noto Sans KR,Segoe UI,sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input,select{font:inherit}.app{max-width:720px;margin:0 auto;padding-bottom:calc(76px + var(--safe-bottom))}
+    .topbar{position:sticky;top:0;z-index:30;background:rgba(245,246,248,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 14px 8px}.topline{display:flex;align-items:center;gap:10px}.title-wrap{flex:1;min-width:0}.title{font-size:18px;font-weight:800;letter-spacing:-.03em;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.subtitle{margin-top:2px;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.filter-btn{border:0;background:var(--primary);color:white;border-radius:999px;padding:9px 12px;font-weight:800;font-size:13px;box-shadow:0 4px 12px rgba(29,78,216,.22);white-space:nowrap}
+    .quick-row{display:flex;gap:6px;overflow-x:auto;padding-top:9px;scrollbar-width:none}.quick-row::-webkit-scrollbar{display:none}.chip{flex:0 0 auto;border:1px solid var(--line);background:white;color:#374151;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:800}.chip.active{background:var(--primary-soft);border-color:#b9cdfd;color:var(--primary)}
+    .status{padding:10px 14px 0;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:10px}.list{display:grid;gap:10px;padding:12px 12px 18px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:13px;box-shadow:var(--shadow)}.card-head{display:flex;align-items:flex-start;gap:9px}.score{flex:0 0 auto;min-width:42px;text-align:center;background:#111827;color:white;border-radius:12px;padding:7px 6px;line-height:1.05}.score b{display:block;font-size:16px}.score span{font-size:10px;opacity:.78}.headline{margin:0;font-size:16px;line-height:1.34;letter-spacing:-.03em;font-weight:800}.meta{margin-top:7px;display:flex;flex-wrap:wrap;gap:5px 8px;color:var(--muted);font-size:12px}.desc{margin:10px 0 0;color:#374151;font-size:13px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}.keywords{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}.keyword{font-size:11px;color:#1f2937;background:#f3f4f6;border:1px solid #e5e7eb;padding:4px 7px;border-radius:999px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.action{border-radius:12px;border:1px solid var(--line);background:#fff;padding:10px 8px;text-align:center;font-weight:800;font-size:13px}.action.primary{background:var(--primary);color:white;border-color:var(--primary)}
+    .empty,.loading,.error{margin:22px 12px;padding:22px 16px;background:white;border:1px solid var(--line);border-radius:var(--radius);color:var(--muted);text-align:center;box-shadow:var(--shadow)}.error{color:var(--danger)}.bottom-tools{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:9px 12px calc(9px + var(--safe-bottom));background:rgba(255,255,255,.94);border-top:1px solid var(--line);backdrop-filter:blur(10px)}.bottom-tools-inner{max-width:720px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.tool-btn{border:1px solid var(--line);background:#fff;border-radius:14px;padding:10px 6px;font-size:12px;font-weight:800;color:#374151}
+    .drawer-backdrop{position:fixed;inset:0;z-index:80;background:rgba(15,23,42,.42);display:none}.drawer-backdrop.open{display:block}.drawer{position:absolute;left:0;right:0;bottom:0;max-height:min(86vh,680px);background:white;border-radius:24px 24px 0 0;padding:12px 16px calc(16px + var(--safe-bottom));overflow-y:auto;transform:translateY(100%);transition:transform .22s ease}.drawer-backdrop.open .drawer{transform:translateY(0)}.grabber{width:42px;height:5px;background:#d1d5db;border-radius:999px;margin:0 auto 12px}.drawer-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.drawer-title h2{font-size:18px;margin:0;letter-spacing:-.03em}.close-btn{border:0;background:#f3f4f6;border-radius:999px;width:34px;height:34px;font-weight:900;color:#4b5563}.form-grid{display:grid;gap:12px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px}label{display:grid;gap:6px;font-size:12px;font-weight:800;color:#374151}input,select{width:100%;border:1px solid var(--line);border-radius:13px;padding:11px 12px;background:#fff;color:var(--text);outline:none}input:focus,select:focus{border-color:#93b4ff;box-shadow:0 0 0 3px var(--primary-soft)}.drawer-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.drawer-actions button{border:1px solid var(--line);border-radius:14px;padding:12px 10px;background:#fff;font-weight:900}.drawer-actions .apply{background:var(--primary);color:white;border-color:var(--primary)}.small-note{margin-top:10px;color:var(--muted);font-size:12px}
     @media (min-width:760px){.app{padding-top:8px}.title{font-size:22px}.headline{font-size:17px}.list{grid-template-columns:1fr 1fr}}
   </style>
 </head>
 <body>
-  <div class="app">
-    <header class="topbar">
-      <div class="topline">
-        <div class="title-wrap">
-          <h1 class="title">소매여신 기사 모바일 뷰어</h1>
-          <div class="subtitle" id="subtitle">JSON 불러오는 중...</div>
-        </div>
-        <button class="filter-btn" id="openFilter">필터</button>
-      </div>
-      <div class="quick-row" id="quickChips"></div>
+  <div class='app'>
+    <header class='topbar'>
+      <div class='topline'><div class='title-wrap'><h1 class='title'>소매여신 기사 모바일 뷰어</h1><div class='subtitle' id='subtitle'>JSON 불러오는 중...</div></div><button class='filter-btn' id='openFilter'>필터</button></div>
+      <div class='quick-row' id='quickChips'></div>
     </header>
-
-    <div class="status">
-      <span id="countText">-</span>
-      <span id="sortText">정렬 준비중</span>
-    </div>
-
-    <main class="list" id="list"><div class="loading">기사 데이터를 불러오고 있습니다.</div></main>
+    <div class='status'><span id='countText'>-</span><span id='sortText'>정렬 준비중</span></div>
+    <main class='list' id='list'><div class='loading'>기사 데이터를 불러오고 있습니다.</div></main>
   </div>
 
-  <nav class="bottom-tools" aria-label="하단 도구">
-    <div class="bottom-tools-inner">
-      <button class="tool-btn" id="topBtn">맨 위</button>
-      <button class="tool-btn" id="highScoreBtn">고득점</button>
-      <button class="tool-btn" id="resetBtn">초기화</button>
-    </div>
-  </nav>
+  <nav class='bottom-tools' aria-label='하단 도구'><div class='bottom-tools-inner'><button class='tool-btn' id='topBtn'>맨 위</button><button class='tool-btn' id='highScoreBtn'>고득점</button><button class='tool-btn' id='resetBtn'>초기화</button></div></nav>
 
-  <div class="drawer-backdrop" id="drawerBackdrop" role="dialog" aria-modal="true" aria-label="필터 설정">
-    <section class="drawer">
-      <div class="grabber"></div>
-      <div class="drawer-title">
-        <h2>필터 설정</h2>
-        <button class="close-btn" id="closeFilter" aria-label="닫기">×</button>
-      </div>
-
-      <div class="form-grid">
-        <label>
-          날짜 선택
-          <input id="dateInput" type="date" />
-        </label>
-
-        <label>
-          검색어
-          <input id="searchInput" type="search" placeholder="제목, 요약, 출처, 키워드 검색" />
-        </label>
-
-        <label>
-          최소 pre_score
-          <input id="minScoreInput" type="number" inputmode="numeric" min="0" step="1" placeholder="예: 30" />
-        </label>
-
-        <div class="two-col">
-          <label>
-            정렬 기준
-            <select id="sortSelect">
-              <option value="score">pre_score</option>
-              <option value="date">게시일</option>
-              <option value="title">제목</option>
-              <option value="source">출처</option>
-            </select>
-          </label>
-          <label>
-            정렬 방향
-            <select id="directionSelect">
-              <option value="desc">내림차순</option>
-              <option value="asc">오름차순</option>
-            </select>
-          </label>
+  <div class='drawer-backdrop' id='drawerBackdrop' role='dialog' aria-modal='true' aria-label='필터 설정'>
+    <section class='drawer'>
+      <div class='grabber'></div>
+      <div class='drawer-title'><h2>필터 설정</h2><button class='close-btn' id='closeFilter' aria-label='닫기'>×</button></div>
+      <div class='form-grid'>
+        <label>날짜 선택<input id='dateInput' type='date' /></label>
+        <label>검색어<input id='searchInput' type='search' placeholder='제목, 요약, 출처, 키워드 검색' /></label>
+        <label>최소 pre_score<input id='minScoreInput' type='number' inputmode='numeric' min='0' step='1' placeholder='예: 30' /></label>
+        <div class='two-col'>
+          <label>정렬 기준<select id='sortSelect'><option value='score'>pre_score</option><option value='date'>게시일</option><option value='title'>제목</option><option value='source'>출처</option></select></label>
+          <label>정렬 방향<select id='directionSelect'><option value='desc'>내림차순</option><option value='asc'>오름차순</option></select></label>
         </div>
       </div>
-
-      <div class="drawer-actions">
-        <button id="clearFilter">비우기</button>
-        <button class="apply" id="applyFilter">적용</button>
-      </div>
-      <p class="small-note">키워드 빠른 선택은 화면 상단 칩에서만 적용됩니다. 검색어 입력창은 자유 검색용입니다.</p>
+      <div class='drawer-actions'><button id='clearFilter'>비우기</button><button class='apply' id='applyFilter'>적용</button></div>
+      <p class='small-note'>키워드 빠른 선택은 화면 상단 칩에서만 적용됩니다. 검색어 입력창은 자유 검색용입니다.</p>
     </section>
   </div>
 
@@ -129,170 +51,39 @@
     const queryDate = params.get('date');
     const defaultDate = queryDate || dateFromFile(queryData) || '2026-04-24';
 
-    const state = {
-      articles: [], filtered: [], search: '', minScore: '',
-      sort: 'score', direction: 'desc', quick: '', selectedDate: defaultDate,
-      dataFile: queryData || fileFromDate(defaultDate)
-    };
-
-    const el = {
-      subtitle: byId('subtitle'), quickChips: byId('quickChips'), countText: byId('countText'), sortText: byId('sortText'), list: byId('list'),
-      openFilter: byId('openFilter'), closeFilter: byId('closeFilter'), drawerBackdrop: byId('drawerBackdrop'),
-      dateInput: byId('dateInput'), searchInput: byId('searchInput'), minScoreInput: byId('minScoreInput'), sortSelect: byId('sortSelect'), directionSelect: byId('directionSelect'),
-      clearFilter: byId('clearFilter'), applyFilter: byId('applyFilter'), resetBtn: byId('resetBtn'), highScoreBtn: byId('highScoreBtn'), topBtn: byId('topBtn')
-    };
-
-    const quickKeywords = [
-      {label:'전체',value:''},{label:'대출',value:'대출'},{label:'규제',value:'규제'},{label:'연체',value:'연체'},
-      {label:'가계대출',value:'가계대출'},{label:'보험사',value:'보험사'},{label:'카드론',value:'카드론'},{label:'AI',value:'AI'}
-    ];
+    const state = {articles:[],filtered:[],search:'',minScore:'',sort:'score',direction:'desc',quick:'',selectedDate:defaultDate,dataFile:queryData || fileFromDate(defaultDate)};
+    const el = {subtitle:byId('subtitle'),quickChips:byId('quickChips'),countText:byId('countText'),sortText:byId('sortText'),list:byId('list'),openFilter:byId('openFilter'),closeFilter:byId('closeFilter'),drawerBackdrop:byId('drawerBackdrop'),dateInput:byId('dateInput'),searchInput:byId('searchInput'),minScoreInput:byId('minScoreInput'),sortSelect:byId('sortSelect'),directionSelect:byId('directionSelect'),clearFilter:byId('clearFilter'),applyFilter:byId('applyFilter'),resetBtn:byId('resetBtn'),highScoreBtn:byId('highScoreBtn'),topBtn:byId('topBtn')};
+    const quickKeywords=[{label:'전체',value:''},{label:'대출',value:'대출'},{label:'규제',value:'규제'},{label:'연체',value:'연체'},{label:'가계대출',value:'가계대출'},{label:'보험사',value:'보험사'},{label:'카드론',value:'카드론'},{label:'AI',value:'AI'}];
 
     function byId(id){return document.getElementById(id)}
-    function fileFromDate(date){const [year, month] = String(date).split('-'); return `data/raw/${year}/${month}/articles_raw_${date}.json`}
+    function fileFromDate(date){const [year,month]=String(date).split('-');return `data/raw/${year}/${month}/articles_raw_${date}.json`}
     function legacyFileFromDate(date){return `articles_raw_${date}.json`}
-    function dateFromFile(file){const m = String(file || '').match(/articles_raw_(\d{4}-\d{2}-\d{2})\.json/); return m ? m[1] : ''}
+    function dateFromFile(file){const m=String(file||'').match(/articles_raw_(\d{4}-\d{2}-\d{2})\.json/);return m?m[1]:''}
     function textOf(a){return [a.title,a.description,a.source,...(a.matched_keywords||[])].filter(Boolean).join(' ').toLowerCase()}
-    function safeDate(a){return a.published_at || a.published_date || ''}
-    function formatDate(v){return v ? v.replace('T',' ').replace('+09:00','').slice(0,16) : '-'}
-    function score(a){return Number(a.pre_score || 0)}
-    function getLink(a){return a.naver_link || a.url || '#'}
-    function escapeHtml(v){return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+    function safeDate(a){return a.published_at||a.published_date||''}
+    function formatDate(v){return v?v.replace('T',' ').replace('+09:00','').slice(0,16):'-'}
+    function score(a){return Number(a.pre_score||0)}
+    function getLink(a){return a.url || a.naver_link || '#'}
+    function escapeHtml(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;')}
     function escapeAttr(v){return escapeHtml(v).replace(/`/g,'&#96;')}
+    async function fetchJson(file){const response=await fetch(file,{cache:'no-store'});if(!response.ok)throw new Error(`HTTP ${response.status}`);return await response.json()}
 
-    async function fetchJson(file){const response = await fetch(file, {cache:'no-store'}); if(!response.ok) throw new Error(`HTTP ${response.status}`); return await response.json();}
+    function compareValue(a){if(state.sort==='score')return score(a);if(state.sort==='date')return safeDate(a);if(state.sort==='title')return a.title||'';if(state.sort==='source')return a.source||'';return score(a)}
+    function applyFilters(){const q=[state.search,state.quick].filter(Boolean).join(' ').trim().toLowerCase();const minScore=Number(state.minScore||0);let rows=state.articles.filter(a=>{const haystack=textOf(a);const okSearch=!q||q.split(/\s+/).every(term=>haystack.includes(term));const okScore=score(a)>=minScore;return okSearch&&okScore});rows.sort((a,b)=>{const av=compareValue(a),bv=compareValue(b);let result;if(typeof av==='number'&&typeof bv==='number')result=av-bv;else result=String(av).localeCompare(String(bv),'ko');if(result===0)result=safeDate(a).localeCompare(safeDate(b));return state.direction==='desc'?-result:result});state.filtered=rows;render()}
+    function sortLabel(){const base={score:'pre_score',date:'게시일',title:'제목',source:'출처'}[state.sort]||'pre_score';return `${base} ${state.direction==='desc'?'내림차순':'오름차순'}`}
+    function renderQuickChips(){el.quickChips.innerHTML=quickKeywords.map(item=>`<button class='chip ${item.value===state.quick?'active':''}' data-quick='${escapeHtml(item.value)}'>${escapeHtml(item.label)}</button>`).join('')}
+    function render(){renderQuickChips();el.countText.textContent=`표시 ${state.filtered.length}건 / 전체 ${state.articles.length}건`;el.sortText.textContent=sortLabel();if(!state.filtered.length){el.list.innerHTML='<div class="empty">조건에 맞는 기사가 없습니다.</div>';return}el.list.innerHTML=state.filtered.map((a,i)=>{const keywords=(a.matched_keywords||[]).slice(0,8);return `<article class='card'><div class='card-head'><div class='score'><b>${score(a)}</b><span>score</span></div><div><h2 class='headline'>${escapeHtml(a.title||'제목 없음')}</h2><div class='meta'><span>${escapeHtml(a.source||'-')}</span><span>${formatDate(safeDate(a))}</span></div></div></div><p class='desc'>${escapeHtml(a.description||'요약 설명 없음')}</p>${keywords.length?`<div class='keywords'>${keywords.map(k=>`<span class='keyword'>${escapeHtml(k)}</span>`).join('')}</div>`:''}<div class='actions'><a class='action primary' href='${escapeAttr(getLink(a))}' target='_blank' rel='noopener'>기사 열기</a><button class='action copy-btn' data-index='${i}'>URL 복사</button></div></article>`}).join('')}
 
-    function compareValue(a){
-      if(state.sort === 'score') return score(a);
-      if(state.sort === 'date') return safeDate(a);
-      if(state.sort === 'title') return a.title || '';
-      if(state.sort === 'source') return a.source || '';
-      return score(a);
-    }
+    async function copyArticleUrl(article){const url=getLink(article);if(!url||url==='#'){alert('복사할 URL이 없습니다.');return}try{await navigator.clipboard.writeText(url);alert('URL을 복사했습니다.')}catch(e){const area=document.createElement('textarea');area.value=url;document.body.appendChild(area);area.select();document.execCommand('copy');area.remove();alert('URL을 복사했습니다.')}}
 
-    function applyFilters(){
-      const q = [state.search,state.quick].filter(Boolean).join(' ').trim().toLowerCase();
-      const minScore = Number(state.minScore || 0);
-      let rows = state.articles.filter(a => {
-        const haystack = textOf(a);
-        const okSearch = !q || q.split(/\s+/).every(term => haystack.includes(term));
-        const okScore = score(a) >= minScore;
-        return okSearch && okScore;
-      });
-
-      rows.sort((a,b) => {
-        const av = compareValue(a), bv = compareValue(b);
-        let result;
-        if(typeof av === 'number' && typeof bv === 'number') result = av - bv;
-        else result = String(av).localeCompare(String(bv), 'ko');
-        if(result === 0) result = safeDate(a).localeCompare(safeDate(b));
-        return state.direction === 'desc' ? -result : result;
-      });
-
-      state.filtered = rows;
-      render();
-    }
-
-    function sortLabel(){
-      const base = {score:'pre_score',date:'게시일',title:'제목',source:'출처'}[state.sort] || 'pre_score';
-      return `${base} ${state.direction === 'desc' ? '내림차순' : '오름차순'}`;
-    }
-
-    function renderQuickChips(){
-      el.quickChips.innerHTML = quickKeywords.map(item => `<button class="chip ${item.value === state.quick ? 'active' : ''}" data-quick="${escapeHtml(item.value)}">${escapeHtml(item.label)}</button>`).join('');
-    }
-
-    function render(){
-      renderQuickChips();
-      el.countText.textContent = `표시 ${state.filtered.length}건 / 전체 ${state.articles.length}건`;
-      el.sortText.textContent = sortLabel();
-      if(!state.filtered.length){el.list.innerHTML = '<div class="empty">조건에 맞는 기사가 없습니다.</div>'; return;}
-      el.list.innerHTML = state.filtered.map((a, i) => {
-        const keywords = (a.matched_keywords || []).slice(0,8);
-        return `<article class="card">
-          <div class="card-head"><div class="score"><b>${score(a)}</b><span>score</span></div><div><h2 class="headline">${escapeHtml(a.title || '제목 없음')}</h2><div class="meta"><span>${escapeHtml(a.source || '-')}</span><span>${formatDate(safeDate(a))}</span></div></div></div>
-          <p class="desc">${escapeHtml(a.description || '요약 설명 없음')}</p>
-          ${keywords.length ? `<div class="keywords">${keywords.map(k => `<span class="keyword">${escapeHtml(k)}</span>`).join('')}</div>` : ''}
-          <div class="actions"><a class="action primary" href="${escapeAttr(getLink(a))}" target="_blank" rel="noopener">기사 열기</a><button class="action copy-btn" data-index="${i}">요약용 복사</button></div>
-        </article>`;
-      }).join('');
-    }
-
-    async function copyPrompt(article){
-      const body = [
-        '아래 기사는 교보생명 소매여신사업본부 공유 후보입니다.',
-        '반드시 링크에 직접 접속해 본문을 확인한 뒤 3줄 요약과 소매여신 실무 관점을 작성해주세요.','',
-        `기사 제목: ${article.title || ''}`,`출처: ${article.source || ''}`,`게시일: ${article.published_at || article.published_date || ''}`,
-        `링크: ${article.url || article.naver_link || ''}`,`pre_score: ${article.pre_score || 0}`,
-        `matched_keywords: ${(article.matched_keywords || []).join(', ')}`,`description: ${article.description || ''}`
-      ].join('\n');
-      try{await navigator.clipboard.writeText(body); alert('요약 요청용 문구를 복사했습니다.');}
-      catch(e){alert('복사에 실패했습니다. 브라우저 권한을 확인해주세요.');}
-    }
-
-    function openDrawer(){
-      el.dateInput.value = state.selectedDate;
-      el.searchInput.value = state.search;
-      el.minScoreInput.value = state.minScore;
-      el.sortSelect.value = state.sort;
-      el.directionSelect.value = state.direction;
-      el.drawerBackdrop.classList.add('open');
-    }
+    function openDrawer(){el.dateInput.value=state.selectedDate;el.searchInput.value=state.search;el.minScoreInput.value=state.minScore;el.sortSelect.value=state.sort;el.directionSelect.value=state.direction;el.drawerBackdrop.classList.add('open')}
     function closeDrawer(){el.drawerBackdrop.classList.remove('open')}
     function resetFilters(){state.search='';state.minScore='';state.sort='score';state.direction='desc';state.quick='';applyFilters()}
+    async function load(file=state.dataFile){state.dataFile=file;el.subtitle.textContent=`${state.selectedDate||''} · JSON 불러오는 중...`;el.list.innerHTML='<div class="loading">기사 데이터를 불러오고 있습니다.</div>';try{let data;let loadedFile=file;try{data=await fetchJson(file)}catch(primaryError){const legacyFile=legacyFileFromDate(state.selectedDate||dateFromFile(file));if(file===legacyFile)throw primaryError;data=await fetchJson(legacyFile);loadedFile=legacyFile}state.articles=Array.isArray(data.articles)?data.articles:[];const loadedDate=data.target_date||dateFromFile(loadedFile)||state.selectedDate;state.selectedDate=loadedDate;el.subtitle.textContent=`${loadedDate||''} · ${state.articles.length}건 수집 · ${data.updated_at?'업데이트 '+data.updated_at.slice(0,16).replace('T',' '):loadedFile}`;const url=new URL(location.href);url.searchParams.set('data',loadedFile);url.searchParams.set('date',state.selectedDate);history.replaceState(null,'',url);applyFilters()}catch(error){el.subtitle.textContent='JSON 로드 실패';el.list.innerHTML=`<div class='error'>데이터를 불러오지 못했습니다.<br>${escapeHtml(error.message)}<br><br>${escapeHtml(file)} 또는 기존 루트 JSON 파일이 있는지 확인해주세요.</div>`}}
 
-    async function load(file = state.dataFile){
-      state.dataFile = file;
-      el.subtitle.textContent = `${state.selectedDate || ''} · JSON 불러오는 중...`;
-      el.list.innerHTML = '<div class="loading">기사 데이터를 불러오고 있습니다.</div>';
-      try{
-        let data;
-        let loadedFile = file;
-        try{
-          data = await fetchJson(file);
-        }catch(primaryError){
-          const legacyFile = legacyFileFromDate(state.selectedDate || dateFromFile(file));
-          if(file === legacyFile) throw primaryError;
-          data = await fetchJson(legacyFile);
-          loadedFile = legacyFile;
-        }
-        state.articles = Array.isArray(data.articles) ? data.articles : [];
-        const loadedDate = data.target_date || dateFromFile(loadedFile) || state.selectedDate;
-        state.selectedDate = loadedDate;
-        el.subtitle.textContent = `${loadedDate || ''} · ${state.articles.length}건 수집 · ${data.updated_at ? '업데이트 ' + data.updated_at.slice(0,16).replace('T',' ') : loadedFile}`;
-        const url = new URL(location.href);
-        url.searchParams.set('data', loadedFile);
-        url.searchParams.set('date', state.selectedDate);
-        history.replaceState(null, '', url);
-        applyFilters();
-      }catch(error){
-        el.subtitle.textContent = 'JSON 로드 실패';
-        el.list.innerHTML = `<div class="error">데이터를 불러오지 못했습니다.<br>${escapeHtml(error.message)}<br><br>${escapeHtml(file)} 또는 기존 루트 JSON 파일이 있는지 확인해주세요.</div>`;
-      }
-    }
-
-    el.openFilter.addEventListener('click', openDrawer);
-    el.closeFilter.addEventListener('click', closeDrawer);
-    el.drawerBackdrop.addEventListener('click', e => { if(e.target === el.drawerBackdrop) closeDrawer(); });
-    el.applyFilter.addEventListener('click', async () => {
-      const nextDate = el.dateInput.value || state.selectedDate;
-      const nextFile = fileFromDate(nextDate);
-      state.search = el.searchInput.value.trim();
-      state.minScore = el.minScoreInput.value.trim();
-      state.sort = el.sortSelect.value;
-      state.direction = el.directionSelect.value;
-      closeDrawer();
-      if(nextDate !== state.selectedDate || nextFile !== state.dataFile){
-        state.selectedDate = nextDate;
-        await load(nextFile);
-      } else applyFilters();
-    });
-    el.clearFilter.addEventListener('click', () => {el.searchInput.value='';el.minScoreInput.value='';el.sortSelect.value='score';el.directionSelect.value='desc';});
-    el.resetBtn.addEventListener('click', resetFilters);
-    el.highScoreBtn.addEventListener('click', () => {state.minScore='50';state.sort='score';state.direction='desc';applyFilters();window.scrollTo({top:0,behavior:'smooth'});});
-    el.topBtn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
-    el.quickChips.addEventListener('click', e => {const chip=e.target.closest('[data-quick]'); if(!chip)return; state.quick=chip.dataset.quick; applyFilters();});
-    el.list.addEventListener('click', e => {const btn=e.target.closest('.copy-btn'); if(!btn)return; copyPrompt(state.filtered[Number(btn.dataset.index)]);});
-
+    el.openFilter.addEventListener('click',openDrawer);el.closeFilter.addEventListener('click',closeDrawer);el.drawerBackdrop.addEventListener('click',e=>{if(e.target===el.drawerBackdrop)closeDrawer()});
+    el.applyFilter.addEventListener('click',async()=>{const nextDate=el.dateInput.value||state.selectedDate;const nextFile=fileFromDate(nextDate);state.search=el.searchInput.value.trim();state.minScore=el.minScoreInput.value.trim();state.sort=el.sortSelect.value;state.direction=el.directionSelect.value;closeDrawer();if(nextDate!==state.selectedDate||nextFile!==state.dataFile){state.selectedDate=nextDate;await load(nextFile)}else applyFilters()});
+    el.clearFilter.addEventListener('click',()=>{el.searchInput.value='';el.minScoreInput.value='';el.sortSelect.value='score';el.directionSelect.value='desc'});el.resetBtn.addEventListener('click',resetFilters);el.highScoreBtn.addEventListener('click',()=>{state.minScore='50';state.sort='score';state.direction='desc';applyFilters();window.scrollTo({top:0,behavior:'smooth'})});el.topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));el.quickChips.addEventListener('click',e=>{const chip=e.target.closest('[data-quick]');if(!chip)return;state.quick=chip.dataset.quick;applyFilters()});el.list.addEventListener('click',e=>{const btn=e.target.closest('.copy-btn');if(!btn)return;copyArticleUrl(state.filtered[Number(btn.dataset.index)])});
     load(state.dataFile);
   </script>
 </body>
