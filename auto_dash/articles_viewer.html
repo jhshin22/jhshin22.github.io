@@ -84,6 +84,8 @@
     let loadedPath = '';
 
     function todayKstString() { const now = new Date(); const kst = new Date(now.getTime() + 9 * 60 * 60 * 1000); return kst.toISOString().slice(0, 10); }
+    function dataPathFromDate(date) { const [year, month] = String(date).split('-'); return `data/raw/${year}/${month}/articles_raw_${date}.json`; }
+    function legacyPathFromDate(date) { return `articles_raw_${date}.json`; }
     function escapeHtml(value) { return String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;'); }
     function articleUrl(article) { return article.url || article.naver_link || ''; }
     function articleText(article) {
@@ -126,12 +128,15 @@
     async function fetchJson(path) { const response = await fetch(`${path}?ts=${Date.now()}`); if (!response.ok) throw new Error(`HTTP ${response.status}`); return await response.json(); }
     async function loadArticles() {
       const date = dateInput.value || todayKstString(); dateInput.value = date;
-      const dailyPath = `articles_raw_${date}.json`; const legacyPath = 'articles_raw.json';
+      const dailyPath = dataPathFromDate(date); const legacyDailyPath = legacyPathFromDate(date); const legacyPath = 'articles_raw.json';
       statusEl.textContent = `${dailyPath} 불러오는 중...`; listEl.innerHTML = '';
       try { currentPayload = await fetchJson(dailyPath); loadedPath = dailyPath; }
       catch (dailyErr) {
-        try { statusEl.textContent = `${dailyPath} 없음. 기존 articles_raw.json을 불러오는 중...`; currentPayload = await fetchJson(legacyPath); loadedPath = legacyPath; if (Array.isArray(currentPayload.articles)) currentPayload = { ...currentPayload, articles: currentPayload.articles.filter(article => String(article.published_at || '').slice(0, 10) === date) }; }
-        catch (legacyErr) { currentPayload = null; rawArticles = []; statusEl.textContent = `파일을 불러오지 못했습니다: ${dailyPath} 또는 ${legacyPath} (${dailyErr.message} / ${legacyErr.message})`; listEl.innerHTML = '<div class="empty">해당 날짜 JSON 파일이 아직 없거나 GitHub Pages 반영 전입니다. Actions를 한 번 수동 실행하면 일자별 파일이 생성됩니다.</div>'; return; }
+        try { statusEl.textContent = `${dailyPath} 없음. 기존 ${legacyDailyPath}를 불러오는 중...`; currentPayload = await fetchJson(legacyDailyPath); loadedPath = legacyDailyPath; }
+        catch (legacyDailyErr) {
+          try { statusEl.textContent = `${legacyDailyPath} 없음. 기존 articles_raw.json을 불러오는 중...`; currentPayload = await fetchJson(legacyPath); loadedPath = legacyPath; if (Array.isArray(currentPayload.articles)) currentPayload = { ...currentPayload, articles: currentPayload.articles.filter(article => String(article.published_at || '').slice(0, 10) === date) }; }
+          catch (legacyErr) { currentPayload = null; rawArticles = []; statusEl.textContent = `파일을 불러오지 못했습니다: ${dailyPath}, ${legacyDailyPath}, ${legacyPath} (${dailyErr.message} / ${legacyDailyErr.message} / ${legacyErr.message})`; listEl.innerHTML = '<div class="empty">해당 날짜 JSON 파일이 아직 없거나 GitHub Pages 반영 전입니다. Actions를 한 번 수동 실행하면 일자별 파일이 생성됩니다.</div>'; return; }
+        }
       }
       rawArticles = Array.isArray(currentPayload.articles) ? currentPayload.articles : [];
       render();
