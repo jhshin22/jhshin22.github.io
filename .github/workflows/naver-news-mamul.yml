@@ -16,7 +16,7 @@ on:
         required: true
         default: '20'
       output:
-        description: 'Optional output path. Leave blank for auto_dash/articles_raw_YYYY-MM-DD.json'
+        description: 'Optional output path. Leave blank for auto_dash/data/raw/YYYY/MM/articles_raw_YYYY-MM-DD.json'
         required: false
         default: ''
 
@@ -51,24 +51,29 @@ jobs:
           DISPLAY: ${{ github.event.inputs.display }}
           OUTPUT: ${{ github.event.inputs.output }}
         run: |
-          if [ -z "$OUTPUT" ]; then
-            python auto_dash/naver_news_collector_mamul.py \
-              --target-date "$TARGET_DATE" \
-              --pages "$PAGES" \
-              --display "$DISPLAY" \
-              --sort date
-          else
-            python auto_dash/naver_news_collector_mamul.py \
-              --target-date "$TARGET_DATE" \
-              --pages "$PAGES" \
-              --display "$DISPLAY" \
-              --output "$OUTPUT" \
-              --sort date
+          RESOLVED_DATE="$TARGET_DATE"
+          if [ "$RESOLVED_DATE" = "today" ]; then
+            RESOLVED_DATE=$(TZ=Asia/Seoul date +%F)
+          elif [ "$RESOLVED_DATE" = "yesterday" ]; then
+            RESOLVED_DATE=$(TZ=Asia/Seoul date -d 'yesterday' +%F)
           fi
+
+          if [ -z "$OUTPUT" ]; then
+            YEAR=$(echo "$RESOLVED_DATE" | cut -d- -f1)
+            MONTH=$(echo "$RESOLVED_DATE" | cut -d- -f2)
+            OUTPUT="auto_dash/data/raw/${YEAR}/${MONTH}/articles_raw_${RESOLVED_DATE}.json"
+          fi
+
+          python auto_dash/naver_news_collector_mamul.py \
+            --target-date "$TARGET_DATE" \
+            --pages "$PAGES" \
+            --display "$DISPLAY" \
+            --output "$OUTPUT" \
+            --sort date
 
       - name: Commit and push manual output if changed
         run: |
-          git add auto_dash/*.json
+          git add auto_dash/data/raw/**/*.json auto_dash/*.json
 
           if git diff --cached --quiet; then
             echo "No JSON changes to commit."
