@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>모바일 기사 뷰어</title>
+  <style>
+    :root {
+      --bg: #f5f6f8;
+      --card: #ffffff;
+      --text: #171717;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --primary: #1d4ed8;
+      --primary-soft: #eaf1ff;
+      --danger: #dc2626;
+      --radius: 16px;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+
+    .app {
+      max-width: 720px;
+      margin: 0 auto;
+      padding-bottom: calc(72px + var(--safe-bottom));
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(245, 246, 248, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 14px 8px;
+    }
+
+    .topline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .title-wrap { flex: 1; min-width: 0; }
+
+    .title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .subtitle {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .filter-btn {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-weight: 700;
+      font-size: 13px;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.22);
+      white-space: nowrap;
+    }
+
+    .quick-row {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-top: 9px;
+      scrollbar-width: none;
+    }
+    .quick-row::-webkit-scrollbar { display: none; }
+
+    .chip {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      background: white;
+      color: #374151;
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .chip.active {
+      background: var(--primary-soft);
+      border-color: #b9cdfd;
+      color: var(--primary);
+    }
+
+    .status {
+      padding: 10px 14px 0;
+      color: var(--muted);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      padding: 12px 12px 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 13px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+
+    .score {
+      flex: 0 0 auto;
+      min-width: 42px;
+      text-align: center;
+      background: #111827;
+      color: white;
+      border-radius: 12px;
+      padding: 7px 6px;
+      line-height: 1.05;
+    }
+    .score b { display: block; font-size: 16px; }
+    .score span { font-size: 10px; opacity: 0.78; }
+
+    .headline {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.34;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    .meta {
+      margin-top: 7px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .desc {
+      margin: 10px 0 0;
+      color: #374151;
+      font-size: 13px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .keyword {
+      font-size: 11px;
+      color: #1f2937;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      padding: 4px 7px;
+      border-radius: 999px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .action {
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 10px 8px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .action.primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .empty, .loading, .error {
+      margin: 22px 12px;
+      padding: 22px 16px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--muted);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .error { color: var(--danger); }
+
+    .bottom-tools {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 40;
+      padding: 9px 12px calc(9px + var(--safe-bottom));
+      background: rgba(255, 255, 255, 0.94);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    .bottom-tools-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .tool-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px 6px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #374151;
+    }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      background: rgba(15, 23, 42, 0.42);
+      display: none;
+    }
+
+    .drawer-backdrop.open { display: block; }
+
+    .drawer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      max-height: min(82vh, 620px);
+      background: white;
+      border-radius: 24px 24px 0 0;
+      padding: 12px 16px calc(16px + var(--safe-bottom));
+      overflow-y: auto;
+      transform: translateY(100%);
+      transition: transform 0.22s ease;
+    }
+
+    .drawer-backdrop.open .drawer { transform: translateY(0); }
+
+    .grabber {
+      width: 42px;
+      height: 5px;
+      background: #d1d5db;
+      border-radius: 999px;
+      margin: 0 auto 12px;
+    }
+
+    .drawer-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .drawer-title h2 {
+      font-size: 18px;
+      margin: 0;
+      letter-spacing: -0.03em;
+    }
+
+    .close-btn {
+      border: 0;
+      background: #f3f4f6;
+      border-radius: 999px;
+      width: 34px;
+      height: 34px;
+      font-weight: 900;
+      color: #4b5563;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #374151;
+    }
+
+    input, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 11px 12px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: #93b4ff;
+      box-shadow: 0 0 0 3px var(--primary-soft);
+    }
+
+    .drawer-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .drawer-actions button {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 10px;
+      background: #fff;
+      font-weight: 900;
+    }
+
+    .drawer-actions .apply {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .small-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (min-width: 760px) {
+      .app { padding-top: 8px; }
+      .title { font-size: 22px; }
+      .headline { font-size: 17px; }
+      .list { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="topline">
+        <div class="title-wrap">
+          <h1 class="title">소매여신 기사 모바일 뷰어</h1>
+          <div class="subtitle" id="subtitle">JSON 불러오는 중...</div>
+        </div>
+        <button class="filter-btn" id="openFilter">필터</button>
+      </div>
+      <div class="quick-row" id="quickChips"></div>
+    </header>
+
+    <div class="status">
+      <span id="countText">-</span>
+      <span id="sortText">pre_score순</span>
+    </div>
+
+    <main class="list" id="list">
+      <div class="loading">기사 데이터를 불러오고 있습니다.</div>
+    </main>
+  </div>
+
+  <nav class="bottom-tools" aria-label="하단 도구">
+    <div class="bottom-tools-inner">
+      <button class="tool-btn" id="topBtn">맨 위</button>
+      <button class="tool-btn" id="highScoreBtn">고득점</button>
+      <button class="tool-btn" id="resetBtn">초기화</button>
+    </div>
+  </nav>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" role="dialog" aria-modal="true" aria-label="필터 설정">
+    <section class="drawer">
+      <div class="grabber"></div>
+      <div class="drawer-title">
+        <h2>필터 설정</h2>
+        <button class="close-btn" id="closeFilter" aria-label="닫기">×</button>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          검색어
+          <input id="searchInput" type="search" placeholder="제목, 요약, 키워드 검색" />
+        </label>
+
+        <label>
+          최소 pre_score
+          <input id="minScoreInput" type="number" inputmode="numeric" min="0" step="1" placeholder="예: 30" />
+        </label>
+
+        <label>
+          카테고리 / 키워드
+          <select id="keywordSelect">
+            <option value="">전체</option>
+            <option value="가계대출">가계대출</option>
+            <option value="주택담보대출">주택담보대출</option>
+            <option value="신용대출">신용대출</option>
+            <option value="대출 규제">대출 규제</option>
+            <option value="DSR">DSR</option>
+            <option value="연체율">연체율</option>
+            <option value="대환대출">대환대출</option>
+            <option value="보험사 대출">보험사 대출</option>
+            <option value="생명보험 대출">생명보험 대출</option>
+            <option value="카드론">카드론</option>
+            <option value="AI">AI</option>
+          </select>
+        </label>
+
+        <label>
+          정렬
+          <select id="sortSelect">
+            <option value="score">pre_score 높은순</option>
+            <option value="latest">최신순</option>
+            <option value="oldest">오래된순</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="drawer-actions">
+        <button id="clearFilter">비우기</button>
+        <button class="apply" id="applyFilter">적용</button>
+      </div>
+
+      <p class="small-note">모바일에서는 설정창을 화면 위에 길게 고정하지 않고, 필요할 때만 아래에서 열리도록 구성했습니다.</p>
+    </section>
+  </div>
+
+  <script>
+    const DEFAULT_JSON = new URLSearchParams(location.search).get('data') || 'articles_raw_2026-04-24.json';
+
+    const state = {
+      articles: [],
+      filtered: [],
+      search: '',
+      minScore: '',
+      keyword: '',
+      sort: 'score',
+      quick: '',
+    };
+
+    const el = {
+      subtitle: document.getElementById('subtitle'),
+      quickChips: document.getElementById('quickChips'),
+      countText: document.getElementById('countText'),
+      sortText: document.getElementById('sortText'),
+      list: document.getElementById('list'),
+      openFilter: document.getElementById('openFilter'),
+      closeFilter: document.getElementById('closeFilter'),
+      drawerBackdrop: document.getElementById('drawerBackdrop'),
+      searchInput: document.getElementById('searchInput'),
+      minScoreInput: document.getElementById('minScoreInput'),
+      keywordSelect: document.getElementById('keywordSelect'),
+      sortSelect: document.getElementById('sortSelect'),
+      clearFilter: document.getElementById('clearFilter'),
+      applyFilter: document.getElementById('applyFilter'),
+      resetBtn: document.getElementById('resetBtn'),
+      highScoreBtn: document.getElementById('highScoreBtn'),
+      topBtn: document.getElementById('topBtn'),
+    };
+
+    const quickKeywords = [
+      { label: '전체', value: '' },
+      { label: '대출', value: '대출' },
+      { label: '규제', value: '규제' },
+      { label: '연체', value: '연체' },
+      { label: '가계대출', value: '가계대출' },
+      { label: '보험사', value: '보험사' },
+      { label: '카드론', value: '카드론' },
+      { label: 'AI', value: 'AI' },
+    ];
+
+    function textOf(article) {
+      return [
+        article.title,
+        article.description,
+        article.source,
+        ...(article.matched_keywords || []),
+      ].filter(Boolean).join(' ').toLowerCase();
+    }
+
+    function safeDate(article) {
+      return article.published_at || article.published_date || '';
+    }
+
+    function formatDate(value) {
+      if (!value) return '-';
+      return value.replace('T', ' ').replace('+09:00', '').slice(0, 16);
+    }
+
+    function score(article) {
+      return Number(article.pre_score || 0);
+    }
+
+    function getLink(article) {
+      return article.naver_link || article.url || '#';
+    }
+
+    function applyFilters() {
+      const q = [state.search, state.quick].filter(Boolean).join(' ').trim().toLowerCase();
+      const minScore = Number(state.minScore || 0);
+      const keyword = state.keyword.toLowerCase();
+
+      let rows = state.articles.filter(article => {
+        const haystack = textOf(article);
+        const okSearch = !q || q.split(/\s+/).every(term => haystack.includes(term));
+        const okScore = score(article) >= minScore;
+        const okKeyword = !keyword || haystack.includes(keyword);
+        return okSearch && okScore && okKeyword;
+      });
+
+      rows.sort((a, b) => {
+        if (state.sort === 'latest') return safeDate(b).localeCompare(safeDate(a));
+        if (state.sort === 'oldest') return safeDate(a).localeCompare(safeDate(b));
+        return score(b) - score(a) || safeDate(b).localeCompare(safeDate(a));
+      });
+
+      state.filtered = rows;
+      render();
+    }
+
+    function renderQuickChips() {
+      el.quickChips.innerHTML = quickKeywords.map(item => {
+        const active = item.value === state.quick ? 'active' : '';
+        return `<button class="chip ${active}" data-quick="${escapeHtml(item.value)}">${escapeHtml(item.label)}</button>`;
+      }).join('');
+    }
+
+    function render() {
+      renderQuickChips();
+      el.countText.textContent = `표시 ${state.filtered.length}건 / 전체 ${state.articles.length}건`;
+      el.sortText.textContent = state.sort === 'score' ? 'pre_score순' : state.sort === 'latest' ? '최신순' : '오래된순';
+
+      if (!state.filtered.length) {
+        el.list.innerHTML = '<div class="empty">조건에 맞는 기사가 없습니다.</div>';
+        return;
+      }
+
+      el.list.innerHTML = state.filtered.map(article => {
+        const keywords = (article.matched_keywords || []).slice(0, 8);
+        const link = getLink(article);
+        return `
+          <article class="card">
+            <div class="card-head">
+              <div class="score"><b>${score(article)}</b><span>score</span></div>
+              <div>
+                <h2 class="headline">${escapeHtml(article.title || '제목 없음')}</h2>
+                <div class="meta">
+                  <span>${escapeHtml(article.source || '-')}</span>
+                  <span>${formatDate(safeDate(article))}</span>
+                </div>
+              </div>
+            </div>
+            <p class="desc">${escapeHtml(article.description || '요약 설명 없음')}</p>
+            ${keywords.length ? `<div class="keywords">${keywords.map(k => `<span class="keyword">${escapeHtml(k)}</span>`).join('')}</div>` : ''}
+            <div class="actions">
+              <a class="action primary" href="${escapeAttr(link)}" target="_blank" rel="noopener">기사 열기</a>
+              <button class="action" onclick='copyPrompt(${JSON.stringify(article).replace(/'/g, "&#39;")})'>요약용 복사</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value).replace(/`/g, '&#96;');
+    }
+
+    async function copyPrompt(article) {
+      const body = [
+        '아래 기사는 교보생명 소매여신사업본부 공유 후보입니다.',
+        '반드시 링크에 직접 접속해 본문을 확인한 뒤 3줄 요약과 소매여신 실무 관점을 작성해주세요.',
+        '',
+        `기사 제목: ${article.title || ''}`,
+        `출처: ${article.source || ''}`,
+        `게시일: ${article.published_at || article.published_date || ''}`,
+        `링크: ${article.url || article.naver_link || ''}`,
+        `pre_score: ${article.pre_score || 0}`,
+        `matched_keywords: ${(article.matched_keywords || []).join(', ')}`,
+        `description: ${article.description || ''}`,
+      ].join('\n');
+
+      try {
+        await navigator.clipboard.writeText(body);
+        alert('요약 요청용 문구를 복사했습니다.');
+      } catch (e) {
+        alert('복사에 실패했습니다. 브라우저 권한을 확인해주세요.');
+      }
+    }
+
+    function openDrawer() {
+      el.searchInput.value = state.search;
+      el.minScoreInput.value = state.minScore;
+      el.keywordSelect.value = state.keyword;
+      el.sortSelect.value = state.sort;
+      el.drawerBackdrop.classList.add('open');
+    }
+
+    function closeDrawer() {
+      el.drawerBackdrop.classList.remove('open');
+    }
+
+    function resetFilters() {
+      state.search = '';
+      state.minScore = '';
+      state.keyword = '';
+      state.sort = 'score';
+      state.quick = '';
+      applyFilters();
+    }
+
+    async function load() {
+      try {
+        const response = await fetch(DEFAULT_JSON, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        state.articles = Array.isArray(data.articles) ? data.articles : [];
+        state.filtered = [...state.articles];
+        el.subtitle.textContent = `${data.target_date || ''} · ${state.articles.length}건 수집 · ${data.updated_at ? '업데이트 ' + data.updated_at.slice(0, 16).replace('T', ' ') : ''}`;
+        applyFilters();
+      } catch (error) {
+        el.subtitle.textContent = 'JSON 로드 실패';
+        el.list.innerHTML = `<div class="error">데이터를 불러오지 못했습니다.<br>${escapeHtml(error.message)}<br><br>같은 폴더에 ${escapeHtml(DEFAULT_JSON)} 파일이 있는지 확인해주세요.</div>`;
+      }
+    }
+
+    el.openFilter.addEventListener('click', openDrawer);
+    el.closeFilter.addEventListener('click', closeDrawer);
+    el.drawerBackdrop.addEventListener('click', event => {
+      if (event.target === el.drawerBackdrop) closeDrawer();
+    });
+
+    el.applyFilter.addEventListener('click', () => {
+      state.search = el.searchInput.value.trim();
+      state.minScore = el.minScoreInput.value.trim();
+      state.keyword = el.keywordSelect.value;
+      state.sort = el.sortSelect.value;
+      applyFilters();
+      closeDrawer();
+    });
+
+    el.clearFilter.addEventListener('click', () => {
+      el.searchInput.value = '';
+      el.minScoreInput.value = '';
+      el.keywordSelect.value = '';
+      el.sortSelect.value = 'score';
+    });
+
+    el.resetBtn.addEventListener('click', resetFilters);
+    el.highScoreBtn.addEventListener('click', () => {
+      state.minScore = '50';
+      state.sort = 'score';
+      applyFilters();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    el.topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    el.quickChips.addEventListener('click', event => {
+      const chip = event.target.closest('[data-quick]');
+      if (!chip) return;
+      state.quick = chip.dataset.quick;
+      applyFilters();
+    });
+
+    load();
+  </script>
+</body>
+</html>
