@@ -41,50 +41,61 @@
         </div>
       </div>
       <div class='drawer-actions'><button id='clearFilter'>비우기</button><button class='apply' id='applyFilter'>적용</button></div>
-      <p class='small-note'>키워드 빠른 선택은 화면 상단 칩에서만 적용됩니다. 검색어 입력창은 자유 검색용입니다.</p>
+      <p class='small-note'>상단 칩은 각 기사의 matched_keywords가 라벨 규칙에 포함되는지로 분류됩니다. 검색어 입력창은 자유 검색용입니다.</p>
     </section>
   </div>
 
   <script>
-    const params = new URLSearchParams(location.search);
-    const queryData = params.get('data');
-    const queryDate = params.get('date');
-    const defaultDate = queryDate || dateFromFile(queryData) || '2026-04-24';
+    const LABEL_RULE_PATH='config/label_rules.json';
+    const FALLBACK_LABELS=[
+      {id:'policy_regulation',name:'정책/규제',keywords:['DSR','DTI','LTV','대출 규제','금융위원회 대출','금융감독원 대출','금융소비자','금소법']},
+      {id:'rate_indicator',name:'금리/지표',keywords:['대출 금리','가계부채','연체율','신용점수','신용평가']},
+      {id:'market_direction',name:'시장방향',keywords:['부동산 대출','주택시장 대출','주택담보대출','주담대','전세대출','가계대출','가계부채']},
+      {id:'risk_npl',name:'리스크/연체',keywords:['연체율','채무조정','개인회생','취약차주','저신용자','가계부채']},
+      {id:'retail_lending_strategy',name:'소매대출전략',keywords:['신용대출','대환대출','대출 갈아타기','카드론','현금서비스','마이너스통장','소상공인 대출','자영업자 대출','은행권 대출','저축은행 대출','카드사 대출','고신용자','저신용자','신용점수','신용평가']},
+      {id:'insurance_issue',name:'보험사',keywords:['보험계약대출','약관대출','보험사 대출','생명보험 대출','교보생명']},
+      {id:'ai_trend',name:'AI',keywords:['금융 AI','AI 활용']}
+    ];
+    const params=new URLSearchParams(location.search);
+    const queryData=params.get('data');
+    const queryDate=params.get('date');
+    const defaultDate=queryDate||dateFromFile(queryData)||'2026-04-24';
 
-    const state = {articles:[],filtered:[],search:'',minScore:'',sort:'score',direction:'desc',quick:'',selectedDate:defaultDate,dataFile:queryData || fileFromDate(defaultDate)};
-    const el = {subtitle:byId('subtitle'),quickChips:byId('quickChips'),countText:byId('countText'),sortText:byId('sortText'),list:byId('list'),openFilter:byId('openFilter'),closeFilter:byId('closeFilter'),drawerBackdrop:byId('drawerBackdrop'),dateInput:byId('dateInput'),searchInput:byId('searchInput'),minScoreInput:byId('minScoreInput'),sortSelect:byId('sortSelect'),directionSelect:byId('directionSelect'),clearFilter:byId('clearFilter'),applyFilter:byId('applyFilter'),resetBtn:byId('resetBtn'),highScoreBtn:byId('highScoreBtn'),topBtn:byId('topBtn')};
-    const quickKeywords=[{label:'전체',value:''},{label:'대출',value:'대출'},{label:'규제',value:'규제'},{label:'연체',value:'연체'},{label:'가계대출',value:'가계대출'},{label:'보험사',value:'보험사'},{label:'카드론',value:'카드론'},{label:'AI',value:'AI'}];
+    const state={articles:[],filtered:[],search:'',minScore:'',sort:'score',direction:'desc',selectedLabel:'',labelRules:FALLBACK_LABELS,selectedDate:defaultDate,dataFile:queryData||fileFromDate(defaultDate)};
+    const el={subtitle:byId('subtitle'),quickChips:byId('quickChips'),countText:byId('countText'),sortText:byId('sortText'),list:byId('list'),openFilter:byId('openFilter'),closeFilter:byId('closeFilter'),drawerBackdrop:byId('drawerBackdrop'),dateInput:byId('dateInput'),searchInput:byId('searchInput'),minScoreInput:byId('minScoreInput'),sortSelect:byId('sortSelect'),directionSelect:byId('directionSelect'),clearFilter:byId('clearFilter'),applyFilter:byId('applyFilter'),resetBtn:byId('resetBtn'),highScoreBtn:byId('highScoreBtn'),topBtn:byId('topBtn')};
 
     function byId(id){return document.getElementById(id)}
     function fileFromDate(date){const [year,month]=String(date).split('-');return `data/raw/${year}/${month}/articles_raw_${date}.json`}
     function legacyFileFromDate(date){return `articles_raw_${date}.json`}
     function dateFromFile(file){const m=String(file||'').match(/articles_raw_(\d{4}-\d{2}-\d{2})\.json/);return m?m[1]:''}
     function textOf(a){return [a.title,a.description,a.source,...(a.matched_keywords||[])].filter(Boolean).join(' ').toLowerCase()}
+    function matchedKeywordSet(a){return new Set((a.matched_keywords||[]).map(k=>String(k).toLowerCase()))}
+    function articleMatchesLabel(a,labelId){if(!labelId)return true;const rule=state.labelRules.find(r=>r.id===labelId);if(!rule)return true;const articleKeywords=matchedKeywordSet(a);return (rule.keywords||[]).some(k=>articleKeywords.has(String(k).toLowerCase()))}
     function safeDate(a){return a.published_at||a.published_date||''}
     function formatDate(v){return v?v.replace('T',' ').replace('+09:00','').slice(0,16):'-'}
     function score(a){return Number(a.pre_score||0)}
-    function getLink(a){return a.url || a.naver_link || '#'}
+    function getLink(a){return a.url||a.naver_link||'#'}
     function escapeHtml(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;')}
     function escapeAttr(v){return escapeHtml(v).replace(/`/g,'&#96;')}
     async function fetchJson(file){const response=await fetch(file,{cache:'no-store'});if(!response.ok)throw new Error(`HTTP ${response.status}`);return await response.json()}
+    async function loadLabelRules(){try{const data=await fetchJson(LABEL_RULE_PATH);if(Array.isArray(data.labels)&&data.labels.length){state.labelRules=data.labels.slice().sort((a,b)=>(a.order||0)-(b.order||0))}}catch(e){state.labelRules=FALLBACK_LABELS}renderQuickChips()}
 
     function compareValue(a){if(state.sort==='score')return score(a);if(state.sort==='date')return safeDate(a);if(state.sort==='title')return a.title||'';if(state.sort==='source')return a.source||'';return score(a)}
-    function applyFilters(){const q=[state.search,state.quick].filter(Boolean).join(' ').trim().toLowerCase();const minScore=Number(state.minScore||0);let rows=state.articles.filter(a=>{const haystack=textOf(a);const okSearch=!q||q.split(/\s+/).every(term=>haystack.includes(term));const okScore=score(a)>=minScore;return okSearch&&okScore});rows.sort((a,b)=>{const av=compareValue(a),bv=compareValue(b);let result;if(typeof av==='number'&&typeof bv==='number')result=av-bv;else result=String(av).localeCompare(String(bv),'ko');if(result===0)result=safeDate(a).localeCompare(safeDate(b));return state.direction==='desc'?-result:result});state.filtered=rows;render()}
+    function applyFilters(){const q=state.search.trim().toLowerCase();const minScore=Number(state.minScore||0);let rows=state.articles.filter(a=>{const haystack=textOf(a);const okSearch=!q||q.split(/\s+/).every(term=>haystack.includes(term));const okScore=score(a)>=minScore;const okLabel=articleMatchesLabel(a,state.selectedLabel);return okSearch&&okScore&&okLabel});rows.sort((a,b)=>{const av=compareValue(a),bv=compareValue(b);let result;if(typeof av==='number'&&typeof bv==='number')result=av-bv;else result=String(av).localeCompare(String(bv),'ko');if(result===0)result=safeDate(a).localeCompare(safeDate(b));return state.direction==='desc'?-result:result});state.filtered=rows;render()}
     function sortLabel(){const base={score:'pre_score',date:'게시일',title:'제목',source:'출처'}[state.sort]||'pre_score';return `${base} ${state.direction==='desc'?'내림차순':'오름차순'}`}
-    function renderQuickChips(){el.quickChips.innerHTML=quickKeywords.map(item=>`<button class='chip ${item.value===state.quick?'active':''}' data-quick='${escapeHtml(item.value)}'>${escapeHtml(item.label)}</button>`).join('')}
+    function renderQuickChips(){const chips=[{id:'',name:'전체'},...state.labelRules];el.quickChips.innerHTML=chips.map(item=>`<button class='chip ${item.id===state.selectedLabel?'active':''}' data-label='${escapeHtml(item.id)}' title='${escapeHtml(item.full_name||item.name)}'>${escapeHtml(item.name)}</button>`).join('')}
     function render(){renderQuickChips();el.countText.textContent=`표시 ${state.filtered.length}건 / 전체 ${state.articles.length}건`;el.sortText.textContent=sortLabel();if(!state.filtered.length){el.list.innerHTML='<div class="empty">조건에 맞는 기사가 없습니다.</div>';return}el.list.innerHTML=state.filtered.map((a,i)=>{const keywords=(a.matched_keywords||[]).slice(0,8);return `<article class='card'><div class='card-head'><div class='score'><b>${score(a)}</b><span>score</span></div><div><h2 class='headline'>${escapeHtml(a.title||'제목 없음')}</h2><div class='meta'><span>${escapeHtml(a.source||'-')}</span><span>${formatDate(safeDate(a))}</span></div></div></div><p class='desc'>${escapeHtml(a.description||'요약 설명 없음')}</p>${keywords.length?`<div class='keywords'>${keywords.map(k=>`<span class='keyword'>${escapeHtml(k)}</span>`).join('')}</div>`:''}<div class='actions'><a class='action primary' href='${escapeAttr(getLink(a))}' target='_blank' rel='noopener'>기사 열기</a><button class='action copy-btn' data-index='${i}'>URL 복사</button></div></article>`}).join('')}
-
     async function copyArticleUrl(article){const url=getLink(article);if(!url||url==='#'){alert('복사할 URL이 없습니다.');return}try{await navigator.clipboard.writeText(url);alert('URL을 복사했습니다.')}catch(e){const area=document.createElement('textarea');area.value=url;document.body.appendChild(area);area.select();document.execCommand('copy');area.remove();alert('URL을 복사했습니다.')}}
 
     function openDrawer(){el.dateInput.value=state.selectedDate;el.searchInput.value=state.search;el.minScoreInput.value=state.minScore;el.sortSelect.value=state.sort;el.directionSelect.value=state.direction;el.drawerBackdrop.classList.add('open')}
     function closeDrawer(){el.drawerBackdrop.classList.remove('open')}
-    function resetFilters(){state.search='';state.minScore='';state.sort='score';state.direction='desc';state.quick='';applyFilters()}
+    function resetFilters(){state.search='';state.minScore='';state.sort='score';state.direction='desc';state.selectedLabel='';applyFilters()}
     async function load(file=state.dataFile){state.dataFile=file;el.subtitle.textContent=`${state.selectedDate||''} · JSON 불러오는 중...`;el.list.innerHTML='<div class="loading">기사 데이터를 불러오고 있습니다.</div>';try{let data;let loadedFile=file;try{data=await fetchJson(file)}catch(primaryError){const legacyFile=legacyFileFromDate(state.selectedDate||dateFromFile(file));if(file===legacyFile)throw primaryError;data=await fetchJson(legacyFile);loadedFile=legacyFile}state.articles=Array.isArray(data.articles)?data.articles:[];const loadedDate=data.target_date||dateFromFile(loadedFile)||state.selectedDate;state.selectedDate=loadedDate;el.subtitle.textContent=`${loadedDate||''} · ${state.articles.length}건 수집 · ${data.updated_at?'업데이트 '+data.updated_at.slice(0,16).replace('T',' '):loadedFile}`;const url=new URL(location.href);url.searchParams.set('data',loadedFile);url.searchParams.set('date',state.selectedDate);history.replaceState(null,'',url);applyFilters()}catch(error){el.subtitle.textContent='JSON 로드 실패';el.list.innerHTML=`<div class='error'>데이터를 불러오지 못했습니다.<br>${escapeHtml(error.message)}<br><br>${escapeHtml(file)} 또는 기존 루트 JSON 파일이 있는지 확인해주세요.</div>`}}
 
     el.openFilter.addEventListener('click',openDrawer);el.closeFilter.addEventListener('click',closeDrawer);el.drawerBackdrop.addEventListener('click',e=>{if(e.target===el.drawerBackdrop)closeDrawer()});
     el.applyFilter.addEventListener('click',async()=>{const nextDate=el.dateInput.value||state.selectedDate;const nextFile=fileFromDate(nextDate);state.search=el.searchInput.value.trim();state.minScore=el.minScoreInput.value.trim();state.sort=el.sortSelect.value;state.direction=el.directionSelect.value;closeDrawer();if(nextDate!==state.selectedDate||nextFile!==state.dataFile){state.selectedDate=nextDate;await load(nextFile)}else applyFilters()});
-    el.clearFilter.addEventListener('click',()=>{el.searchInput.value='';el.minScoreInput.value='';el.sortSelect.value='score';el.directionSelect.value='desc'});el.resetBtn.addEventListener('click',resetFilters);el.highScoreBtn.addEventListener('click',()=>{state.minScore='50';state.sort='score';state.direction='desc';applyFilters();window.scrollTo({top:0,behavior:'smooth'})});el.topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));el.quickChips.addEventListener('click',e=>{const chip=e.target.closest('[data-quick]');if(!chip)return;state.quick=chip.dataset.quick;applyFilters()});el.list.addEventListener('click',e=>{const btn=e.target.closest('.copy-btn');if(!btn)return;copyArticleUrl(state.filtered[Number(btn.dataset.index)])});
-    load(state.dataFile);
+    el.clearFilter.addEventListener('click',()=>{el.searchInput.value='';el.minScoreInput.value='';el.sortSelect.value='score';el.directionSelect.value='desc'});el.resetBtn.addEventListener('click',resetFilters);el.highScoreBtn.addEventListener('click',()=>{state.minScore='50';state.sort='score';state.direction='desc';applyFilters();window.scrollTo({top:0,behavior:'smooth'})});el.topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));el.quickChips.addEventListener('click',e=>{const chip=e.target.closest('[data-label]');if(!chip)return;state.selectedLabel=chip.dataset.label;applyFilters()});el.list.addEventListener('click',e=>{const btn=e.target.closest('.copy-btn');if(!btn)return;copyArticleUrl(state.filtered[Number(btn.dataset.index)])});
+    loadLabelRules();load(state.dataFile);
   </script>
 </body>
 </html>
