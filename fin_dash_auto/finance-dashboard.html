@@ -294,6 +294,15 @@
         .replace(/\"/g, '&quot;')
         .replace(/'/g, '&#39;');
     }
+    function formatRating(value) {
+      if (value === undefined || value === null || value === '') return '';
+      const text = String(value).trim();
+      if (text.includes('★') || text.includes('☆')) return text;
+      const number = Number(text);
+      if (Number.isNaN(number)) return text;
+      const score = Math.max(0, Math.min(5, Math.round(number)));
+      return '★'.repeat(score) + '☆'.repeat(5 - score);
+    }
     function normalizeCategory(category) { return CATEGORY_ALIASES[category] || category || '기타'; }
     function getArticleLink(article) { return article.URL || article.url || '#'; }
     function buildKeywords(article) {
@@ -314,7 +323,7 @@
     }
     function renderActionRow(article) { return `<div class="action-row">${renderOriginalLink(article)}${renderShareButton(article)}</div>`; }
     function renderMeta(article) {
-      return `<div class="article-meta"><span>${escapeHtml(article.publisher)}</span><span>${escapeHtml(article.udate || '')}</span><span class="badge">추천도 ${escapeHtml(article.rating || '')}</span></div>`;
+      return `<div class="article-meta"><span>${escapeHtml(article.publisher)}</span><span>${escapeHtml(article.udate || '')}</span><span class="badge">추천도 ${escapeHtml(formatRating(article.rating))}</span></div>`;
     }
     function setTemporaryButtonLabel(button, label) {
       const original = button.dataset.originalLabel || button.textContent;
