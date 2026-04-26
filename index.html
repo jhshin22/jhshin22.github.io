@@ -114,6 +114,8 @@
       backdrop-filter: blur(10px);
     }
 
+    section.wide { grid-column: 1 / -1; }
+
     .section-head {
       display: flex;
       align-items: center;
@@ -141,6 +143,10 @@
     .cards {
       display: grid;
       gap: 14px;
+    }
+
+    .cards.compact {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     a.card {
@@ -211,6 +217,10 @@
       letter-spacing: -0.015em;
     }
 
+    @media (max-width: 920px) {
+      .cards.compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
     @media (max-width: 760px) {
       .wrap { width: min(100% - 28px, 1120px); padding-top: 34px; }
       header { display: block; }
@@ -218,6 +228,7 @@
       .sections { grid-template-columns: 1fr; }
       section { padding: 20px; }
       h1 { margin-top: 14px; }
+      .cards.compact { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -227,7 +238,7 @@
       <div>
         <div class="eyebrow">📌 Dashboard Portal</div>
         <h1>금융·대출 대시보드 포탈</h1>
-        <p class="lead">흩어져 있는 5개 대시보드를 한 화면에서 바로 이동할 수 있도록 모았습니다.</p>
+        <p class="lead">흩어져 있는 대시보드와 저장소 안의 HTML 페이지를 한 화면에서 바로 이동할 수 있도록 모았습니다.</p>
       </div>
       <div class="date-box" aria-label="오늘 날짜">
         <div class="label">TODAY</div>
@@ -275,6 +286,70 @@
             <div class="card-title">최종 선정 기사 대시보드</div>
             <div class="card-desc">선별된 기사 JSON을 날짜별로 불러와 공유하는 최종 대시보드입니다.</div>
             <div class="url">/auto_dash/selected_dashboard.html</div>
+          </a>
+        </div>
+      </section>
+
+      <section class="wide">
+        <div class="section-head">
+          <h2>기타 HTML</h2>
+          <span class="badge">저장소 내 페이지</span>
+        </div>
+        <div class="cards compact">
+          <a class="card" href="https://jhshin22.github.io/qz.html">
+            <div class="card-title">qz</div>
+            <div class="card-desc">루트에 있는 단독 HTML 페이지입니다.</div>
+            <div class="url">/qz.html</div>
+          </a>
+          <a class="card" href="https://jhshin22.github.io/nono.html">
+            <div class="card-title">nono</div>
+            <div class="card-desc">루트에 있는 단독 HTML 페이지입니다.</div>
+            <div class="url">/nono.html</div>
+          </a>
+          <a class="card" href="https://jhshin22.github.io/ganpyeon.html">
+            <div class="card-title">ganpyeon</div>
+            <div class="card-desc">간편조회 관련 루트 HTML 페이지입니다.</div>
+            <div class="url">/ganpyeon.html</div>
+          </a>
+          <a class="card" href="https://jhshin22.github.io/ganpyoenpotal.html">
+            <div class="card-title">ganpyoenpotal</div>
+            <div class="card-desc">간편조회 포탈 성격의 루트 HTML 페이지입니다.</div>
+            <div class="url">/ganpyoenpotal.html</div>
+          </a>
+          <a class="card" href="https://jhshin22.github.io/sinyongpotal.html">
+            <div class="card-title">sinyongpotal</div>
+            <div class="card-desc">신용대출/간편조회 관련 포탈 HTML 페이지입니다.</div>
+            <div class="url">/sinyongpotal.html</div>
+          </a>
+          <a class="card" href="https://jhshin22.github.io/calculator.html">
+            <div class="card-title">calculator</div>
+            <div class="card-desc">계산기 기능용 루트 HTML 페이지입니다.</div>
+            <div class="url">/calculator.html</div>
+          </a>
+          <a class="card" href="https://jhshin22.github.io/bobo.html">
+            <div class="card-title">bobo</div>
+            <div class="card-desc">루트에 있는 단독 HTML 페이지입니다.</div>
+            <div class="url">/bobo.html</div>
+          </a>
+          <a class="card" href="https://jhshin22.github.io/credit-loan-share/">
+            <div class="card-title">credit-loan-share</div>
+            <div class="card-desc">신용대출 공유용 하위 프로젝트 페이지입니다.</div>
+            <div class="url">/credit-loan-share/</div>
+          </a>
+          <a class="card" href="https://jhshin22.github.io/stockgame/">
+            <div class="card-title">stockgame</div>
+            <div class="card-desc">주식 차트 예측 게임 페이지입니다.</div>
+            <div class="url">/stockgame/</div>
+          </a>
+          <a class="card" href="https://jhshin22.github.io/stockgame-v2/">
+            <div class="card-title">stockgame-v2</div>
+            <div class="card-desc">주식 차트 예측 게임 개선 버전 페이지입니다.</div>
+            <div class="url">/stockgame-v2/</div>
+          </a>
+          <a class="card" href="https://jhshin22.github.io/sostone/">
+            <div class="card-title">sostone</div>
+            <div class="card-desc">하위 폴더에 있는 별도 HTML 프로젝트입니다.</div>
+            <div class="url">/sostone/</div>
           </a>
         </div>
       </section>
