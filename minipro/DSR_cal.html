@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DSR 계산기</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --ink: #172033;
+      --muted: #687386;
+      --line: #dde5f0;
+      --primary: #2364d2;
+      --primary-dark: #174aa1;
+      --good: #0f8a5f;
+      --warn: #d98200;
+      --bad: #c73535;
+      --soft: #eef4ff;
+      --shadow: 0 14px 40px rgba(25, 47, 89, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+      background: linear-gradient(135deg, #edf4ff 0%, #f8fafc 46%, #fff8ef 100%);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      width: min(1100px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+
+    header {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(35, 100, 210, 0.1);
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 5vw, 46px);
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+      max-width: 760px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(221, 229, 240, 0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-head {
+      padding: 20px 22px 14px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .form {
+      padding: 20px 22px 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #27334a;
+    }
+
+    input, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 13px;
+      font: inherit;
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input:focus, select:focus {
+      border-color: rgba(35, 100, 210, 0.7);
+      box-shadow: 0 0 0 4px rgba(35, 100, 210, 0.1);
+    }
+
+    .loan-box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 15px;
+      background: #fbfdff;
+      display: grid;
+      gap: 12px;
+    }
+
+    .loan-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 900;
+      color: #24304a;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 5px 9px;
+      background: var(--soft);
+      color: var(--primary-dark);
+      border-radius: 999px;
+      font-weight: 900;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 15px;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 0.12s, filter 0.12s;
+    }
+
+    button:active { transform: translateY(1px); }
+
+    .primary {
+      background: var(--primary);
+      color: white;
+      flex: 1 1 190px;
+    }
+
+    .ghost {
+      background: #eef2f7;
+      color: #27334a;
+      flex: 1 1 130px;
+    }
+
+    .result {
+      padding: 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .score {
+      border-radius: 22px;
+      padding: 22px;
+      background: linear-gradient(135deg, #1f5cc7, #2b7de9);
+      color: #fff;
+      display: grid;
+      gap: 8px;
+    }
+
+    .score .label {
+      font-size: 13px;
+      opacity: 0.86;
+      font-weight: 800;
+    }
+
+    .score .value {
+      font-size: clamp(44px, 9vw, 68px);
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: -0.05em;
+    }
+
+    .score .desc {
+      font-size: 14px;
+      line-height: 1.55;
+      opacity: 0.92;
+    }
+
+    .bar-wrap {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bar {
+      position: relative;
+      height: 14px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: linear-gradient(90deg, var(--good) 0 40%, var(--warn) 40% 50%, var(--bad) 50% 100%);
+    }
+
+    .marker {
+      position: absolute;
+      top: -4px;
+      width: 4px;
+      height: 22px;
+      background: #111827;
+      border-radius: 999px;
+      left: 0%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.9);
+    }
+
+    .bar-labels {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff;
+      display: grid;
+      gap: 5px;
+    }
+
+    .metric span:first-child {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .metric strong {
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .note {
+      border-radius: 16px;
+      background: #fff7e8;
+      color: #6c4908;
+      border: 1px solid #f2dfb9;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .table th, .table td {
+      padding: 11px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+    }
+
+    .table th:first-child, .table td:first-child { text-align: left; }
+    .table th { color: var(--muted); background: #f7f9fc; font-size: 12px; }
+    .table tr:last-child td { border-bottom: 0; }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      padding: 14px 16px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    details p, details li {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      .row { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="eyebrow">DSR 계산기 · 원리금 기준</div>
+      <h1>대출 전, DSR 여유를 빠르게 확인하세요</h1>
+      <p class="subtitle">연소득과 기존 대출의 연간 원리금 상환액, 신규 대출 조건을 입력하면 예상 DSR과 한도 여유를 계산합니다. 실제 심사 결과는 금융회사 기준, 소득 인정 방식, 대출 종류별 산정 방식에 따라 달라질 수 있습니다.</p>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="section-head">
+          <h2>입력값</h2>
+          <span class="hint">금액은 만원 단위로 입력</span>
+        </div>
+        <div class="form">
+          <div class="row">
+            <label>연소득
+              <input id="income" type="number" inputmode="decimal" min="0" step="100" value="5000" />
+            </label>
+            <label>DSR 기준
+              <select id="limitRate">
+                <option value="40">40% / 일반 기준</option>
+                <option value="50">50% / 보수 완화 가정</option>
+                <option value="60">60% / 참고용</option>
+                <option value="custom">직접 입력</option>
+              </select>
+            </label>
+          </div>
+          <div class="row" id="customLimitRow" style="display:none">
+            <label>직접 입력 DSR 기준(%)
+              <input id="customLimit" type="number" inputmode="decimal" min="1" step="1" value="40" />
+            </label>
+          </div>
+
+          <div class="loan-box">
+            <div class="loan-title">기존 대출 <span class="pill">연간 원리금</span></div>
+            <div class="row">
+              <label>기존 대출 연간 원리금
+                <input id="existingAnnual" type="number" inputmode="decimal" min="0" step="10" value="600" />
+              </label>
+              <label>기타 연간 상환액
+                <input id="otherAnnual" type="number" inputmode="decimal" min="0" step="10" value="0" />
+              </label>
+            </div>
+          </div>
+
+          <div class="loan-box">
+            <div class="loan-title">신규 대출 <span class="pill">원리금균등 가정</span></div>
+            <div class="row">
+              <label>신규 대출금액
+                <input id="newPrincipal" type="number" inputmode="decimal" min="0" step="100" value="3000" />
+              </label>
+              <label>연 금리(%)
+                <input id="newRate" type="number" inputmode="decimal" min="0" step="0.1" value="8.5" />
+              </label>
+            </div>
+            <div class="row">
+              <label>상환기간(년)
+                <input id="newYears" type="number" inputmode="decimal" min="0.1" step="0.5" value="5" />
+              </label>
+              <label>상환방식
+                <select id="repayType">
+                  <option value="amortized">원리금균등</option>
+                  <option value="principal">원금균등 첫해 기준</option>
+                  <option value="interestOnly">만기일시 / 이자만</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="primary" id="calcBtn">계산하기</button>
+            <button class="ghost" id="resetBtn">초기화</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>계산 결과</h2>
+          <span class="hint">단순 참고용 시뮬레이션</span>
+        </div>
+        <div class="result">
+          <div class="score">
+            <div class="label">예상 DSR</div>
+            <div class="value" id="dsrValue">-</div>
+            <div class="desc" id="dsrDesc">입력값을 기준으로 계산합니다.</div>
+          </div>
+
+          <div class="bar-wrap">
+            <div class="bar"><div class="marker" id="marker"></div></div>
+            <div class="bar-labels"><span>0%</span><span>40%</span><span>50%</span><span>100%+</span></div>
+          </div>
+
+          <div class="metrics">
+            <div class="metric"><span>총 연간 원리금</span><strong id="totalAnnual">-</strong></div>
+            <div class="metric"><span>신규 연간 원리금</span><strong id="newAnnual">-</strong></div>
+            <div class="metric"><span>기준 내 남은 여유</span><strong id="roomAnnual">-</strong></div>
+            <div class="metric"><span>월 환산 상환액</span><strong id="monthlyPay">-</strong></div>
+          </div>
+
+          <table class="table" aria-label="DSR 계산 상세">
+            <thead><tr><th>구분</th><th>금액</th><th>비고</th></tr></thead>
+            <tbody id="detailRows"></tbody>
+          </table>
+
+          <div class="note">주의: 이 계산기는 원리금 상환 부담을 빠르게 보는 참고용입니다. 실제 DSR 산정은 주택담보대출, 신용대출, 카드론 등 대출 종류별 만기·상환방식 인정 기준과 금융회사 내부 기준에 따라 달라질 수 있습니다.</div>
+
+          <details>
+            <summary>계산 방식 보기</summary>
+            <p>DSR은 일반적으로 <strong>연간 모든 대출 원리금 상환액 ÷ 연소득 × 100</strong>으로 계산합니다.</p>
+            <ul>
+              <li>원리금균등: 월 상환액을 계산한 뒤 12개월로 환산합니다.</li>
+              <li>원금균등 첫해 기준: 첫해 원금상환액과 첫해 이자액을 합산합니다.</li>
+              <li>만기일시: 연간 이자액만 반영하는 단순 가정입니다.</li>
+            </ul>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const fields = ["income", "limitRate", "customLimit", "existingAnnual", "otherAnnual", "newPrincipal", "newRate", "newYears", "repayType"];
+
+    function num(id) {
+      const value = parseFloat($(id).value);
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function fmtManwon(value) {
+      const rounded = Math.round(value * 10) / 10;
+      return rounded.toLocaleString("ko-KR") + "만원";
+    }
+
+    function fmtPct(value) {
+      return (Math.round(value * 10) / 10).toLocaleString("ko-KR") + "%";
+    }
+
+    function getLimit() {
+      const selected = $("limitRate").value;
+      return selected === "custom" ? Math.max(num("customLimit"), 0) : parseFloat(selected);
+    }
+
+    function calcNewAnnual(principal, annualRate, years, type) {
+      if (principal <= 0 || years <= 0) return { annual: 0, monthly: 0 };
+      const r = annualRate / 100;
+      if (type === "interestOnly") {
+        const annual = principal * r;
+        return { annual, monthly: annual / 12 };
+      }
+      if (type === "principal") {
+        const annualPrincipal = principal / years;
+        const firstYearInterest = principal * r;
+        const annual = annualPrincipal + firstYearInterest;
+        return { annual, monthly: annual / 12 };
+      }
+      const months = years * 12;
+      const mr = r / 12;
+      let monthly;
+      if (mr === 0) monthly = principal / months;
+      else monthly = principal * mr * Math.pow(1 + mr, months) / (Math.pow(1 + mr, months) - 1);
+      return { annual: monthly * 12, monthly };
+    }
+
+    function render() {
+      $("customLimitRow").style.display = $("limitRate").value === "custom" ? "grid" : "none";
+
+      const income = num("income");
+      const limit = getLimit();
+      const existingAnnual = num("existingAnnual");
+      const otherAnnual = num("otherAnnual");
+      const principal = num("newPrincipal");
+      const rate = num("newRate");
+      const years = num("newYears");
+      const type = $("repayType").value;
+      const newCalc = calcNewAnnual(principal, rate, years, type);
+      const totalAnnual = existingAnnual + otherAnnual + newCalc.annual;
+      const dsr = income > 0 ? totalAnnual / income * 100 : 0;
+      const allowedAnnual = income * limit / 100;
+      const room = allowedAnnual - totalAnnual;
+
+      $("dsrValue").textContent = income > 0 ? fmtPct(dsr) : "-";
+      const status = dsr <= limit ? "기준 이내입니다." : "기준을 초과합니다.";
+      $("dsrDesc").textContent = income > 0 ? `선택한 DSR 기준 ${fmtPct(limit)} 대비 ${status}` : "연소득을 입력하면 계산됩니다.";
+      $("totalAnnual").textContent = fmtManwon(totalAnnual);
+      $("newAnnual").textContent = fmtManwon(newCalc.annual);
+      $("roomAnnual").textContent = (room >= 0 ? "+" : "") + fmtManwon(room);
+      $("monthlyPay").textContent = fmtManwon(newCalc.monthly);
+      $("marker").style.left = Math.max(0, Math.min(dsr, 100)) + "%";
+
+      const repayLabel = { amortized: "원리금균등", principal: "원금균등 첫해", interestOnly: "만기일시/이자" }[type];
+      $("detailRows").innerHTML = `
+        <tr><td>연소득</td><td>${fmtManwon(income)}</td><td>입력값</td></tr>
+        <tr><td>기존 상환액</td><td>${fmtManwon(existingAnnual + otherAnnual)}</td><td>연간 기준</td></tr>
+        <tr><td>신규 상환액</td><td>${fmtManwon(newCalc.annual)}</td><td>${repayLabel}</td></tr>
+        <tr><td>DSR 기준 한도</td><td>${fmtManwon(allowedAnnual)}</td><td>${fmtPct(limit)} 적용</td></tr>
+      `;
+    }
+
+    function reset() {
+      $("income").value = 5000;
+      $("limitRate").value = 40;
+      $("customLimit").value = 40;
+      $("existingAnnual").value = 600;
+      $("otherAnnual").value = 0;
+      $("newPrincipal").value = 3000;
+      $("newRate").value = 8.5;
+      $("newYears").value = 5;
+      $("repayType").value = "amortized";
+      render();
+    }
+
+    fields.forEach(id => $(id).addEventListener("input", render));
+    $("calcBtn").addEventListener("click", render);
+    $("resetBtn").addEventListener("click", reset);
+    render();
+  </script>
+</body>
+</html>
