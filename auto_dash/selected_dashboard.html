@@ -14,11 +14,7 @@
       color: #0f172a;
       line-height: 1.6;
     }
-    .container {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 28px 18px 56px;
-    }
+    .container { max-width: 1240px; margin: 0 auto; padding: 28px 18px 56px; }
     .hero {
       background: linear-gradient(135deg, #0f766e, #2563eb 72%, #38bdf8);
       color: #fff;
@@ -27,22 +23,9 @@
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
       margin-bottom: 22px;
     }
-    .hero h1 {
-      margin: 0 0 10px;
-      font-size: 34px;
-      line-height: 1.2;
-    }
-    .hero p {
-      margin: 0;
-      opacity: 0.94;
-      font-size: 15px;
-    }
-    .meta {
-      margin-top: 16px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .hero h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.2; }
+    .hero p { margin: 0; opacity: 0.94; font-size: 15px; }
+    .meta { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
     .chip {
       background: rgba(255,255,255,0.16);
       border: 1px solid rgba(255,255,255,0.22);
@@ -51,314 +34,91 @@
       font-size: 14px;
       font-weight: 700;
     }
-    .section { margin-top: 24px; }
-    .section-head {
+    .toolbar {
+      margin: -6px 0 18px;
+      padding: 14px;
+      border: 1px solid #dbeafe;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.05);
       display: flex;
-      justify-content: space-between;
       align-items: end;
-      gap: 16px;
-      margin-bottom: 14px;
+      justify-content: space-between;
+      gap: 12px;
       flex-wrap: wrap;
     }
-    .section h2 {
-      margin: 0;
-      font-size: 28px;
-      line-height: 1.2;
-    }
-    .section-desc {
-      color: #475569;
-      font-size: 15px;
-      margin-top: 4px;
-    }
-    .top-grid {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 16px;
-    }
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 18px;
-    }
-    .category-card,
-    .article-card {
-      background: #fff;
-      border: 1px solid #e2e8f0;
+    .toolbar-group { display: flex; align-items: end; gap: 10px; flex-wrap: wrap; }
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label { font-size: 12px; font-weight: 800; color: #475569; }
+    .field input,
+    .field select {
+      min-height: 40px;
+      border: 1px solid #cbd5e1;
       border-radius: 8px;
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 14px;
+      color: #0f172a;
+      background: #fff;
     }
-    .article-card {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .top-article {
-      grid-column: span 4;
-      position: relative;
-      overflow: hidden;
-      border-color: #cbd5e1;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-    }
-    .top-article::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(37,99,235,0.03) 100%);
-    }
-    .top-article.featured {
-      grid-column: span 6;
-      padding: 22px;
-      border-color: #bfdbfe;
-      box-shadow: 0 16px 34px rgba(37, 99, 235, 0.12);
-      background: linear-gradient(160deg, #eff6ff 0%, #ffffff 70%);
-    }
+    .status-text { font-size: 13px; color: #64748b; font-weight: 700; }
+    .section { margin-top: 24px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+    .section h2 { margin: 0; font-size: 28px; line-height: 1.2; }
+    .section-desc { color: #475569; font-size: 15px; margin-top: 4px; }
+    .top-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+    .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+    .category-card, .article-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06); }
+    .article-card { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+    .top-article { grid-column: span 4; position: relative; overflow: hidden; border-color: #cbd5e1; background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
+    .top-article::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(37,99,235,0.03) 100%); }
+    .top-article.featured { grid-column: span 6; padding: 22px; border-color: #bfdbfe; box-shadow: 0 16px 34px rgba(37, 99, 235, 0.12); background: linear-gradient(160deg, #eff6ff 0%, #ffffff 70%); }
     .top-article.featured .article-title { font-size: 22px; line-height: 1.34; }
     .top-article.featured .summary { font-size: 15px; }
-    .top-label {
-      display: inline-flex;
-      align-items: center;
-      align-self: flex-start;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: #dbeafe;
-      color: #1d4ed8;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
-    .rank {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #ccfbf1;
-      color: #0f766e;
-      font-weight: 800;
-      font-size: 15px;
-      box-shadow: inset 0 0 0 1px rgba(15, 118, 110, 0.12);
-    }
-    .top-rank-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .article-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: #0f172a;
-      text-decoration: none;
-      line-height: 1.4;
-      position: relative;
-      z-index: 1;
-    }
+    .top-label { display: inline-flex; align-items: center; align-self: flex-start; padding: 6px 10px; border-radius: 999px; background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; }
+    .rank { width: 36px; height: 36px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; background: #ccfbf1; color: #0f766e; font-weight: 800; font-size: 15px; box-shadow: inset 0 0 0 1px rgba(15, 118, 110, 0.12); }
+    .top-rank-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .article-title { font-size: 18px; font-weight: 800; color: #0f172a; text-decoration: none; line-height: 1.4; position: relative; z-index: 1; }
     .article-title:hover { text-decoration: underline; }
-    .article-meta,
-    .keyword-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      color: #475569;
-      font-size: 14px;
-      position: relative;
-      z-index: 1;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 8px;
-      padding: 6px 10px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .keyword {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 8px;
-      padding: 5px 10px;
-      background: #f1f5f9;
-      color: #334155;
-      font-size: 12px;
-      font-weight: 700;
-      border: 1px solid #e2e8f0;
-    }
-    .summary {
-      color: #334155;
-      font-size: 14px;
-      margin: 0;
-      position: relative;
-      z-index: 1;
-      white-space: pre-line;
-    }
-    .action-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
+    .article-meta, .keyword-row { display: flex; flex-wrap: wrap; gap: 8px; color: #475569; font-size: 14px; position: relative; z-index: 1; }
+    .badge { display: inline-flex; align-items: center; border-radius: 8px; padding: 6px 10px; background: #eff6ff; color: #1d4ed8; font-size: 13px; font-weight: 700; }
+    .keyword { display: inline-flex; align-items: center; border-radius: 8px; padding: 5px 10px; background: #f1f5f9; color: #334155; font-size: 12px; font-weight: 700; border: 1px solid #e2e8f0; }
+    .summary { color: #334155; font-size: 14px; margin: 0; position: relative; z-index: 1; white-space: pre-line; }
+    .action-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; position: relative; z-index: 1; }
     .action-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      min-width: 108px;
-      min-height: 40px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-      background: #ecfeff;
-      color: #0e7490;
-      border: 1px solid #a5f3fc;
-      white-space: nowrap;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 108px; min-height: 40px; padding: 8px 12px;
+      border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 800; cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      background: #ecfeff; color: #0e7490; border: 1px solid #a5f3fc; white-space: nowrap;
     }
     .action-button:hover { background: #cffafe; }
-    .action-button:focus-visible {
-      outline: 2px solid rgba(14, 116, 144, 0.25);
-      outline-offset: 2px;
-    }
+    .action-button:focus-visible { outline: 2px solid rgba(14, 116, 144, 0.25); outline-offset: 2px; }
     button.action-button { font-family: inherit; appearance: none; }
-    .guide-banner,
-    .empty-banner {
-      margin: 0 0 18px;
-      padding: 13px 15px;
-      border-radius: 8px;
-      background: #eef6ff;
-      border: 1px solid #cfe0ff;
-      color: #1e40af;
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .empty-banner {
-      background: #fff7ed;
-      border-color: #fed7aa;
-      color: #9a3412;
-    }
-    .category-card {
-      overflow: hidden;
-      background: linear-gradient(180deg, var(--category-soft, #ffffff) 0, #ffffff 96px);
-    }
-    .category-header {
-      padding: 16px 18px;
-      background: var(--category-soft, #f8fafc);
-    }
-    .category-header h3 {
-      margin: 0 0 6px;
-      font-size: 19px;
-      line-height: 1.3;
-      color: var(--category-title, #0f172a);
-    }
-    .category-header p {
-      margin: 0;
-      color: var(--category-meta, #475569);
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .category-body {
-      padding: 12px;
-      display: grid;
-      gap: 12px;
-    }
-    .small-card {
-      border: 1px solid var(--category-border, #e2e8f0);
-      border-left: 4px solid var(--category-accent, #94a3b8);
-      border-radius: 8px;
-      padding: 13px;
-      background: rgba(255, 255, 255, 0.92);
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
-    .small-card .keyword {
-      background: var(--category-chip-bg, #f8fafc);
-      color: var(--category-chip-text, #334155);
-      border-color: var(--category-chip-border, #dbe3ee);
-    }
-    .small-card a {
-      text-decoration: none;
-      color: #0f172a;
-      font-weight: 700;
-      display: block;
-      line-height: 1.45;
-    }
+    .guide-banner, .empty-banner { margin: 0 0 18px; padding: 13px 15px; border-radius: 8px; background: #eef6ff; border: 1px solid #cfe0ff; color: #1e40af; font-size: 14px; font-weight: 700; }
+    .empty-banner { background: #fff7ed; border-color: #fed7aa; color: #9a3412; }
+    .category-card { overflow: hidden; background: linear-gradient(180deg, var(--category-soft, #ffffff) 0, #ffffff 96px); }
+    .category-header { padding: 16px 18px; background: var(--category-soft, #f8fafc); }
+    .category-header h3 { margin: 0 0 6px; font-size: 19px; line-height: 1.3; color: var(--category-title, #0f172a); }
+    .category-header p { margin: 0; color: var(--category-meta, #475569); font-size: 13px; font-weight: 700; }
+    .category-body { padding: 12px; display: grid; gap: 12px; }
+    .small-card { border: 1px solid var(--category-border, #e2e8f0); border-left: 4px solid var(--category-accent, #94a3b8); border-radius: 8px; padding: 13px; background: rgba(255, 255, 255, 0.92); display: flex; flex-direction: column; gap: 9px; }
+    .small-card .keyword { background: var(--category-chip-bg, #f8fafc); color: var(--category-chip-text, #334155); border-color: var(--category-chip-border, #dbe3ee); }
+    .small-card a { text-decoration: none; color: #0f172a; font-weight: 700; display: block; line-height: 1.45; }
     .small-card a:hover { text-decoration: underline; }
-    .footer-note {
-      margin-top: 24px;
-      font-size: 13px;
-      color: #64748b;
-      text-align: center;
-    }
-    .loading,
-    .error {
-      padding: 24px;
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      color: #475569;
-    }
-    @media (max-width: 1100px) {
-      .top-article { grid-column: span 6; }
-      .top-article.featured { grid-column: span 12; }
-    }
-    @media (max-width: 900px) {
-      .top-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .top-article,
-      .top-article.featured { grid-column: auto; }
-      .category-grid { grid-template-columns: 1fr; }
-    }
+    .footer-note { margin-top: 24px; font-size: 13px; color: #64748b; text-align: center; }
+    .loading, .error { padding: 24px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; color: #475569; }
+    @media (max-width: 1100px) { .top-article { grid-column: span 6; } .top-article.featured { grid-column: span 12; } }
+    @media (max-width: 900px) { .top-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .top-article, .top-article.featured { grid-column: auto; } .category-grid { grid-template-columns: 1fr; } }
     @media (max-width: 768px) {
-      .container { padding: 18px 12px 40px; }
-      .hero { padding: 20px 18px 18px; margin-bottom: 18px; }
-      .hero h1 { font-size: 28px; margin-bottom: 8px; }
-      .hero p { font-size: 14px; }
-      .meta { margin-top: 14px; gap: 8px; }
-      .chip { padding: 7px 12px; font-size: 13px; }
-      .section { margin-top: 20px; }
-      .section-head { margin-bottom: 12px; gap: 8px; }
-      .section h2 { font-size: 23px; }
-      .section-desc { font-size: 14px; }
-      .top-grid,
-      .category-grid { grid-template-columns: 1fr; gap: 12px; }
-      .article-card,
-      .small-card { padding: 14px; gap: 8px; }
-      .top-article.featured { padding: 16px; }
-      .top-article.featured .article-title,
-      .article-title,
-      .small-card a { font-size: 16px; line-height: 1.38; }
-      .top-label { padding: 5px 9px; font-size: 10px; }
-      .summary { font-size: 13px; line-height: 1.55; }
-      .top-article.featured .summary { font-size: 13px; }
-      .article-meta,
-      .keyword-row { gap: 6px; font-size: 12px; }
-      .keyword { padding: 4px 8px; font-size: 11px; }
-      .badge { padding: 5px 8px; font-size: 12px; }
-      .action-row { gap: 8px; }
-      .action-button {
-        flex: 1 1 140px;
-        min-width: 0;
-        min-height: 38px;
-        padding: 8px 10px;
-        font-size: 12px;
-      }
-      .guide-banner,
-      .empty-banner { margin-bottom: 14px; padding: 12px 13px; font-size: 13px; }
-      .category-header { padding: 14px 16px; }
-      .category-header h3 { font-size: 17px; margin-bottom: 4px; }
-      .category-header p { font-size: 12px; }
-      .category-body { padding: 10px; gap: 10px; }
-      .footer-note { margin-top: 18px; font-size: 12px; }
+      .container { padding: 18px 12px 40px; } .hero { padding: 20px 18px 18px; margin-bottom: 18px; } .hero h1 { font-size: 28px; margin-bottom: 8px; } .hero p { font-size: 14px; }
+      .meta { margin-top: 14px; gap: 8px; } .chip { padding: 7px 12px; font-size: 13px; } .toolbar { align-items: stretch; } .toolbar-group, .field, .field input, .field select, .toolbar .action-button { width: 100%; }
+      .section { margin-top: 20px; } .section-head { margin-bottom: 12px; gap: 8px; } .section h2 { font-size: 23px; } .section-desc { font-size: 14px; }
+      .top-grid, .category-grid { grid-template-columns: 1fr; gap: 12px; } .article-card, .small-card { padding: 14px; gap: 8px; } .top-article.featured { padding: 16px; }
+      .top-article.featured .article-title, .article-title, .small-card a { font-size: 16px; line-height: 1.38; } .top-label { padding: 5px 9px; font-size: 10px; }
+      .summary { font-size: 13px; line-height: 1.55; } .top-article.featured .summary { font-size: 13px; } .article-meta, .keyword-row { gap: 6px; font-size: 12px; }
+      .keyword { padding: 4px 8px; font-size: 11px; } .badge { padding: 5px 8px; font-size: 12px; } .action-row { gap: 8px; }
+      .action-button { flex: 1 1 140px; min-width: 0; min-height: 38px; padding: 8px 10px; font-size: 12px; }
+      .guide-banner, .empty-banner { margin-bottom: 14px; padding: 12px 13px; font-size: 13px; } .category-header { padding: 14px 16px; } .category-header h3 { font-size: 17px; margin-bottom: 4px; }
+      .category-header p { font-size: 12px; } .category-body { padding: 10px; gap: 10px; } .footer-note { margin-top: 18px; font-size: 12px; }
     }
   </style>
 </head>
@@ -370,31 +130,39 @@
       <div class="meta" id="metaChips"><span class="chip">selected JSON 자동 렌더링</span></div>
     </section>
 
+    <section class="toolbar" aria-label="기사 날짜 선택">
+      <div class="toolbar-group">
+        <div class="field">
+          <label for="datePicker">날짜 선택</label>
+          <input type="date" id="datePicker" />
+        </div>
+        <div class="field">
+          <label for="dateSelect">최근 발견 파일</label>
+          <select id="dateSelect">
+            <option value="">최근 파일 검색 중...</option>
+          </select>
+        </div>
+        <button class="action-button" type="button" id="loadDateButton">선택일 불러오기</button>
+        <button class="action-button" type="button" id="loadLatestButton">최신 파일</button>
+      </div>
+      <div class="status-text" id="fileStatus">초기화 중...</div>
+    </section>
+
     <div id="app"><div class="loading">데이터를 불러오는 중입니다...</div></div>
     <div class="footer-note">JSON 데이터 기반 자동 생성 화면입니다. 실무 검토용 reason 필드는 화면에 표시하지 않습니다.</div>
   </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const DATA_FILE = params.get('data') || './data/selected/2026/04/news_2026-04-26.json';
-    const CATEGORY_ORDER = [
-      '대출 관련 정책/규제 변화',
-      '금리/지표 변화',
-      '시장 방향성',
-      '리스크/연체/NPL',
-      '금융사 소매 대출 전략/상품',
-      '보험사 관련 이슈',
-      'AI 동향'
-    ];
-    const CATEGORY_BY_ID = {
-      cat1: '대출 관련 정책/규제 변화',
-      cat2: '금리/지표 변화',
-      cat3: '시장 방향성',
-      cat4: '리스크/연체/NPL',
-      cat5: '금융사 소매 대출 전략/상품',
-      cat6: '보험사 관련 이슈',
-      cat7: 'AI 동향'
-    };
+    const EXPLICIT_DATA_FILE = params.get('data');
+    const EXPLICIT_DATE = params.get('date');
+    const SELECTED_BASE_PATH = './data/selected';
+    const LOOKBACK_DAYS = 45;
+    let DATA_FILE = EXPLICIT_DATA_FILE || '';
+    let availableFiles = [];
+
+    const CATEGORY_ORDER = ['대출 관련 정책/규제 변화', '금리/지표 변화', '시장 방향성', '리스크/연체/NPL', '금융사 소매 대출 전략/상품', '보험사 관련 이슈', 'AI 동향'];
+    const CATEGORY_BY_ID = { cat1: '대출 관련 정책/규제 변화', cat2: '금리/지표 변화', cat3: '시장 방향성', cat4: '리스크/연체/NPL', cat5: '금융사 소매 대출 전략/상품', cat6: '보험사 관련 이슈', cat7: 'AI 동향' };
     const CATEGORY_STYLES = {
       '대출 관련 정책/규제 변화': { accent: '#0f766e', soft: '#f0fdfa', border: '#99f6e4', title: '#115e59', meta: '#0f766e', chipBg: '#ccfbf1', chipBorder: '#99f6e4', chipText: '#115e59' },
       '금리/지표 변화': { accent: '#2563eb', soft: '#eff6ff', border: '#bfdbfe', title: '#1d4ed8', meta: '#2563eb', chipBg: '#dbeafe', chipBorder: '#bfdbfe', chipText: '#1d4ed8' },
@@ -406,306 +174,162 @@
       '기타': { accent: '#475569', soft: '#f8fafc', border: '#cbd5e1', title: '#334155', meta: '#475569', chipBg: '#e2e8f0', chipBorder: '#cbd5e1', chipText: '#334155' }
     };
 
-    function escapeHtml(value) {
-      return String(value ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/\"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+    function escapeHtml(value) { return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#39;'); }
+    function pad2(value) { return String(value).padStart(2, '0'); }
+    function formatDateKey(date) { return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`; }
+    function dateKeyToPath(dateKey) { const [year, month] = dateKey.split('-'); return `${SELECTED_BASE_PATH}/${year}/${month}/news_${dateKey}.json`; }
+    function buildCandidateDates(days = LOOKBACK_DAYS) {
+      const dates = [];
+      const today = new Date();
+      for (let i = 0; i < days; i += 1) {
+        const date = new Date(today);
+        date.setDate(today.getDate() - i);
+        dates.push(formatDateKey(date));
+      }
+      return dates;
+    }
+    function setStatus(message) { document.getElementById('fileStatus').textContent = message; }
+    async function fetchJsonIfExists(path) {
+      const response = await fetch(path, { cache: 'no-store' });
+      if (!response.ok) return null;
+      return response.json();
+    }
+    async function discoverAvailableFiles() {
+      const candidates = buildCandidateDates();
+      const found = [];
+      setStatus(`최근 ${LOOKBACK_DAYS}일 파일 검색 중...`);
+      for (const dateKey of candidates) {
+        const path = dateKeyToPath(dateKey);
+        try {
+          const response = await fetch(path, { method: 'HEAD', cache: 'no-store' });
+          if (response.ok) found.push({ dateKey, path });
+        } catch (error) {}
+      }
+      availableFiles = found;
+      renderDateSelect(found);
+      return found;
+    }
+    function renderDateSelect(files) {
+      const select = document.getElementById('dateSelect');
+      if (!files.length) {
+        select.innerHTML = '<option value="">최근 발견 파일 없음</option>';
+        return;
+      }
+      select.innerHTML = files.map(file => `<option value="${escapeHtml(file.dateKey)}">${escapeHtml(file.dateKey)}</option>`).join('');
+    }
+    function updateUrl(dateKey, path, explicitData = false) {
+      const url = new URL(window.location.href);
+      if (explicitData) {
+        url.searchParams.set('data', path);
+        url.searchParams.delete('date');
+      } else {
+        url.searchParams.set('date', dateKey);
+        url.searchParams.delete('data');
+      }
+      window.history.replaceState({}, '', url);
+    }
+    async function loadDataFile(path, options = {}) {
+      DATA_FILE = path;
+      document.getElementById('app').innerHTML = '<div class="loading">데이터를 불러오는 중입니다...</div>';
+      setStatus(`불러오는 중: ${path}`);
+      try {
+        const data = await fetchJsonIfExists(path);
+        if (!data) throw new Error('not found');
+        renderDashboard(data);
+        const loadedDate = options.dateKey || getBaseDate(data, normalizeData(data));
+        if (loadedDate) {
+          document.getElementById('datePicker').value = loadedDate;
+          document.getElementById('dateSelect').value = loadedDate;
+        }
+        setStatus(`로드 완료: ${loadedDate || path}`);
+        if (options.updateUrl) updateUrl(loadedDate || '', path, options.explicitData);
+      } catch (error) {
+        document.getElementById('app').innerHTML = `<div class="error">선택한 날짜의 JSON 파일을 불러오지 못했습니다.<br>경로: ${escapeHtml(path)}</div>`;
+        setStatus('파일 없음 또는 JSON 오류');
+      }
+    }
+    async function loadByDate(dateKey, updateUrlFlag = true) {
+      if (!dateKey) return;
+      await loadDataFile(dateKeyToPath(dateKey), { dateKey, updateUrl: updateUrlFlag, explicitData: false });
+    }
+    async function loadLatest() {
+      if (!availableFiles.length) await discoverAvailableFiles();
+      if (!availableFiles.length) {
+        document.getElementById('app').innerHTML = '<div class="error">최근 기간에서 불러올 selected JSON 파일을 찾지 못했습니다.</div>';
+        setStatus('최근 파일 없음');
+        return;
+      }
+      await loadDataFile(availableFiles[0].path, { dateKey: availableFiles[0].dateKey, updateUrl: true, explicitData: false });
     }
 
-    function getArticleLink(article) {
-      return article.URL || article.url || article.link || article.naver_link || '#';
-    }
-
-    function normalizeRating(rating) {
-      if (rating === undefined || rating === null || rating === '') return '';
-      if (typeof rating === 'number') return '★'.repeat(Math.max(1, Math.min(5, rating)));
-      return String(rating);
-    }
-
-    function buildKeywords(article) {
-      const raw = article.keywords || article.matched_keywords || article.tags || [];
-      if (Array.isArray(raw)) return raw.map(v => String(v).trim()).filter(Boolean).slice(0, 5);
-      if (typeof raw === 'string') return raw.split(',').map(v => v.trim()).filter(Boolean).slice(0, 5);
-      return [];
-    }
-
-    function renderKeywords(article) {
-      const keywords = buildKeywords(article);
-      if (!keywords.length) return '';
-      return `<div class="keyword-row">${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join('')}</div>`;
-    }
-
-    function renderOriginalLink(article) {
-      return `<a class="action-button" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a>`;
-    }
-
-    function renderShareButton(article) {
-      return `<button class="action-button" type="button" data-url="${escapeHtml(getArticleLink(article))}" data-title="${escapeHtml(article.title || '')}" onclick="handleShareClick(this)">공유하기</button>`;
-    }
-
-    function renderActionRow(article) {
-      return `<div class="action-row">${renderOriginalLink(article)}${renderShareButton(article)}</div>`;
-    }
-
+    function getArticleLink(article) { return article.URL || article.url || article.link || article.naver_link || '#'; }
+    function normalizeRating(rating) { if (rating === undefined || rating === null || rating === '') return ''; if (typeof rating === 'number') return '★'.repeat(Math.max(1, Math.min(5, rating))); return String(rating); }
+    function buildKeywords(article) { const raw = article.keywords || article.matched_keywords || article.tags || []; if (Array.isArray(raw)) return raw.map(v => String(v).trim()).filter(Boolean).slice(0, 5); if (typeof raw === 'string') return raw.split(',').map(v => v.trim()).filter(Boolean).slice(0, 5); return []; }
+    function renderKeywords(article) { const keywords = buildKeywords(article); if (!keywords.length) return ''; return `<div class="keyword-row">${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join('')}</div>`; }
+    function renderOriginalLink(article) { return `<a class="action-button" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a>`; }
+    function renderShareButton(article) { return `<button class="action-button" type="button" data-url="${escapeHtml(getArticleLink(article))}" data-title="${escapeHtml(article.title || '')}" onclick="handleShareClick(this)">공유하기</button>`; }
+    function renderActionRow(article) { return `<div class="action-row">${renderOriginalLink(article)}${renderShareButton(article)}</div>`; }
     function renderMeta(article) {
       const dateText = article.udate || article.published_date || article.published_at || article.date || '';
       const ratingText = normalizeRating(article.rating || article.recommendation || article.score);
-      return `
-        <div class="article-meta">
-          <span>${escapeHtml(article.publisher || article.source || '')}</span>
-          <span>${escapeHtml(formatDate(dateText))}</span>
-          ${ratingText ? `<span class="badge">추천도 ${escapeHtml(ratingText)}</span>` : ''}
-        </div>
-      `;
+      return `<div class="article-meta"><span>${escapeHtml(article.publisher || article.source || '')}</span><span>${escapeHtml(formatDate(dateText))}</span>${ratingText ? `<span class="badge">추천도 ${escapeHtml(ratingText)}</span>` : ''}</div>`;
     }
-
-    function formatDate(value) {
-      if (!value) return '';
-      const text = String(value);
-      if (/^\d{4}-\d{2}-\d{2}T/.test(text)) return text.slice(0, 10);
-      return text;
-    }
-
-    function setTemporaryButtonLabel(button, label) {
-      const original = button.dataset.originalLabel || button.textContent;
-      button.dataset.originalLabel = original;
-      button.textContent = label;
-      window.clearTimeout(button._labelTimer);
-      button._labelTimer = window.setTimeout(() => { button.textContent = original; }, 1800);
-    }
-
-    async function copyTextFallback(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        return;
-      }
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.setAttribute('readonly', '');
-      textarea.style.position = 'absolute';
-      textarea.style.left = '-9999px';
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-    }
-
-    async function shareArticle(url, title, button) {
-      try {
-        if (navigator.share) {
-          await navigator.share({ title, url });
-          setTemporaryButtonLabel(button, '공유됨');
-          return;
-        }
-        await copyTextFallback(url);
-        setTemporaryButtonLabel(button, 'URL 복사됨');
-      } catch (error) {
-        if (error && error.name === 'AbortError') return;
-        try {
-          await copyTextFallback(url);
-          setTemporaryButtonLabel(button, 'URL 복사됨');
-        } catch (copyError) {
-          setTemporaryButtonLabel(button, '복사 실패');
-        }
-      }
-    }
-
-    function handleShareClick(button) {
-      shareArticle(button.dataset.url || '', button.dataset.title || '', button);
-    }
-
-    function getCategoryStyle(category) {
-      return CATEGORY_STYLES[category] || CATEGORY_STYLES['기타'];
-    }
-
-    function buildCategoryStyleAttr(category) {
-      const style = getCategoryStyle(category);
-      return [
-        `--category-accent:${style.accent}`,
-        `--category-soft:${style.soft}`,
-        `--category-border:${style.border}`,
-        `--category-title:${style.title}`,
-        `--category-meta:${style.meta}`,
-        `--category-chip-bg:${style.chipBg}`,
-        `--category-chip-border:${style.chipBorder}`,
-        `--category-chip-text:${style.chipText}`
-      ].join(';');
-    }
-
-    function inferSection(article, index) {
-      if (article.section) return article.section;
-      const id = String(article.id || '').toLowerCase();
-      if (id.startsWith('top_') || id.startsWith('top')) return 'top5';
-      if (id.startsWith('cat')) return 'category';
-      if (article.category) return 'category';
-      return index < 5 ? 'top5' : 'category';
-    }
-
-    function inferCategory(article) {
-      if (article.category) return article.category;
-      const id = String(article.id || '').toLowerCase();
-      const match = id.match(/^(cat\d+)/);
-      if (match && CATEGORY_BY_ID[match[1]]) return CATEGORY_BY_ID[match[1]];
-      return '기타';
-    }
-
-    function normalizeArticle(article, index) {
-      const publishedAt = article.published_at || article.udate || article.published_date || article.date || '';
-      return {
-        ...article,
-        section: inferSection(article, index),
-        category: inferCategory(article),
-        udate: article.udate || formatDate(publishedAt),
-        URL: article.URL || article.url || article.link || article.naver_link || '#',
-        summary: article.summary || article.description || article.desc || '',
-        rating: article.rating || article.recommendation || article.score || ''
-      };
-    }
-
-    function extractArticles(data) {
-      if (Array.isArray(data)) return data;
-      if (Array.isArray(data.articles)) return data.articles;
-      if (Array.isArray(data.selected_articles)) return data.selected_articles;
-      if (Array.isArray(data.items)) return data.items;
-      return [];
-    }
-
+    function formatDate(value) { if (!value) return ''; const text = String(value); if (/^\d{4}-\d{2}-\d{2}T/.test(text)) return text.slice(0, 10); return text; }
+    function setTemporaryButtonLabel(button, label) { const original = button.dataset.originalLabel || button.textContent; button.dataset.originalLabel = original; button.textContent = label; window.clearTimeout(button._labelTimer); button._labelTimer = window.setTimeout(() => { button.textContent = original; }, 1800); }
+    async function copyTextFallback(text) { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(text); return; } const textarea = document.createElement('textarea'); textarea.value = text; textarea.setAttribute('readonly', ''); textarea.style.position = 'absolute'; textarea.style.left = '-9999px'; document.body.appendChild(textarea); textarea.select(); document.execCommand('copy'); document.body.removeChild(textarea); }
+    async function shareArticle(url, title, button) { try { if (navigator.share) { await navigator.share({ title, url }); setTemporaryButtonLabel(button, '공유됨'); return; } await copyTextFallback(url); setTemporaryButtonLabel(button, 'URL 복사됨'); } catch (error) { if (error && error.name === 'AbortError') return; try { await copyTextFallback(url); setTemporaryButtonLabel(button, 'URL 복사됨'); } catch (copyError) { setTemporaryButtonLabel(button, '복사 실패'); } } }
+    function handleShareClick(button) { shareArticle(button.dataset.url || '', button.dataset.title || '', button); }
+    function getCategoryStyle(category) { return CATEGORY_STYLES[category] || CATEGORY_STYLES['기타']; }
+    function buildCategoryStyleAttr(category) { const style = getCategoryStyle(category); return [`--category-accent:${style.accent}`, `--category-soft:${style.soft}`, `--category-border:${style.border}`, `--category-title:${style.title}`, `--category-meta:${style.meta}`, `--category-chip-bg:${style.chipBg}`, `--category-chip-border:${style.chipBorder}`, `--category-chip-text:${style.chipText}`].join(';'); }
+    function inferSection(article, index) { if (article.section) return article.section; const id = String(article.id || '').toLowerCase(); if (id.startsWith('top_') || id.startsWith('top')) return 'top5'; if (id.startsWith('cat')) return 'category'; if (article.category) return 'category'; return index < 5 ? 'top5' : 'category'; }
+    function inferCategory(article) { if (article.category) return article.category; const id = String(article.id || '').toLowerCase(); const match = id.match(/^(cat\d+)/); if (match && CATEGORY_BY_ID[match[1]]) return CATEGORY_BY_ID[match[1]]; return '기타'; }
+    function normalizeArticle(article, index) { const publishedAt = article.published_at || article.udate || article.published_date || article.date || ''; return { ...article, section: inferSection(article, index), category: inferCategory(article), udate: article.udate || formatDate(publishedAt), URL: article.URL || article.url || article.link || article.naver_link || '#', summary: article.summary || article.description || article.desc || '', rating: article.rating || article.recommendation || article.score || '' }; }
+    function extractArticles(data) { if (Array.isArray(data)) return data; if (Array.isArray(data.articles)) return data.articles; if (Array.isArray(data.selected_articles)) return data.selected_articles; if (Array.isArray(data.items)) return data.items; return []; }
     function normalizeData(data) {
       const articles = extractArticles(data).map(normalizeArticle);
       const topArticles = articles.filter(article => article.section === 'top5').slice(0, 5);
       const categoryArticles = articles.filter(article => article.section !== 'top5');
       const grouped = new Map();
-
-      categoryArticles.forEach(article => {
-        const category = article.category || '기타';
-        if (!grouped.has(category)) grouped.set(category, []);
-        grouped.get(category).push(article);
-      });
-
+      categoryArticles.forEach(article => { const category = article.category || '기타'; if (!grouped.has(category)) grouped.set(category, []); grouped.get(category).push(article); });
       const orderedCategories = [];
-      CATEGORY_ORDER.forEach(category => {
-        if (grouped.has(category)) orderedCategories.push([category, grouped.get(category)]);
-      });
-      grouped.forEach((items, category) => {
-        if (!CATEGORY_ORDER.includes(category)) orderedCategories.push([category, items]);
-      });
-
+      CATEGORY_ORDER.forEach(category => { if (grouped.has(category)) orderedCategories.push([category, grouped.get(category)]); });
+      grouped.forEach((items, category) => { if (!CATEGORY_ORDER.includes(category)) orderedCategories.push([category, items]); });
       return { articles, topArticles, categoryArticles, orderedCategories };
     }
-
-    function getBaseDate(data, normalized) {
-      if (!Array.isArray(data) && (data.base_date || data.date)) return data.base_date || data.date;
-      const dates = normalized.articles.map(article => article.udate).filter(Boolean).sort().reverse();
-      return dates[0] || '';
-    }
-
-    function getDeclaredCount(data, normalized) {
-      if (!Array.isArray(data)) {
-        return data.validation?.article_count || data.count || data.total || normalized.articles.length;
-      }
-      return normalized.articles.length;
-    }
-
-    function renderTopArticle(article, rank) {
-      const featuredClass = rank === 1 ? ' featured' : '';
-      const label = rank === 1 ? '오늘의 핵심' : '핵심 이슈';
-      return `
-        <article class="article-card top-article${featuredClass}">
-          <div class="top-rank-row">
-            <span class="rank">${rank}</span>
-            <span class="top-label">${label}</span>
-          </div>
-          ${renderKeywords(article)}
-          <a class="article-title" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
-          ${renderMeta(article)}
-          <p class="summary">${escapeHtml(article.summary)}</p>
-          ${renderActionRow(article)}
-        </article>
-      `;
-    }
-
-    function renderCategoryArticle(article) {
-      return `
-        <div class="small-card">
-          ${renderKeywords(article)}
-          <a href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
-          ${renderMeta(article)}
-          <p class="summary">${escapeHtml(article.summary)}</p>
-          ${renderActionRow(article)}
-        </div>
-      `;
-    }
-
+    function getBaseDate(data, normalized) { if (!Array.isArray(data) && (data.base_date || data.date)) return data.base_date || data.date; const dates = normalized.articles.map(article => article.udate).filter(Boolean).sort().reverse(); return dates[0] || ''; }
+    function getDeclaredCount(data, normalized) { if (!Array.isArray(data)) return data.validation?.article_count || data.count || data.total || normalized.articles.length; return normalized.articles.length; }
+    function renderTopArticle(article, rank) { const featuredClass = rank === 1 ? ' featured' : ''; const label = rank === 1 ? '오늘의 핵심' : '핵심 이슈'; return `<article class="article-card top-article${featuredClass}"><div class="top-rank-row"><span class="rank">${rank}</span><span class="top-label">${label}</span></div>${renderKeywords(article)}<a class="article-title" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>${renderMeta(article)}<p class="summary">${escapeHtml(article.summary)}</p>${renderActionRow(article)}</article>`; }
+    function renderCategoryArticle(article) { return `<div class="small-card">${renderKeywords(article)}<a href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>${renderMeta(article)}<p class="summary">${escapeHtml(article.summary)}</p>${renderActionRow(article)}</div>`; }
     function renderDashboard(data) {
       const normalized = normalizeData(data);
       const date = getBaseDate(data, normalized);
       const count = getDeclaredCount(data, normalized);
-
-      document.getElementById('metaChips').innerHTML = `
-        ${date ? `<span class="chip">기준일: ${escapeHtml(date)}</span>` : ''}
-        <span class="chip">총 ${escapeHtml(count)}개 기사</span>
-        <span class="chip">데이터: ${escapeHtml(DATA_FILE)}</span>
-      `;
-
-      if (!normalized.articles.length) {
-        document.getElementById('app').innerHTML = '<div class="error">표시할 기사가 없습니다. JSON 파일 경로와 배열/ articles 형식을 확인해주세요.</div>';
-        return;
-      }
-
+      document.getElementById('metaChips').innerHTML = `${date ? `<span class="chip">기준일: ${escapeHtml(date)}</span>` : ''}<span class="chip">총 ${escapeHtml(count)}개 기사</span><span class="chip">데이터: ${escapeHtml(DATA_FILE)}</span>`;
+      if (!normalized.articles.length) { document.getElementById('app').innerHTML = '<div class="error">표시할 기사가 없습니다. JSON 파일 경로와 배열/ articles 형식을 확인해주세요.</div>'; return; }
       const guideBanner = `<div class="guide-banner">기사 제목, <strong>원문 보기 ↗</strong>, <strong>공유하기</strong> 버튼으로 바로 활용할 수 있습니다.</div>`;
-      const shortageBanner = normalized.articles.length < 12
-        ? `<div class="empty-banner">현재 선택 기사 수가 적어 일부 카테고리는 표시되지 않을 수 있습니다. 향후 기사 수가 늘어나면 자동으로 카드가 추가됩니다.</div>`
-        : '';
-      const topSection = normalized.topArticles.length ? `
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>오늘 가장 중요한 이슈 Top ${normalized.topArticles.length}</h2>
-              <div class="section-desc">자동 선별 결과 중 핵심 이슈를 우선 배치했습니다.</div>
-            </div>
-          </div>
-          <div class="top-grid">${normalized.topArticles.map((article, index) => renderTopArticle(article, index + 1)).join('')}</div>
-        </section>
-      ` : '';
-      const categorySection = normalized.orderedCategories.length ? `
-        <section class="section">
-          <div class="section-head">
-            <div>
-              <h2>주제별 대표 기사</h2>
-              <div class="section-desc">카테고리별 기사 수에 맞춰 자동 구성됩니다.</div>
-            </div>
-          </div>
-          <div class="category-grid">
-            ${normalized.orderedCategories.map(([category, items]) => `
-              <section class="category-card" style="${buildCategoryStyleAttr(category)}">
-                <div class="category-header">
-                  <h3>${escapeHtml(category)}</h3>
-                  <p>${escapeHtml(items.length)}개 기사</p>
-                </div>
-                <div class="category-body">${items.map(renderCategoryArticle).join('')}</div>
-              </section>
-            `).join('')}
-          </div>
-        </section>
-      ` : '';
-
+      const shortageBanner = normalized.articles.length < 12 ? `<div class="empty-banner">현재 선택 기사 수가 적어 일부 카테고리는 표시되지 않을 수 있습니다. 향후 기사 수가 늘어나면 자동으로 카드가 추가됩니다.</div>` : '';
+      const topSection = normalized.topArticles.length ? `<section class="section"><div class="section-head"><div><h2>오늘 가장 중요한 이슈 Top ${normalized.topArticles.length}</h2><div class="section-desc">자동 선별 결과 중 핵심 이슈를 우선 배치했습니다.</div></div></div><div class="top-grid">${normalized.topArticles.map((article, index) => renderTopArticle(article, index + 1)).join('')}</div></section>` : '';
+      const categorySection = normalized.orderedCategories.length ? `<section class="section"><div class="section-head"><div><h2>주제별 대표 기사</h2><div class="section-desc">카테고리별 기사 수에 맞춰 자동 구성됩니다.</div></div></div><div class="category-grid">${normalized.orderedCategories.map(([category, items]) => `<section class="category-card" style="${buildCategoryStyleAttr(category)}"><div class="category-header"><h3>${escapeHtml(category)}</h3><p>${escapeHtml(items.length)}개 기사</p></div><div class="category-body">${items.map(renderCategoryArticle).join('')}</div></section>`).join('')}</div></section>` : '';
       document.getElementById('app').innerHTML = guideBanner + shortageBanner + topSection + categorySection;
     }
-
     async function init() {
-      try {
-        const response = await fetch(DATA_FILE, { cache: 'no-store' });
-        if (!response.ok) throw new Error('데이터를 불러오지 못했습니다.');
-        const data = await response.json();
-        renderDashboard(data);
-      } catch (error) {
-        document.getElementById('app').innerHTML = `<div class="error">대시보드 데이터를 불러오는 데 실패했습니다. JSON 파일 경로와 형식을 확인해주세요.</div>`;
+      document.getElementById('loadDateButton').addEventListener('click', () => loadByDate(document.getElementById('datePicker').value));
+      document.getElementById('loadLatestButton').addEventListener('click', loadLatest);
+      document.getElementById('dateSelect').addEventListener('change', event => { if (event.target.value) loadByDate(event.target.value); });
+      document.getElementById('datePicker').addEventListener('change', event => { document.getElementById('dateSelect').value = event.target.value; });
+
+      const found = await discoverAvailableFiles();
+      if (EXPLICIT_DATA_FILE) {
+        await loadDataFile(EXPLICIT_DATA_FILE, { updateUrl: false, explicitData: true });
+      } else if (EXPLICIT_DATE) {
+        await loadByDate(EXPLICIT_DATE, false);
+      } else if (found.length) {
+        await loadDataFile(found[0].path, { dateKey: found[0].dateKey, updateUrl: true, explicitData: false });
+      } else {
+        document.getElementById('app').innerHTML = '<div class="error">최근 기간에서 불러올 selected JSON 파일을 찾지 못했습니다.</div>';
+        setStatus('최근 파일 없음');
       }
     }
-
     init();
   </script>
 </body>
