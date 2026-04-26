@@ -247,7 +247,8 @@ h2 { font-size: 22px; margin-bottom: 10px; }
   right: max(14px, calc((100vw - 980px) / 2 + 14px));
   bottom: 150px;
   z-index: 19;
-  width: min(310px, calc(100vw - 28px));
+  width: auto;
+  max-width: min(292px, calc(100vw - 28px));
   cursor: grab;
   pointer-events: auto;
   touch-action: none;
@@ -261,16 +262,18 @@ h2 { font-size: 22px; margin-bottom: 10px; }
 
 .monkey-rival {
   display: grid;
-  grid-template-columns: 78px minmax(0, 1fr);
-  gap: 2px;
+  grid-template-columns: auto auto;
+  gap: 0;
   align-items: end;
-  justify-items: end;
+  justify-content: end;
 }
 
 .monkey-character {
   position: relative;
   width: 78px;
   height: 78px;
+  z-index: 2;
+  margin-right: -7px;
   filter: drop-shadow(0 8px 18px rgba(36, 58, 92, 0.16));
 }
 
@@ -403,22 +406,22 @@ h2 { font-size: 22px; margin-bottom: 10px; }
 
 .monkey-copy {
   position: relative;
-  max-width: 220px;
+  max-width: 206px;
   padding: 10px 12px;
   border: 1px solid #d9e2ef;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 10px 24px rgba(36, 58, 92, 0.14);
 }
 
 .monkey-copy::after {
   content: '';
   position: absolute;
-  left: -6px;
+  left: -5px;
   bottom: 17px;
   width: 10px;
   height: 10px;
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.97);
   border-left: 1px solid #d9e2ef;
   border-bottom: 1px solid #d9e2ef;
   transform: rotate(45deg);
@@ -534,18 +537,19 @@ h2 { font-size: 22px; margin-bottom: 10px; }
   .monkey-panel {
     right: 10px;
     bottom: 142px;
-    width: min(282px, calc(100vw - 20px));
+    max-width: min(265px, calc(100vw - 20px));
   }
   .monkey-rival {
-    grid-template-columns: 68px minmax(0, 1fr);
-    gap: 1px;
+    grid-template-columns: auto auto;
+    gap: 0;
   }
   .monkey-character {
     width: 70px;
     height: 70px;
+    margin-right: -8px;
   }
   .monkey-copy {
-    max-width: 196px;
+    max-width: 188px;
     padding: 9px 11px;
   }
   .result-grid {
