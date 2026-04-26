@@ -153,9 +153,9 @@ function endQuiz() {
         const ua = navigator.userAgent.toLowerCase();
         let smsLink;
         if (ua.indexOf("iphone") > -1 || ua.indexOf("ipad") > -1) {
-            smsLink = `sms:01035418023&body= '퀴즈100점 달성! 인증번호 : +${encodeURIComponent(code)}`;
+            smsLink = `sms:1&body= '퀴즈100점 달성! 인증번호 : +${encodeURIComponent(code)}`;
         } else {
-            smsLink = `sms:01035418023?body= '퀴즈100점 달성! 인증번호 : +${encodeURIComponent(code)}`;
+            smsLink = `sms:1?body= '퀴즈100점 달성! 인증번호 : +${encodeURIComponent(code)}`;
         }
 
         const smsBtn = document.getElementById("smsBtn");
