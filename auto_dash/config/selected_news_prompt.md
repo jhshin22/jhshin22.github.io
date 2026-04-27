@@ -14,7 +14,7 @@
 
 반드시 아래 절차를 지켜주세요.
 
-1. 기사 후보는 https://raw.githubusercontent.com/jhshin22/jhshin22.github.io/refs/heads/main/auto_dash/candidates.json 에 있습니다. 모든 기사를 처음부터 읽진 말고 pre_score기준 내림차순 정렬되어있으니 맨 위 기사부터 우선 검토해주세요.
+1. 기사 후보는 https://raw.githubusercontent.com/jhshin22/jhshin22.github.io/refs/heads/main/auto_dash/candidates.json 에 있습니다. (json 파일이 길어https://github.com/jhshin22/jhshin22.github.io/blob/main/auto_dash/candidates.json로 접속하면 표시되지 않을 수 있으니, 처음 제공한 링크로 접속 필수) 모든 기사를 처음부터 읽진 말고 pre_score기준 내림차순 정렬되어있으니 맨 위 기사부터 우선 검토해주세요.
 2. 단순히 pre_score만 보고 선정하지 말고, 제목·description·matched_keywords·score_detail·출처 신뢰도·소매여신 실무 관련성을 함께 판단해주세요.
 3. 동일 이슈/동일 보도자료/동일 사건을 다룬 기사는 언론사가 달라도 중복으로 간주하고 1개만 남겨주세요.
 4. 선정할 각 기사에 대해서는 반드시 article.url(접속 불가한 경우에만 naver_link시도)에 직접 접속해 기사 본문을 확인한 뒤 요약해주세요.
