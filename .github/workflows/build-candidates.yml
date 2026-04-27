@@ -1,0 +1,49 @@
+name: Build Article Candidates
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub Actions cron uses UTC. KST = UTC+9.
+    # Runs at 23:30 KST every day.
+    - cron: '30 14 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-article-candidates
+  cancel-in-progress: false
+
+jobs:
+  build-candidates:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build candidates JSON
+        run: |
+          python auto_dash/build_candidates.py
+
+      - name: Commit and push candidates if changed
+        run: |
+          git add auto_dash/candidates.json
+
+          if git diff --cached --quiet; then
+            echo "No candidate changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update article candidates"
+          git pull --rebase origin main
+          git push
