@@ -369,7 +369,10 @@ def verify_article(c: Candidate) -> VerifiedArticle | None:
 
 def split_sentences(text: str) -> list[str]:
     text = clean_text(text)
-    parts = re.split(r"(?<=[.!?。]|다\.|요\.|임\.|음\.)\s+", text)
+    # Avoid variable-width lookbehind: first mark sentence boundaries, then split.
+    text = re.sub(r"([.!?。])\s+", r"\1\n", text)
+    text = re.sub(r"((?:다|요|임|음)\.)\s+", r"\1\n", text)
+    parts = text.splitlines()
     sentences: list[str] = []
     for part in parts:
         part = part.strip()
