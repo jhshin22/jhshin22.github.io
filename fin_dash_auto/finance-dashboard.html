@@ -7,213 +7,53 @@
   <style>
     * { box-sizing: border-box; }
     :root { color-scheme: light; }
-    body {
-      margin: 0;
-      font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-      background: #f8fafc;
-      color: #0f172a;
-      line-height: 1.6;
-    }
+    body { margin: 0; font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; }
     .container { max-width: 1240px; margin: 0 auto; padding: 28px 18px 56px; }
-    .hero {
-      background: linear-gradient(135deg, #0f766e, #2563eb 72%, #38bdf8);
-      color: #fff;
-      border-radius: 8px;
-      padding: 26px 26px 24px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
-      margin-bottom: 22px;
-    }
+    .hero { background: linear-gradient(135deg, #0f766e, #2563eb 72%, #38bdf8); color: #fff; border-radius: 8px; padding: 26px 26px 24px; box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14); margin-bottom: 22px; }
     .hero h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.2; }
     .hero p { margin: 0; opacity: 0.94; font-size: 15px; }
     .meta { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
-    .chip {
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.22);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 14px;
-      font-weight: 700;
-    }
+    .chip { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22); border-radius: 8px; padding: 8px 14px; font-size: 14px; font-weight: 700; }
+    .guide-banner { margin: 0 0 18px; padding: 13px 15px; border-radius: 8px; background: #eef6ff; border: 1px solid #cfe0ff; color: #1e40af; font-size: 14px; font-weight: 700; }
     .section { margin-top: 24px; }
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 16px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-    }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
     .section h2 { margin: 0; font-size: 28px; line-height: 1.2; }
     .section-desc { color: #475569; font-size: 15px; margin-top: 4px; }
     .top-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
     .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
-    .category-card, .article-card {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
-    }
+    .category-card, .article-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06); }
     .article-card { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
-    .top-article {
-      grid-column: span 4;
-      position: relative;
-      overflow: hidden;
-      border-color: #cbd5e1;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-    }
-    .top-article::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(37,99,235,0.03) 100%);
-    }
-    .top-article.featured {
-      grid-column: span 6;
-      padding: 22px;
-      border-color: #bfdbfe;
-      box-shadow: 0 16px 34px rgba(37, 99, 235, 0.12);
-      background: linear-gradient(160deg, #eff6ff 0%, #ffffff 70%);
-    }
+    .top-article { grid-column: span 4; position: relative; overflow: hidden; border-color: #cbd5e1; background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); }
+    .top-article::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(37,99,235,0.03) 100%); }
+    .top-article.featured { grid-column: span 6; padding: 22px; border-color: #bfdbfe; box-shadow: 0 16px 34px rgba(37, 99, 235, 0.12); background: linear-gradient(160deg, #eff6ff 0%, #ffffff 70%); }
     .top-article.featured .article-title { font-size: 22px; line-height: 1.34; }
     .top-article.featured .summary { font-size: 15px; }
-    .top-label {
-      display: inline-flex;
-      align-items: center;
-      align-self: flex-start;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: #dbeafe;
-      color: #1d4ed8;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
-    .rank {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #ccfbf1;
-      color: #0f766e;
-      font-weight: 800;
-      font-size: 15px;
-      box-shadow: inset 0 0 0 1px rgba(15, 118, 110, 0.12);
-    }
+    .top-label { display: inline-flex; align-items: center; align-self: flex-start; padding: 6px 10px; border-radius: 999px; background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; }
+    .rank { width: 36px; height: 36px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; background: #ccfbf1; color: #0f766e; font-weight: 800; font-size: 15px; box-shadow: inset 0 0 0 1px rgba(15, 118, 110, 0.12); }
     .top-rank-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .article-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: #0f172a;
-      text-decoration: none;
-      line-height: 1.4;
-      position: relative;
-      z-index: 1;
-    }
-    .article-title:hover { text-decoration: underline; }
-    .article-meta, .keyword-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      color: #475569;
-      font-size: 14px;
-      position: relative;
-      z-index: 1;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 8px;
-      padding: 6px 10px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .keyword {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 8px;
-      padding: 5px 10px;
-      background: #f1f5f9;
-      color: #334155;
-      font-size: 12px;
-      font-weight: 700;
-      border: 1px solid #e2e8f0;
-    }
+    .article-title { font-size: 18px; font-weight: 800; color: #0f172a; text-decoration: none; line-height: 1.4; position: relative; z-index: 1; }
+    .article-title:hover, .small-card a:hover { text-decoration: underline; }
+    .article-meta, .keyword-row { display: flex; flex-wrap: wrap; gap: 8px; color: #475569; font-size: 14px; position: relative; z-index: 1; }
+    .badge { display: inline-flex; align-items: center; border-radius: 8px; padding: 6px 10px; background: #eff6ff; color: #1d4ed8; font-size: 13px; font-weight: 700; }
+    .keyword { display: inline-flex; align-items: center; border-radius: 8px; padding: 5px 10px; background: #f1f5f9; color: #334155; font-size: 12px; font-weight: 700; border: 1px solid #e2e8f0; }
     .summary { color: #334155; font-size: 14px; margin: 0; position: relative; z-index: 1; }
     .action-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; position: relative; z-index: 1; }
-    .action-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      min-width: 108px;
-      min-height: 40px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-      background: #ecfeff;
-      color: #0e7490;
-      border: 1px solid #a5f3fc;
-      white-space: nowrap;
-    }
+    .action-button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 108px; min-height: 40px; padding: 8px 12px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 800; cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease; background: #ecfeff; color: #0e7490; border: 1px solid #a5f3fc; white-space: nowrap; }
     .action-button:hover { background: #cffafe; }
     .action-button:focus-visible { outline: 2px solid rgba(14, 116, 144, 0.25); outline-offset: 2px; }
     button.action-button { font-family: inherit; appearance: none; }
-    .guide-banner {
-      margin: 0 0 18px;
-      padding: 13px 15px;
-      border-radius: 8px;
-      background: #eef6ff;
-      border: 1px solid #cfe0ff;
-      color: #1e40af;
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .category-card {
-      overflow: hidden;
-      background: linear-gradient(180deg, var(--category-soft, #ffffff) 0, #ffffff 96px);
-    }
+    .category-card { overflow: hidden; background: linear-gradient(180deg, var(--category-soft, #ffffff) 0, #ffffff 96px); }
     .category-header { padding: 16px 18px; background: var(--category-soft, #f8fafc); }
     .category-header h3 { margin: 0 0 6px; font-size: 19px; line-height: 1.3; color: var(--category-title, #0f172a); }
     .category-header p { margin: 0; color: var(--category-meta, #475569); font-size: 13px; font-weight: 700; }
     .category-body { padding: 12px; display: grid; gap: 12px; }
-    .small-card {
-      border: 1px solid var(--category-border, #e2e8f0);
-      border-left: 4px solid var(--category-accent, #94a3b8);
-      border-radius: 8px;
-      padding: 13px;
-      background: rgba(255, 255, 255, 0.92);
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
-    .small-card .keyword {
-      background: var(--category-chip-bg, #f8fafc);
-      color: var(--category-chip-text, #334155);
-      border-color: var(--category-chip-border, #dbe3ee);
-    }
+    .small-card { border: 1px solid var(--category-border, #e2e8f0); border-left: 4px solid var(--category-accent, #94a3b8); border-radius: 8px; padding: 13px; background: rgba(255, 255, 255, 0.92); display: flex; flex-direction: column; gap: 9px; }
+    .small-card .keyword { background: var(--category-chip-bg, #f8fafc); color: var(--category-chip-text, #334155); border-color: var(--category-chip-border, #dbe3ee); }
     .small-card a { text-decoration: none; color: #0f172a; font-weight: 700; display: block; line-height: 1.45; }
-    .small-card a:hover { text-decoration: underline; }
     .footer-note { margin-top: 24px; font-size: 13px; color: #64748b; text-align: center; }
     .loading, .error { padding: 24px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; color: #475569; }
-    @media (max-width: 1100px) {
-      .top-article { grid-column: span 6; }
-      .top-article.featured { grid-column: span 12; }
-    }
-    @media (max-width: 900px) {
-      .top-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .top-article, .top-article.featured { grid-column: auto; }
-      .category-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 1100px) { .top-article { grid-column: span 6; } .top-article.featured { grid-column: span 12; } }
+    @media (max-width: 900px) { .top-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .top-article, .top-article.featured { grid-column: auto; } .category-grid { grid-template-columns: 1fr; } }
     @media (max-width: 768px) {
       .container { padding: 18px 12px 40px; }
       .hero { padding: 20px 18px 18px; margin-bottom: 18px; }
@@ -260,21 +100,16 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const DATA_FILE = params.get('data') || './finance_articles_2026-04-28.json';
+    const DATA_FILE = params.get('data') || './finance_articles_2026-05-05.json';
     const CATEGORY_ALIASES = {
       '시장 방향성(부동산/증권시장 등 대출수요 변동 가능 이슈)': '시장 방향성',
+      '시장 방향성: 부동산, 증권시장 등 대출수요 변동 가능 이슈': '시장 방향성',
       '금융사 소매 대출 전략/상품(특히 삼성생명, 한화생명 포함)': '금융사 소매 대출 전략/상품',
-      'AI 동향(금융 AI 포함)': 'AI 동향'
+      '금융사 소매 대출 전략/상품: 특히 삼성생명, 한화생명 포함': '금융사 소매 대출 전략/상품',
+      'AI 동향(금융 AI 포함)': 'AI 동향',
+      'AI 동향: 금융 AI 포함': 'AI 동향'
     };
-    const CATEGORY_ORDER = [
-      '대출 관련 정책/규제 변화',
-      '금리/지표 변화',
-      '시장 방향성',
-      '리스크/연체/NPL',
-      '금융사 소매 대출 전략/상품',
-      '보험사 관련 이슈',
-      'AI 동향'
-    ];
+    const CATEGORY_ORDER = ['대출 관련 정책/규제 변화', '금리/지표 변화', '시장 방향성', '리스크/연체/NPL', '금융사 소매 대출 전략/상품', '보험사 관련 이슈', 'AI 동향'];
     const CATEGORY_STYLES = {
       '대출 관련 정책/규제 변화': { accent: '#0f766e', soft: '#f0fdfa', border: '#99f6e4', title: '#115e59', meta: '#0f766e', chipBg: '#ccfbf1', chipBorder: '#99f6e4', chipText: '#115e59' },
       '금리/지표 변화': { accent: '#2563eb', soft: '#eff6ff', border: '#bfdbfe', title: '#1d4ed8', meta: '#2563eb', chipBg: '#dbeafe', chipBorder: '#bfdbfe', chipText: '#1d4ed8' },
@@ -286,14 +121,7 @@
       '기타': { accent: '#475569', soft: '#f8fafc', border: '#cbd5e1', title: '#334155', meta: '#475569', chipBg: '#e2e8f0', chipBorder: '#cbd5e1', chipText: '#334155' }
     };
 
-    function escapeHtml(value) {
-      return String(value ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/\"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
+    function escapeHtml(value) { return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#39;'); }
     function formatRating(value) {
       if (value === undefined || value === null || value === '') return '';
       const text = String(value).trim();
@@ -315,16 +143,10 @@
       if (!keywords.length) return '';
       return `<div class="keyword-row">${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join('')}</div>`;
     }
-    function renderOriginalLink(article) {
-      return `<a class="action-button" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a>`;
-    }
-    function renderShareButton(article) {
-      return `<button class="action-button" type="button" data-url="${escapeHtml(getArticleLink(article))}" data-title="${escapeHtml(article.title || '')}" onclick="handleShareClick(this)">공유하기</button>`;
-    }
+    function renderOriginalLink(article) { return `<a class="action-button" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a>`; }
+    function renderShareButton(article) { return `<button class="action-button" type="button" data-url="${escapeHtml(getArticleLink(article))}" data-title="${escapeHtml(article.title || '')}" onclick="handleShareClick(this)">공유하기</button>`; }
     function renderActionRow(article) { return `<div class="action-row">${renderOriginalLink(article)}${renderShareButton(article)}</div>`; }
-    function renderMeta(article) {
-      return `<div class="article-meta"><span>${escapeHtml(article.publisher)}</span><span>${escapeHtml(article.udate || '')}</span><span class="badge">추천도 ${escapeHtml(formatRating(article.rating))}</span></div>`;
-    }
+    function renderMeta(article) { return `<div class="article-meta"><span>${escapeHtml(article.publisher)}</span><span>${escapeHtml(article.udate || '')}</span><span class="badge">추천도 ${escapeHtml(formatRating(article.rating))}</span></div>`; }
     function setTemporaryButtonLabel(button, label) {
       const original = button.dataset.originalLabel || button.textContent;
       button.dataset.originalLabel = original;
@@ -350,33 +172,21 @@
         await copyTextFallback(url); setTemporaryButtonLabel(button, 'URL 복사됨');
       } catch (error) {
         if (error && error.name === 'AbortError') return;
-        try { await copyTextFallback(url); setTemporaryButtonLabel(button, 'URL 복사됨'); }
-        catch (copyError) { setTemporaryButtonLabel(button, '복사 실패'); }
+        try { await copyTextFallback(url); setTemporaryButtonLabel(button, 'URL 복사됨'); } catch (copyError) { setTemporaryButtonLabel(button, '복사 실패'); }
       }
     }
     function handleShareClick(button) { shareArticle(button.dataset.url || '', button.dataset.title || '', button); }
     function getCategoryStyle(category) { return CATEGORY_STYLES[normalizeCategory(category)] || CATEGORY_STYLES['기타']; }
     function buildCategoryStyleAttr(category) {
       const style = getCategoryStyle(category);
-      return [
-        `--category-accent:${style.accent}`,
-        `--category-soft:${style.soft}`,
-        `--category-border:${style.border}`,
-        `--category-title:${style.title}`,
-        `--category-meta:${style.meta}`,
-        `--category-chip-bg:${style.chipBg}`,
-        `--category-chip-border:${style.chipBorder}`,
-        `--category-chip-text:${style.chipText}`
-      ].join(';');
+      return [`--category-accent:${style.accent}`, `--category-soft:${style.soft}`, `--category-border:${style.border}`, `--category-title:${style.title}`, `--category-meta:${style.meta}`, `--category-chip-bg:${style.chipBg}`, `--category-chip-border:${style.chipBorder}`, `--category-chip-text:${style.chipText}`].join(';');
     }
     function renderTopArticle(article, rank) {
       const featuredClass = rank === 1 ? ' featured' : '';
       const label = rank === 1 ? '오늘의 핵심' : '핵심 이슈';
       return `<article class="article-card top-article${featuredClass}"><div class="top-rank-row"><span class="rank">${rank}</span><span class="top-label">${label}</span></div>${renderKeywords(article)}<a class="article-title" href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>${renderMeta(article)}<p class="summary">${escapeHtml(article.summary)}</p>${renderActionRow(article)}</article>`;
     }
-    function renderCategoryArticle(article) {
-      return `<div class="small-card">${renderKeywords(article)}<a href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>${renderMeta(article)}<p class="summary">${escapeHtml(article.summary)}</p>${renderActionRow(article)}</div>`;
-    }
+    function renderCategoryArticle(article) { return `<div class="small-card">${renderKeywords(article)}<a href="${escapeHtml(getArticleLink(article))}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>${renderMeta(article)}<p class="summary">${escapeHtml(article.summary)}</p>${renderActionRow(article)}</div>`; }
     function normalizeData(data) {
       const articles = Array.isArray(data.articles) ? data.articles : [];
       const topArticles = articles.filter(article => article.section === 'top5').slice(0, 5);
@@ -390,14 +200,10 @@
       const orderedCategories = [];
       CATEGORY_ORDER.forEach(orderCategory => {
         grouped.forEach((items, category) => {
-          if (normalizeCategory(category) === orderCategory && !orderedCategories.some(([existing]) => existing === category)) {
-            orderedCategories.push([category, items]);
-          }
+          if (normalizeCategory(category) === orderCategory && !orderedCategories.some(([existing]) => existing === category)) orderedCategories.push([category, items]);
         });
       });
-      grouped.forEach((items, category) => {
-        if (!orderedCategories.some(([existing]) => existing === category)) orderedCategories.push([category, items]);
-      });
+      grouped.forEach((items, category) => { if (!orderedCategories.some(([existing]) => existing === category)) orderedCategories.push([category, items]); });
       return { articles, topArticles, orderedCategories };
     }
     function renderDashboard(data) {
