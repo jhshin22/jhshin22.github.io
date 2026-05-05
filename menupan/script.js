@@ -66,7 +66,7 @@ const exclusionPanel = document.querySelector("#exclusionPanel");
 const exclusionList = document.querySelector("#exclusionList");
 const clearExclusions = document.querySelector("#clearExclusions");
 
-fetch("data/menus_100.json")
+fetchMenuData()
   .then((response) => response.json())
   .then((data) => {
     menus = data;
@@ -77,6 +77,13 @@ fetch("data/menus_100.json")
   .catch(() => {
     statusText.textContent = "메뉴 데이터를 불러오지 못했습니다.";
   });
+
+function fetchMenuData() {
+  return fetch("data/menus_100.json").then((response) => {
+    if (response.ok) return response;
+    return fetch("https://raw.githubusercontent.com/jhshin22/jhshin22.github.io/main/menupan/data/menus_100.json");
+  });
+}
 
 effortInput.addEventListener("input", () => {
   effortValue.textContent = effortInput.value;
