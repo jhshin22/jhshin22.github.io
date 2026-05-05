@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""Generate selected news JSON from candidates.json using selected_news_prompt rules.
-
-Policy highlights implemented:
-- Stop when tomorrow (KST) is non-business day.
-- Stop when candidates list is missing/empty.
-- Select up to 20 articles with top-5 first then category representatives.
-- Conservative dedup by normalized URL and normalized title.
-- checkyn strategy option 2: always set checkyn='N' and exclude items that require body-check.
-  As a result, this script reports and exits without creating JSON when body verification is unavailable.
-"""
+"""Generate selected news JSON from auto_dash/candidates.json."""
 
 from __future__ import annotations
 
@@ -53,7 +44,7 @@ def parse_target_date(value: str | None) -> date:
     return date.fromisoformat(value)
 
 
-def _strip_trailing_commas(text: str) -> str:
+def strip_trailing_commas(text: str) -> str:
     return re.sub(r",(\s*[}\]])", r"\1", text)
 
 
@@ -62,7 +53,7 @@ def load_json(path: Path) -> Any:
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
-        return json.loads(_strip_trailing_commas(raw))
+        return json.loads(strip_trailing_commas(raw))
 
 
 def load_extra_holidays() -> set[str]:
@@ -93,36 +84,27 @@ def load_extra_holidays() -> set[str]:
 
 
 def is_non_business_day(day: date, extra_holidays: set[str]) -> bool:
-    if day.weekday() >= 5:
-        return True
-    return day.isoformat() in extra_holidays
+    return day.weekday() >= 5 or day.isoformat() in extra_holidays
 
 
 def normalize_url(url: str) -> str:
-    if not url:
-        return ""
-    parsed = urllib.parse.urlsplit(url.strip())
+    parsed = urllib.parse.urlsplit((url or "").strip())
     query = urllib.parse.urlencode(sorted(urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)))
     return urllib.parse.urlunsplit((parsed.scheme.lower(), parsed.netloc.lower(), parsed.path.rstrip("/"), query, ""))
 
 
 def normalize_title(title: str) -> str:
-    return re.sub(r"\s+", " ", re.sub(r"[^0-9A-Za-z가-힣 ]", " ", title.lower())).strip()
+    normalized = re.sub(r"[^0-9A-Za-z가-힣 ]", " ", (title or "").lower())
+    return re.sub(r"\s+", " ", normalized).strip()
 
 
 def load_candidates(path: Path) -> list[Candidate]:
     if not path.exists():
         return []
     data = load_json(path)
-    rows: list[dict[str, Any]]
-    if isinstance(data, list):
-        rows = data
-    elif isinstance(data, dict) and isinstance(data.get("articles"), list):
-        rows = data["articles"]
-    else:
-        return []
+    rows = data if isinstance(data, list) else data.get("articles", []) if isinstance(data, dict) else []
 
-    candidates: list[Candidate] = []
+    out: list[Candidate] = []
     for row in rows:
         if not isinstance(row, dict):
             continue
@@ -130,7 +112,7 @@ def load_candidates(path: Path) -> list[Candidate]:
         url = str(row.get("url") or row.get("article_url") or row.get("originallink") or "").strip()
         if not title or not url:
             continue
-        candidates.append(
+        out.append(
             Candidate(
                 raw=row,
                 url=url,
@@ -141,8 +123,8 @@ def load_candidates(path: Path) -> list[Candidate]:
                 matched_keywords=[str(x) for x in (row.get("matched_keywords") or [])],
             )
         )
-    candidates.sort(key=lambda c: (c.pre_score, c.published_at), reverse=True)
-    return candidates
+    out.sort(key=lambda c: (c.pre_score, c.published_at), reverse=True)
+    return out
 
 
 def load_labels(path: Path) -> list[dict[str, Any]]:
@@ -151,13 +133,13 @@ def load_labels(path: Path) -> list[dict[str, Any]]:
 
 
 def candidate_labels(c: Candidate, labels: list[dict[str, Any]]) -> list[str]:
-    kws = set(k.lower() for k in c.matched_keywords)
-    out: list[str] = []
+    kws = {k.lower() for k in c.matched_keywords}
+    matched: list[str] = []
     for label in labels:
-        lk = [str(x).lower() for x in label.get("keywords", [])]
-        if any(k in kws for k in lk):
-            out.append(str(label.get("id")))
-    return out
+        label_kws = [str(x).lower() for x in label.get("keywords", [])]
+        if any(k in kws for k in label_kws):
+            matched.append(str(label.get("id")))
+    return matched
 
 
 def dedup(candidates: list[Candidate]) -> list[Candidate]:
@@ -167,9 +149,7 @@ def dedup(candidates: list[Candidate]) -> list[Candidate]:
     for c in candidates:
         nu = normalize_url(c.url)
         nt = normalize_title(c.title)
-        if nu and nu in seen_url:
-            continue
-        if nt and nt in seen_title:
+        if nu in seen_url or nt in seen_title:
             continue
         seen_url.add(nu)
         seen_title.add(nt)
@@ -181,15 +161,12 @@ def choose(candidates: list[Candidate], labels: list[dict[str, Any]], max_items:
     pool = dedup(candidates)
     chosen: list[Candidate] = []
 
-    # top 5
     for c in pool:
         if len(chosen) >= 5:
             break
         chosen.append(c)
 
     chosen_urls = {normalize_url(c.url) for c in chosen}
-
-    # category reps (up to 3 each)
     for label in sorted(labels, key=lambda x: int(x.get("order", 999))):
         lid = str(label.get("id"))
         count = 0
@@ -204,22 +181,16 @@ def choose(candidates: list[Candidate], labels: list[dict[str, Any]], max_items:
                 count += 1
                 if count >= 3:
                     break
-
     return chosen[:max_items]
 
 
 def output_path_for(run_day: date) -> Path:
     return SELECTED_ROOT / f"{run_day.year:04d}" / f"{run_day.month:02d}" / f"news_{run_day.isoformat()}.json"
 
+
 def build_record(item_id: str, c: Candidate) -> dict[str, Any]:
-    summary = str(c.raw.get("description") or "").strip()
-    if not summary:
-        summary = f"{c.title} 관련 기사입니다."
-    keywords = c.matched_keywords[:4]
-    if not keywords:
-        keywords = ["뉴스"]
-    reason = "pre_score 및 키워드/카테고리 매칭 기준으로 자동 선별됨"
-    rating = 3
+    summary = str(c.raw.get("description") or "").strip() or f"{c.title} 관련 기사입니다."
+    keywords = c.matched_keywords[:4] or ["뉴스"]
     return {
         "id": item_id,
         "title": c.title,
@@ -228,30 +199,27 @@ def build_record(item_id: str, c: Candidate) -> dict[str, Any]:
         "checkyn": "N",
         "summary": summary,
         "keywords": keywords,
-        "reason": reason,
+        "reason": "pre_score 및 키워드/카테고리 매칭 기준으로 자동 선별됨",
         "URL": c.url,
-        "rating": rating,
+        "rating": 3,
     }
 
 
 def assign_ids(selected: list[Candidate], labels: list[dict[str, Any]]) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
-    # top 5 ids
-    top = selected[:5]
-    for i, c in enumerate(top, start=1):
+    for i, c in enumerate(selected[:5], start=1):
         records.append(build_record(f"top_{i:02d}", c))
 
-    # category ids for remaining items
     remaining = selected[5:]
     counts: dict[str, int] = {}
-    label_ids = [str(x.get("id")) for x in sorted(labels, key=lambda x: int(x.get("order", 999)))]
-    label_index = {lid: idx + 1 for idx, lid in enumerate(label_ids)}
+    ordered_labels = [str(x.get("id")) for x in sorted(labels, key=lambda x: int(x.get("order", 999)))]
+    label_index = {lid: idx + 1 for idx, lid in enumerate(ordered_labels)}
 
     for c in remaining:
         lids = candidate_labels(c, labels)
-        lid = lids[0] if lids else label_ids[0] if label_ids else "cat1"
-        cat_no = label_index.get(lid, 1)
+        lid = lids[0] if lids else (ordered_labels[0] if ordered_labels else "policy_regulation")
         counts[lid] = counts.get(lid, 0) + 1
+        cat_no = label_index.get(lid, 1)
         records.append(build_record(f"cat{cat_no}_{counts[lid]:02d}", c))
     return records
 
@@ -260,8 +228,9 @@ def save_selected(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
 
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate selected news JSON from auto_dash/candidates.json")
+    parser = argparse.ArgumentParser(description="Generate selected news JSON from candidates")
     parser.add_argument("--run-date", default="today", help="today|yesterday|YYYY-MM-DD (KST)")
     parser.add_argument("--candidates", default=str(CANDIDATES_PATH))
     parser.add_argument("--labels", default=str(LABEL_RULES_PATH))
@@ -269,9 +238,7 @@ def main() -> int:
 
     run_day = parse_target_date(args.run_date)
     tomorrow = run_day + timedelta(days=1)
-    holidays = load_extra_holidays()
-
-    if is_non_business_day(tomorrow, holidays):
+    if is_non_business_day(tomorrow, load_extra_holidays()):
         print("비영업일이므로 실행 종료")
         return 0
 
@@ -282,17 +249,16 @@ def main() -> int:
 
     labels = load_labels(Path(args.labels))
     selected = choose(candidates, labels, max_items=20)
-
     if not selected:
         print("최종 선정 기사가 0건이므로 파일 생성 없이 종료")
         return 0
 
-    output_path = output_path_for(run_day)
+    out_path = output_path_for(run_day)
     rows = assign_ids(selected, labels)
-    save_selected(output_path, rows)
+    save_selected(out_path, rows)
 
     print(f"선별 기사 {len(rows)}건 저장 완료")
-    print(f"저장 경로: {output_path}")
+    print(f"저장 경로: {out_path}")
     print("checkyn 전략 2 적용: 모든 기사 checkyn=N으로 저장")
     return 0
 
