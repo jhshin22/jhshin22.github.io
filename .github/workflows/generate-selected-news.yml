@@ -1,0 +1,56 @@
+name: Generate Selected News
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub Actions cron uses UTC. KST = UTC+9.
+    # Runs at 00:10 KST every day.
+    - cron: '10 15 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-selected-news
+  cancel-in-progress: false
+
+jobs:
+  generate-selected-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate selected news JSON
+        run: |
+          python auto_dash/generate_selected_news.py --run-date today
+
+      - name: Commit and push selected JSON if changed
+        run: |
+          mapfile -t FILES < <(find auto_dash/data/selected -type f -name "news_*.json" | sort)
+          if [ ${#FILES[@]} -eq 0 ]; then
+            echo "No selected JSON files found."
+            exit 0
+          fi
+
+          git add "${FILES[@]}"
+
+          if git diff --cached --quiet; then
+            echo "No selected news changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          RUN_DAY=$(TZ=Asia/Seoul date +%F)
+          git commit -m "update selected news json for ${RUN_DAY}"
+          git pull --rebase origin main
+          git push
