@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2인 식사 메뉴 추천기</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Dinner Picker for Two</p>
+          <h1>2인 식사 메뉴 추천기</h1>
+          <p class="intro">두 사람의 기분, 최근 식사, 날씨, 예산, 귀찮음, 영양 밸런스를 반영해 오늘 먹기 좋은 메뉴 1~3위를 계산합니다.</p>
+        </div>
+        <div class="hero-stat">
+          <span id="menuCount">0</span>
+          <small>menus</small>
+        </div>
+      </section>
+
+      <form id="recommendForm" class="panel">
+        <section class="form-grid">
+          <div class="field">
+            <label for="moodA">사람 A 기분</label>
+            <select id="moodA" name="moodA">
+              <option>피곤함</option>
+              <option>스트레스</option>
+              <option>기분좋음</option>
+              <option>우울함</option>
+              <option>아무생각없음</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="moodB">사람 B 기분</label>
+            <select id="moodB" name="moodB">
+              <option>아무생각없음</option>
+              <option>피곤함</option>
+              <option>스트레스</option>
+              <option>기분좋음</option>
+              <option>우울함</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="weather">날씨</label>
+            <select id="weather" name="weather">
+              <option>맑음</option>
+              <option>흐림</option>
+              <option>비</option>
+              <option>눈</option>
+              <option>추움</option>
+              <option>더움</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="budget">1인 예산</label>
+            <select id="budget" name="budget">
+              <option value="9000">9,000원 이하</option>
+              <option value="13000" selected>13,000원 이하</option>
+              <option value="18000">18,000원 이하</option>
+              <option value="26000">26,000원 이하</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="effort">귀찮음 정도</label>
+            <input id="effort" name="effort" type="range" min="1" max="5" value="3">
+            <div class="range-labels"><span>움직일 수 있음</span><strong id="effortValue">3</strong><span>매우 귀찮음</span></div>
+          </div>
+          <div class="field">
+            <label for="nutrition">영양 밸런스</label>
+            <select id="nutrition" name="nutrition">
+              <option value="normal">보통</option>
+              <option value="balanced" selected>균형 있게</option>
+              <option value="light">가볍게</option>
+              <option value="protein">단백질 중심</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="recommendMode">추천 모드</label>
+            <select id="recommendMode" name="recommendMode">
+              <option value="stable">안정 추천</option>
+              <option value="balanced" selected>균형 추천</option>
+              <option value="adventure">모험 추천</option>
+              <option value="random">아무거나</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="text-grid">
+          <div class="field">
+            <label for="recentMeals">최근 먹은 메뉴</label>
+            <textarea id="recentMeals" name="recentMeals" rows="4" placeholder="예: 치킨, 라멘, 삼겹살"></textarea>
+          </div>
+          <div class="field">
+            <label for="dislikes">비선호 음식/재료</label>
+            <textarea id="dislikes" name="dislikes" rows="4" placeholder="예: 매운 음식, 해산물, 닭고기"></textarea>
+          </div>
+        </section>
+
+        <button class="primary-button" type="submit">추천 받기</button>
+      </form>
+
+      <section class="results" aria-live="polite">
+        <div class="section-heading">
+          <h2>추천 결과</h2>
+          <p id="statusText">조건을 입력하고 추천을 받아보세요.</p>
+        </div>
+        <div id="resultsList" class="result-grid"></div>
+        <div id="exclusionPanel" class="exclusion-panel" hidden>
+          <div class="section-heading compact">
+            <h2>제외한 내역</h2>
+            <button id="clearExclusions" class="text-button" type="button">초기화</button>
+          </div>
+          <ul id="exclusionList" class="exclusion-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
