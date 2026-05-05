@@ -6,8 +6,8 @@ Policy highlights implemented:
 - Stop when candidates list is missing/empty.
 - Select up to 20 articles with top-5 first then category representatives.
 - Conservative dedup by normalized URL and normalized title.
-- checkyn strategy option 2: always set checkyn='N' and exclude items that require body-check.
-  As a result, this script reports and exits without creating JSON when body verification is unavailable.
+- Save selected articles to auto_dash/data/selected/YYYY/MM/news_YYYY-MM-DD.json.
+- Since this script does not directly verify article bodies, checkyn is set to "N".
 """
 
 from __future__ import annotations
@@ -15,7 +15,6 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import sys
 import urllib.parse
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
@@ -190,7 +189,7 @@ def choose(candidates: list[Candidate], labels: list[dict[str, Any]], max_items:
 
     chosen_urls = {normalize_url(c.url) for c in chosen}
 
-    # category reps (up to 3 each)
+    # category representatives (up to 3 each)
     for label in sorted(labels, key=lambda x: int(x.get("order", 999))):
         lid = str(label.get("id"))
         count = 0
@@ -211,6 +210,60 @@ def choose(candidates: list[Candidate], labels: list[dict[str, Any]], max_items:
 
 def output_path_for(run_day: date) -> Path:
     return SELECTED_ROOT / f"{run_day.year:04d}" / f"{run_day.month:02d}" / f"news_{run_day.isoformat()}.json"
+
+
+def clean_summary(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def build_record(item_id: str, c: Candidate) -> dict[str, Any]:
+    summary = clean_summary(str(c.raw.get("description") or c.raw.get("summary") or ""))
+    if not summary:
+        summary = f"{c.title} 관련 기사입니다."
+
+    keywords = [str(x) for x in c.matched_keywords[:4] if str(x).strip()]
+    if not keywords:
+        keywords = ["뉴스"]
+
+    return {
+        "id": item_id,
+        "title": c.title,
+        "publisher": c.publisher,
+        "published_at": c.published_at,
+        "checkyn": "N",
+        "summary": summary,
+        "keywords": keywords,
+        "reason": "pre_score 및 키워드/카테고리 매칭 기준으로 자동 선별됨",
+        "URL": c.url,
+        "rating": 3,
+    }
+
+
+def assign_ids(selected: list[Candidate], labels: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+
+    for i, c in enumerate(selected[:5], start=1):
+        records.append(build_record(f"top_{i:02d}", c))
+
+    remaining = selected[5:]
+    counts: dict[str, int] = {}
+    sorted_labels = sorted(labels, key=lambda x: int(x.get("order", 999)))
+    label_ids = [str(x.get("id")) for x in sorted_labels if x.get("id") is not None]
+    label_index = {lid: idx + 1 for idx, lid in enumerate(label_ids)}
+
+    for c in remaining:
+        lids = candidate_labels(c, labels)
+        lid = lids[0] if lids else (label_ids[0] if label_ids else "cat1")
+        cat_no = label_index.get(lid, 1)
+        counts[lid] = counts.get(lid, 0) + 1
+        records.append(build_record(f"cat{cat_no}_{counts[lid]:02d}", c))
+
+    return records
+
+
+def save_selected(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def main() -> int:
@@ -236,9 +289,17 @@ def main() -> int:
     labels = load_labels(Path(args.labels))
     selected = choose(candidates, labels, max_items=20)
 
-    # checkyn strategy 2: no body verification automation in this script, so do not emit JSON.
-    print(f"선별 후보 {len(selected)}건 계산됨")
-    print("checkyn 전략 2 적용: 본문 자동 확인 미구현으로 파일 생성/커밋 없이 종료")
+    if not selected:
+        print("최종 선정 기사가 0건이므로 파일 생성 없이 종료")
+        return 0
+
+    output_path = output_path_for(run_day)
+    rows = assign_ids(selected, labels)
+    save_selected(output_path, rows)
+
+    print(f"선별 기사 {len(rows)}건 저장 완료")
+    print(f"저장 경로: {output_path}")
+    print("본문 자동 확인 미구현: 모든 기사 checkyn=N으로 저장")
     return 0
 
 
