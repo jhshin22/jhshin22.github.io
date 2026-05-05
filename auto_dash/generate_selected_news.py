@@ -41,8 +41,23 @@ KEYWORD_STOPWORDS = {
     "기자", "뉴스", "관련", "이번", "지난", "올해", "내년", "최근", "현재", "통해",
     "대한", "위해", "면서", "따르면", "있다", "했다", "한다", "된다", "있는",
     "없는", "것으로", "이라고", "그리고", "하지만", "때문", "경우", "가운데",
-    "금융", "대출", "은행", "보험", "시장", "정부",
+    "금융", "대출", "은행", "보험", "시장", "정부", "관계자", "밝혔다", "설명했다",
+    "전했다", "말했다", "나타났다", "예정이다", "가능성", "중심", "전망",
 }
+DOMAIN_TERMS = [
+    "가계대출", "개인대출", "신용대출", "주택담보대출", "주담대", "전세대출",
+    "보험계약대출", "약관대출", "부동산담보대출", "대환대출", "대출 갈아타기",
+    "마이너스통장", "카드론", "현금서비스", "중금리대출", "소상공인 대출",
+    "자영업자 대출", "대출금리", "대출 금리", "기준금리", "시장금리", "가산금리",
+    "DSR", "DTI", "LTV", "총부채원리금상환비율", "가계부채", "대출 규제",
+    "금융위원회", "금융위", "금융감독원", "금감원", "한국은행", "한은",
+    "연체율", "부실채권", "NPL", "취약차주", "저신용자", "고신용자", "신용점수",
+    "신용평가", "채무조정", "개인회생", "부동산", "주택시장", "전세", "아파트",
+    "생명보험", "보험사 대출", "삼성생명", "한화생명", "교보생명", "금융 AI", "AI 대출",
+]
+NUMERIC_VALUE_PATTERN = re.compile(
+    r"\d+(?:[.,]\d+)?\s*(?:%p|％p|%|％|조|억|만원|원|bp|포인트|명|건|가구|호|배|년|개월)"
+)
 
 
 @dataclass
@@ -177,14 +192,61 @@ def load_labels(path: Path) -> list[dict[str, Any]]:
     return data.get("labels", []) if isinstance(data, dict) else []
 
 
-def candidate_labels(c: Candidate, labels: list[dict[str, Any]]) -> list[str]:
-    kws = set(k.lower() for k in c.matched_keywords)
-    out: list[str] = []
+def label_keyword_terms(labels: list[dict[str, Any]]) -> list[str]:
+    terms: list[str] = []
+    seen: set[str] = set()
     for label in labels:
-        lk = [str(x).lower() for x in label.get("keywords", [])]
-        if any(k in kws for k in lk):
-            out.append(str(label.get("id")))
-    return out
+        for term in label.get("keywords", []):
+            term_str = str(term).strip()
+            key = term_str.lower()
+            if term_str and key not in seen:
+                terms.append(term_str)
+                seen.add(key)
+    return terms
+
+
+def candidate_text_for_match(c: Candidate, body_text: str = "") -> str:
+    parts = [
+        c.title,
+        " ".join(c.matched_keywords),
+        str(c.raw.get("description") or ""),
+        str(c.raw.get("summary") or ""),
+        body_text[:2500],
+    ]
+    return " ".join(parts).lower()
+
+
+def label_scores(c: Candidate, labels: list[dict[str, Any]], body_text: str = "") -> list[tuple[int, int, str]]:
+    text = candidate_text_for_match(c, body_text)
+    scored: list[tuple[int, int, str]] = []
+    for label in labels:
+        label_id = str(label.get("id") or "")
+        if not label_id:
+            continue
+        score = 0
+        for term in label.get("keywords", []):
+            keyword = str(term).strip().lower()
+            if not keyword:
+                continue
+            if keyword in text:
+                score += 2 if (" " in keyword or len(keyword) >= 5) else 1
+        if score:
+            scored.append((score, int(label.get("order", 999)), label_id))
+    scored.sort(key=lambda item: (-item[0], item[1], item[2]))
+    return scored
+
+
+def candidate_labels(c: Candidate, labels: list[dict[str, Any]]) -> list[str]:
+    return [label_id for _, _, label_id in label_scores(c, labels)]
+
+
+def article_labels(c: Candidate, body_text: str, labels: list[dict[str, Any]]) -> list[str]:
+    return [label_id for _, _, label_id in label_scores(c, labels, body_text)]
+
+
+def label_names(label_ids: list[str], labels: list[dict[str, Any]]) -> list[str]:
+    by_id = {str(label.get("id")): str(label.get("full_name") or label.get("name") or label.get("id")) for label in labels}
+    return [by_id[label_id] for label_id in label_ids if label_id in by_id]
 
 
 def dedup(candidates: list[Candidate]) -> list[Candidate]:
@@ -383,44 +445,73 @@ def split_sentences(text: str) -> list[str]:
     return sentences
 
 
-def summarize_body(title: str, body_text: str, max_sentences: int = 3) -> str:
+def sentence_scores(title: str, body_text: str, labels: list[dict[str, Any]]) -> list[tuple[float, int, str]]:
     sentences = split_sentences(body_text)
     title_terms = {
         t.lower()
         for t in re.findall(r"[A-Za-z0-9가-힣]{2,}", title)
         if t.lower() not in KEYWORD_STOPWORDS
     }
-    finance_terms = {
-        "대출", "가계대출", "신용대출", "주담대", "금리", "연체", "DSR", "규제",
-        "보험", "은행", "상환", "부동산", "금융위", "금감원", "저신용", "중금리",
-    }
+    finance_terms = {term.lower() for term in DOMAIN_TERMS}
+    finance_terms.update(term.lower() for term in label_keyword_terms(labels))
 
     scored: list[tuple[float, int, str]] = []
-    for idx, sentence in enumerate(sentences[:25]):
+    for idx, sentence in enumerate(sentences[:30]):
         lower = sentence.lower()
         score = 0.0
         score += max(0, 8 - idx) * 0.35
         score += sum(1.6 for term in title_terms if term in lower)
-        score += sum(1.0 for term in finance_terms if term.lower() in lower)
+        score += sum(1.0 for term in finance_terms if term and term in lower)
+        if NUMERIC_VALUE_PATTERN.search(sentence):
+            score += 1.2
+        if sentence.count('"') + sentence.count("'") + sentence.count("“") + sentence.count("”") >= 2:
+            score -= 0.4
         scored.append((score, idx, sentence))
 
-    selected = sorted(sorted(scored, reverse=True)[:max_sentences], key=lambda x: x[1])
-    summary_sentences = [sentence for _, _, sentence in selected]
-    return " ".join(summary_sentences)
+    return scored
 
 
-def extract_keywords_from_body(body_text: str, c: Candidate, labels: list[dict[str, Any]], limit: int = 4) -> list[str]:
-    text_lower = body_text.lower()
+def extract_key_sentences(title: str, body_text: str, labels: list[dict[str, Any]], max_sentences: int = 3) -> list[str]:
+    scored = sentence_scores(title, body_text, labels)
+    selected = sorted(
+        sorted(scored, key=lambda x: (x[0], -x[1]), reverse=True)[:max_sentences],
+        key=lambda x: x[1],
+    )
+    return [sentence for _, _, sentence in selected]
+
+
+def summarize_body(title: str, body_text: str, labels: list[dict[str, Any]], max_sentences: int = 3) -> str:
+    return " ".join(extract_key_sentences(title, body_text, labels, max_sentences=max_sentences))
+
+
+def extract_keywords_from_body(body_text: str, c: Candidate, labels: list[dict[str, Any]], limit: int = 8) -> list[str]:
+    combined_text = " ".join([
+        c.title,
+        " ".join(c.matched_keywords),
+        str(c.raw.get("description") or ""),
+        body_text,
+    ])
+    text_lower = combined_text.lower()
     keywords: list[str] = []
 
     def add(term: str) -> None:
-        term = term.strip()
-        if term and term not in keywords:
+        term = clean_text(term).strip()
+        if not term:
+            return
+        if term.lower() in KEYWORD_STOPWORDS:
+            return
+        if term not in keywords:
             keywords.append(term)
 
     for term in c.matched_keywords:
         if term and term.lower() in text_lower:
             add(str(term))
+
+    for term in DOMAIN_TERMS:
+        if term.lower() in text_lower:
+            add(term)
+        if len(keywords) >= limit:
+            return keywords[:limit]
 
     for label in labels:
         for term in label.get("keywords", []):
@@ -430,7 +521,18 @@ def extract_keywords_from_body(body_text: str, c: Candidate, labels: list[dict[s
             if len(keywords) >= limit:
                 return keywords[:limit]
 
-    tokens = re.findall(r"[A-Za-z]{2,}|[가-힣]{2,}", body_text)
+    phrase_counter: Counter[str] = Counter()
+    for match in re.findall(r"[가-힣A-Za-z0-9]{2,}(?:\s+[가-힣A-Za-z0-9]{2,}){1,2}", combined_text):
+        phrase = clean_text(match)
+        if 4 <= len(phrase) <= 20 and not any(stop in phrase for stop in KEYWORD_STOPWORDS):
+            phrase_counter[phrase] += 1
+
+    for phrase, _ in phrase_counter.most_common(10):
+        add(phrase)
+        if len(keywords) >= limit:
+            return keywords[:limit]
+
+    tokens = re.findall(r"[A-Za-z]{2,}|[가-힣]{2,}", combined_text)
     counter: Counter[str] = Counter()
     for token in tokens:
         if token in KEYWORD_STOPWORDS:
@@ -447,17 +549,42 @@ def extract_keywords_from_body(body_text: str, c: Candidate, labels: list[dict[s
     return keywords[:limit] or ["뉴스"]
 
 
+def issue_signature(c: Candidate, keywords: list[str], category_ids: list[str]) -> str:
+    signature_terms: list[str] = []
+    seen: set[str] = set()
+
+    def add(term: str) -> None:
+        token = normalize_title(term)
+        if not token or token in KEYWORD_STOPWORDS or token in seen:
+            return
+        if len(token) < 2 or len(token) > 20:
+            return
+        signature_terms.append(token)
+        seen.add(token)
+
+    for term in category_ids:
+        add(term)
+    for term in keywords:
+        add(term)
+    for term in c.matched_keywords:
+        add(term)
+    for token in re.findall(r"[A-Za-z0-9가-힣]{2,}", c.title):
+        add(token)
+
+    return "|".join(signature_terms[:8])
+
+
 def reason_from_body(c: Candidate, body_text: str) -> str:
     text = body_text[:1200]
     if any(term in text for term in ["규제", "금융위", "금감원", "DSR", "정책"]):
-        return "대출 규제·정책 변화 가능성이 있어 소매여신 영업과 리스크 관리에 참고가 필요함"
+        return "본문 내 대출 규제·정책 관련 키워드 확인"
     if any(term in text for term in ["연체", "부실", "NPL", "취약차주", "저신용"]):
-        return "차주 건전성 및 연체 리스크 흐름을 파악하는 데 참고가 필요함"
+        return "본문 내 연체·건전성 관련 키워드 확인"
     if any(term in text for term in ["금리", "기준금리", "시장금리", "채권"]):
-        return "금리 환경 변화가 대출 수요와 상환 흐름에 영향을 줄 수 있음"
+        return "본문 내 금리·지표 관련 키워드 확인"
     if any(term in text for term in ["주택", "부동산", "주담대", "전세"]):
-        return "부동산·주담대 수요 변화가 개인대출 물량 흐름에 영향을 줄 수 있음"
-    return "pre_score, 기사 본문 내용, 키워드 매칭을 기준으로 소매여신 업무 참고 가치가 있다고 판단됨"
+        return "본문 내 부동산·담보대출 관련 키워드 확인"
+    return "제목·본문·키워드 기준 소매여신 관련성 확인"
 
 
 def rating_from_body(c: Candidate, body_text: str) -> int:
@@ -467,6 +594,8 @@ def rating_from_body(c: Candidate, body_text: str) -> int:
         score += 10
     if any(term in body for term in ["보험", "생명보험", "약관대출", "보험사"]):
         score += 8
+    if NUMERIC_VALUE_PATTERN.search(body):
+        score += 3
     if score >= 90:
         return 5
     if score >= 70:
@@ -481,14 +610,22 @@ def rating_from_body(c: Candidate, body_text: str) -> int:
 def build_record(item_id: str, verified: VerifiedArticle, labels: list[dict[str, Any]]) -> dict[str, Any]:
     c = verified.candidate
     body_text = verified.body_text
+    keywords = extract_keywords_from_body(body_text, c, labels)
+    key_sentences = extract_key_sentences(c.title, body_text, labels)
+    category_ids = article_labels(c, body_text, labels)
+    category_candidates = label_names(category_ids, labels)
     return {
         "id": item_id,
         "title": c.title,
         "publisher": c.publisher,
         "published_at": c.published_at,
         "checkyn": "Y",
-        "summary": summarize_body(c.title, body_text),
-        "keywords": extract_keywords_from_body(body_text, c, labels),
+        "summary": " ".join(key_sentences),
+        "keywords": keywords,
+        "auto_keywords": keywords,
+        "auto_key_sentences": key_sentences,
+        "auto_category_candidates": category_candidates,
+        "dedupe_signature": issue_signature(c, keywords, category_ids),
         "reason": reason_from_body(c, body_text),
         "URL": verified.used_url,
         "rating": rating_from_body(c, body_text),
@@ -509,7 +646,7 @@ def assign_ids(selected: list[VerifiedArticle], labels: list[dict[str, Any]]) ->
 
     for verified in remaining:
         c = verified.candidate
-        lids = candidate_labels(c, labels)
+        lids = article_labels(c, verified.body_text, labels)
         lid = lids[0] if lids else (label_ids[0] if label_ids else "cat1")
         cat_no = label_index.get(lid, 1)
         counts[lid] = counts.get(lid, 0) + 1
