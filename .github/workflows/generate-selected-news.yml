@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   schedule:
     # GitHub Actions cron uses UTC. KST = UTC+9.
-    # Runs at 00:10 KST every day.
-    - cron: '10 15 * * *'
+    # Runs aty.
+    - cron: '20 14 * * *'
 
 permissions:
   contents: write
