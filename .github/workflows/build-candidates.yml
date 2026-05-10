@@ -5,7 +5,7 @@ on:
   schedule:
     # GitHub Actions cron uses UTC. KST = UTC+9.
     # Runs at 23:10 KST every day.
-    - cron: '10 14 * * *'
+    - cron: '10 13 * * *'
 
 permissions:
   contents: write
