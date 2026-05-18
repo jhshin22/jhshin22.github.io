@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
   schedule:
     # GitHub Actions cron uses UTC. KST = UTC+9.
-    # Runs at 07:00, 12:00, 17:00, 23:00 KST every day.
+    # Runs at 07:00, 12:00, 17:00 KST every day.
+    # The 23:00 KST collection is handled by auto-dash-nightly.yml.
     - cron: '0 22 * * *'  # 07:00 KST
     - cron: '0 3 * * *'   # 12:00 KST
     - cron: '0 8 * * *'   # 17:00 KST
-    - cron: '0 13 * * *'  # 22:00 KST
 
 permissions:
   contents: write
@@ -51,7 +51,7 @@ jobs:
 
       - name: Commit and push if daily JSON changed
         run: |
-          git add auto_dash/data/raw/**/*.json
+          git add auto_dash/data/raw
 
           if git diff --cached --quiet; then
             echo "No article changes to commit."
