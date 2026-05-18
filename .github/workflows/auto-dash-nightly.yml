@@ -1,0 +1,71 @@
+name: Auto Dash Nightly
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub Actions cron uses UTC. KST = UTC+9.
+    # Runs at 23:00 KST every day.
+    - cron: '0 14 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-dash-nightly
+  cancel-in-progress: false
+
+jobs:
+  auto-dash-nightly:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Collect today's Naver News articles
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+        run: |
+          TARGET_DATE=$(TZ=Asia/Seoul date +%F)
+          YEAR=$(TZ=Asia/Seoul date +%Y)
+          MONTH=$(TZ=Asia/Seoul date +%m)
+          OUTPUT_PATH="auto_dash/data/raw/${YEAR}/${MONTH}/articles_raw_${TARGET_DATE}.json"
+
+          python auto_dash/naver_news_collector.py \
+            --target-date today \
+            --output "$OUTPUT_PATH" \
+            --display 20 \
+            --pages 1 \
+            --sort date
+
+      - name: Build candidates JSON
+        run: |
+          python auto_dash/build_candidates.py
+
+      - name: Generate selected news JSON
+        run: |
+          python auto_dash/generate_selected_news.py --run-date today
+
+      - name: Commit and push auto dash outputs if changed
+        run: |
+          git add auto_dash/data/raw auto_dash/candidates.json auto_dash/data/selected
+
+          if git diff --cached --quiet; then
+            echo "No auto dash changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          RUN_DAY=$(TZ=Asia/Seoul date +%F)
+          git commit -m "update auto dash nightly data for ${RUN_DAY}"
+          git pull --rebase origin main
+          git push
