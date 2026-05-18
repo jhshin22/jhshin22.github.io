@@ -2,10 +2,6 @@ name: Generate Selected News
 
 on:
   workflow_dispatch:
-  schedule:
-    # GitHub Actions cron uses UTC. KST = UTC+9.
-    # Runs aty.
-    - cron: '20 13 * * *'
 
 permissions:
   contents: write
@@ -35,7 +31,7 @@ jobs:
 
       - name: Commit and push selected JSON if changed
         run: |
-          git add auto_dash/data/selected/**/*.json
+          git add auto_dash/data/selected
 
           if git diff --cached --quiet; then
             echo "No selected news changes to commit."
