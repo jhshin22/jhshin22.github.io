@@ -8,6 +8,7 @@ from zoneinfo import ZoneInfo
 
 from build_events import build_daily_summary, build_real_events
 from calc_objects import ObservationPoint
+from fetch_weather import fetch_open_meteo_weather
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -25,6 +26,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build StarSeeker data files.")
     parser.add_argument("--days", type=int, default=30, help="Number of calendar days to build.")
     parser.add_argument("--start-date", type=str, default=None, help="YYYY-MM-DD. Defaults to today in Asia/Seoul.")
+    parser.add_argument("--disable-weather", action="store_true", help="Disable Open-Meteo weather filtering.")
     return parser.parse_args()
 
 
@@ -48,7 +50,24 @@ def main() -> None:
         timezone=location_config.get("timezone", "Asia/Seoul"),
     )
 
-    events = build_real_events(start_date, args.days, location, objects, rules)
+    weather_by_hour = {}
+    weather_enabled = False
+    weather_error = None
+    if not args.disable_weather:
+        try:
+            weather_by_hour = fetch_open_meteo_weather(
+                latitude=location.latitude,
+                longitude=location.longitude,
+                timezone=location.timezone,
+                forecast_days=min(args.days + 1, 16),
+            )
+            weather_enabled = bool(weather_by_hour)
+            print(f"Fetched {len(weather_by_hour)} hourly weather records from Open-Meteo.")
+        except Exception as exc:  # noqa: BLE001 - keep astronomy build alive when weather fails
+            weather_error = str(exc)
+            print(f"Weather fetch failed; continuing without weather filter: {weather_error}")
+
+    events = build_real_events(start_date, args.days, location, objects, rules, weather_by_hour=weather_by_hour)
     daily_summary = build_daily_summary(events)
     end_date = start_date + timedelta(days=args.days - 1)
     metadata = {
@@ -64,10 +83,13 @@ def main() -> None:
             "start_date": start_date.strftime("%Y-%m-%d"),
             "end_date": end_date.strftime("%Y-%m-%d"),
         },
-        "weather_enabled": False,
+        "weather_enabled": weather_enabled,
+        "weather_provider": "open_meteo" if weather_enabled else None,
+        "weather_error": weather_error,
+        "weather_forecast_days": min(args.days + 1, 16) if weather_enabled else 0,
         "kasi_enabled": False,
         "astronomy_engine": "skyfield_de421",
-        "version": "0.2.0-skyfield",
+        "version": "0.3.0-weather",
     }
 
     write_json(ROOT / "data" / "events.json", events)
