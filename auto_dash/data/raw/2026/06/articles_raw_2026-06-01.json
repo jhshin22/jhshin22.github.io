@@ -1,0 +1,1302 @@
+{
+  "target_date": "2026-06-01",
+  "updated_at": "2026-06-01T00:02:25+09:00",
+  "count": 29,
+  "articles": [
+    {
+      "id": "64192df0c306e8c4",
+      "title": "AI 챗봇은 친구인가, 상담자인가 [강민주의 디지털 법률 Insight]",
+      "source": "한국경제",
+      "source_domain": "hankyung.com",
+      "published_at": "2026-06-01T00:01:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.hankyung.com/article/202605319315i",
+      "naver_link": "https://n.news.naver.com/mnews/article/015/0005293340?sid=102",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "금융 AI",
+        "금융소비자"
+      ],
+      "description": "전문 변호사들이 조세, 상속, 노동, 공정거래, M&A, 금융 등 다양한 분야의 법률 이슈를 다루며, 주요 판결... 나아가 소비자 기만 등의 문제로 이어질 수 있을 것이다. AI 채팅, 해외따라 제도 정비해 해외 규제도 이...",
+      "pre_score": 49,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            },
+            {
+              "term": "챗봇",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 9,
+        "raw_score": 49,
+        "final_score": 49
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "f42699f7afd14638",
+      "title": "은행권 건전성 '경고등'… 연체율·금융사고 상승",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=91011",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=91011",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "금융감독원 대출",
+        "신용대출",
+        "연체율",
+        "은행권 대출"
+      ],
+      "description": "중소기업대출(0.81%)은 전년 동기(0.76%) 대비 여전히 높고, 가계신용대출(0.76%)도 전월(0.90%) 대비 낮아졌지만 여전히 높은 수준이다. ■ 금융권 금융사고 6년간 1조 돌파… 은행이 62% 차지 연체 지표가 악화되는...",
+      "pre_score": 101,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 28,
+          "risk_repayment": 27,
+          "industry_strategy": 16
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "은행권",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 101,
+        "final_score": 101
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d56e5ac839eeb519",
+      "title": "보험사, 부실채권 늘고 해외투자 주의보 '이중고'",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=91014",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=91014",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "금융감독원 대출",
+        "금융위원회 대출",
+        "보험사 대출",
+        "연체율",
+        "주택담보대출"
+      ],
+      "description": "가계대출은 134조5000억원으로 5000억원 늘었지만, 기업대출은 129조5000억원으로 1조7000억원 줄었다. 기업대출 축소 영향으로 전체 대출 규모도 전 분기 대비 줄어든 것으로 나타났다. ■ 연체율은 안정, 부실채권비율은...",
+      "pre_score": 87,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "risk_repayment": 27,
+          "industry_strategy": 16
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "부실",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 87,
+        "final_score": 87
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "2fd5e2e756c9dffb",
+      "title": "\"AI 공격은 AI로\"… 금융권 보안 패러다임 전환",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=91017",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=91017",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "금융 AI"
+      ],
+      "description": "■ KB금융, AI 기반 실전형 보안체계 강화 금융회사들도 자체 보안 역량 강화에 속도를 내고 있다. KB금융그룹은 'AI 공격에는 AI로 대응한다'는 원칙 아래 AI 에이전트를 활용한 모의해킹과 보안업무 자동화 체계를...",
+      "pre_score": 34,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 34,
+        "final_score": 34
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9406227b201e148c",
+      "title": "[김진호의 판례로 배우는 보험상식] \"의료자문 받자\"는 보험사, 소비자...",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=91062",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=91062",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "다만 소비자도 의료자문을 무조건 요구하는 방식은 주의해야 한다. 먼저 주치의 소견서, 검사결과, 진료기록 등 기본자료를 충분히 확보하고, 보험사가 문제 삼는 쟁점이 무엇인지 확인해야 한다. 금융당국도...",
+      "pre_score": 30,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 24
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 30,
+        "final_score": 30
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "0e294da8454412e4",
+      "title": "[포용적 금융] 포용보험·은행대리업 도입, 금융 사각지대 해소할까",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=91015",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=91015",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자",
+        "보험사 대출",
+        "소상공인 대출",
+        "은행권 대출",
+        "자영업자 대출"
+      ],
+      "description": "해외에서는 은행업무의 외부 수행을 일정 범위에서 허용하면서도 소비자 피해와 금융안정 리스크를 막기 위해 책임소재와 감독체계를 분명히 하고 있다. 일본은 은행대리업을 별도 신설해 규제한다는 점에서 국내 논의와...",
+      "pre_score": 30,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 30,
+        "final_score": 30
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "c19da4dd980bccc1",
+      "title": "대한전선, 다시 상승 국면 열리나…AI 전력 인프라 수혜에 월요일 주가...",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=578473",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=578473",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "[※ 본 기사는 투자 정보 제공을 목적으로 작성됐으며 투자 판단과 책임은 투자자 본인에게 있습니다. 기사 작성 과정에서 AI를 활용해 수행했습니다.] ▮ CBC뉴스ㅣCBCNEWS",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9f79305f61bcb9c3",
+      "title": "M&A, 사업구조 재설계와 AI 기반 가치창출 역량에 집중",
+      "source": "junggi.co.kr",
+      "source_domain": "junggi.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.junggi.co.kr/news/articleView.html?idxno=36537",
+      "naver_link": "https://www.junggi.co.kr/news/articleView.html?idxno=36537",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "과거에는 재무 데이터 중심으로 거래 여부를 판단했다면, 최근에는 AI를 활용해 미래 사업 모델과 시장 변화 가능성, 잠재적 시너지와 리스크까지 함께 분석하는 방향으로 진화하고 있다는 설명이다. 또한 기업들은...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "22681c47e027cecf",
+      "title": "[포용적 금융] \"포용금융, '금융기본권'으로 재정립해야\"",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=91020",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=91020",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융위원회 대출",
+        "채무조정",
+        "취약차주"
+      ],
+      "description": "단순히 금융 취약계층에 일회성 지원을 제공하는 데 그치지 않고 채무조정과 위험 보장, 자금 공급, 자산 형성까지 이어지는 생활 기반 회복 체계를 마련해야 한다는 취지에서다. 이를 위한 정책 구상으로는 취약계층의...",
+      "pre_score": 27,
+      "score_detail": {
+        "groups": {
+          "risk_repayment": 9
+        },
+        "matched_terms": {
+          "risk_repayment": [
+            {
+              "term": "채무조정",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 27,
+        "final_score": 27
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "7feb573c2dbddd6a",
+      "title": "주식 과열장에 필요한 건 종목 정보 아닌 '판단 역량'",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=91025",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=91025",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "금융 AI",
+        "금융소비자"
+      ],
+      "description": "이정민 한국금융소비자보호재단 연구위원은 \"중고령층은 디지털 활용 능력이 상대적으로 낮고 질문과 피드백이 즉각적으로 이뤄질 필요가 있기 때문에 대면 교육 채널이 반드시 유지·강화돼야 한다\"고 했으며 \"공공...",
+      "pre_score": 26,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 8
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "고령층",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 26,
+        "final_score": 26
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "6b5d1128a7e9c999",
+      "title": "뉴질랜드, 보험 가입 건수 감소에도 생명보험 수요 유지",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=90996",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=90996",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "중요한 금융 안전망 역할을 한다\"며 \"보험산업은 상품 접근성과 소비자 신뢰를 높이고, 더 많은 뉴질랜드 국민들이 자신에게 필요한 보장을 이해할 수 있도록 노력해야 한다\"고 말했다. 한편 보험료 수입 기준...",
+      "pre_score": 22,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 16
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "생명보험",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 22,
+        "final_score": 22
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "a08bb910870ddf2c",
+      "title": "스테이블코인 확산 속도 빨라지는데, \"제도화 서둘러야\"",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=91029",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=91029",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "금융 AI"
+      ],
+      "description": "스테이블코인이 단순 투자 자산을 넘어 차세대 금융 인프라로 부상하면서 발행 중심 논의를 넘어 유통... 정 부행장은 \"본격화된 인공지능(AI) 에이전트 시대에 스테이블코인은 AI 이코노미이자 머신투머신(M2M) 시장...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ec456a090ebee0a1",
+      "title": "[시론] 차라리 소설 속 '전쟁과 평화'였으면",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=90981",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=90981",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "더 높이 올라가야만 행복하다는 그 지독한 고집으로부터 벗어나는 순간, 비로소 멀게만 느껴졌던 평화의 첫 장이 열릴지도 모른다. 박치수 청주대학교 교수 前 교보생명 전무",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 8
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "c3d376fb9553abbc",
+      "title": "리플(XRP) 거래소 물량 감소 계속되나…개인 투자자 존재감 커지며 공급...",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=578444",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=578444",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "AI가 생성한 이미지. 최근 온체인 데이터에 따르면 바이낸스에서 고래 투자자와 개인 투자자 간 스프레드가... 여기에 미국과 이란 간 갈등이 최근 휴전 국면으로 접어들면서 글로벌 금융시장의 긴장감 역시 이전보다...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "5e7ba4088becdb68",
+      "title": "[김대호 진단] 국채 자경단 \"케빈 워시에 대한 경고\"",
+      "source": "g-enews.com",
+      "source_domain": "g-enews.com",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.g-enews.com/view.php?ud=202605271345294334906806b77b_1",
+      "naver_link": "https://www.g-enews.com/view.php?ud=202605271345294334906806b77b_1",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "서부 시대의 무법자들이 선량한 시민을 위협했다면 현대 금융시장의 무법자는 빚을 내어 돈을 펑펑 쓰는... 워시 의장은 지금의 인플레이션 우려를 일시적(Transitory)인 현상으로 진단하고, 인공지능(AI) 혁명이 주도하는...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "1358a8d5117e7aa3",
+      "title": "'제29차 국제보험학회(IME 2026)' 6월 29일 서울서 개최",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=91022",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=91022",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "인공지능(AI), 보험계리, 리스크, 연금 등을 주제로 260편 이상의 논문과 연구 결과가 발표될 예정이다.... 보험계리와 금융 리스크 전반을 아우른다. 행사 첫날인 29일에는 등록과 환영 리셉션이 진행된다. 30일에는...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "54f0d24b60cc5904",
+      "title": "우리기술, 원전 기대감 다시 부각…미국·이란 휴전 양상 속 에너지 안...",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=578442",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=578442",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "[※AI가 일부 조력한 기사입니다. 본 기사에서 제공하는 정보는 일반적인 금융시장 및 산업 관련 소식 전달을 목적으로 하며, 투자 권유나 재정적 조언이 아닙니다. 시장은 변동성이 매우 크며, 투자에 따른 손실은 투자자...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "25f55836eef83931",
+      "title": "로보티즈, 5세대 자율주행 로봇 기대감 커진다…월요일 주가 반등 시동...",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=578470",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=578470",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "[※ 본 기사는 투자 정보 제공을 목적으로 작성됐으며 투자 판단과 책임은 투자자 본인에게 있습니다. 기사 작성 과정에서 AI를 활용해 수행했습니다.] ▮ CBC뉴스ㅣCBCNEWS",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "1ceb0d836569f64e",
+      "title": "대한광통신, 바닥권 반등 신호 나올까…월요일 주가 향방은 지지 여부에...",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=578472",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=578472",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "[※ 본 기사는 투자 정보 제공을 목적으로 작성됐으며 투자 판단과 책임은 투자자 본인에게 있습니다. 기사 작성 과정에서 AI를 활용해 수행했습니다.] ▮ CBC뉴스ㅣCBCNEWS",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "f80e90c299adc561",
+      "title": "2026년 달력 현충일 대체공휴일 논의 다시 부상…\"하루 차이로 갈린 연...",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=578445",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=578445",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "AI가 생성. 오는 6월 6일 현충일을 앞두고 대체공휴일 적용 여부에 대한 관심이 다시 높아지고 있다. 올해는... 6월 3일 전국동시지방선거일이 법정공휴일로 지정되면서 일부 직장인들은 연차 활용 전략에 주목하고 있다....",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "2988061907d24d19",
+      "title": "레인보우로보틱스, 방어 성공…월요일 주가 '이 구간'이 승부처",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=578469",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=578469",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "[※ 본 기사는 투자 정보 제공을 목적으로 작성됐으며 투자 판단과 책임은 투자자 본인에게 있습니다. 기사 작성 과정에서 AI를 활용해 수행했습니다.] ▮ CBC뉴스ㅣCBCNEWS",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "5b4098a1d88d6170",
+      "title": "이수스페셜티케미컬, 6월 '전고체 배터리' 기대감 커진다…월요일 주가...",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=578471",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=578471",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "[※ 본 기사는 투자 정보 제공을 목적으로 작성됐으며 투자 판단과 책임은 투자자 본인에게 있습니다. 기사 작성 과정에서 AI를 활용해 수행했습니다.] ▮ CBC뉴스ㅣCBCNEWS",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "8831f50d5912c3cf",
+      "title": "6월1일 운세(띠별)",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=578229",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=578229",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "AI가 생성. 쥐띠 (1948, 1960, 1972, 1984, 1996, 2008, 2020) 총운: 급한 결정보다는 신중한 태도가 필요합니다.... 건강운: 에너지가 넘치니 이를 활용해 활발히 움직여 보세요. 뱀띠 (1953, 1965, 1977, 1989, 2001, 2013, 2025) 총운...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d1a0bf3b839ada82",
+      "title": "[하루건강] 플랫슈즈 즐겨 신는 여성 괴롭히는 발바닥 통증, 왜?",
+      "source": "hankookilbo.com",
+      "source_domain": "hankookilbo.com",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.hankookilbo.com/news/article/A2026052017340005048?did=NA",
+      "naver_link": "https://n.news.naver.com/mnews/article/469/0000933714?sid=103",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "종아리와 뒤꿈치를 쭉 늘려주는 아킬레스건 스트레칭을 자주 하고, 통증이 계속되면 빨리 진료를 받아보시는 게 좋아요. 전체기사보기: ※ 이 기사는 생성형 AI로 제작했습니다. 한국일보는 생성형 AI 활용 준칙을 준수합니다.",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "cf3fd5ee4ca6b6c5",
+      "title": "[MBTI 오늘의 운세] 2026년 6월 1일",
+      "source": "hankookilbo.com",
+      "source_domain": "hankookilbo.com",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.hankookilbo.com/news/article/A2026052909270004319?did=NA",
+      "naver_link": "https://n.news.naver.com/mnews/article/469/0000933713?sid=103",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "한 구석을 살짝 바꿔보면 새로운 아이디어가 떠올라요. 컨디션 좋아하는 노래를 크게 틀고 몸을 흔들면 에너지가 두 배로 충전돼요. ※ 이 기사는 생성형 AI로 제작했습니다. 한국일보는 생성형 AI 활용 준칙을 준수합니다.",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "16fb534888553895",
+      "title": "리노공업 변수 후폭풍…월요일 주가 분수령은?",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=578475",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=578475",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "신중한 대응이 요구되는 상황이다. [※ 본 기사는 투자 정보 제공을 목적으로 작성됐으며 투자 판단과 책임은 투자자 본인에게 있습니다. 기사 작성 과정에서 AI를 활용해 수행했습니다.] ▮ CBC뉴스ㅣCBCNEWS",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "f603c65176dd9b12",
+      "title": "[메타리치 MRC의 보험 라운지] 보험 해지 충동, 지금 참아야 하는 이유",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=91066",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=91066",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "보험계약대출",
+        "약관대출"
+      ],
+      "description": "예를 들어 사망보험금이 2억원인 종신보험이라면, 납입을 멈추는 대신 보험금을 1억원으로 줄여 계약을... 셋째, 보험료 자동대출납입이다. 그동안 쌓인 해약환급금, 즉 지금 해지하면 돌려받을 수 있는 돈을 담보로...",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d1bf1648d9cea173",
+      "title": "키움증권, 퇴직연금 시장 진출...비대면·수수료 경쟁력 부각",
+      "source": "newswhoplus.com",
+      "source_domain": "newswhoplus.com",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.newswhoplus.com/news/articleView.html?idxno=61294",
+      "naver_link": "https://www.newswhoplus.com/news/articleView.html?idxno=61294",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI",
+        "금융소비자"
+      ],
+      "description": "키움증권은 기존 퇴직연금 시장이 금융기관과 사용자 법인 중심으로 운영돼 왔다면, 앞으로는 가입자와... 투자에 대한 소비자 니즈와 수익률 중시 기조가 확산되며 퇴직연금 시장에서 증권사들의 지위가 달라진...",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "519f132bb6fcb44e",
+      "title": "삼성전기, 가파른 랠리?…목표가에도 월요일 변수는 '가격'",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-01T00:00:00+09:00",
+      "published_date": "2026-06-01",
+      "collected_at": "2026-06-01T00:01:51+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=578474",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=578474",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "[※ 본 기사는 투자 정보 제공을 목적으로 작성됐으며 투자 판단과 책임은 투자자 본인에게 있습니다. 기사 작성 과정에서 AI를 활용해 수행했습니다.] ▮ CBC뉴스ㅣCBCNEWS",
+      "pre_score": 0,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8,
+          "market_noise": -25
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "market_noise": [
+            {
+              "term": "목표가",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": -11,
+        "final_score": 0
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": true
+      }
+    }
+  ]
+}
