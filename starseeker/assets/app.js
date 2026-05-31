@@ -43,10 +43,30 @@ function filterEvents(events) {
   });
 }
 
+function eventDisplayTime(event) {
+  return event.display_time || event.time || '-';
+}
+
 function eventDateTime(event) {
-  const raw = event.datetime || `${event.date || event.calendar_date}T${event.display_time || event.time}:00+09:00`;
+  const raw = event.datetime || `${event.date || event.calendar_date}T${eventDisplayTime(event)}:00+09:00`;
   const time = new Date(raw).getTime();
   return Number.isNaN(time) ? 0 : time;
+}
+
+function visibilityTimeRange(event) {
+  const grouped = Array.isArray(event.grouped_events) && event.grouped_events.length
+    ? event.grouped_events
+    : null;
+
+  if (!grouped && event.time_range) {
+    return event.time_range;
+  }
+
+  const items = grouped || [event];
+  const sortedByTime = [...items].sort((a, b) => eventDateTime(a) - eventDateTime(b));
+  const start = eventDisplayTime(sortedByTime[0]);
+  const end = eventDisplayTime(sortedByTime[sortedByTime.length - 1]);
+  return `${start} ~ ${end}`;
 }
 
 function groupEventsByObject(events) {
@@ -66,14 +86,14 @@ function groupEventsByObject(events) {
     const best = sortedByScore[0];
     const first = sortedByTime[0];
     const last = sortedByTime[sortedByTime.length - 1];
-    const timeRange = sortedByTime.length === 1
-      ? (first.display_time || first.time)
-      : `${first.display_time || first.time} ~ ${last.display_time || last.time}`;
+    const timeRange = `${eventDisplayTime(first)} ~ ${eventDisplayTime(last)}`;
 
     return {
       ...best,
       time_range: timeRange,
-      best_time: best.display_time || best.time,
+      start_time: eventDisplayTime(first),
+      end_time: eventDisplayTime(last),
+      best_time: eventDisplayTime(best),
       slot_count: sortedByTime.length,
       grouped_events: sortedByTime
     };
@@ -249,11 +269,10 @@ function renderEventCard(event) {
   const weather = event.weather?.available
     ? `${event.weather.sky || '-'} · 강수확률 ${event.weather.precipitation_probability ?? '-'}%`
     : '날씨 데이터 없음';
-  const time = event.time_range || event.display_time || event.time;
+  const timeRange = visibilityTimeRange(event);
   const category = categoryLabels[event.category] || event.category;
-  const slotInfo = event.slot_count > 1
-    ? `관측 가능 시간: ${event.time_range} · 최적 시간: ${event.best_time}`
-    : `관측 가능 시간: ${time}`;
+  const bestTime = event.best_time || eventDisplayTime(event);
+  const slotInfo = `관측 가능 시간: ${timeRange} · 최적 시간: ${bestTime}`;
 
   return `
     <article class="event-card">
