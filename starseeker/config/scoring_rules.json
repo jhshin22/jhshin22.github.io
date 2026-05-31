@@ -1,0 +1,13 @@
+{
+  "minimum_altitude_deg": 10,
+  "recommended_altitude_deg": 20,
+  "excellent_altitude_deg": 35,
+  "night_sun_altitude_deg": -6,
+  "dark_sun_altitude_deg": -12,
+  "time_slots": ["19:00", "20:00", "21:00", "22:00", "23:00", "00:00", "01:00", "02:00", "03:00", "04:00"],
+  "score_thresholds": {
+    "excellent": 80,
+    "good": 60,
+    "fair": 40
+  }
+}
