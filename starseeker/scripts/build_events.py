@@ -201,6 +201,15 @@ def build_real_events(
     return events
 
 
+def best_unique_events(date_events: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    unique: dict[str, dict[str, Any]] = {}
+    for event in sorted(date_events, key=lambda item: item["score"], reverse=True):
+        key = f"{event['category']}__{event.get('object_id') or event['object_name_kr']}"
+        if key not in unique:
+            unique[key] = event
+    return list(unique.values())
+
+
 def build_daily_summary(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
     grouped: dict[str, list[dict[str, Any]]] = {}
     for event in events:
@@ -209,15 +218,16 @@ def build_daily_summary(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
     summaries: list[dict[str, Any]] = []
     for date_key, date_events in sorted(grouped.items()):
         sorted_events = sorted(date_events, key=lambda item: item["score"], reverse=True)
-        top = sorted_events[0]
+        unique_events = best_unique_events(sorted_events)
+        top = unique_events[0]
         summaries.append(
             {
                 "date": date_key,
                 "best_time": top["display_time"],
-                "best_objects": [event["object_name_kr"] for event in sorted_events[:3]],
+                "best_objects": [event["object_name_kr"] for event in unique_events[:3]],
                 "top_score": top["score"],
                 "grade": top["grade"],
-                "short_comment": " · ".join(event["object_name_kr"] for event in sorted_events[:2]) + " 관측 추천",
+                "short_comment": " · ".join(event["object_name_kr"] for event in unique_events[:2]) + " 관측 추천",
             }
         )
     return summaries
