@@ -1,0 +1,23 @@
+{
+  "planets": [
+    {"id": "mercury", "name_kr": "수성", "name_en": "Mercury", "base_magnitude": -0.5},
+    {"id": "venus", "name_kr": "금성", "name_en": "Venus", "base_magnitude": -4.0},
+    {"id": "mars", "name_kr": "화성", "name_en": "Mars", "base_magnitude": 0.0},
+    {"id": "jupiter", "name_kr": "목성", "name_en": "Jupiter", "base_magnitude": -2.2},
+    {"id": "saturn", "name_kr": "토성", "name_en": "Saturn", "base_magnitude": 0.7}
+  ],
+  "stars": [
+    {"id": "sirius", "name_kr": "시리우스", "name_en": "Sirius", "ra_hours": 6.7525, "dec_degrees": -16.7161, "magnitude": -1.46},
+    {"id": "vega", "name_kr": "베가", "name_en": "Vega", "ra_hours": 18.6156, "dec_degrees": 38.7837, "magnitude": 0.03},
+    {"id": "arcturus", "name_kr": "아크투루스", "name_en": "Arcturus", "ra_hours": 14.2610, "dec_degrees": 19.1825, "magnitude": -0.05},
+    {"id": "spica", "name_kr": "스피카", "name_en": "Spica", "ra_hours": 13.4199, "dec_degrees": -11.1613, "magnitude": 0.98},
+    {"id": "altair", "name_kr": "알타이르", "name_en": "Altair", "ra_hours": 19.8464, "dec_degrees": 8.8683, "magnitude": 0.77},
+    {"id": "deneb", "name_kr": "데네브", "name_en": "Deneb", "ra_hours": 20.6905, "dec_degrees": 45.2803, "magnitude": 1.25},
+    {"id": "capella", "name_kr": "카펠라", "name_en": "Capella", "ra_hours": 5.2782, "dec_degrees": 45.9980, "magnitude": 0.08},
+    {"id": "rigel", "name_kr": "리겔", "name_en": "Rigel", "ra_hours": 5.2423, "dec_degrees": -8.2016, "magnitude": 0.13},
+    {"id": "betelgeuse", "name_kr": "베텔게우스", "name_en": "Betelgeuse", "ra_hours": 5.9195, "dec_degrees": 7.4071, "magnitude": 0.42},
+    {"id": "aldebaran", "name_kr": "알데바란", "name_en": "Aldebaran", "ra_hours": 4.5987, "dec_degrees": 16.5093, "magnitude": 0.85},
+    {"id": "antares", "name_kr": "안타레스", "name_en": "Antares", "ra_hours": 16.4901, "dec_degrees": -26.4319, "magnitude": 1.06},
+    {"id": "fomalhaut", "name_kr": "포말하우트", "name_en": "Fomalhaut", "ra_hours": 22.9608, "dec_degrees": -29.6222, "magnitude": 1.16}
+  ]
+}
