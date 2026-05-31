@@ -4,9 +4,18 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from calc_objects import ObservationPoint, calculate_sample_position
+from calc_objects import ObservationPoint, SkyfieldEngine, object_position
 
 ROOT = Path(__file__).resolve().parents[1]
+
+BRIGHTNESS_SCORE_BY_OBJECT = {
+    "moon": 25,
+    "venus": 30,
+    "jupiter": 25,
+    "mars": 20,
+    "saturn": 18,
+    "mercury": 15,
+}
 
 
 def score_to_grade(score: int) -> str:
@@ -19,77 +28,175 @@ def score_to_grade(score: int) -> str:
     return "poor"
 
 
-def build_placeholder_events(
+def altitude_score(altitude_deg: float) -> int:
+    if altitude_deg < 10:
+        return 0
+    if altitude_deg < 20:
+        return 15
+    if altitude_deg < 35:
+        return 25
+    return 35
+
+
+def darkness_score(sun_altitude_deg: float) -> int:
+    if sun_altitude_deg >= -6:
+        return 0
+    if sun_altitude_deg >= -12:
+        return 15
+    return 25
+
+
+def brightness_score(obj: dict[str, Any], category: str) -> int:
+    object_id = obj["id"]
+    if object_id in BRIGHTNESS_SCORE_BY_OBJECT:
+        return BRIGHTNESS_SCORE_BY_OBJECT[object_id]
+    if category == "star":
+        magnitude = float(obj.get("magnitude", 2.0))
+        if magnitude <= 0:
+            return 20
+        if magnitude <= 1:
+            return 15
+        if magnitude <= 2:
+            return 10
+    return 5
+
+
+def moonlight_penalty(category: str, moon_altitude_deg: float, moon_illumination_pct: float) -> int:
+    if category in {"moon", "planet"}:
+        return 0
+    if moon_altitude_deg <= 0:
+        return 0
+    if moon_illumination_pct >= 70:
+        return 20
+    if moon_illumination_pct >= 40:
+        return 10
+    if moon_illumination_pct >= 20:
+        return 5
+    return 0
+
+
+def calculate_score(obj: dict[str, Any], category: str, position: dict[str, Any], context: dict[str, float]) -> int:
+    altitude = float(position["altitude_deg"])
+    sun_altitude = float(context["sun_altitude_deg"])
+
+    if altitude < 10:
+        return 0
+    if sun_altitude >= -6 and category not in {"moon", "planet"}:
+        return 0
+
+    score = 0
+    score += altitude_score(altitude)
+    score += darkness_score(sun_altitude)
+    score += brightness_score(obj, category)
+    score -= moonlight_penalty(
+        category,
+        float(context["moon_altitude_deg"]),
+        float(context["moon_illumination_pct"]),
+    )
+    return max(0, min(100, int(score)))
+
+
+def build_viewing_hint(obj: dict[str, Any], category: str, grade: str) -> str:
+    name = obj["name_kr"]
+    if category == "moon":
+        return "쌍안경으로 달의 명암 경계선 주변을 보면 크레이터와 지형 대비를 확인하기 좋습니다."
+    if obj["id"] == "jupiter":
+        return "맨눈으로도 밝게 보이며, 쌍안경으로는 갈릴레이 위성 관측을 시도할 수 있습니다."
+    if obj["id"] == "venus":
+        return "매우 밝은 행성이지만 지평선 근처 건물과 산에 가려질 수 있어 트인 방향이 중요합니다."
+    if obj["id"] == "saturn":
+        return "맨눈으로는 밝은 별처럼 보입니다. 고도가 충분하면 소형 망원경 관측 대상으로 좋습니다."
+    if category == "star":
+        return f"{name}은 맨눈으로 찾기 쉬운 밝은 별입니다. 주변 별자리와 함께 위치를 확인해 보세요."
+    return "고도가 높고 하늘이 어두울수록 관측 조건이 좋아집니다."
+
+
+def event_summary(obj: dict[str, Any], slot: str, position: dict[str, Any], grade: str) -> str:
+    label = {"excellent": "매우 좋은", "good": "좋은", "fair": "조건부로 가능한"}.get(grade, "낮은")
+    return (
+        f"{slot} 기준 {position['direction_kr']} 방향, 고도 {position['altitude_deg']}도로 "
+        f"관측 조건이 {label} 편입니다."
+    )
+
+
+def iter_observation_objects(objects: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
+    result: list[tuple[str, dict[str, Any]]] = [
+        ("moon", {"id": "moon", "name_kr": "달", "name_en": "Moon", "magnitude": -12.0})
+    ]
+    result.extend(("planet", {**item, "magnitude": item.get("base_magnitude", 0.0)}) for item in objects.get("planets", []))
+    result.extend(("star", item) for item in objects.get("stars", []))
+    return result
+
+
+def build_real_events(
     start_date: datetime,
     days: int,
     location: ObservationPoint,
     objects: dict[str, Any],
     rules: dict[str, Any],
 ) -> list[dict[str, Any]]:
-    """Build non-astronomical placeholder events for first-page development.
-
-    Real Skyfield-based calculations should replace this function's internals.
-    The output schema is kept stable so the HTML can be developed independently.
-    """
+    cache_dir = ROOT / "data" / "skyfield_cache"
+    engine = SkyfieldEngine(location, cache_dir=cache_dir)
     time_slots = rules.get("time_slots", ["20:00", "21:00", "22:00"])
-    event_objects = [
-        {"category": "moon", "id": "moon", "name_kr": "달", "name_en": "Moon", "magnitude": -12.0},
-        *[{"category": "planet", **item, "magnitude": item.get("base_magnitude", 0.0)} for item in objects.get("planets", [])[:3]],
-        *[{"category": "star", **item} for item in objects.get("stars", [])[:6]],
-    ]
+    min_score = int(rules.get("minimum_score", 40))
     events: list[dict[str, Any]] = []
 
     for day_offset in range(days):
         calendar_day = start_date + timedelta(days=day_offset)
-        for index, obj in enumerate(event_objects[:4]):
-            slot = time_slots[(day_offset + index) % len(time_slots)]
+        date_key = calendar_day.strftime("%Y-%m-%d")
+
+        for slot in time_slots:
             hour, minute = map(int, slot.split(":"))
             actual_day = calendar_day + timedelta(days=1 if hour < 12 else 0)
             when = actual_day.replace(hour=hour, minute=minute, second=0, microsecond=0)
-            position = calculate_sample_position(obj["id"], when, location)
-            base_score = 88 - index * 9 - (day_offset % 3) * 3
-            score = max(40, min(95, base_score))
-            grade = score_to_grade(score)
-            date_key = calendar_day.strftime("%Y-%m-%d")
+            context = engine.context(when)
 
-            events.append(
-                {
-                    "date": date_key,
-                    "calendar_date": date_key,
-                    "time": slot,
-                    "display_time": slot,
-                    "datetime": when.isoformat(),
-                    "timezone": location.timezone,
-                    "location": location.name,
-                    "category": obj["category"],
-                    "object_id": obj["id"],
-                    "object_name_kr": obj["name_kr"],
-                    "object_name_en": obj.get("name_en", obj["id"]),
-                    "title": f"{obj['name_kr']} 관측 가능",
-                    "summary": f"{slot} 기준 {position['direction_kr']} 방향, 고도 {position['altitude_deg']}도로 표시되는 1차 개발용 placeholder 이벤트입니다.",
-                    "direction_kr": position["direction_kr"],
-                    "azimuth_deg": position["azimuth_deg"],
-                    "altitude_deg": position["altitude_deg"],
-                    "magnitude": obj.get("magnitude"),
-                    "sun_altitude_deg": -14.0,
-                    "moon_illumination_pct": 50.0 + (day_offset % 10) * 4,
-                    "moon_altitude_deg": 20.0,
-                    "weather": {
-                        "available": False,
-                        "sky": None,
-                        "precipitation_type": None,
-                        "precipitation_probability": None,
-                    },
-                    "score": score,
-                    "grade": grade,
-                    "viewing_hint": "실제 Skyfield 계산 연동 전까지 화면 개발을 위한 임시 데이터입니다.",
-                    "source_flags": {
-                        "position": "placeholder",
-                        "sun_moon": "placeholder",
-                        "weather": "disabled",
-                    },
-                }
-            )
+            for category, obj in iter_observation_objects(objects):
+                position = object_position(engine, obj, category, when)
+                score = calculate_score(obj, category, position, context)
+                if score < min_score:
+                    continue
+                grade = score_to_grade(score)
+                magnitude = obj.get("magnitude", obj.get("base_magnitude"))
+
+                events.append(
+                    {
+                        "date": date_key,
+                        "calendar_date": date_key,
+                        "time": slot,
+                        "display_time": slot,
+                        "datetime": when.isoformat(),
+                        "timezone": location.timezone,
+                        "location": location.name,
+                        "category": category,
+                        "object_id": obj["id"],
+                        "object_name_kr": obj["name_kr"],
+                        "object_name_en": obj.get("name_en", obj["id"]),
+                        "title": f"{obj['name_kr']} 관측 가능",
+                        "summary": event_summary(obj, slot, position, grade),
+                        "direction_kr": position["direction_kr"],
+                        "azimuth_deg": position["azimuth_deg"],
+                        "altitude_deg": position["altitude_deg"],
+                        "magnitude": magnitude,
+                        "sun_altitude_deg": context["sun_altitude_deg"],
+                        "moon_illumination_pct": context["moon_illumination_pct"],
+                        "moon_altitude_deg": context["moon_altitude_deg"],
+                        "weather": {
+                            "available": False,
+                            "sky": None,
+                            "precipitation_type": None,
+                            "precipitation_probability": None,
+                        },
+                        "score": score,
+                        "grade": grade,
+                        "viewing_hint": build_viewing_hint(obj, category, grade),
+                        "source_flags": {
+                            "position": "skyfield_de421",
+                            "sun_moon": "skyfield_de421",
+                            "weather": "disabled",
+                        },
+                    }
+                )
 
     return events
 
