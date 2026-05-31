@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-31T19:30:00+09:00",
+  "generated_at": null,
   "timezone": "Asia/Seoul",
   "location": {
     "name": "Seoul Jongno",
@@ -8,10 +8,11 @@
     "elevation_m": 50
   },
   "range": {
-    "start_date": "2026-06-01",
-    "end_date": "2026-06-30"
+    "start_date": null,
+    "end_date": null
   },
   "weather_enabled": false,
   "kasi_enabled": false,
-  "version": "0.1.0-scaffold"
+  "astronomy_engine": "skyfield_de421",
+  "version": "0.2.0-skyfield-pending-build"
 }
