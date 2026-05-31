@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <header class="hero">
+  <header class="hero compact-hero">
     <div>
       <p class="eyebrow">Korea Night Sky Calendar</p>
       <h1>StarSeeker</h1>
@@ -17,12 +17,16 @@
   </header>
 
   <main class="layout">
-    <section class="panel today-panel">
+    <section class="panel calendar-panel">
       <div class="section-title">
-        <h2>오늘 밤 추천</h2>
-        <span id="todayDate"></span>
+        <button id="prevMonth" class="ghost-btn" type="button">‹</button>
+        <h2 id="monthTitle">월간 캘린더</h2>
+        <button id="nextMonth" class="ghost-btn" type="button">›</button>
       </div>
-      <div id="todayList" class="event-list"></div>
+      <div class="weekday-grid" aria-hidden="true">
+        <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+      </div>
+      <div id="calendarGrid" class="calendar-grid"></div>
     </section>
 
     <section class="panel controls-panel">
@@ -52,28 +56,17 @@
       </div>
     </section>
 
-    <section class="panel calendar-panel">
-      <div class="section-title">
-        <button id="prevMonth" class="ghost-btn" type="button">‹</button>
-        <h2 id="monthTitle">월간 캘린더</h2>
-        <button id="nextMonth" class="ghost-btn" type="button">›</button>
-      </div>
-      <div class="weekday-grid" aria-hidden="true">
-        <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
-      </div>
-      <div id="calendarGrid" class="calendar-grid"></div>
-    </section>
-
     <section class="panel detail-panel">
       <div class="section-title">
         <h2 id="detailTitle">날짜를 선택하세요</h2>
       </div>
-      <div id="detailList" class="event-list muted">캘린더에서 날짜를 누르면 시간대별 관측 추천 천체가 표시됩니다.</div>
+      <div id="detailList" class="event-list muted">캘린더에서 날짜를 누르면 관측 추천 카드가 표시됩니다.</div>
+      <div id="eventDetail" class="event-detail muted">카드를 누르면 상세정보와 관측 주의사항이 표시됩니다.</div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>StarSeeker 1차 버전 · 샘플 데이터 기반 · Asia/Seoul</p>
+    <p>StarSeeker · Skyfield + Open-Meteo · Asia/Seoul</p>
   </footer>
 
   <script src="assets/app.js"></script>
