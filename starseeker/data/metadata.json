@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-31T22:36:09+09:00",
+  "generated_at": "2026-05-31T22:36:42+09:00",
   "timezone": "Asia/Seoul",
   "location": {
     "name": "Seoul Jongno",
@@ -11,8 +11,11 @@
     "start_date": "2026-05-31",
     "end_date": "2026-06-29"
   },
-  "weather_enabled": false,
+  "weather_enabled": true,
+  "weather_provider": "open_meteo",
+  "weather_error": null,
+  "weather_forecast_days": 16,
   "kasi_enabled": false,
   "astronomy_engine": "skyfield_de421",
-  "version": "0.2.0-skyfield"
+  "version": "0.3.0-weather"
 }
