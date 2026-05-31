@@ -1,0 +1,57 @@
+name: Update StarSeeker
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 20 * * *" # 05:20 KST
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r starseeker/requirements.txt
+
+      - name: Build StarSeeker data
+        env:
+          ASTRO_LOCATION_NAME: "Seoul Jongno"
+          ASTRO_LAT: "37.5729"
+          ASTRO_LON: "126.9794"
+          ASTRO_ELEVATION_M: "50"
+          ASTRO_TIMEZONE: "Asia/Seoul"
+          KASI_API_KEY: ${{ secrets.KASI_API_KEY }}
+          KMA_API_KEY: ${{ secrets.KMA_API_KEY }}
+        run: |
+          cd starseeker
+          python scripts/build_all.py --days 30
+
+      - name: Validate output
+        run: |
+          cd starseeker
+          python scripts/validate_output.py
+          pytest tests
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add starseeker/data/*.json
+          if git diff --cached --quiet; then
+            echo "No StarSeeker data changes"
+          else
+            git commit -m "Update StarSeeker data"
+            git push
+          fi
