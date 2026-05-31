@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "20 20 * * *" # 05:20 KST
+  push:
+    paths:
+      - "starseeker/**"
+      - ".github/workflows/update-starseeker.yml"
 
 permissions:
   contents: write
