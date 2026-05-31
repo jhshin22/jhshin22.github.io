@@ -5,7 +5,7 @@ const state = {
   metadata: null,
   currentMonth: new Date(),
   selectedDate: null,
-  selectedEventKey: null,
+  expandedEventKey: null,
   filters: {
     category: 'all',
     grade: 'all'
@@ -202,24 +202,28 @@ async function init() {
 function bindEvents() {
   document.getElementById('categoryFilter').addEventListener('change', (event) => {
     state.filters.category = event.target.value;
-    state.selectedEventKey = null;
+    state.expandedEventKey = null;
     renderAll();
   });
 
   document.getElementById('gradeFilter').addEventListener('change', (event) => {
     state.filters.grade = event.target.value;
-    state.selectedEventKey = null;
+    state.expandedEventKey = null;
     renderAll();
   });
 
   document.getElementById('prevMonth').addEventListener('click', () => {
     state.currentMonth = new Date(state.currentMonth.getFullYear(), state.currentMonth.getMonth() - 1, 1);
+    state.expandedEventKey = null;
     renderCalendar();
+    renderDetail(state.selectedDate);
   });
 
   document.getElementById('nextMonth').addEventListener('click', () => {
     state.currentMonth = new Date(state.currentMonth.getFullYear(), state.currentMonth.getMonth() + 1, 1);
+    state.expandedEventKey = null;
     renderCalendar();
+    renderDetail(state.selectedDate);
   });
 }
 
@@ -231,21 +235,7 @@ function renderAll() {
 
 function renderMetadata() {
   const el = document.getElementById('metadataCard');
-  if (!state.metadata) {
-    el.textContent = '메타데이터 없음 · 데이터 확인 필요';
-    return;
-  }
-
-  const generated = state.metadata.generated_at || '-';
-  const location = state.metadata.location?.name || '관측지 미지정';
-  const start = state.metadata.range?.start_date || '-';
-  const end = state.metadata.range?.end_date || '-';
-  el.innerHTML = `
-    <strong>${location}</strong><br />
-    데이터 범위: ${start} ~ ${end}<br />
-    생성: ${generated}<br />
-    날씨: ${state.metadata.weather_enabled ? '사용' : '미사용'} · KASI: ${state.metadata.kasi_enabled ? '사용' : '미사용'}
-  `;
+  el.innerHTML = '<strong>별보러 언제갈까?</strong><br />서울에서 별이 관측 가능한 날을 알아보세요';
 }
 
 function renderCalendar() {
@@ -286,7 +276,7 @@ function renderCalendar() {
   grid.querySelectorAll('.day-card[data-date]').forEach((button) => {
     button.addEventListener('click', () => {
       state.selectedDate = button.dataset.date;
-      state.selectedEventKey = null;
+      state.expandedEventKey = null;
       renderCalendar();
       renderDetail(state.selectedDate);
     });
@@ -296,7 +286,6 @@ function renderCalendar() {
 function renderDetail(dateKey) {
   const title = document.getElementById('detailTitle');
   const list = document.getElementById('detailList');
-  const detail = document.getElementById('eventDetail');
   title.textContent = `${dateKey} 밤 관측 추천`;
 
   const allDateEvents = state.events.filter((event) => (event.calendar_date || event.date) === dateKey);
@@ -306,37 +295,37 @@ function renderDetail(dateKey) {
   list.classList.remove('muted');
   if (!grouped.length) {
     list.innerHTML = `<p class="muted">추천 대상 없음<br />${noRecommendationReason(dateKey, allDateEvents)}</p>`;
-    detail.classList.add('muted');
-    detail.innerHTML = '다른 날짜를 선택하거나 필터 조건을 완화해 보세요.';
     return;
   }
 
-  const selected = grouped.find((event) => event.group_key === state.selectedEventKey) || grouped[0];
-  state.selectedEventKey = selected.group_key;
-  list.innerHTML = grouped.map((event) => renderEventSummaryCard(event, event.group_key === state.selectedEventKey)).join('');
-  list.querySelectorAll('.event-card[data-event-key]').forEach((button) => {
+  list.innerHTML = grouped.map((event) => renderExpandableEventCard(event, event.group_key === state.expandedEventKey)).join('');
+  list.querySelectorAll('.expand-toggle').forEach((button) => {
     button.addEventListener('click', () => {
-      state.selectedEventKey = button.dataset.eventKey;
+      const key = button.dataset.eventKey;
+      state.expandedEventKey = state.expandedEventKey === key ? null : key;
       renderDetail(state.selectedDate);
     });
   });
-  renderEventDetail(selected);
 }
 
-function renderEventSummaryCard(event, isActive) {
+function renderExpandableEventCard(event, isExpanded) {
   const grade = event.grade || 'fair';
   const bestTime = event.best_time || eventDisplayTime(event);
+  const detail = isExpanded ? renderInlineEventDetail(event) : '';
   return `
-    <button class="event-card summary-card ${isActive ? 'active' : ''}" type="button" data-event-key="${event.group_key}">
-      <span class="summary-object">${event.object_name_kr}</span>
-      <span class="summary-time">최적시간 ${bestTime}</span>
-      <span class="badge ${grade}">${gradeLabels[grade] || grade}</span>
-    </button>
+    <article class="event-card summary-card ${isExpanded ? 'active expanded' : ''}">
+      <div class="summary-row">
+        <span class="summary-object">${event.object_name_kr}</span>
+        <span class="summary-time">최적시간 ${bestTime}</span>
+        <span class="badge ${grade}">${gradeLabels[grade] || grade}</span>
+        <button class="expand-toggle" type="button" data-event-key="${event.group_key}">${isExpanded ? '접기' : '확장'}</button>
+      </div>
+      ${detail}
+    </article>
   `;
 }
 
-function renderEventDetail(event) {
-  const detail = document.getElementById('eventDetail');
+function renderInlineEventDetail(event) {
   const grade = event.grade || 'fair';
   const weather = event.weather?.available
     ? `${event.weather.sky || '-'} · 구름량 ${event.weather.cloud_cover ?? '-'}% · 강수확률 ${event.weather.precipitation_probability ?? '-'}%`
@@ -346,13 +335,8 @@ function renderEventDetail(event) {
   const bestTime = event.best_time || eventDisplayTime(event);
   const warnings = warningsForEvent(event);
 
-  detail.classList.remove('muted');
-  detail.innerHTML = `
-    <article class="event-detail-card">
-      <div class="detail-head">
-        <h3>${event.object_name_kr}</h3>
-        <span class="badge ${grade}">${gradeLabels[grade] || grade}</span>
-      </div>
+  return `
+    <div class="inline-detail">
       <div class="event-meta">
         관측 가능 시간: ${timeRange}<br />
         최적 시간: ${bestTime}<br />
@@ -365,7 +349,7 @@ function renderEventDetail(event) {
         <strong>관측 주의사항</strong>
         <ul>${warnings.map((warning) => `<li>${warning}</li>`).join('')}</ul>
       </div>
-    </article>
+    </div>
   `;
 }
 
