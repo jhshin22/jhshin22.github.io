@@ -43,6 +43,61 @@ function filterEvents(events) {
   });
 }
 
+function eventDateTime(event) {
+  const raw = event.datetime || `${event.date || event.calendar_date}T${event.display_time || event.time}:00+09:00`;
+  const time = new Date(raw).getTime();
+  return Number.isNaN(time) ? 0 : time;
+}
+
+function groupEventsByObject(events) {
+  const groups = new Map();
+
+  events.forEach((event) => {
+    const key = `${event.calendar_date || event.date}__${event.category}__${event.object_id || event.object_name_kr}`;
+    if (!groups.has(key)) {
+      groups.set(key, []);
+    }
+    groups.get(key).push(event);
+  });
+
+  return Array.from(groups.values()).map((items) => {
+    const sortedByTime = [...items].sort((a, b) => eventDateTime(a) - eventDateTime(b));
+    const sortedByScore = [...items].sort((a, b) => b.score - a.score);
+    const best = sortedByScore[0];
+    const first = sortedByTime[0];
+    const last = sortedByTime[sortedByTime.length - 1];
+    const timeRange = sortedByTime.length === 1
+      ? (first.display_time || first.time)
+      : `${first.display_time || first.time} ~ ${last.display_time || last.time}`;
+
+    return {
+      ...best,
+      time_range: timeRange,
+      best_time: best.display_time || best.time,
+      slot_count: sortedByTime.length,
+      grouped_events: sortedByTime
+    };
+  }).sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return eventDateTime(a) - eventDateTime(b);
+  });
+}
+
+function uniqueObjectNames(events, limit = 3) {
+  const names = [];
+  const seen = new Set();
+  events
+    .sort((a, b) => b.score - a.score)
+    .forEach((event) => {
+      const key = `${event.category}__${event.object_id || event.object_name_kr}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        names.push(event.object_name_kr);
+      }
+    });
+  return names.slice(0, limit);
+}
+
 async function loadJson(path, fallback) {
   try {
     const response = await fetch(path, { cache: 'no-store' });
@@ -126,11 +181,10 @@ function renderToday() {
   document.getElementById('todayDate').textContent = todayKey;
   const list = document.getElementById('todayList');
   const events = filterEvents(state.events)
-    .filter((event) => event.calendar_date === todayKey || event.date === todayKey)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 5);
+    .filter((event) => event.calendar_date === todayKey || event.date === todayKey);
+  const grouped = groupEventsByObject(events).slice(0, 5);
 
-  list.innerHTML = events.length ? events.map(renderEventCard).join('') : '<p class="muted">오늘 날짜의 추천 데이터가 없습니다. 캘린더에서 다른 날짜를 선택하세요.</p>';
+  list.innerHTML = grouped.length ? grouped.map(renderEventCard).join('') : '<p class="muted">오늘 날짜의 추천 데이터가 없습니다. 캘린더에서 다른 날짜를 선택하세요.</p>';
 }
 
 function renderCalendar() {
@@ -153,15 +207,16 @@ function renderCalendar() {
     const key = `${y}-${String(m + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     const summary = state.dailySummary.find((item) => item.date === key);
     const events = filterEvents(state.events).filter((event) => (event.calendar_date || event.date) === key);
-    const topObjects = summary?.best_objects || events.slice(0, 3).map((event) => event.object_name_kr);
-    const grade = summary?.grade || events[0]?.grade || 'poor';
+    const topObjects = summary?.best_objects || uniqueObjectNames(events, 3);
+    const grouped = groupEventsByObject(events);
+    const grade = summary?.grade || grouped[0]?.grade || 'poor';
     const active = state.selectedDate === key ? 'active' : '';
 
     pieces.push(`
       <button class="day-card ${active}" type="button" data-date="${key}">
         <span class="day-num">${day}</span>
         <span class="day-objects">${topObjects.slice(0, 3).join(' · ') || '추천 없음'}</span>
-        ${events.length ? `<span class="badge ${grade}">${gradeLabels[grade] || grade}</span>` : '<span class="badge poor">없음</span>'}
+        ${grouped.length ? `<span class="badge ${grade}">${gradeLabels[grade] || grade}</span>` : '<span class="badge poor">없음</span>'}
       </button>
     `);
   }
@@ -182,11 +237,11 @@ function renderDetail(dateKey) {
   title.textContent = `${dateKey} 밤 관측 추천`;
 
   const events = filterEvents(state.events)
-    .filter((event) => (event.calendar_date || event.date) === dateKey)
-    .sort((a, b) => `${a.display_time || a.time}`.localeCompare(`${b.display_time || b.time}`));
+    .filter((event) => (event.calendar_date || event.date) === dateKey);
+  const grouped = groupEventsByObject(events);
 
   list.classList.remove('muted');
-  list.innerHTML = events.length ? events.map(renderEventCard).join('') : '<p class="muted">선택한 날짜에 조건을 만족하는 추천 천체가 없습니다.</p>';
+  list.innerHTML = grouped.length ? grouped.map(renderEventCard).join('') : '<p class="muted">선택한 날짜에 조건을 만족하는 추천 천체가 없습니다.</p>';
 }
 
 function renderEventCard(event) {
@@ -194,14 +249,18 @@ function renderEventCard(event) {
   const weather = event.weather?.available
     ? `${event.weather.sky || '-'} · 강수확률 ${event.weather.precipitation_probability ?? '-'}%`
     : '날씨 데이터 없음';
-  const time = event.display_time || event.time;
+  const time = event.time_range || event.display_time || event.time;
   const category = categoryLabels[event.category] || event.category;
+  const slotInfo = event.slot_count > 1
+    ? `관측 가능 시간: ${event.time_range} · 최적 시간: ${event.best_time}`
+    : `관측 가능 시간: ${time}`;
 
   return `
     <article class="event-card">
-      <h3>${time} · ${event.object_name_kr} <span class="badge ${grade}">${gradeLabels[grade] || grade}</span></h3>
+      <h3>${event.object_name_kr} <span class="badge ${grade}">${gradeLabels[grade] || grade}</span></h3>
       <div class="event-meta">
-        ${category} · ${event.direction_kr || '-'} · 고도 ${formatNumber(event.altitude_deg)}° · 방위각 ${formatNumber(event.azimuth_deg)}° · 점수 ${event.score}<br />
+        ${slotInfo}<br />
+        ${category} · ${event.direction_kr || '-'} · 최적 고도 ${formatNumber(event.altitude_deg)}° · 방위각 ${formatNumber(event.azimuth_deg)}° · 점수 ${event.score}<br />
         달 조명률 ${formatNumber(event.moon_illumination_pct)}% · 태양고도 ${formatNumber(event.sun_altitude_deg)}° · ${weather}
       </div>
       <p class="event-summary">${event.summary || event.viewing_hint || '관측 메모가 없습니다.'}</p>
