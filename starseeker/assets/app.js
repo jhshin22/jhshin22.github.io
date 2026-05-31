@@ -1,6 +1,7 @@
 const state = {
   events: [],
   dailySummary: [],
+  noRecommendationReasons: [],
   metadata: null,
   currentMonth: new Date(),
   selectedDate: null,
@@ -36,14 +37,6 @@ function getTodayKey() {
   return toDateKey(new Date());
 }
 
-function filterEvents(events) {
-  return events.filter((event) => {
-    const categoryOk = state.filters.category === 'all' || event.category === state.filters.category;
-    const gradeOk = state.filters.grade === 'all' || event.grade === event.grade && state.filters.grade === event.grade;
-    return categoryOk && gradeOk;
-  });
-}
-
 function filterEventsForList(events) {
   return events.filter((event) => {
     const categoryOk = state.filters.category === 'all' || event.category === state.filters.category;
@@ -63,15 +56,7 @@ function eventDateTime(event) {
 }
 
 function visibilityTimeRange(event) {
-  const grouped = Array.isArray(event.grouped_events) && event.grouped_events.length
-    ? event.grouped_events
-    : null;
-
-  if (!grouped && event.time_range) {
-    return event.time_range;
-  }
-
-  const items = grouped || [event];
+  const items = Array.isArray(event.grouped_events) && event.grouped_events.length ? event.grouped_events : [event];
   const sortedByTime = [...items].sort((a, b) => eventDateTime(a) - eventDateTime(b));
   const start = eventDisplayTime(sortedByTime[0]);
   const end = eventDisplayTime(sortedByTime[sortedByTime.length - 1]);
@@ -87,9 +72,7 @@ function groupEventsByObject(events) {
 
   events.forEach((event) => {
     const key = objectGroupKey(event);
-    if (!groups.has(key)) {
-      groups.set(key, []);
-    }
+    if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(event);
   });
 
@@ -99,12 +82,11 @@ function groupEventsByObject(events) {
     const best = sortedByScore[0];
     const first = sortedByTime[0];
     const last = sortedByTime[sortedByTime.length - 1];
-    const timeRange = `${eventDisplayTime(first)} ~ ${eventDisplayTime(last)}`;
 
     return {
       ...best,
       group_key: key,
-      time_range: timeRange,
+      time_range: `${eventDisplayTime(first)} ~ ${eventDisplayTime(last)}`,
       start_time: eventDisplayTime(first),
       end_time: eventDisplayTime(last),
       best_time: eventDisplayTime(best),
@@ -175,17 +157,8 @@ function warningsForEvent(event) {
 }
 
 function noRecommendationReason(dateKey, allEventsForDate) {
-  const weatherEvents = state.events.filter((event) => (event.calendar_date || event.date) === dateKey && event.weather?.available);
-  const weatherSamples = weatherEvents.map((event) => event.weather).filter(Boolean);
-  const worstWeather = weatherSamples.sort((a, b) => weatherSeverity(b) - weatherSeverity(a))[0];
-
-  if (worstWeather && weatherSeverity(worstWeather) >= 4) {
-    const parts = [];
-    if (worstWeather.sky) parts.push(worstWeather.sky);
-    if (worstWeather.cloud_cover !== null && worstWeather.cloud_cover !== undefined) parts.push(`구름량 ${worstWeather.cloud_cover}%`);
-    if (worstWeather.precipitation_probability !== null && worstWeather.precipitation_probability !== undefined) parts.push(`강수확률 ${worstWeather.precipitation_probability}%`);
-    return `날씨 조건이 좋지 않아 추천을 숨겼습니다(${parts.join(', ')}).`;
-  }
+  const generatedReason = state.noRecommendationReasons.find((item) => item.date === dateKey);
+  if (generatedReason?.reason) return generatedReason.reason;
 
   if (!allEventsForDate.length) {
     return '고도, 밝기, 하늘 어두움 조건을 동시에 만족하는 대상이 없습니다.';
@@ -206,14 +179,16 @@ async function loadJson(path, fallback) {
 }
 
 async function init() {
-  const [events, dailySummary, metadata] = await Promise.all([
+  const [events, dailySummary, noRecommendationReasons, metadata] = await Promise.all([
     loadJson('data/events.json', []),
     loadJson('data/daily_summary.json', []),
+    loadJson('data/no_recommendation_reasons.json', []),
     loadJson('data/metadata.json', null)
   ]);
 
   state.events = events;
   state.dailySummary = dailySummary;
+  state.noRecommendationReasons = noRecommendationReasons;
   state.metadata = metadata;
 
   const rangeStart = metadata?.range?.start_date;
