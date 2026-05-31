@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from build_events import build_daily_summary, build_placeholder_events
+from build_events import build_daily_summary, build_real_events
 from calc_objects import ObservationPoint
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,7 +48,7 @@ def main() -> None:
         timezone=location_config.get("timezone", "Asia/Seoul"),
     )
 
-    events = build_placeholder_events(start_date, args.days, location, objects, rules)
+    events = build_real_events(start_date, args.days, location, objects, rules)
     daily_summary = build_daily_summary(events)
     end_date = start_date + timedelta(days=args.days - 1)
     metadata = {
@@ -66,13 +66,14 @@ def main() -> None:
         },
         "weather_enabled": False,
         "kasi_enabled": False,
-        "version": "0.1.0-placeholder",
+        "astronomy_engine": "skyfield_de421",
+        "version": "0.2.0-skyfield",
     }
 
     write_json(ROOT / "data" / "events.json", events)
     write_json(ROOT / "data" / "daily_summary.json", daily_summary)
     write_json(ROOT / "data" / "metadata.json", metadata)
-    print(f"Generated {len(events)} events for {args.days} days.")
+    print(f"Generated {len(events)} Skyfield-based events for {args.days} days.")
 
 
 if __name__ == "__main__":
