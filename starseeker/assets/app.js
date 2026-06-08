@@ -299,9 +299,9 @@ function renderDetail(dateKey) {
   }
 
   list.innerHTML = grouped.map((event) => renderExpandableEventCard(event, event.group_key === state.expandedEventKey)).join('');
-  list.querySelectorAll('.expand-toggle').forEach((button) => {
-    button.addEventListener('click', () => {
-      const key = button.dataset.eventKey;
+  list.querySelectorAll('.event-card[data-event-key]').forEach((card) => {
+    card.addEventListener('click', () => {
+      const key = card.dataset.eventKey;
       state.expandedEventKey = state.expandedEventKey === key ? null : key;
       renderDetail(state.selectedDate);
     });
@@ -313,12 +313,12 @@ function renderExpandableEventCard(event, isExpanded) {
   const bestTime = event.best_time || eventDisplayTime(event);
   const detail = isExpanded ? renderInlineEventDetail(event) : '';
   return `
-    <article class="event-card summary-card ${isExpanded ? 'active expanded' : ''}">
+    <article class="event-card summary-card ${isExpanded ? 'active expanded' : ''}" data-event-key="${event.group_key}" role="button" tabindex="0" aria-expanded="${isExpanded}">
       <div class="summary-row">
         <span class="summary-object">${event.object_name_kr}</span>
         <span class="summary-time">최적시간 ${bestTime}</span>
         <span class="badge ${grade}">${gradeLabels[grade] || grade}</span>
-        <button class="expand-toggle" type="button" data-event-key="${event.group_key}">${isExpanded ? '접기' : '확장'}</button>
+        <span class="expand-toggle" aria-hidden="true">${isExpanded ? '접기' : '펼치기'}</span>
       </div>
       ${detail}
     </article>
@@ -326,7 +326,6 @@ function renderExpandableEventCard(event, isExpanded) {
 }
 
 function renderInlineEventDetail(event) {
-  const grade = event.grade || 'fair';
   const weather = event.weather?.available
     ? `${event.weather.sky || '-'} · 구름량 ${event.weather.cloud_cover ?? '-'}% · 강수확률 ${event.weather.precipitation_probability ?? '-'}%`
     : '날씨 데이터 없음';
