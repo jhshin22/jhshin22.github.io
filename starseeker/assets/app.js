@@ -167,6 +167,17 @@ function noRecommendationReason(dateKey, allEventsForDate) {
   return '현재 선택한 필터 조건을 만족하는 추천 대상이 없습니다.';
 }
 
+function phaseText(event) {
+  const phase = event.phase;
+  if (!phase) return '';
+  const name = phase.phase_name_kr || '-';
+  const illumination = phase.illumination_pct !== null && phase.illumination_pct !== undefined
+    ? `${formatNumber(phase.illumination_pct)}%`
+    : '-';
+  const note = phase.observable_phase_note ? ` · ${phase.observable_phase_note}` : '';
+  return `위상: ${name} · 조명률 ${illumination}${note}<br />`;
+}
+
 async function loadJson(path, fallback) {
   try {
     const response = await fetch(path, { cache: 'no-store' });
@@ -340,6 +351,7 @@ function renderInlineEventDetail(event) {
         관측 가능 시간: ${timeRange}<br />
         최적 시간: ${bestTime}<br />
         ${category} · 방향 ${event.direction_kr || '-'} · 최적 고도 ${formatNumber(event.altitude_deg)}° · 방위각 ${formatNumber(event.azimuth_deg)}° · 점수 ${event.score}<br />
+        ${phaseText(event)}
         달 조명률 ${formatNumber(event.moon_illumination_pct)}% · 태양고도 ${formatNumber(event.sun_altitude_deg)}°<br />
         날씨: ${weather}
       </div>
