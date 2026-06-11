@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-11T21:01:47+09:00",
+  "generated_at": "2026-06-11T21:04:12+09:00",
   "timezone": "Asia/Seoul",
   "location": {
     "name": "Seoul Jongno",
@@ -11,10 +11,10 @@
     "start_date": "2026-06-11",
     "end_date": "2026-07-10"
   },
-  "weather_enabled": false,
-  "weather_provider": null,
-  "weather_error": "HTTPSConnectionPool(host='api.open-meteo.com', port=443): Max retries exceeded with url: /v1/forecast?latitude=37.5729&longitude=126.9794&timezone=Asia%2FSeoul&forecast_days=16&hourly=cloud_cover%2Cprecipitation_probability%2Cprecipitation%2Cweather_code%2Cvisibility (Caused by NameResolutionError(\"HTTPSConnection(host='api.open-meteo.com', port=443): Failed to resolve 'api.open-meteo.com' ([Errno -3] Temporary failure in name resolution)\"))",
-  "weather_forecast_days": 0,
+  "weather_enabled": true,
+  "weather_provider": "open_meteo",
+  "weather_error": null,
+  "weather_forecast_days": 16,
   "kasi_enabled": false,
   "astronomy_engine": "skyfield_de421",
   "version": "0.4.0-ux-reasons"
