@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from calc_objects import ObservationPoint, SkyfieldEngine, object_position
+from calc_objects import ObservationPoint, SkyfieldEngine, object_phase_info, object_position
 from fetch_weather import event_weather_key, is_weather_unsuitable, weather_score_delta
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -121,8 +121,18 @@ def build_viewing_hint(obj: dict[str, Any], category: str, grade: str) -> str:
     return "고도가 높고 하늘이 어두울수록 관측 조건이 좋아집니다."
 
 
-def event_summary(obj: dict[str, Any], slot: str, position: dict[str, Any], grade: str, weather: dict[str, Any] | None = None) -> str:
+def event_summary(
+    obj: dict[str, Any],
+    slot: str,
+    position: dict[str, Any],
+    grade: str,
+    weather: dict[str, Any] | None = None,
+    phase: dict[str, Any] | None = None,
+) -> str:
     label = {"excellent": "매우 좋은", "good": "좋은", "fair": "조건부로 가능한"}.get(grade, "낮은")
+    phase_text = ""
+    if phase:
+        phase_text = f" 위상은 {phase.get('phase_name_kr')}이며 조명률은 {phase.get('illumination_pct')}%입니다."
     weather_text = ""
     if weather and weather.get("available"):
         sky = weather.get("sky") or "날씨 확인"
@@ -136,7 +146,7 @@ def event_summary(obj: dict[str, Any], slot: str, position: dict[str, Any], grad
         weather_text += "입니다."
     return (
         f"{slot} 기준 {position['direction_kr']} 방향, 고도 {position['altitude_deg']}도로 "
-        f"관측 조건이 {label} 편입니다.{weather_text}"
+        f"관측 조건이 {label} 편입니다.{phase_text}{weather_text}"
     )
 
 
@@ -182,6 +192,7 @@ def build_real_events(
                     continue
                 grade = score_to_grade(score)
                 magnitude = obj.get("magnitude", obj.get("base_magnitude"))
+                phase = object_phase_info(engine, obj, category, when)
 
                 events.append(
                     {
@@ -197,11 +208,12 @@ def build_real_events(
                         "object_name_kr": obj["name_kr"],
                         "object_name_en": obj.get("name_en", obj["id"]),
                         "title": f"{obj['name_kr']} 관측 가능",
-                        "summary": event_summary(obj, slot, position, grade, weather),
+                        "summary": event_summary(obj, slot, position, grade, weather, phase),
                         "direction_kr": position["direction_kr"],
                         "azimuth_deg": position["azimuth_deg"],
                         "altitude_deg": position["altitude_deg"],
                         "magnitude": magnitude,
+                        "phase": phase,
                         "sun_altitude_deg": context["sun_altitude_deg"],
                         "moon_illumination_pct": context["moon_illumination_pct"],
                         "moon_altitude_deg": context["moon_altitude_deg"],
@@ -212,6 +224,7 @@ def build_real_events(
                         "source_flags": {
                             "position": "skyfield_de421",
                             "sun_moon": "skyfield_de421",
+                            "phase": "skyfield_de421" if phase else "not_applicable",
                             "weather": "open_meteo" if weather.get("available") else "disabled",
                         },
                     }
