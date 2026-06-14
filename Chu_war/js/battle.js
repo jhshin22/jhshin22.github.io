@@ -1,1 +1,1 @@
-window.ChuWar=window.ChuWar||{};ChuWar.battle=function(){return null};
+window.ChuWar=window.ChuWar||{};(function(A){A.battleRank=function(a,d){if(a.type==='BOMB'||d.type==='BOMB')return'X';if(a.type==='KING'&&d.type==='KING')return'K';if(a.type===d.type)return'D';return'A'}})(ChuWar);
