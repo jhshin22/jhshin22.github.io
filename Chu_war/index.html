@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>전략계급전</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="board-panel">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">비공개 정보 전략 보드게임</p>
+          <h1>전략계급전</h1>
+          <p class="field-hint">상단 진영: 위쪽 4행 · 하단 진영: 아래쪽 4행</p>
+        </div>
+        <button id="newGameBtn" class="primary">새 게임</button>
+      </header>
+      <div class="zone-label">▲ 상단 플레이어 진영</div>
+      <div id="board" class="board" aria-label="8x8 보드"></div>
+      <div class="zone-label">▼ 하단 플레이어 진영</div>
+    </section>
+    <aside class="side-panel">
+      <section class="card"><div class="card-title">현재 상태</div><div id="statusText" class="status-text"></div><div id="turnGuide" class="turn-guide"></div></section>
+      <section id="setupPanel" class="card"><div class="card-title">배치</div><p id="setupHelp" class="muted"></p><div id="pieceTray" class="piece-tray"></div><div class="button-grid"><button id="randomBtn" class="secondary">랜덤 배치</button><button id="clearSetupBtn" class="secondary">배치 초기화</button><button id="finishSetupBtn" class="primary">배치 완료</button></div></section>
+      <section id="playPanel" class="card hidden"><div class="card-title">행동</div><div id="selectedInfo" class="selected-info muted">기물을 선택하세요.</div><div class="button-grid"><button id="passBtn" class="secondary">패스</button></div></section>
+      <section class="card"><div class="card-title">제거된 기물</div><strong>상단 제거</strong><div id="capturedTop" class="captured-list"></div><strong>하단 제거</strong><div id="capturedBottom" class="captured-list"></div></section>
+      <section class="card"><div class="card-title">최근 기록</div><div id="logList" class="log-list"></div></section>
+    </aside>
+  </main>
+  <div id="cover" class="cover hidden"><div class="modal"><h2 id="coverTitle">턴 전환</h2><p id="coverMessage"></p><button id="readyBtn" class="primary wide">준비 완료</button></div></div>
+  <div id="alertModal" class="cover hidden"><div class="modal"><h2 id="alertTitle">알림</h2><div id="alertBody" class="alert-body"></div><button id="alertOkBtn" class="primary wide">확인</button></div></div>
+  <script src="js/constants.js"></script><script src="js/state.js"></script><script src="js/movement.js"></script><script src="js/battle.js"></script><script src="js/victory.js"></script><script src="js/setup.js"></script><script src="js/render.js"></script><script src="js/main.js"></script>
+</body>
+</html>
