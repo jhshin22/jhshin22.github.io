@@ -22,9 +22,7 @@
       --shadow: rgba(0, 0, 0, 0.35);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -49,17 +47,14 @@
       align-items: start;
     }
 
-    .board-panel,
-    .side-panel {
+    .board-panel, .side-panel {
       background: rgba(31, 41, 55, 0.94);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 24px;
       box-shadow: 0 24px 80px var(--shadow);
     }
 
-    .board-panel {
-      padding: 20px;
-    }
+    .board-panel { padding: 20px; }
 
     .topbar {
       display: flex;
@@ -75,11 +70,7 @@
       letter-spacing: -0.04em;
     }
 
-    .subtitle {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 4px;
-    }
+    .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
 
     button {
       border: 0;
@@ -89,13 +80,8 @@
       transition: transform 0.12s ease, filter 0.12s ease, box-shadow 0.12s ease;
     }
 
-    button:hover {
-      filter: brightness(1.05);
-    }
-
-    button:active {
-      transform: translateY(1px);
-    }
+    button:hover { filter: brightness(1.05); }
+    button:active { transform: translateY(1px); }
 
     .new-game-btn {
       background: #facc15;
@@ -105,12 +91,7 @@
       box-shadow: 0 10px 30px rgba(250, 204, 21, 0.18);
     }
 
-    .board-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 640px;
-      margin: 0 auto;
-    }
+    .board-wrap { position: relative; width: 100%; max-width: 640px; margin: 0 auto; }
 
     .board {
       width: 100%;
@@ -136,38 +117,21 @@
       text-shadow: 0 2px 10px rgba(255, 255, 255, 0.16);
     }
 
-    .square.light {
-      background: var(--light-square);
-    }
+    .square.light { background: var(--light-square); }
+    .square.dark { background: var(--dark-square); }
 
-    .square.dark {
-      background: var(--dark-square);
-    }
-
-    .square.selected::after,
-    .square.last-move::after,
-    .square.check::after {
+    .square.selected::after, .square.last-move::after, .square.check::after {
       content: "";
       position: absolute;
       inset: 0;
       pointer-events: none;
     }
 
-    .square.selected::after {
-      box-shadow: inset 0 0 0 5px var(--selected);
-    }
+    .square.selected::after { box-shadow: inset 0 0 0 5px var(--selected); }
+    .square.last-move::after { background: var(--last); }
+    .square.check::after { background: rgba(239, 68, 68, 0.42); box-shadow: inset 0 0 0 5px rgba(127, 29, 29, 0.7); }
 
-    .square.last-move::after {
-      background: var(--last);
-    }
-
-    .square.check::after {
-      background: rgba(239, 68, 68, 0.42);
-      box-shadow: inset 0 0 0 5px rgba(127, 29, 29, 0.7);
-    }
-
-    .square.legal::before,
-    .square.capture::before {
+    .square.legal::before, .square.capture::before, .square.castle::before, .square.en-passant::before {
       content: "";
       position: absolute;
       z-index: 1;
@@ -187,23 +151,25 @@
       border: 5px solid var(--capture);
     }
 
-    .piece {
-      position: relative;
-      z-index: 2;
-      filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.35));
+    .square.castle::before {
+      width: 64%;
+      height: 18%;
+      border-radius: 999px;
+      background: rgba(250, 204, 21, 0.82);
     }
 
-    .piece.black {
-      color: #111827;
+    .square.en-passant::before {
+      inset: 18%;
+      border-radius: 50%;
+      border: 4px dashed rgba(239, 68, 68, 0.85);
+      background: rgba(239, 68, 68, 0.14);
     }
 
-    .piece.white {
-      color: #f8fafc;
-      -webkit-text-stroke: 1px rgba(17, 24, 39, 0.45);
-    }
+    .piece { position: relative; z-index: 2; filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.35)); }
+    .piece.black { color: #111827; }
+    .piece.white { color: #f8fafc; -webkit-text-stroke: 1px rgba(17, 24, 39, 0.45); }
 
-    .coords-file,
-    .coords-rank {
+    .coords-file, .coords-rank {
       position: absolute;
       z-index: 3;
       font-size: 11px;
@@ -212,22 +178,10 @@
       pointer-events: none;
     }
 
-    .coords-file {
-      right: 6px;
-      bottom: 4px;
-    }
+    .coords-file { right: 6px; bottom: 4px; }
+    .coords-rank { left: 6px; top: 4px; }
 
-    .coords-rank {
-      left: 6px;
-      top: 4px;
-    }
-
-    .side-panel {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+    .side-panel { padding: 18px; display: flex; flex-direction: column; gap: 14px; }
 
     .card {
       background: rgba(39, 52, 73, 0.88);
@@ -236,25 +190,9 @@
       padding: 16px;
     }
 
-    .card-title {
-      font-weight: 800;
-      margin-bottom: 8px;
-      color: #e5e7eb;
-    }
-
-    .status {
-      font-size: 17px;
-      font-weight: 800;
-      line-height: 1.45;
-    }
-
-    .status small {
-      display: block;
-      margin-top: 6px;
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 500;
-    }
+    .card-title { font-weight: 800; margin-bottom: 8px; color: #e5e7eb; }
+    .status { font-size: 17px; font-weight: 800; line-height: 1.45; }
+    .status small { display: block; margin-top: 6px; font-size: 13px; color: var(--muted); font-weight: 500; }
 
     .turn-badge {
       display: inline-flex;
@@ -269,33 +207,11 @@
       color: #e5e7eb;
     }
 
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #f8fafc;
-      border: 1px solid rgba(0, 0, 0, 0.45);
-    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #f8fafc; border: 1px solid rgba(0, 0, 0, 0.45); }
+    .dot.black { background: #111827; border-color: rgba(255, 255, 255, 0.35); }
 
-    .dot.black {
-      background: #111827;
-      border-color: rgba(255, 255, 255, 0.35);
-    }
-
-    .captured {
-      min-height: 31px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      font-size: 22px;
-      line-height: 1.1;
-    }
-
-    .history {
-      max-height: 360px;
-      overflow: auto;
-      padding-right: 4px;
-    }
+    .captured { min-height: 31px; display: flex; flex-wrap: wrap; gap: 4px; font-size: 22px; line-height: 1.1; }
+    .history { max-height: 360px; overflow: auto; padding-right: 4px; }
 
     .history-row {
       display: grid;
@@ -306,65 +222,58 @@
       font-size: 14px;
     }
 
-    .history-row:last-child {
-      border-bottom: 0;
+    .history-row:last-child { border-bottom: 0; }
+    .move-no { color: var(--muted); font-weight: 700; }
+    .move-text { font-family: Consolas, Menlo, monospace; color: #f9fafb; overflow-wrap: anywhere; }
+    .empty-history { color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .rules { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 0; padding-left: 18px; }
+    .danger { color: #fecaca; }
+    .ok { color: #bbf7d0; }
+
+    .promotion-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(0, 0, 0, 0.62);
+      z-index: 20;
     }
 
-    .move-no {
-      color: var(--muted);
-      font-weight: 700;
+    .promotion-overlay.hidden { display: none; }
+
+    .promotion-modal {
+      width: min(420px, 100%);
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.55);
+      text-align: center;
     }
 
-    .move-text {
-      font-family: Consolas, Menlo, monospace;
-      color: #f9fafb;
-      overflow-wrap: anywhere;
+    .promotion-title { margin: 0 0 8px; font-size: 22px; }
+    .promotion-help { margin: 0 0 16px; color: var(--muted); font-size: 14px; }
+
+    .promotion-choices { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .promotion-choice {
+      min-height: 76px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 38px;
+      border-radius: 16px;
     }
 
-    .empty-history {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .rules {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.55;
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .danger {
-      color: #fecaca;
-    }
-
-    .ok {
-      color: #bbf7d0;
-    }
+    .promotion-choice span { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
 
     @media (max-width: 860px) {
-      body {
-        padding: 14px;
-        align-items: flex-start;
-      }
-
-      .app {
-        grid-template-columns: 1fr;
-      }
-
-      .topbar {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .new-game-btn {
-        width: 100%;
-      }
-
-      .side-panel {
-        order: 2;
-      }
+      body { padding: 14px; align-items: flex-start; }
+      .app { grid-template-columns: 1fr; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .new-game-btn { width: 100%; }
+      .side-panel { order: 2; }
     }
   </style>
 </head>
@@ -374,7 +283,7 @@
       <div class="topbar">
         <div>
           <h1>LiveChess</h1>
-          <div class="subtitle">HTML · CSS · Vanilla JavaScript 단일 파일 체스</div>
+          <div class="subtitle">캐슬링 · 앙파상 · 승진 선택까지 지원하는 단일 파일 체스</div>
         </div>
         <button class="new-game-btn" id="newGameBtn" type="button">새 게임</button>
       </div>
@@ -408,25 +317,32 @@
         <div class="card-title">구현 범위</div>
         <ul class="rules">
           <li>기본 이동 규칙, 체크, 체크메이트, 스테일메이트 지원</li>
-          <li>자기 킹을 체크 상태로 만드는 수는 금지</li>
-          <li>폰이 끝줄에 도달하면 자동으로 퀸 승진</li>
-          <li>캐슬링, 앙파상, 승진 선택창은 추후 확장 대상</li>
+          <li>캐슬링: 킹/룩 미이동, 경로 공백, 체크 통과 금지 조건 반영</li>
+          <li>앙파상: 상대 폰의 직전 2칸 전진 직후 1회만 허용</li>
+          <li>폰 승진: 끝줄 도달 시 퀸/룩/비숍/나이트 선택 가능</li>
         </ul>
       </section>
     </aside>
   </main>
 
+  <div class="promotion-overlay hidden" id="promotionOverlay" role="dialog" aria-modal="true" aria-labelledby="promotionTitle">
+    <div class="promotion-modal">
+      <h2 class="promotion-title" id="promotionTitle">폰 승진</h2>
+      <p class="promotion-help">승진할 말을 선택하세요.</p>
+      <div class="promotion-choices" id="promotionChoices"></div>
+    </div>
+  </div>
+
   <script>
     "use strict";
 
     const files = ["a", "b", "c", "d", "e", "f", "g", "h"];
+    const promotionTypes = ["Q", "R", "B", "N"];
     const pieceSymbols = {
       wK: "♔", wQ: "♕", wR: "♖", wB: "♗", wN: "♘", wP: "♙",
       bK: "♚", bQ: "♛", bR: "♜", bB: "♝", bN: "♞", bP: "♟"
     };
-    const pieceNames = {
-      K: "킹", Q: "퀸", R: "룩", B: "비숍", N: "나이트", P: "폰"
-    };
+    const pieceNames = { K: "킹", Q: "퀸", R: "룩", B: "비숍", N: "나이트", P: "폰" };
 
     let board = [];
     let turn = "w";
@@ -438,6 +354,9 @@
     let lastMove = null;
     let gameOver = false;
     let statusMessage = "";
+    let castlingRights = null;
+    let enPassantTarget = null;
+    let promotionPending = null;
 
     const boardEl = document.getElementById("board");
     const statusTextEl = document.getElementById("statusText");
@@ -446,6 +365,8 @@
     const capturedByWhiteEl = document.getElementById("capturedByWhite");
     const capturedByBlackEl = document.getElementById("capturedByBlack");
     const newGameBtn = document.getElementById("newGameBtn");
+    const promotionOverlayEl = document.getElementById("promotionOverlay");
+    const promotionChoicesEl = document.getElementById("promotionChoices");
 
     // 새 게임 상태를 만든다.
     function initGame() {
@@ -467,6 +388,13 @@
       capturedByBlack = [];
       lastMove = null;
       gameOver = false;
+      castlingRights = {
+        w: { kingSide: true, queenSide: true },
+        b: { kingSide: true, queenSide: true }
+      };
+      enPassantTarget = null;
+      promotionPending = null;
+      hidePromotionDialog();
       statusMessage = "백 차례입니다.";
       renderAll();
     }
@@ -493,19 +421,15 @@
           square.dataset.row = String(row);
           square.dataset.col = String(col);
 
-          if (selected && selected.row === row && selected.col === col) {
-            square.classList.add("selected");
-          }
-          if ((lastMove && isSameSquare(lastMove.from, { row, col })) || (lastMove && isSameSquare(lastMove.to, { row, col }))) {
-            square.classList.add("last-move");
-          }
-          if (checkedKing && checkedKing.row === row && checkedKing.col === col) {
-            square.classList.add("check");
-          }
+          if (selected && selected.row === row && selected.col === col) square.classList.add("selected");
+          if ((lastMove && isSameSquare(lastMove.from, { row, col })) || (lastMove && isSameSquare(lastMove.to, { row, col }))) square.classList.add("last-move");
+          if (checkedKing && checkedKing.row === row && checkedKing.col === col) square.classList.add("check");
 
           const legalMove = selectedMoves.find(move => move.to.row === row && move.to.col === col);
           if (legalMove) {
-            square.classList.add(board[row][col] ? "capture" : "legal");
+            if (legalMove.isCastling) square.classList.add("castle");
+            else if (legalMove.isEnPassant) square.classList.add("en-passant");
+            else square.classList.add(board[row][col] ? "capture" : "legal");
           }
 
           const piece = board[row][col];
@@ -537,10 +461,10 @@
 
     // 현재 상태, 턴, 체크 여부를 표시한다.
     function renderStatus() {
-      const inCheck = isKingInCheck(board, turn);
+      const inCheck = !gameOver && isKingInCheck(board, turn);
       const turnText = colorName(turn);
       const cssClass = gameOver ? "danger" : inCheck ? "danger" : "ok";
-      statusTextEl.innerHTML = `<span class="${cssClass}">${escapeHtml(statusMessage)}</span><small>현재 턴: ${turnText}${inCheck && !gameOver ? " · 체크 상태" : ""}</small>`;
+      statusTextEl.innerHTML = `<span class="${cssClass}">${escapeHtml(statusMessage)}</span><small>현재 턴: ${turnText}${inCheck ? " · 체크 상태" : ""}</small>`;
       turnBadgeEl.innerHTML = `<span class="dot ${turn === "b" ? "black" : ""}"></span>${turnText} 차례`;
     }
 
@@ -550,7 +474,6 @@
         historyEl.innerHTML = `<div class="empty-history">아직 이동 기록이 없습니다.</div>`;
         return;
       }
-
       const rows = [];
       for (let i = 0; i < moveHistory.length; i += 2) {
         const whiteMove = moveHistory[i];
@@ -575,64 +498,89 @@
 
     // 사용자가 체스판 칸을 클릭했을 때 선택 또는 이동을 처리한다.
     function handleSquareClick(row, col) {
-      if (gameOver) return;
+      if (gameOver || promotionPending) return;
 
       const clickedPiece = board[row][col];
       const move = selectedMoves.find(item => item.to.row === row && item.to.col === col);
 
       if (selected && move) {
-        makeMove(move);
+        if (move.isPromotion) showPromotionDialog(move);
+        else makeMove(move);
         return;
       }
 
       if (clickedPiece && getColor(clickedPiece) === turn) {
         selected = { row, col };
         selectedMoves = getLegalMoves(board, row, col);
-        statusMessage = `${colorName(turn)} ${pieceNames[getType(clickedPiece)]} 선택: ${squareName(row, col)}`;
+        const moveCountText = selectedMoves.length === 0 ? "합법 수 없음" : `합법 수 ${selectedMoves.length}개`;
+        statusMessage = `${colorName(turn)} ${pieceNames[getType(clickedPiece)]} 선택: ${squareName(row, col)} · ${moveCountText}`;
       } else {
         selected = null;
         selectedMoves = [];
-        statusMessage = clickedPiece
-          ? "상대 말입니다. 현재 턴의 말을 선택하세요."
-          : "이동할 말을 선택하세요.";
+        statusMessage = clickedPiece ? "상대 말입니다. 현재 턴의 말을 선택하세요." : "이동할 말을 선택하세요.";
       }
-
       renderAll();
     }
 
+    // 승진 선택창을 표시한다.
+    function showPromotionDialog(move) {
+      promotionPending = move;
+      const movingPiece = board[move.from.row][move.from.col];
+      const color = getColor(movingPiece);
+      promotionChoicesEl.innerHTML = "";
+      for (const type of promotionTypes) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "promotion-choice";
+        button.innerHTML = `${pieceSymbols[color + type]}<span>${pieceNames[type]}</span>`;
+        button.addEventListener("click", () => completePromotion(type));
+        promotionChoicesEl.appendChild(button);
+      }
+      promotionOverlayEl.classList.remove("hidden");
+    }
+
+    // 선택된 승진 말로 이동을 완료한다.
+    function completePromotion(type) {
+      if (!promotionPending) return;
+      const move = promotionPending;
+      promotionPending = null;
+      hidePromotionDialog();
+      makeMove(move, type);
+    }
+
+    // 승진 선택창을 숨긴다.
+    function hidePromotionDialog() {
+      promotionOverlayEl.classList.add("hidden");
+      promotionChoicesEl.innerHTML = "";
+    }
+
     // 합법 수를 실제 보드에 반영하고 게임 상태를 갱신한다.
-    function makeMove(move) {
+    function makeMove(move, promotionType = "Q") {
       const piece = board[move.from.row][move.from.col];
-      const captured = board[move.to.row][move.to.col];
+      const captured = getCapturedPieceForMove(board, move);
       const movingColor = getColor(piece);
       const opponent = opposite(movingColor);
       const fullMoveNumber = Math.floor(moveHistory.length / 2) + 1;
 
-      board[move.to.row][move.to.col] = piece;
-      board[move.from.row][move.from.col] = null;
-
-      let promoted = false;
-      if (getType(piece) === "P" && (move.to.row === 0 || move.to.row === 7)) {
-        board[move.to.row][move.to.col] = movingColor + "Q";
-        promoted = true;
-      }
+      applyMoveToBoard(board, move, promotionType);
+      updateCastlingRights(piece, move, captured);
+      updateEnPassantTarget(piece, move);
 
       if (captured) {
         if (movingColor === "w") capturedByWhite.push(captured);
         else capturedByBlack.push(captured);
       }
 
-      lastMove = { from: { ...move.from }, to: { ...move.to } };
-
       const opponentInCheck = isKingInCheck(board, opponent);
       const opponentMoves = getAllLegalMoves(board, opponent);
       const checkmate = opponentInCheck && opponentMoves.length === 0;
       const stalemate = !opponentInCheck && opponentMoves.length === 0;
 
+      lastMove = { from: { ...move.from }, to: { ...move.to } };
       moveHistory.push({
         number: fullMoveNumber,
         color: movingColor,
-        notation: formatMoveNotation(piece, move, captured, promoted, opponentInCheck, checkmate)
+        notation: formatMoveNotation(piece, move, captured, promotionType, opponentInCheck, checkmate)
       });
 
       selected = null;
@@ -650,7 +598,6 @@
       } else {
         statusMessage = `${colorName(turn)} 차례입니다.`;
       }
-
       renderAll();
     }
 
@@ -658,21 +605,19 @@
     function getLegalMoves(currentBoard, row, col) {
       const piece = currentBoard[row][col];
       if (!piece) return [];
-
       const color = getColor(piece);
       const pseudoMoves = getPseudoLegalMoves(currentBoard, row, col);
       return pseudoMoves.filter(move => {
         const nextBoard = cloneBoard(currentBoard);
-        applyMoveToBoard(nextBoard, move);
+        applyMoveToBoard(nextBoard, move, "Q");
         return !isKingInCheck(nextBoard, color);
       });
     }
 
-    // 말 자체의 이동 규칙만 반영한 후보 수를 반환한다. 체크 여부는 여기서 판단하지 않는다.
+    // 말 자체의 이동 규칙만 반영한 후보 수를 반환한다. 체크 여부는 여기서 최종 판단하지 않는다.
     function getPseudoLegalMoves(currentBoard, row, col) {
       const piece = currentBoard[row][col];
       if (!piece) return [];
-
       const color = getColor(piece);
       const type = getType(piece);
       const moves = [];
@@ -683,11 +628,10 @@
       if (type === "Q") addSlidingMoves(currentBoard, row, col, color, moves, [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]);
       if (type === "N") addKnightMoves(currentBoard, row, col, color, moves);
       if (type === "K") addKingMoves(currentBoard, row, col, color, moves);
-
       return moves;
     }
 
-    // 폰 이동 후보를 추가한다.
+    // 폰 이동, 대각선 잡기, 앙파상, 승진 후보를 추가한다.
     function addPawnMoves(currentBoard, row, col, color, moves) {
       const dir = color === "w" ? -1 : 1;
       const startRow = color === "w" ? 6 : 1;
@@ -695,9 +639,9 @@
       const twoStep = row + dir * 2;
 
       if (inBounds(oneStep, col) && !currentBoard[oneStep][col]) {
-        moves.push(createMove(row, col, oneStep, col));
+        moves.push(createPawnMove(row, col, oneStep, col));
         if (row === startRow && inBounds(twoStep, col) && !currentBoard[twoStep][col]) {
-          moves.push(createMove(row, col, twoStep, col));
+          moves.push(createMove(row, col, twoStep, col, { isDoublePawnPush: true }));
         }
       }
 
@@ -706,10 +650,29 @@
         const targetCol = col + dc;
         if (!inBounds(targetRow, targetCol)) continue;
         const targetPiece = currentBoard[targetRow][targetCol];
-        if (targetPiece && getColor(targetPiece) !== color) {
-          moves.push(createMove(row, col, targetRow, targetCol));
+        if (targetPiece && getColor(targetPiece) !== color) moves.push(createPawnMove(row, col, targetRow, targetCol));
+      }
+
+      if (enPassantTarget && enPassantTarget.validFor === color) {
+        const targetRow = row + dir;
+        const targetCol = enPassantTarget.col;
+        const adjacentCol = enPassantTarget.pawnCol;
+        const adjacentPiece = currentBoard[row]?.[adjacentCol];
+        const canReachTarget = targetRow === enPassantTarget.row && Math.abs(targetCol - col) === 1;
+        const hasCapturablePawn = adjacentPiece === opposite(color) + "P" && row === enPassantTarget.pawnRow;
+        if (canReachTarget && hasCapturablePawn) {
+          moves.push(createMove(row, col, targetRow, targetCol, {
+            isEnPassant: true,
+            capturedSquare: { row: enPassantTarget.pawnRow, col: enPassantTarget.pawnCol }
+          }));
         }
       }
+    }
+
+    // 승진 줄에 닿는 폰 수에는 승진 플래그를 붙인다.
+    function createPawnMove(fromRow, fromCol, toRow, toCol) {
+      const isPromotion = toRow === 0 || toRow === 7;
+      return createMove(fromRow, fromCol, toRow, toCol, { isPromotion });
     }
 
     // 룩, 비숍, 퀸처럼 직선으로 움직이는 말의 후보 수를 추가한다.
@@ -719,9 +682,8 @@
         let c = col + dc;
         while (inBounds(r, c)) {
           const targetPiece = currentBoard[r][c];
-          if (!targetPiece) {
-            moves.push(createMove(row, col, r, c));
-          } else {
+          if (!targetPiece) moves.push(createMove(row, col, r, c));
+          else {
             if (getColor(targetPiece) !== color) moves.push(createMove(row, col, r, c));
             break;
           }
@@ -743,7 +705,7 @@
       }
     }
 
-    // 킹 이동 후보를 추가한다. 캐슬링은 추후 확장 대상으로 제외한다.
+    // 킹 이동 후보와 캐슬링 후보를 추가한다.
     function addKingMoves(currentBoard, row, col, color, moves) {
       for (let dr = -1; dr <= 1; dr++) {
         for (let dc = -1; dc <= 1; dc++) {
@@ -755,6 +717,45 @@
           if (!targetPiece || getColor(targetPiece) !== color) moves.push(createMove(row, col, r, c));
         }
       }
+      addCastlingMoves(currentBoard, row, col, color, moves);
+    }
+
+    // 캐슬링 가능 조건을 검사해 후보 수를 추가한다.
+    function addCastlingMoves(currentBoard, row, col, color, moves) {
+      const homeRow = color === "w" ? 7 : 0;
+      if (row !== homeRow || col !== 4 || currentBoard[row][col] !== color + "K") return;
+      if (canCastle(currentBoard, color, "kingSide")) {
+        moves.push(createMove(row, col, homeRow, 6, {
+          isCastling: true,
+          castleSide: "kingSide",
+          rookFrom: { row: homeRow, col: 7 },
+          rookTo: { row: homeRow, col: 5 }
+        }));
+      }
+      if (canCastle(currentBoard, color, "queenSide")) {
+        moves.push(createMove(row, col, homeRow, 2, {
+          isCastling: true,
+          castleSide: "queenSide",
+          rookFrom: { row: homeRow, col: 0 },
+          rookTo: { row: homeRow, col: 3 }
+        }));
+      }
+    }
+
+    // 캐슬링의 정식 조건을 확인한다.
+    function canCastle(currentBoard, color, side) {
+      if (!castlingRights || !castlingRights[color]?.[side]) return false;
+      const row = color === "w" ? 7 : 0;
+      const opponent = opposite(color);
+      const rookCol = side === "kingSide" ? 7 : 0;
+      const emptyCols = side === "kingSide" ? [5, 6] : [1, 2, 3];
+      const kingPathCols = side === "kingSide" ? [4, 5, 6] : [4, 3, 2];
+
+      if (currentBoard[row][4] !== color + "K") return false;
+      if (currentBoard[row][rookCol] !== color + "R") return false;
+      if (emptyCols.some(col => currentBoard[row][col])) return false;
+      if (kingPathCols.some(col => isSquareAttacked(currentBoard, row, col, opponent))) return false;
+      return true;
     }
 
     // 특정 색의 모든 합법 수를 구한다. 체크메이트/스테일메이트 판정에 사용한다.
@@ -763,9 +764,7 @@
       for (let row = 0; row < 8; row++) {
         for (let col = 0; col < 8; col++) {
           const piece = currentBoard[row][col];
-          if (piece && getColor(piece) === color) {
-            result.push(...getLegalMoves(currentBoard, row, col));
-          }
+          if (piece && getColor(piece) === color) result.push(...getLegalMoves(currentBoard, row, col));
         }
       }
       return result;
@@ -808,29 +807,15 @@
         const dir = color === "w" ? -1 : 1;
         return dr === dir && Math.abs(dc) === 1;
       }
-
-      if (type === "N") {
-        return (Math.abs(dr) === 2 && Math.abs(dc) === 1) || (Math.abs(dr) === 1 && Math.abs(dc) === 2);
-      }
-
-      if (type === "K") {
-        return Math.max(Math.abs(dr), Math.abs(dc)) === 1;
-      }
-
-      if (type === "R") {
-        return (dr === 0 || dc === 0) && isPathClear(currentBoard, row, col, targetRow, targetCol);
-      }
-
-      if (type === "B") {
-        return Math.abs(dr) === Math.abs(dc) && isPathClear(currentBoard, row, col, targetRow, targetCol);
-      }
-
+      if (type === "N") return (Math.abs(dr) === 2 && Math.abs(dc) === 1) || (Math.abs(dr) === 1 && Math.abs(dc) === 2);
+      if (type === "K") return Math.max(Math.abs(dr), Math.abs(dc)) === 1;
+      if (type === "R") return (dr === 0 || dc === 0) && isPathClear(currentBoard, row, col, targetRow, targetCol);
+      if (type === "B") return Math.abs(dr) === Math.abs(dc) && isPathClear(currentBoard, row, col, targetRow, targetCol);
       if (type === "Q") {
         const straight = dr === 0 || dc === 0;
         const diagonal = Math.abs(dr) === Math.abs(dc);
         return (straight || diagonal) && isPathClear(currentBoard, row, col, targetRow, targetCol);
       }
-
       return false;
     }
 
@@ -840,7 +825,6 @@
       const colStep = Math.sign(toCol - fromCol);
       let row = fromRow + rowStep;
       let col = fromCol + colStep;
-
       while (row !== toRow || col !== toCol) {
         if (currentBoard[row][col]) return false;
         row += rowStep;
@@ -860,61 +844,94 @@
       return null;
     }
 
-    // 시뮬레이션용 보드에 수를 적용한다.
-    function applyMoveToBoard(targetBoard, move) {
+    // 시뮬레이션용/실제 보드에 수를 적용한다. 캐슬링, 앙파상, 승진까지 처리한다.
+    function applyMoveToBoard(targetBoard, move, promotionType = "Q") {
       const piece = targetBoard[move.from.row][move.from.col];
-      targetBoard[move.to.row][move.to.col] = piece;
       targetBoard[move.from.row][move.from.col] = null;
 
+      if (move.isEnPassant && move.capturedSquare) {
+        targetBoard[move.capturedSquare.row][move.capturedSquare.col] = null;
+      }
+
+      targetBoard[move.to.row][move.to.col] = piece;
+
+      if (move.isCastling && move.rookFrom && move.rookTo) {
+        const rook = targetBoard[move.rookFrom.row][move.rookFrom.col];
+        targetBoard[move.rookFrom.row][move.rookFrom.col] = null;
+        targetBoard[move.rookTo.row][move.rookTo.col] = rook;
+      }
+
       if (piece && getType(piece) === "P" && (move.to.row === 0 || move.to.row === 7)) {
-        targetBoard[move.to.row][move.to.col] = getColor(piece) + "Q";
+        targetBoard[move.to.row][move.to.col] = getColor(piece) + promotionType;
+      }
+    }
+
+    // 이동에 의해 잡히는 말을 반환한다. 앙파상은 도착 칸이 아니라 옆 칸의 폰을 잡는다.
+    function getCapturedPieceForMove(currentBoard, move) {
+      if (move.isEnPassant && move.capturedSquare) return currentBoard[move.capturedSquare.row][move.capturedSquare.col];
+      return currentBoard[move.to.row][move.to.col];
+    }
+
+    // 킹/룩 이동 또는 원래 자리의 룩 포획에 따라 캐슬링 권한을 갱신한다.
+    function updateCastlingRights(piece, move, captured) {
+      const color = getColor(piece);
+      const type = getType(piece);
+      if (type === "K") {
+        castlingRights[color].kingSide = false;
+        castlingRights[color].queenSide = false;
+      }
+      if (type === "R") disableRookCastlingRight(color, move.from.row, move.from.col);
+      if (captured && getType(captured) === "R" && !move.isEnPassant) {
+        disableRookCastlingRight(getColor(captured), move.to.row, move.to.col);
+      }
+    }
+
+    // 원래 자리의 룩이 이동/포획되면 해당 방향 캐슬링 권한을 제거한다.
+    function disableRookCastlingRight(color, row, col) {
+      const homeRow = color === "w" ? 7 : 0;
+      if (row !== homeRow) return;
+      if (col === 0) castlingRights[color].queenSide = false;
+      if (col === 7) castlingRights[color].kingSide = false;
+    }
+
+    // 직전 수가 폰 2칸 전진이면 앙파상 타깃을 만들고, 아니면 제거한다.
+    function updateEnPassantTarget(piece, move) {
+      if (getType(piece) === "P" && Math.abs(move.to.row - move.from.row) === 2) {
+        enPassantTarget = {
+          row: (move.from.row + move.to.row) / 2,
+          col: move.from.col,
+          pawnRow: move.to.row,
+          pawnCol: move.to.col,
+          pawnColor: getColor(piece),
+          validFor: opposite(getColor(piece))
+        };
+      } else {
+        enPassantTarget = null;
       }
     }
 
     // 이동 기록에 표시할 간단한 좌표식 기보를 만든다.
-    function formatMoveNotation(piece, move, captured, promoted, givesCheck, checkmate) {
-      const symbol = pieceSymbols[piece];
+    function formatMoveNotation(piece, move, captured, promotionType, givesCheck, checkmate) {
+      if (move.isCastling) return (move.castleSide === "kingSide" ? "O-O" : "O-O-O") + (checkmate ? "#" : givesCheck ? "+" : "");
       const captureMark = captured ? "x" : "-";
-      const promotionText = promoted ? "=Q" : "";
+      const promotionText = move.isPromotion ? `=${pieceSymbols[getColor(piece) + promotionType]}` : "";
+      const enPassantText = move.isEnPassant ? " e.p." : "";
       const suffix = checkmate ? "#" : givesCheck ? "+" : "";
-      return `${symbol} ${squareName(move.from.row, move.from.col)}${captureMark}${squareName(move.to.row, move.to.col)}${promotionText}${suffix}`;
+      return `${pieceSymbols[piece]} ${squareName(move.from.row, move.from.col)}${captureMark}${squareName(move.to.row, move.to.col)}${promotionText}${enPassantText}${suffix}`;
     }
 
-    function createMove(fromRow, fromCol, toRow, toCol) {
-      return { from: { row: fromRow, col: fromCol }, to: { row: toRow, col: toCol } };
+    function createMove(fromRow, fromCol, toRow, toCol, extra = {}) {
+      return { from: { row: fromRow, col: fromCol }, to: { row: toRow, col: toCol }, ...extra };
     }
 
-    function cloneBoard(currentBoard) {
-      return currentBoard.map(row => row.slice());
-    }
-
-    function inBounds(row, col) {
-      return row >= 0 && row < 8 && col >= 0 && col < 8;
-    }
-
-    function getColor(piece) {
-      return piece[0];
-    }
-
-    function getType(piece) {
-      return piece[1];
-    }
-
-    function opposite(color) {
-      return color === "w" ? "b" : "w";
-    }
-
-    function colorName(color) {
-      return color === "w" ? "백" : "흑";
-    }
-
-    function squareName(row, col) {
-      return files[col] + String(8 - row);
-    }
-
-    function isSameSquare(a, b) {
-      return a && b && a.row === b.row && a.col === b.col;
-    }
+    function cloneBoard(currentBoard) { return currentBoard.map(row => row.slice()); }
+    function inBounds(row, col) { return row >= 0 && row < 8 && col >= 0 && col < 8; }
+    function getColor(piece) { return piece[0]; }
+    function getType(piece) { return piece[1]; }
+    function opposite(color) { return color === "w" ? "b" : "w"; }
+    function colorName(color) { return color === "w" ? "백" : "흑"; }
+    function squareName(row, col) { return files[col] + String(8 - row); }
+    function isSameSquare(a, b) { return a && b && a.row === b.row && a.col === b.col; }
 
     function escapeHtml(value) {
       return String(value)
