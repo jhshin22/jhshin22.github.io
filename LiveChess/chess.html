@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LiveChess</title>
+  <style>
+    :root {
+      --bg: #111827;
+      --panel: #1f2937;
+      --panel-light: #273449;
+      --text: #f9fafb;
+      --muted: #cbd5e1;
+      --light-square: #f0d9b5;
+      --dark-square: #b58863;
+      --selected: #facc15;
+      --move: rgba(34, 197, 94, 0.72);
+      --capture: rgba(239, 68, 68, 0.78);
+      --last: rgba(59, 130, 246, 0.45);
+      --danger: #ef4444;
+      --ok: #22c55e;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.24), transparent 32rem),
+        radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.18), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .app {
+      width: min(1120px, 100%);
+      display: grid;
+      grid-template-columns: minmax(320px, 680px) minmax(260px, 360px);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .board-panel,
+    .side-panel {
+      background: rgba(31, 41, 55, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      box-shadow: 0 24px 80px var(--shadow);
+    }
+
+    .board-panel {
+      padding: 20px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 36px);
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.12s ease, filter 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    button:hover {
+      filter: brightness(1.05);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .new-game-btn {
+      background: #facc15;
+      color: #111827;
+      padding: 12px 16px;
+      white-space: nowrap;
+      box-shadow: 0 10px 30px rgba(250, 204, 21, 0.18);
+    }
+
+    .board-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .board {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      overflow: hidden;
+      border-radius: 18px;
+      border: 4px solid rgba(17, 24, 39, 0.78);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 60px rgba(0, 0, 0, 0.3);
+      user-select: none;
+    }
+
+    .square {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(28px, 7vw, 62px);
+      line-height: 1;
+      color: #111827;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.16);
+    }
+
+    .square.light {
+      background: var(--light-square);
+    }
+
+    .square.dark {
+      background: var(--dark-square);
+    }
+
+    .square.selected::after,
+    .square.last-move::after,
+    .square.check::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .square.selected::after {
+      box-shadow: inset 0 0 0 5px var(--selected);
+    }
+
+    .square.last-move::after {
+      background: var(--last);
+    }
+
+    .square.check::after {
+      background: rgba(239, 68, 68, 0.42);
+      box-shadow: inset 0 0 0 5px rgba(127, 29, 29, 0.7);
+    }
+
+    .square.legal::before,
+    .square.capture::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .square.legal::before {
+      width: 26%;
+      height: 26%;
+      border-radius: 50%;
+      background: var(--move);
+    }
+
+    .square.capture::before {
+      inset: 10%;
+      border-radius: 50%;
+      border: 5px solid var(--capture);
+    }
+
+    .piece {
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.35));
+    }
+
+    .piece.black {
+      color: #111827;
+    }
+
+    .piece.white {
+      color: #f8fafc;
+      -webkit-text-stroke: 1px rgba(17, 24, 39, 0.45);
+    }
+
+    .coords-file,
+    .coords-rank {
+      position: absolute;
+      z-index: 3;
+      font-size: 11px;
+      font-weight: 800;
+      opacity: 0.72;
+      pointer-events: none;
+    }
+
+    .coords-file {
+      right: 6px;
+      bottom: 4px;
+    }
+
+    .coords-rank {
+      left: 6px;
+      top: 4px;
+    }
+
+    .side-panel {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      background: rgba(39, 52, 73, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .card-title {
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #e5e7eb;
+    }
+
+    .status {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .status small {
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .turn-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 6px 10px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #f8fafc;
+      border: 1px solid rgba(0, 0, 0, 0.45);
+    }
+
+    .dot.black {
+      background: #111827;
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .captured {
+      min-height: 31px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .history {
+      max-height: 360px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .history-row {
+      display: grid;
+      grid-template-columns: 36px 1fr 1fr;
+      gap: 8px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 14px;
+    }
+
+    .history-row:last-child {
+      border-bottom: 0;
+    }
+
+    .move-no {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .move-text {
+      font-family: Consolas, Menlo, monospace;
+      color: #f9fafb;
+      overflow-wrap: anywhere;
+    }
+
+    .empty-history {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .rules {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .danger {
+      color: #fecaca;
+    }
+
+    .ok {
+      color: #bbf7d0;
+    }
+
+    @media (max-width: 860px) {
+      body {
+        padding: 14px;
+        align-items: flex-start;
+      }
+
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .new-game-btn {
+        width: 100%;
+      }
+
+      .side-panel {
+        order: 2;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="board-panel" aria-label="체스판 영역">
+      <div class="topbar">
+        <div>
+          <h1>LiveChess</h1>
+          <div class="subtitle">HTML · CSS · Vanilla JavaScript 단일 파일 체스</div>
+        </div>
+        <button class="new-game-btn" id="newGameBtn" type="button">새 게임</button>
+      </div>
+      <div class="board-wrap">
+        <div class="board" id="board" aria-label="체스판"></div>
+      </div>
+    </section>
+
+    <aside class="side-panel" aria-label="게임 정보 영역">
+      <section class="card">
+        <div class="card-title">현재 상태</div>
+        <div class="status" id="statusText"></div>
+        <div class="turn-badge" id="turnBadge"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-title">잡은 말</div>
+        <div>백이 잡은 말</div>
+        <div class="captured" id="capturedByWhite"></div>
+        <div style="height: 10px;"></div>
+        <div>흑이 잡은 말</div>
+        <div class="captured" id="capturedByBlack"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-title">이동 기록</div>
+        <div class="history" id="history"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-title">구현 범위</div>
+        <ul class="rules">
+          <li>기본 이동 규칙, 체크, 체크메이트, 스테일메이트 지원</li>
+          <li>자기 킹을 체크 상태로 만드는 수는 금지</li>
+          <li>폰이 끝줄에 도달하면 자동으로 퀸 승진</li>
+          <li>캐슬링, 앙파상, 승진 선택창은 추후 확장 대상</li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+
+  <script>
+    "use strict";
+
+    const files = ["a", "b", "c", "d", "e", "f", "g", "h"];
+    const pieceSymbols = {
+      wK: "♔", wQ: "♕", wR: "♖", wB: "♗", wN: "♘", wP: "♙",
+      bK: "♚", bQ: "♛", bR: "♜", bB: "♝", bN: "♞", bP: "♟"
+    };
+    const pieceNames = {
+      K: "킹", Q: "퀸", R: "룩", B: "비숍", N: "나이트", P: "폰"
+    };
+
+    let board = [];
+    let turn = "w";
+    let selected = null;
+    let selectedMoves = [];
+    let moveHistory = [];
+    let capturedByWhite = [];
+    let capturedByBlack = [];
+    let lastMove = null;
+    let gameOver = false;
+    let statusMessage = "";
+
+    const boardEl = document.getElementById("board");
+    const statusTextEl = document.getElementById("statusText");
+    const turnBadgeEl = document.getElementById("turnBadge");
+    const historyEl = document.getElementById("history");
+    const capturedByWhiteEl = document.getElementById("capturedByWhite");
+    const capturedByBlackEl = document.getElementById("capturedByBlack");
+    const newGameBtn = document.getElementById("newGameBtn");
+
+    // 새 게임 상태를 만든다.
+    function initGame() {
+      board = [
+        ["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"],
+        ["bP", "bP", "bP", "bP", "bP", "bP", "bP", "bP"],
+        [null, null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null, null],
+        ["wP", "wP", "wP", "wP", "wP", "wP", "wP", "wP"],
+        ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]
+      ];
+      turn = "w";
+      selected = null;
+      selectedMoves = [];
+      moveHistory = [];
+      capturedByWhite = [];
+      capturedByBlack = [];
+      lastMove = null;
+      gameOver = false;
+      statusMessage = "백 차례입니다.";
+      renderAll();
+    }
+
+    // 전체 화면 요소를 다시 그린다.
+    function renderAll() {
+      renderBoard();
+      renderStatus();
+      renderHistory();
+      renderCapturedPieces();
+    }
+
+    // 8x8 체스판과 말, 하이라이트를 렌더링한다.
+    function renderBoard() {
+      boardEl.innerHTML = "";
+      const checkedKing = getCheckedKingSquare(board, turn);
+
+      for (let row = 0; row < 8; row++) {
+        for (let col = 0; col < 8; col++) {
+          const square = document.createElement("button");
+          square.type = "button";
+          square.className = "square " + ((row + col) % 2 === 0 ? "light" : "dark");
+          square.setAttribute("aria-label", squareName(row, col));
+          square.dataset.row = String(row);
+          square.dataset.col = String(col);
+
+          if (selected && selected.row === row && selected.col === col) {
+            square.classList.add("selected");
+          }
+          if ((lastMove && isSameSquare(lastMove.from, { row, col })) || (lastMove && isSameSquare(lastMove.to, { row, col }))) {
+            square.classList.add("last-move");
+          }
+          if (checkedKing && checkedKing.row === row && checkedKing.col === col) {
+            square.classList.add("check");
+          }
+
+          const legalMove = selectedMoves.find(move => move.to.row === row && move.to.col === col);
+          if (legalMove) {
+            square.classList.add(board[row][col] ? "capture" : "legal");
+          }
+
+          const piece = board[row][col];
+          if (piece) {
+            const span = document.createElement("span");
+            span.className = "piece " + (getColor(piece) === "w" ? "white" : "black");
+            span.textContent = pieceSymbols[piece];
+            square.appendChild(span);
+          }
+
+          if (col === 7) {
+            const rank = document.createElement("span");
+            rank.className = "coords-rank";
+            rank.textContent = String(8 - row);
+            square.appendChild(rank);
+          }
+          if (row === 7) {
+            const file = document.createElement("span");
+            file.className = "coords-file";
+            file.textContent = files[col];
+            square.appendChild(file);
+          }
+
+          square.addEventListener("click", () => handleSquareClick(row, col));
+          boardEl.appendChild(square);
+        }
+      }
+    }
+
+    // 현재 상태, 턴, 체크 여부를 표시한다.
+    function renderStatus() {
+      const inCheck = isKingInCheck(board, turn);
+      const turnText = colorName(turn);
+      const cssClass = gameOver ? "danger" : inCheck ? "danger" : "ok";
+      statusTextEl.innerHTML = `<span class="${cssClass}">${escapeHtml(statusMessage)}</span><small>현재 턴: ${turnText}${inCheck && !gameOver ? " · 체크 상태" : ""}</small>`;
+      turnBadgeEl.innerHTML = `<span class="dot ${turn === "b" ? "black" : ""}"></span>${turnText} 차례`;
+    }
+
+    // 이동 기록을 1수 단위로 묶어 표시한다.
+    function renderHistory() {
+      if (moveHistory.length === 0) {
+        historyEl.innerHTML = `<div class="empty-history">아직 이동 기록이 없습니다.</div>`;
+        return;
+      }
+
+      const rows = [];
+      for (let i = 0; i < moveHistory.length; i += 2) {
+        const whiteMove = moveHistory[i];
+        const blackMove = moveHistory[i + 1];
+        rows.push(`
+          <div class="history-row">
+            <div class="move-no">${whiteMove.number}.</div>
+            <div class="move-text">${escapeHtml(whiteMove.notation)}</div>
+            <div class="move-text">${blackMove ? escapeHtml(blackMove.notation) : ""}</div>
+          </div>
+        `);
+      }
+      historyEl.innerHTML = rows.join("");
+      historyEl.scrollTop = historyEl.scrollHeight;
+    }
+
+    // 잡은 말을 표시한다.
+    function renderCapturedPieces() {
+      capturedByWhiteEl.textContent = capturedByWhite.map(piece => pieceSymbols[piece]).join(" ") || "-";
+      capturedByBlackEl.textContent = capturedByBlack.map(piece => pieceSymbols[piece]).join(" ") || "-";
+    }
+
+    // 사용자가 체스판 칸을 클릭했을 때 선택 또는 이동을 처리한다.
+    function handleSquareClick(row, col) {
+      if (gameOver) return;
+
+      const clickedPiece = board[row][col];
+      const move = selectedMoves.find(item => item.to.row === row && item.to.col === col);
+
+      if (selected && move) {
+        makeMove(move);
+        return;
+      }
+
+      if (clickedPiece && getColor(clickedPiece) === turn) {
+        selected = { row, col };
+        selectedMoves = getLegalMoves(board, row, col);
+        statusMessage = `${colorName(turn)} ${pieceNames[getType(clickedPiece)]} 선택: ${squareName(row, col)}`;
+      } else {
+        selected = null;
+        selectedMoves = [];
+        statusMessage = clickedPiece
+          ? "상대 말입니다. 현재 턴의 말을 선택하세요."
+          : "이동할 말을 선택하세요.";
+      }
+
+      renderAll();
+    }
+
+    // 합법 수를 실제 보드에 반영하고 게임 상태를 갱신한다.
+    function makeMove(move) {
+      const piece = board[move.from.row][move.from.col];
+      const captured = board[move.to.row][move.to.col];
+      const movingColor = getColor(piece);
+      const opponent = opposite(movingColor);
+      const fullMoveNumber = Math.floor(moveHistory.length / 2) + 1;
+
+      board[move.to.row][move.to.col] = piece;
+      board[move.from.row][move.from.col] = null;
+
+      let promoted = false;
+      if (getType(piece) === "P" && (move.to.row === 0 || move.to.row === 7)) {
+        board[move.to.row][move.to.col] = movingColor + "Q";
+        promoted = true;
+      }
+
+      if (captured) {
+        if (movingColor === "w") capturedByWhite.push(captured);
+        else capturedByBlack.push(captured);
+      }
+
+      lastMove = { from: { ...move.from }, to: { ...move.to } };
+
+      const opponentInCheck = isKingInCheck(board, opponent);
+      const opponentMoves = getAllLegalMoves(board, opponent);
+      const checkmate = opponentInCheck && opponentMoves.length === 0;
+      const stalemate = !opponentInCheck && opponentMoves.length === 0;
+
+      moveHistory.push({
+        number: fullMoveNumber,
+        color: movingColor,
+        notation: formatMoveNotation(piece, move, captured, promoted, opponentInCheck, checkmate)
+      });
+
+      selected = null;
+      selectedMoves = [];
+      turn = opponent;
+
+      if (checkmate) {
+        gameOver = true;
+        statusMessage = `체크메이트! ${colorName(movingColor)} 승리입니다.`;
+      } else if (stalemate) {
+        gameOver = true;
+        statusMessage = "스테일메이트! 무승부입니다.";
+      } else if (opponentInCheck) {
+        statusMessage = `${colorName(opponent)} 킹이 체크 상태입니다.`;
+      } else {
+        statusMessage = `${colorName(turn)} 차례입니다.`;
+      }
+
+      renderAll();
+    }
+
+    // 특정 말의 진짜 합법 수를 반환한다. 자기 킹을 체크에 빠뜨리는 수는 제외한다.
+    function getLegalMoves(currentBoard, row, col) {
+      const piece = currentBoard[row][col];
+      if (!piece) return [];
+
+      const color = getColor(piece);
+      const pseudoMoves = getPseudoLegalMoves(currentBoard, row, col);
+      return pseudoMoves.filter(move => {
+        const nextBoard = cloneBoard(currentBoard);
+        applyMoveToBoard(nextBoard, move);
+        return !isKingInCheck(nextBoard, color);
+      });
+    }
+
+    // 말 자체의 이동 규칙만 반영한 후보 수를 반환한다. 체크 여부는 여기서 판단하지 않는다.
+    function getPseudoLegalMoves(currentBoard, row, col) {
+      const piece = currentBoard[row][col];
+      if (!piece) return [];
+
+      const color = getColor(piece);
+      const type = getType(piece);
+      const moves = [];
+
+      if (type === "P") addPawnMoves(currentBoard, row, col, color, moves);
+      if (type === "R") addSlidingMoves(currentBoard, row, col, color, moves, [[1, 0], [-1, 0], [0, 1], [0, -1]]);
+      if (type === "B") addSlidingMoves(currentBoard, row, col, color, moves, [[1, 1], [1, -1], [-1, 1], [-1, -1]]);
+      if (type === "Q") addSlidingMoves(currentBoard, row, col, color, moves, [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]);
+      if (type === "N") addKnightMoves(currentBoard, row, col, color, moves);
+      if (type === "K") addKingMoves(currentBoard, row, col, color, moves);
+
+      return moves;
+    }
+
+    // 폰 이동 후보를 추가한다.
+    function addPawnMoves(currentBoard, row, col, color, moves) {
+      const dir = color === "w" ? -1 : 1;
+      const startRow = color === "w" ? 6 : 1;
+      const oneStep = row + dir;
+      const twoStep = row + dir * 2;
+
+      if (inBounds(oneStep, col) && !currentBoard[oneStep][col]) {
+        moves.push(createMove(row, col, oneStep, col));
+        if (row === startRow && inBounds(twoStep, col) && !currentBoard[twoStep][col]) {
+          moves.push(createMove(row, col, twoStep, col));
+        }
+      }
+
+      for (const dc of [-1, 1]) {
+        const targetRow = row + dir;
+        const targetCol = col + dc;
+        if (!inBounds(targetRow, targetCol)) continue;
+        const targetPiece = currentBoard[targetRow][targetCol];
+        if (targetPiece && getColor(targetPiece) !== color) {
+          moves.push(createMove(row, col, targetRow, targetCol));
+        }
+      }
+    }
+
+    // 룩, 비숍, 퀸처럼 직선으로 움직이는 말의 후보 수를 추가한다.
+    function addSlidingMoves(currentBoard, row, col, color, moves, directions) {
+      for (const [dr, dc] of directions) {
+        let r = row + dr;
+        let c = col + dc;
+        while (inBounds(r, c)) {
+          const targetPiece = currentBoard[r][c];
+          if (!targetPiece) {
+            moves.push(createMove(row, col, r, c));
+          } else {
+            if (getColor(targetPiece) !== color) moves.push(createMove(row, col, r, c));
+            break;
+          }
+          r += dr;
+          c += dc;
+        }
+      }
+    }
+
+    // 나이트 이동 후보를 추가한다.
+    function addKnightMoves(currentBoard, row, col, color, moves) {
+      const deltas = [[2, 1], [2, -1], [-2, 1], [-2, -1], [1, 2], [1, -2], [-1, 2], [-1, -2]];
+      for (const [dr, dc] of deltas) {
+        const r = row + dr;
+        const c = col + dc;
+        if (!inBounds(r, c)) continue;
+        const targetPiece = currentBoard[r][c];
+        if (!targetPiece || getColor(targetPiece) !== color) moves.push(createMove(row, col, r, c));
+      }
+    }
+
+    // 킹 이동 후보를 추가한다. 캐슬링은 추후 확장 대상으로 제외한다.
+    function addKingMoves(currentBoard, row, col, color, moves) {
+      for (let dr = -1; dr <= 1; dr++) {
+        for (let dc = -1; dc <= 1; dc++) {
+          if (dr === 0 && dc === 0) continue;
+          const r = row + dr;
+          const c = col + dc;
+          if (!inBounds(r, c)) continue;
+          const targetPiece = currentBoard[r][c];
+          if (!targetPiece || getColor(targetPiece) !== color) moves.push(createMove(row, col, r, c));
+        }
+      }
+    }
+
+    // 특정 색의 모든 합법 수를 구한다. 체크메이트/스테일메이트 판정에 사용한다.
+    function getAllLegalMoves(currentBoard, color) {
+      const result = [];
+      for (let row = 0; row < 8; row++) {
+        for (let col = 0; col < 8; col++) {
+          const piece = currentBoard[row][col];
+          if (piece && getColor(piece) === color) {
+            result.push(...getLegalMoves(currentBoard, row, col));
+          }
+        }
+      }
+      return result;
+    }
+
+    // 특정 색의 킹이 공격받는지 확인한다.
+    function isKingInCheck(currentBoard, color) {
+      const kingSquare = findKing(currentBoard, color);
+      if (!kingSquare) return true;
+      return isSquareAttacked(currentBoard, kingSquare.row, kingSquare.col, opposite(color));
+    }
+
+    // 현재 턴의 킹이 체크 상태라면 그 위치를 반환한다.
+    function getCheckedKingSquare(currentBoard, color) {
+      if (!isKingInCheck(currentBoard, color)) return null;
+      return findKing(currentBoard, color);
+    }
+
+    // 특정 칸이 상대 색 말에게 공격받는지 확인한다.
+    function isSquareAttacked(currentBoard, targetRow, targetCol, byColor) {
+      for (let row = 0; row < 8; row++) {
+        for (let col = 0; col < 8; col++) {
+          const piece = currentBoard[row][col];
+          if (!piece || getColor(piece) !== byColor) continue;
+          if (canPieceAttackSquare(currentBoard, row, col, targetRow, targetCol)) return true;
+        }
+      }
+      return false;
+    }
+
+    // 각 말이 특정 칸을 공격할 수 있는지 확인한다. 폰은 이동이 아니라 공격 방향만 본다.
+    function canPieceAttackSquare(currentBoard, row, col, targetRow, targetCol) {
+      const piece = currentBoard[row][col];
+      const color = getColor(piece);
+      const type = getType(piece);
+      const dr = targetRow - row;
+      const dc = targetCol - col;
+
+      if (type === "P") {
+        const dir = color === "w" ? -1 : 1;
+        return dr === dir && Math.abs(dc) === 1;
+      }
+
+      if (type === "N") {
+        return (Math.abs(dr) === 2 && Math.abs(dc) === 1) || (Math.abs(dr) === 1 && Math.abs(dc) === 2);
+      }
+
+      if (type === "K") {
+        return Math.max(Math.abs(dr), Math.abs(dc)) === 1;
+      }
+
+      if (type === "R") {
+        return (dr === 0 || dc === 0) && isPathClear(currentBoard, row, col, targetRow, targetCol);
+      }
+
+      if (type === "B") {
+        return Math.abs(dr) === Math.abs(dc) && isPathClear(currentBoard, row, col, targetRow, targetCol);
+      }
+
+      if (type === "Q") {
+        const straight = dr === 0 || dc === 0;
+        const diagonal = Math.abs(dr) === Math.abs(dc);
+        return (straight || diagonal) && isPathClear(currentBoard, row, col, targetRow, targetCol);
+      }
+
+      return false;
+    }
+
+    // 직선/대각선 이동 경로 중간에 말이 있는지 확인한다.
+    function isPathClear(currentBoard, fromRow, fromCol, toRow, toCol) {
+      const rowStep = Math.sign(toRow - fromRow);
+      const colStep = Math.sign(toCol - fromCol);
+      let row = fromRow + rowStep;
+      let col = fromCol + colStep;
+
+      while (row !== toRow || col !== toCol) {
+        if (currentBoard[row][col]) return false;
+        row += rowStep;
+        col += colStep;
+      }
+      return true;
+    }
+
+    // 킹 위치를 찾는다.
+    function findKing(currentBoard, color) {
+      const king = color + "K";
+      for (let row = 0; row < 8; row++) {
+        for (let col = 0; col < 8; col++) {
+          if (currentBoard[row][col] === king) return { row, col };
+        }
+      }
+      return null;
+    }
+
+    // 시뮬레이션용 보드에 수를 적용한다.
+    function applyMoveToBoard(targetBoard, move) {
+      const piece = targetBoard[move.from.row][move.from.col];
+      targetBoard[move.to.row][move.to.col] = piece;
+      targetBoard[move.from.row][move.from.col] = null;
+
+      if (piece && getType(piece) === "P" && (move.to.row === 0 || move.to.row === 7)) {
+        targetBoard[move.to.row][move.to.col] = getColor(piece) + "Q";
+      }
+    }
+
+    // 이동 기록에 표시할 간단한 좌표식 기보를 만든다.
+    function formatMoveNotation(piece, move, captured, promoted, givesCheck, checkmate) {
+      const symbol = pieceSymbols[piece];
+      const captureMark = captured ? "x" : "-";
+      const promotionText = promoted ? "=Q" : "";
+      const suffix = checkmate ? "#" : givesCheck ? "+" : "";
+      return `${symbol} ${squareName(move.from.row, move.from.col)}${captureMark}${squareName(move.to.row, move.to.col)}${promotionText}${suffix}`;
+    }
+
+    function createMove(fromRow, fromCol, toRow, toCol) {
+      return { from: { row: fromRow, col: fromCol }, to: { row: toRow, col: toCol } };
+    }
+
+    function cloneBoard(currentBoard) {
+      return currentBoard.map(row => row.slice());
+    }
+
+    function inBounds(row, col) {
+      return row >= 0 && row < 8 && col >= 0 && col < 8;
+    }
+
+    function getColor(piece) {
+      return piece[0];
+    }
+
+    function getType(piece) {
+      return piece[1];
+    }
+
+    function opposite(color) {
+      return color === "w" ? "b" : "w";
+    }
+
+    function colorName(color) {
+      return color === "w" ? "백" : "흑";
+    }
+
+    function squareName(row, col) {
+      return files[col] + String(8 - row);
+    }
+
+    function isSameSquare(a, b) {
+      return a && b && a.row === b.row && a.col === b.col;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    newGameBtn.addEventListener("click", initGame);
+    initGame();
+  </script>
+</body>
+</html>
