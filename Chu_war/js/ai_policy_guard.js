@@ -322,8 +322,7 @@ window.ChuWar = window.ChuWar || {};
   }
 
   function shouldKeepMove(fromRow, fromCol, move, piece) {
-    const target = A.S.board[move.r] && A.S.board[move.c] ? null : null;
-    const realTarget = A.S.board[move.r] && A.S.board[move.r][move.c];
+    const target = A.S.board[move.r] && A.S.board[move.r][move.c];
     const nowPhase = phase();
     const currentKingDanger = kingDanger(A.S.board);
     const afterBoard = simulateMove(fromRow, fromCol, move);
@@ -352,10 +351,10 @@ window.ChuWar = window.ChuWar || {};
     }
 
     if (piece.type === 'CAVALRY') {
-      if (!shouldKeepCavalryMove(fromRow, fromCol, move, piece, realTarget, nowPhase)) return false;
+      if (!shouldKeepCavalryMove(fromRow, fromCol, move, piece, target, nowPhase)) return false;
     }
 
-    if (!shouldKeepHiddenAttack(fromRow, fromCol, move, piece, realTarget, nowPhase)) return false;
+    if (!shouldKeepHiddenAttack(fromRow, fromCol, move, piece, target, nowPhase)) return false;
 
     return true;
   }
@@ -405,7 +404,7 @@ window.ChuWar = window.ChuWar || {};
           if (isEndgameHuntMode()) score += 140;
           if (score > bestScore) {
             bestScore = score;
-            best = { fromRow: row, fromCol: col, move, piece, score };
+            best = { fromRow: row, fromCol: col, move: move, piece: piece, score: score };
           }
         }
       }
