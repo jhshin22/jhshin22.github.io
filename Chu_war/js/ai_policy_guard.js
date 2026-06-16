@@ -34,6 +34,20 @@ window.ChuWar = window.ChuWar || {};
     return Math.abs(aRow - bRow) + Math.abs(aCol - bCol);
   }
 
+  function pieceValue(type) {
+    if (type === 'KING') return 10000;
+    if (type === 'G5') return 900;
+    if (type === 'G4') return 760;
+    if (type === 'G3') return 620;
+    if (type === 'G2') return 500;
+    if (type === 'G1') return 380;
+    if (type === 'CAVALRY') return 330;
+    if (type === 'SPY') return 310;
+    if (type === 'BOMB') return 260;
+    if (type === 'INFANTRY') return 160;
+    return 100;
+  }
+
   function sameSquare(a, row, col) {
     return a && a[0] === row && a[1] === col;
   }
@@ -226,22 +240,67 @@ window.ChuWar = window.ChuWar || {};
     return sameSquare(previous.to, fromRow, fromCol) && sameSquare(previous.from, move.r, move.c);
   }
 
+  function directAttackScore(piece, target, row, col, move) {
+    if (!piece || !target || target.owner !== 'bottom') return -99999;
+    if (target.revealed) {
+      const result = A.battleRank(piece, target);
+      if (target.type === 'KING' && (result === 'A' || result === 'X')) return 90000;
+      if (result === 'A') return 700 + pieceValue(target.type) - pieceValue(piece.type) * 0.15;
+      if (result === 'X') return 420 + pieceValue(target.type) * 0.55 - pieceValue(piece.type) * 0.55;
+      if (result === 'D' || result === 'K') return 220 + pieceValue(target.type) * 0.35 - pieceValue(piece.type) * 0.35;
+      return -90000;
+    }
+    let score = hiddenKingCandidateScore(target, row, col);
+    if (isEndgameHuntMode()) score += 320;
+    if (move && move.kind === 'special') score -= 120;
+    return score;
+  }
+
+  function bestDirectCavalryAttack(fromRow, fromCol, piece) {
+    if (!piece || piece.type !== 'CAVALRY') return { score: -99999, move: null };
+    let best = { score: -99999, move: null };
+    const rawMoves = previousLegal.apply(A, [fromRow, fromCol]);
+    for (const move of rawMoves) {
+      if (!move.hit) continue;
+      const target = A.S.board[move.r] && A.S.board[move.r][move.c];
+      const score = directAttackScore(piece, target, move.r, move.c, move);
+      if (score > best.score) best = { score, move };
+    }
+    return best;
+  }
+
+  function shouldSuppressCavalrySetupMove(fromRow, fromCol, move, piece) {
+    if (!piece || piece.type !== 'CAVALRY' || move.hit) return false;
+    const best = bestDirectCavalryAttack(fromRow, fromCol, piece);
+    if (!best.move || best.score < 520) return false;
+    return !moveHelpsKing(fromRow, fromCol, move);
+  }
+
   function shouldKeepCavalryMove(fromRow, fromCol, move, piece, target, nowPhase) {
     const moveDistance = move.dist || distance(fromRow, fromCol, move.r, move.c);
     if (moveDistance < 2) return true;
-    if (nowPhase === 'late' && move.hit && target && target.revealed) return true;
 
-    if (target && target.owner === 'bottom' && !target.revealed) {
-      if (hiddenKingCandidateScore(target, move.r, move.c) < 285) return false;
-      if (nowPhase === 'early' && hiddenNeighborCount(move.r, move.c) >= 1) return false;
+    if (target && target.owner === 'bottom') {
+      if (target.revealed) return true;
+      const candidateScore = hiddenKingCandidateScore(target, move.r, move.c);
+      if (isEndgameHuntMode()) return candidateScore >= 120;
+      if (candidateScore < 210) return false;
+      if (nowPhase === 'early' && candidateScore < 285 && hiddenNeighborCount(move.r, move.c) >= 1) return false;
+      return true;
+    }
+
+    if (piece.revealed && !target) {
+      if (hiddenNeighborCount(move.r, move.c) >= 1 && !moveHelpsKing(fromRow, fromCol, move)) return false;
       return true;
     }
 
     if (!target) {
       const nearest = bestHiddenCandidateNear(move.r, move.c);
-      const usefulCandidatePressure = nearest.distance <= 2 && nearest.score >= 260;
-      const usefulLinePressure = linePressure(move.r, move.c) >= 285;
-      if (!usefulCandidatePressure && !usefulLinePressure && !moveHelpsKing(fromRow, fromCol, move)) return false;
+      const beforeNearest = bestHiddenCandidateNear(fromRow, fromCol);
+      const usefulCandidatePressure = nearest.distance <= 2 && nearest.score >= 230;
+      const improvesCandidateDistance = nearest.score >= 220 && nearest.distance + 1 < beforeNearest.distance;
+      const usefulLinePressure = linePressure(move.r, move.c) >= 250;
+      if (!usefulCandidatePressure && !improvesCandidateDistance && !usefulLinePressure && !moveHelpsKing(fromRow, fromCol, move)) return false;
       if (hiddenNeighborCount(move.r, move.c) >= 1) return false;
       if (nowPhase === 'late' && !usefulLinePressure && nearest.distance > 3 && !moveHelpsKing(fromRow, fromCol, move)) return false;
     }
@@ -251,6 +310,7 @@ window.ChuWar = window.ChuWar || {};
 
   function shouldKeepHiddenAttack(fromRow, fromCol, move, piece, target, nowPhase) {
     if (!target || target.owner !== 'bottom' || target.revealed) return true;
+    if (piece.type === 'CAVALRY' && (move.dist || distance(fromRow, fromCol, move.r, move.c)) >= 2) return true;
     if (!A.isGen(piece.type)) return true;
     if (moveHelpsKing(fromRow, fromCol, move)) return true;
     if (isEndgameHuntMode()) return true;
@@ -262,7 +322,8 @@ window.ChuWar = window.ChuWar || {};
   }
 
   function shouldKeepMove(fromRow, fromCol, move, piece) {
-    const target = A.S.board[move.r] && A.S.board[move.r][move.c];
+    const target = A.S.board[move.r] && A.S.board[move.c] ? null : null;
+    const realTarget = A.S.board[move.r] && A.S.board[move.r][move.c];
     const nowPhase = phase();
     const currentKingDanger = kingDanger(A.S.board);
     const afterBoard = simulateMove(fromRow, fromCol, move);
@@ -282,16 +343,19 @@ window.ChuWar = window.ChuWar || {};
       return false;
     }
 
+    if (shouldSuppressCavalrySetupMove(fromRow, fromCol, move, piece)) {
+      return false;
+    }
+
     if (move.kind === 'special' && !move.hit) {
-      const targetPressure = hiddenKingCandidateScore(target, move.r, move.c);
-      if (targetPressure < 285 && hiddenNeighborCount(move.r, move.c) === 0 && !moveHelpsKing(fromRow, fromCol, move)) return false;
+      if (!moveHelpsKing(fromRow, fromCol, move)) return false;
     }
 
     if (piece.type === 'CAVALRY') {
-      if (!shouldKeepCavalryMove(fromRow, fromCol, move, piece, target, nowPhase)) return false;
+      if (!shouldKeepCavalryMove(fromRow, fromCol, move, piece, realTarget, nowPhase)) return false;
     }
 
-    if (!shouldKeepHiddenAttack(fromRow, fromCol, move, piece, target, nowPhase)) return false;
+    if (!shouldKeepHiddenAttack(fromRow, fromCol, move, piece, realTarget, nowPhase)) return false;
 
     return true;
   }
@@ -318,6 +382,37 @@ window.ChuWar = window.ChuWar || {};
     return 250;
   }
 
+  function chooseForcedCavalryStrike() {
+    if (currentMode() !== 'ai-summer' || !isAiTopTurn()) return null;
+    let best = null;
+    let bestScore = -99999;
+    const currentDanger = kingDanger(A.S.board);
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = A.S.board[row][col];
+        if (!piece || piece.owner !== 'top' || piece.type !== 'CAVALRY') continue;
+        const moves = A.legal(row, col);
+        for (const move of moves) {
+          if (!move.hit) continue;
+          const target = A.S.board[move.r] && A.S.board[move.r][move.c];
+          if (!target || target.owner !== 'bottom') continue;
+          const afterDanger = kingDanger(simulateMove(row, col, move));
+          if (currentDanger >= 900 && afterDanger >= currentDanger) continue;
+          if (afterDanger >= 900 && afterDanger > currentDanger + 250) continue;
+          let score = directAttackScore(piece, target, move.r, move.c, move);
+          if (target.revealed) score += 180;
+          if (piece.revealed) score += 120;
+          if (isEndgameHuntMode()) score += 140;
+          if (score > bestScore) {
+            bestScore = score;
+            best = { fromRow: row, fromCol: col, move, piece, score };
+          }
+        }
+      }
+    }
+    return bestScore >= 640 ? best : null;
+  }
+
   function chooseForcedHunt() {
     if (currentMode() !== 'ai-summer' || !isAiTopTurn() || !isEndgameHuntMode()) return null;
     const enemy = pieceSummary('bottom');
@@ -341,6 +436,7 @@ window.ChuWar = window.ChuWar || {};
           score += Math.max(0, 5 - enemy.hidden) * 95;
           if (enemy.hidden <= 2) score += 260;
           if (piece.revealed && A.isGen(piece.type)) score += 140;
+          if (piece.type === 'CAVALRY') score += 210;
           if (piece.type === 'BOMB') score -= 180;
           if (move.kind === 'special') score -= 120;
           if (score > bestScore) {
@@ -355,7 +451,8 @@ window.ChuWar = window.ChuWar || {};
 
   function runForcedHunt() {
     if (forcedHuntBusy) return true;
-    const hunt = chooseForcedHunt();
+    const cavalryStrike = chooseForcedCavalryStrike();
+    const hunt = cavalryStrike || chooseForcedHunt();
     if (!hunt) return false;
     forcedHuntBusy = true;
     A.S.viewer = 'bottom';
@@ -367,8 +464,8 @@ window.ChuWar = window.ChuWar || {};
       if (!isAiTopTurn() || A.S.phase !== 'playing') return;
       const piece = A.S.board[hunt.fromRow] && A.S.board[hunt.fromRow][hunt.fromCol];
       const target = A.S.board[hunt.move.r] && A.S.board[hunt.move.r][hunt.move.c];
-      if (piece && piece.id === hunt.piece.id && target && target.owner === 'bottom' && !target.revealed) {
-        A.S.logs.unshift('여름 AI 긴급 추격: 후반 왕 후보 직접 공격');
+      if (piece && piece.id === hunt.piece.id && target && target.owner === 'bottom') {
+        A.S.logs.unshift(cavalryStrike ? '여름 AI 기병 직격: 장거리 공격 우선' : '여름 AI 긴급 추격: 후반 왕 후보 직접 공격');
         A.applyMove(hunt.fromRow, hunt.fromCol, hunt.move.r, hunt.move.c, hunt.move);
         return;
       }
