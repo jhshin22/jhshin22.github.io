@@ -2,6 +2,7 @@ window.ChuWar = window.ChuWar || {};
 (function (A) {
   const previousLegal = A.legal;
   const previousApplyMove = A.applyMove;
+  const previousResetAi = A.resetAi;
   if (!previousLegal) return;
 
   const lastTopMoveByPiece = new Map();
@@ -200,7 +201,7 @@ window.ChuWar = window.ChuWar || {};
   function shouldKeepCavalryMove(fromRow, fromCol, move, piece, target, nowPhase) {
     const moveDistance = move.dist || distance(fromRow, fromCol, move.r, move.c);
     if (moveDistance < 2) return true;
-    if (nowPhase === 'late') return true;
+    if (nowPhase === 'late' && move.hit && target && target.revealed) return true;
 
     if (target && target.owner === 'bottom' && !target.revealed) {
       if (hiddenKingCandidateScore(target, move.r, move.c) < 285) return false;
@@ -214,6 +215,7 @@ window.ChuWar = window.ChuWar || {};
       const usefulLinePressure = linePressure(move.r, move.c) >= 285;
       if (!usefulCandidatePressure && !usefulLinePressure && !moveHelpsKing(fromRow, fromCol, move)) return false;
       if (hiddenNeighborCount(move.r, move.c) >= 1) return false;
+      if (nowPhase === 'late' && !usefulLinePressure && nearest.distance > 3 && !moveHelpsKing(fromRow, fromCol, move)) return false;
     }
 
     return true;
@@ -221,12 +223,12 @@ window.ChuWar = window.ChuWar || {};
 
   function shouldKeepHiddenAttack(fromRow, fromCol, move, piece, target, nowPhase) {
     if (!target || target.owner !== 'bottom' || target.revealed) return true;
-    if (nowPhase === 'late') return true;
     if (!A.isGen(piece.type)) return true;
     if (moveHelpsKing(fromRow, fromCol, move)) return true;
     const candidateScore = hiddenKingCandidateScore(target, move.r, move.c);
     if (piece.type === 'G5' && candidateScore < 330) return false;
-    if (candidateScore < 260) return false;
+    if (nowPhase !== 'late' && candidateScore < 260) return false;
+    if (nowPhase === 'late' && candidateScore < 220) return false;
     return true;
   }
 
@@ -234,9 +236,15 @@ window.ChuWar = window.ChuWar || {};
     const target = A.S.board[move.r] && A.S.board[move.r][move.c];
     const nowPhase = phase();
     const currentKingDanger = kingDanger(A.S.board);
+    const afterBoard = simulateMove(fromRow, fromCol, move);
+    const afterKingDanger = kingDanger(afterBoard);
 
-    if (currentKingDanger >= 900 && !moveHelpsKing(fromRow, fromCol, move)) {
-      if (!move.hit || !target || !target.revealed) return false;
+    if (afterKingDanger >= 900 && afterKingDanger > currentKingDanger + 250) {
+      return false;
+    }
+
+    if (currentKingDanger >= 900 && afterKingDanger >= currentKingDanger) {
+      return false;
     }
 
     if (piece.type === 'BOMB' && !move.hit) return false;
@@ -284,4 +292,9 @@ window.ChuWar = window.ChuWar || {};
       return result;
     };
   }
+
+  A.resetAi = function () {
+    lastTopMoveByPiece.clear();
+    if (previousResetAi) previousResetAi.apply(A, arguments);
+  };
 })(ChuWar);
