@@ -321,6 +321,48 @@ window.ChuWar = window.ChuWar || {};
     return true;
   }
 
+  function emergencyMoveScore(fromRow, fromCol, move, piece, currentDanger) {
+    const target = A.S.board[move.r] && A.S.board[move.r][move.c];
+    const afterDanger = kingDanger(simulateMove(fromRow, fromCol, move));
+    if (afterDanger > currentDanger + 250) return -99999;
+    let score = 0;
+    if (afterDanger < currentDanger) score += (currentDanger - afterDanger) * 4;
+    if (target && target.owner === 'bottom') {
+      const attackScore = directAttackScore(piece, target, move.r, move.c, move);
+      if (target.revealed && target.type === 'KING') return 90000;
+      if (attackScore > -90000) score += 900 + attackScore;
+      if (!target.revealed && isEndgameHuntMode()) score += 420;
+    } else if (afterDanger <= currentDanger) {
+      const near = bestHiddenCandidateNear(move.r, move.c);
+      if (near.score >= 260 && near.distance <= 2) score += 300 + near.score;
+      if (linePressure(move.r, move.c) >= 285) score += 260;
+    }
+    if (piece.type === 'KING') score -= 900;
+    if (piece.type === 'BOMB' && !move.hit) score -= 900;
+    if (isImmediateBacktrack(fromRow, fromCol, move, piece)) score -= 500;
+    return score;
+  }
+
+  function isEmergencyCounterplay(fromRow, fromCol, move, piece, currentDanger) {
+    return emergencyMoveScore(fromRow, fromCol, move, piece, currentDanger) >= 650;
+  }
+
+  function emergencyFallbackMoves(fromRow, fromCol, moves, piece) {
+    const currentDanger = kingDanger(A.S.board);
+    if (currentDanger < 900) return [];
+    const fallback = [];
+    for (const move of moves) {
+      const target = A.S.board[move.r] && A.S.board[move.r][move.c];
+      const afterDanger = kingDanger(simulateMove(fromRow, fromCol, move));
+      if (afterDanger > currentDanger + 250) continue;
+      if (piece.type === 'BOMB' && !move.hit) continue;
+      if (isImmediateBacktrack(fromRow, fromCol, move, piece) && afterDanger >= currentDanger) continue;
+      const score = emergencyMoveScore(fromRow, fromCol, move, piece, currentDanger);
+      if (score >= 0 || (target && target.owner === 'bottom') || afterDanger <= currentDanger) fallback.push(move);
+    }
+    return fallback;
+  }
+
   function shouldKeepMove(fromRow, fromCol, move, piece) {
     const target = A.S.board[move.r] && A.S.board[move.r][move.c];
     const nowPhase = phase();
@@ -332,7 +374,7 @@ window.ChuWar = window.ChuWar || {};
       return false;
     }
 
-    if (currentKingDanger >= 900 && afterKingDanger >= currentKingDanger) {
+    if (currentKingDanger >= 900 && afterKingDanger >= currentKingDanger && !isEmergencyCounterplay(fromRow, fromCol, move, piece, currentKingDanger)) {
       return false;
     }
 
@@ -363,9 +405,11 @@ window.ChuWar = window.ChuWar || {};
     const moves = previousLegal.apply(A, arguments);
     const piece = A.S.board[row] && A.S.board[row][col];
     if (!isAiTopTurn() || !piece || piece.owner !== 'top') return moves;
-    return moves.filter(function (move) {
+    const filtered = moves.filter(function (move) {
       return shouldKeepMove(row, col, move, piece);
     });
+    if (filtered.length > 0) return filtered;
+    return emergencyFallbackMoves(row, col, moves, piece);
   };
 
   function forcePieceScore(piece) {
@@ -379,6 +423,29 @@ window.ChuWar = window.ChuWar || {};
     if (piece.type === 'BOMB') return 330;
     if (piece.type === 'CAVALRY') return 300;
     return 250;
+  }
+
+  function chooseEmergencyResponse() {
+    if (currentMode() !== 'ai-summer' || !isAiTopTurn()) return null;
+    const currentDanger = kingDanger(A.S.board);
+    if (currentDanger < 900) return null;
+    let best = null;
+    let bestScore = -99999;
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = A.S.board[row][col];
+        if (!piece || piece.owner !== 'top') continue;
+        const moves = previousLegal.apply(A, [row, col]);
+        for (const move of moves) {
+          const score = emergencyMoveScore(row, col, move, piece, currentDanger);
+          if (score > bestScore) {
+            bestScore = score;
+            best = { fromRow: row, fromCol: col, move: move, piece: piece, score: score };
+          }
+        }
+      }
+    }
+    return bestScore >= 250 ? best : null;
   }
 
   function chooseForcedCavalryStrike() {
@@ -396,7 +463,7 @@ window.ChuWar = window.ChuWar || {};
           const target = A.S.board[move.r] && A.S.board[move.r][move.c];
           if (!target || target.owner !== 'bottom') continue;
           const afterDanger = kingDanger(simulateMove(row, col, move));
-          if (currentDanger >= 900 && afterDanger >= currentDanger) continue;
+          if (currentDanger >= 900 && afterDanger >= currentDanger && !isEmergencyCounterplay(row, col, move, piece, currentDanger)) continue;
           if (afterDanger >= 900 && afterDanger > currentDanger + 250) continue;
           let score = directAttackScore(piece, target, move.r, move.c, move);
           if (target.revealed) score += 180;
@@ -428,7 +495,7 @@ window.ChuWar = window.ChuWar || {};
           const target = A.S.board[move.r] && A.S.board[move.r][move.c];
           if (!target || target.owner !== 'bottom' || target.revealed) continue;
           const afterDanger = kingDanger(simulateMove(row, col, move));
-          if (currentDanger >= 900 && afterDanger >= currentDanger) continue;
+          if (currentDanger >= 900 && afterDanger >= currentDanger && !isEmergencyCounterplay(row, col, move, piece, currentDanger)) continue;
           if (afterDanger >= 900 && afterDanger > currentDanger + 250) continue;
           let score = forcePieceScore(piece) + hiddenKingCandidateScore(target, move.r, move.c);
           score += Math.max(0, 6 - enemy.total) * 125;
@@ -450,8 +517,9 @@ window.ChuWar = window.ChuWar || {};
 
   function runForcedHunt() {
     if (forcedHuntBusy) return true;
-    const cavalryStrike = chooseForcedCavalryStrike();
-    const hunt = cavalryStrike || chooseForcedHunt();
+    const emergency = chooseEmergencyResponse();
+    const cavalryStrike = emergency ? null : chooseForcedCavalryStrike();
+    const hunt = emergency || cavalryStrike || chooseForcedHunt();
     if (!hunt) return false;
     forcedHuntBusy = true;
     A.S.viewer = 'bottom';
@@ -463,8 +531,8 @@ window.ChuWar = window.ChuWar || {};
       if (!isAiTopTurn() || A.S.phase !== 'playing') return;
       const piece = A.S.board[hunt.fromRow] && A.S.board[hunt.fromRow][hunt.fromCol];
       const target = A.S.board[hunt.move.r] && A.S.board[hunt.move.r][hunt.move.c];
-      if (piece && piece.id === hunt.piece.id && target && target.owner === 'bottom') {
-        A.S.logs.unshift(cavalryStrike ? '여름 AI 기병 직격: 장거리 공격 우선' : '여름 AI 긴급 추격: 후반 왕 후보 직접 공격');
+      if (piece && piece.id === hunt.piece.id && (hunt.move && (!hunt.move.hit || (target && target.owner === 'bottom')))) {
+        A.S.logs.unshift(emergency ? '여름 AI 비상 대응: 왕 위협 중 최선 대응' : (cavalryStrike ? '여름 AI 기병 직격: 장거리 공격 우선' : '여름 AI 긴급 추격: 후반 왕 후보 직접 공격'));
         A.applyMove(hunt.fromRow, hunt.fromCol, hunt.move.r, hunt.move.c, hunt.move);
         return;
       }
