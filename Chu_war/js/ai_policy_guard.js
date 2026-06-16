@@ -3,9 +3,11 @@ window.ChuWar = window.ChuWar || {};
   const previousLegal = A.legal;
   const previousApplyMove = A.applyMove;
   const previousResetAi = A.resetAi;
+  const previousScheduleAiTurn = A.scheduleAiTurn;
   if (!previousLegal) return;
 
   const lastTopMoveByPiece = new Map();
+  let forcedHuntBusy = false;
 
   function currentMode() {
     const select = document.getElementById('modeSelect');
@@ -36,6 +38,26 @@ window.ChuWar = window.ChuWar || {};
     return a && a[0] === row && a[1] === col;
   }
 
+  function pieceSummary(owner) {
+    const result = { total: 0, hidden: 0, revealed: 0, nonKing: 0 };
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = A.S.board[row][col];
+        if (!piece || piece.owner !== owner) continue;
+        result.total++;
+        if (piece.type !== 'KING') result.nonKing++;
+        if (piece.revealed) result.revealed++;
+        else result.hidden++;
+      }
+    }
+    return result;
+  }
+
+  function isEndgameHuntMode() {
+    const enemy = pieceSummary('bottom');
+    return phase() === 'late' || enemy.total <= 5 || enemy.hidden <= 4;
+  }
+
   function hiddenNeighborCount(row, col) {
     let count = 0;
     const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
@@ -53,6 +75,12 @@ window.ChuWar = window.ChuWar || {};
     else if (row === 6) score += 55;
     else if (row === 5) score += 25;
     if (col === 3 || col === 4) score += 18;
+    if (isEndgameHuntMode()) {
+      const enemy = pieceSummary('bottom');
+      score += Math.max(0, 6 - enemy.total) * 85;
+      score += Math.max(0, 5 - enemy.hidden) * 70;
+      if (enemy.hidden <= 2) score += 180;
+    }
     return score;
   }
 
@@ -225,6 +253,7 @@ window.ChuWar = window.ChuWar || {};
     if (!target || target.owner !== 'bottom' || target.revealed) return true;
     if (!A.isGen(piece.type)) return true;
     if (moveHelpsKing(fromRow, fromCol, move)) return true;
+    if (isEndgameHuntMode()) return true;
     const candidateScore = hiddenKingCandidateScore(target, move.r, move.c);
     if (piece.type === 'G5' && candidateScore < 330) return false;
     if (nowPhase !== 'late' && candidateScore < 260) return false;
@@ -276,6 +305,85 @@ window.ChuWar = window.ChuWar || {};
     });
   };
 
+  function forcePieceScore(piece) {
+    if (!piece || piece.type === 'KING') return -99999;
+    if (piece.type === 'G5') return 760;
+    if (piece.type === 'G4') return 740;
+    if (piece.type === 'G3') return 610;
+    if (piece.type === 'G2') return 520;
+    if (piece.type === 'SPY') return piece.revealed ? 280 : 560;
+    if (piece.type === 'INFANTRY') return 430;
+    if (piece.type === 'BOMB') return 330;
+    if (piece.type === 'CAVALRY') return 300;
+    return 250;
+  }
+
+  function chooseForcedHunt() {
+    if (currentMode() !== 'ai-summer' || !isAiTopTurn() || !isEndgameHuntMode()) return null;
+    const enemy = pieceSummary('bottom');
+    if (enemy.total > 5 && enemy.hidden > 3) return null;
+    const currentDanger = kingDanger(A.S.board);
+    let best = null;
+    let bestScore = -99999;
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = A.S.board[row][col];
+        if (!piece || piece.owner !== 'top' || piece.type === 'KING') continue;
+        const moves = A.legal(row, col);
+        for (const move of moves) {
+          const target = A.S.board[move.r] && A.S.board[move.r][move.c];
+          if (!target || target.owner !== 'bottom' || target.revealed) continue;
+          const afterDanger = kingDanger(simulateMove(row, col, move));
+          if (currentDanger >= 900 && afterDanger >= currentDanger) continue;
+          if (afterDanger >= 900 && afterDanger > currentDanger + 250) continue;
+          let score = forcePieceScore(piece) + hiddenKingCandidateScore(target, move.r, move.c);
+          score += Math.max(0, 6 - enemy.total) * 125;
+          score += Math.max(0, 5 - enemy.hidden) * 95;
+          if (enemy.hidden <= 2) score += 260;
+          if (piece.revealed && A.isGen(piece.type)) score += 140;
+          if (piece.type === 'BOMB') score -= 180;
+          if (move.kind === 'special') score -= 120;
+          if (score > bestScore) {
+            bestScore = score;
+            best = { fromRow: row, fromCol: col, move: move, piece: piece };
+          }
+        }
+      }
+    }
+    return bestScore >= 720 ? best : null;
+  }
+
+  function runForcedHunt() {
+    if (forcedHuntBusy) return true;
+    const hunt = chooseForcedHunt();
+    if (!hunt) return false;
+    forcedHuntBusy = true;
+    A.S.viewer = 'bottom';
+    const cover = document.getElementById('cover');
+    if (cover) cover.classList.add('hidden');
+    if (A.render) A.render();
+    setTimeout(function () {
+      forcedHuntBusy = false;
+      if (!isAiTopTurn() || A.S.phase !== 'playing') return;
+      const piece = A.S.board[hunt.fromRow] && A.S.board[hunt.fromRow][hunt.fromCol];
+      const target = A.S.board[hunt.move.r] && A.S.board[hunt.move.r][hunt.move.c];
+      if (piece && piece.id === hunt.piece.id && target && target.owner === 'bottom' && !target.revealed) {
+        A.S.logs.unshift('여름 AI 긴급 추격: 후반 왕 후보 직접 공격');
+        A.applyMove(hunt.fromRow, hunt.fromCol, hunt.move.r, hunt.move.c, hunt.move);
+        return;
+      }
+      if (previousScheduleAiTurn) previousScheduleAiTurn.apply(A, arguments);
+    }, 420);
+    return true;
+  }
+
+  if (previousScheduleAiTurn) {
+    A.scheduleAiTurn = function () {
+      if (currentMode() === 'ai-summer' && isAiTopTurn() && runForcedHunt()) return;
+      return previousScheduleAiTurn.apply(A, arguments);
+    };
+  }
+
   if (previousApplyMove) {
     A.applyMove = function (fromRow, fromCol, toRow, toCol, move) {
       const pieceBeforeMove = A.S.board[fromRow] && A.S.board[fromRow][fromCol];
@@ -294,6 +402,7 @@ window.ChuWar = window.ChuWar || {};
   }
 
   A.resetAi = function () {
+    forcedHuntBusy = false;
     lastTopMoveByPiece.clear();
     if (previousResetAi) previousResetAi.apply(A, arguments);
   };
