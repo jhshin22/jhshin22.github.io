@@ -1,0 +1,636 @@
+window.ChuWar = window.ChuWar || {};
+(function (A) {
+  var prev = A.scheduleAiTurn,
+    oldReset = A.resetAi,
+    busy = false,
+    mem = null;
+  var V = {
+    KING: 10000,
+    G5: 900,
+    G4: 760,
+    G3: 620,
+    G2: 500,
+    G1: 380,
+    CAVALRY: 330,
+    SPY: 310,
+    BOMB: 260,
+    INFANTRY: 160,
+  };
+  var ST = [
+    {
+      key: "balanced",
+      name: "균형형",
+      w: { cand: 1, atk: 1, info: 1, def: 1.15, avoid: 1.15 },
+    },
+    {
+      key: "scout",
+      name: "정찰형",
+      w: { cand: 0.95, atk: 0.85, info: 1.35, def: 1.05, avoid: 1.15 },
+    },
+    {
+      key: "pressure",
+      name: "압박형",
+      w: { cand: 1.5, atk: 1.15, info: 0.85, def: 1, avoid: 1.1 },
+    },
+    {
+      key: "defense",
+      name: "수비형",
+      w: { cand: 0.85, atk: 0.75, info: 0.8, def: 1.9, avoid: 1.45 },
+    },
+    {
+      key: "trap",
+      name: "함정형",
+      w: { cand: 1.05, atk: 0.9, info: 0.95, def: 1.25, avoid: 1.25 },
+    },
+  ];
+  function mode() {
+    var s = document.getElementById("modeSelect");
+    return s ? s.value : "human";
+  }
+  function val(t) {
+    return V[t] || 100;
+  }
+  function id(p) {
+    return p && p.id ? p.id : "";
+  }
+  function ensure() {
+    if (mem) return;
+    var st = ST[Math.floor(Math.random() * ST.length)];
+    mem = { style: st, seen: {}, processed: "" };
+    A.S.logs.unshift("여름 AI 성향: " + st.name);
+  }
+  function rec(p, r, c) {
+    ensure();
+    var k = id(p);
+    if (!k) return null;
+    if (!mem.seen[k])
+      mem.seen[k] = {
+        king: 120,
+        moved: 0,
+        stale: 0,
+        last: [r, c],
+        known: null,
+      };
+    var x = mem.seen[k];
+    x.last = [r, c];
+    if (p.revealed) {
+      x.known = p.type;
+      x.king = p.type === "KING" ? 1000 : 0;
+    }
+    return x;
+  }
+  function clamp(x) {
+    return Math.max(0, Math.min(420, x));
+  }
+  function allMoves(o) {
+    var out = [];
+    for (var r = 0; r < 8; r++)
+      for (var c = 0; c < 8; c++) {
+        var p = A.S.board[r][c];
+        if (p && p.owner === o)
+          A.legal(r, c).forEach(function (m) {
+            out.push({ fr: r, fc: c, to: m, p: p });
+          });
+      }
+    return out;
+  }
+  function phase() {
+    var n = 0;
+    for (var r = 0; r < 8; r++)
+      for (var c = 0; c < 8; c++) if (A.S.board[r][c]) n++;
+    return n > 24 ? "early" : n > 12 ? "mid" : "late";
+  }
+  function scan() {
+    ensure();
+    for (var r = 0; r < 8; r++)
+      for (var c = 0; c < 8; c++) {
+        var p = A.S.board[r][c];
+        if (p && p.owner === "bottom") rec(p, r, c);
+      }
+  }
+  function inferMoveType(mv, p) {
+    if (!mv.from || !mv.to || !p || !p.revealed) return null;
+    var dr = mv.to[0] - mv.from[0],
+      dc = mv.to[1] - mv.from[1],
+      ar = Math.abs(dr),
+      ac = Math.abs(dc),
+      d = ar + ac;
+    if ((ar === 2 && ac === 1) || (ar === 1 && ac === 2)) return "G1";
+    if (ar === 1 && ac === 1) return "G3";
+    if (d === 2 && (dr === 0 || dc === 0)) {
+      var mr = (mv.from[0] + mv.to[0]) / 2,
+        mc = (mv.from[1] + mv.to[1]) / 2,
+        q = A.S.board[mr] && A.S.board[mr][mc];
+      return q && q.owner === "bottom" ? "G2" : "CAVALRY";
+    }
+    if (d >= 2 && (dr === 0 || dc === 0)) return "CAVALRY";
+    return p.type;
+  }
+  function updateMemory() {
+    ensure();
+    scan();
+    var mv = A.S.lastMove;
+    if (!mv || mv.owner !== "bottom") return;
+    var key = JSON.stringify([mv.owner, mv.from, mv.to, mv.text]);
+    if (mem.processed === key) return;
+    mem.processed = key;
+    var movedId = "";
+    if (mv.to) {
+      var p = A.S.board[mv.to[0]] && A.S.board[mv.to[0]][mv.to[1]];
+      if (!p || p.owner !== "bottom")
+        p =
+          mv.from && A.S.board[mv.from[0]] && A.S.board[mv.from[0]][mv.from[1]];
+      if (p && p.owner === "bottom") {
+        movedId = id(p);
+        var x = rec(p, (mv.to && mv.to[0]) || 0, (mv.to && mv.to[1]) || 0);
+        x.moved++;
+        x.stale = 0;
+        if (p.revealed) {
+          x.known = inferMoveType(mv, p) || p.type;
+          x.king = x.known === "KING" ? 1000 : 0;
+        } else {
+          var f = mv.from,
+            t = mv.to;
+          if (f && t) {
+            if (t[0] < f[0]) x.king -= 35;
+            if (t[0] <= 5) x.king -= 30;
+            if (Math.abs(t[1] - f[1]) > 0) x.king -= 8;
+            if (t[0] >= 6) x.king += 8;
+          }
+          x.king -= 18;
+          x.king = clamp(x.king);
+        }
+      }
+    }
+    for (var r = 0; r < 8; r++)
+      for (var c = 0; c < 8; c++) {
+        var q = A.S.board[r][c];
+        if (q && q.owner === "bottom" && !q.revealed && id(q) !== movedId) {
+          var y = rec(q, r, c);
+          y.stale++;
+          if (r >= 6) y.king += 7;
+          if (r === 7) y.king += 8;
+          if (c === 3 || c === 4) y.king += 2;
+          y.king = clamp(y.king);
+        }
+      }
+  }
+  function clearLine(a, b, board) {
+    if (a[0] !== b[0] && a[1] !== b[1]) return false;
+    var dr = Math.sign(b[0] - a[0]),
+      dc = Math.sign(b[1] - a[1]),
+      r = a[0] + dr,
+      c = a[1] + dc;
+    while (r !== b[0] || c !== b[1]) {
+      if (board[r][c]) return false;
+      r += dr;
+      c += dc;
+    }
+    return true;
+  }
+  function canReach(p, fr, fc, tr, tc, board) {
+    if (p.type === "CAVALRY")
+      return (fr === tr || fc === tc) && clearLine([fr, fc], [tr, tc], board);
+    return Math.abs(fr - tr) + Math.abs(fc - tc) === 1;
+  }
+  function boardAfter(m) {
+    var b = A.S.board.map(function (row) {
+      return row.slice();
+    });
+    var p = b[m.fr][m.fc],
+      q = b[m.to.r][m.to.c];
+    if (!p) return b;
+    if (!q) {
+      b[m.fr][m.fc] = null;
+      b[m.to.r][m.to.c] = p;
+      return b;
+    }
+    if (!q.revealed) {
+      if (p.type === "BOMB") {
+        b[m.fr][m.fc] = null;
+        b[m.to.r][m.to.c] = null;
+      } else {
+        b[m.fr][m.fc] = null;
+      }
+      return b;
+    }
+    var r = A.battleRank(p, q);
+    if (r === "A") {
+      if (p.type === "G4" && !p.revealed && !p.specialUsed) {
+        b[m.to.r][m.to.c] = null;
+      } else {
+        b[m.fr][m.fc] = null;
+        b[m.to.r][m.to.c] = p;
+      }
+    } else if (r === "B") {
+      b[m.fr][m.fc] = null;
+    } else {
+      b[m.fr][m.fc] = null;
+      b[m.to.r][m.to.c] = null;
+    }
+    return b;
+  }
+  function publicThreatAt(board, p, r, c) {
+    if (!p || !p.revealed) return 0;
+    var worst = 0,
+      pv = val(p.type);
+    for (var er = 0; er < 8; er++)
+      for (var ec = 0; ec < 8; ec++) {
+        var e = board[er][ec];
+        if (!e || e.owner !== "bottom" || !e.revealed) continue;
+        if (!canReach(e, er, ec, r, c, board)) continue;
+        var res = A.battleRank(e, p),
+          risk = 0;
+        if (res === "A") risk = pv + 300;
+        if (res === "X") risk = pv * 0.9 + 100;
+        if (res === "D" || res === "K")
+          risk = Math.max(120, pv - val(e.type) * 0.35);
+        if (p.type === "KING" && risk > 0) risk += 9000;
+        if (risk > worst) worst = risk;
+      }
+    return worst;
+  }
+  function squareDanger(board, r, c) {
+    var danger = 0;
+    for (var er = 0; er < 8; er++)
+      for (var ec = 0; ec < 8; ec++) {
+        var e = board[er][ec];
+        if (!e || e.owner !== "bottom") continue;
+        var d = Math.abs(er - r) + Math.abs(ec - c);
+        if (e.revealed) {
+          if (
+            e.type === "CAVALRY" &&
+            (er === r || ec === c) &&
+            clearLine([er, ec], [r, c], board)
+          )
+            danger += 900;
+          else if (e.type !== "CAVALRY" && d === 1) danger += 650;
+        } else {
+          if (d === 1) danger += 520;
+          if (
+            (Math.abs(er - r) === 2 && Math.abs(ec - c) === 1) ||
+            (Math.abs(er - r) === 1 && Math.abs(ec - c) === 2)
+          )
+            danger += 120;
+        }
+      }
+    return danger;
+  }
+  function kingAt(board) {
+    for (var r = 0; r < 8; r++)
+      for (var c = 0; c < 8; c++) {
+        var p = board[r][c];
+        if (p && p.owner === "top" && p.type === "KING") return [r, c];
+      }
+    return null;
+  }
+  function guardValue(p, d) {
+    if (!p || p.owner !== "top" || p.type === "KING" || d > 3) return 0;
+    var g =
+      p.type === "BOMB"
+        ? 260
+        : A.isGen(p.type)
+          ? 200
+          : p.type === "INFANTRY"
+            ? 160
+            : p.type === "SPY"
+              ? 135
+              : 120;
+    if (d === 1) return g * 0.35;
+    if (d === 2) return g * 0.85;
+    return g * 0.3;
+  }
+  function screenBonus(board, r, c) {
+    var b = 0,
+      dirs = [
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1],
+      ];
+    dirs.forEach(function (d) {
+      var r1 = r + d[0],
+        c1 = c + d[1],
+        r2 = r + d[0] * 2,
+        c2 = c + d[1] * 2,
+        r3 = r + d[0] * 3,
+        c3 = c + d[1] * 3;
+      if (
+        r1 < 0 ||
+        r1 > 7 ||
+        c1 < 0 ||
+        c1 > 7 ||
+        r2 < 0 ||
+        r2 > 7 ||
+        c2 < 0 ||
+        c2 > 7
+      )
+        return;
+      var p1 = board[r1][c1],
+        p2 = board[r2][c2],
+        p3 = board[r3] && board[r3][c3];
+      if (!p1 && p2 && p2.owner === "top") b += 190;
+      if (p1 && p1.owner === "top" && !p2) b -= 80;
+      if (!p1 && !p2 && p3 && p3.owner === "top") b += 70;
+    });
+    return b;
+  }
+  function kingSafety(board) {
+    var k = kingAt(board);
+    if (!k) return -9999;
+    var r = k[0],
+      c = k[1],
+      guard = 0,
+      threat = 0,
+      ownAdj = 0,
+      emptyAdj = 0,
+      safeAdj = 0;
+    for (var dr = -3; dr <= 3; dr++)
+      for (var dc = -3; dc <= 3; dc++) {
+        var nr = r + dr,
+          nc = c + dc;
+        if (nr < 0 || nr > 7 || nc < 0 || nc > 7 || (!dr && !dc)) continue;
+        var d = Math.abs(dr) + Math.abs(dc);
+        if (d > 3) continue;
+        var p = board[nr][nc];
+        if (p && p.owner === "top") {
+          if (d === 1) ownAdj++;
+          guard += guardValue(p, d);
+        } else if (p && p.owner === "bottom") {
+          if (d === 1) threat += p.revealed ? 850 : 650;
+          if (d === 2 && !p.revealed) threat += 160;
+          if ((nr === r || nc === c) && clearLine([nr, nc], [r, c], board))
+            threat += p.revealed && p.type === "CAVALRY" ? 950 : 280;
+        }
+      }
+    [
+      [1, 0],
+      [-1, 0],
+      [0, 1],
+      [0, -1],
+    ].forEach(function (d) {
+      var nr = r + d[0],
+        nc = c + d[1];
+      if (nr < 0 || nr > 7 || nc < 0 || nc > 7) return;
+      if (!board[nr][nc]) {
+        emptyAdj++;
+        if (squareDanger(board, nr, nc) === 0) safeAdj++;
+      }
+    });
+    guard += screenBonus(board, r, c);
+    guard += safeAdj * 310 + (emptyAdj - safeAdj) * 80;
+    if (safeAdj === 0) threat += 1250;
+    else if (safeAdj === 1) threat += 470;
+    if (ownAdj >= 3) threat += (ownAdj - 2) * 520;
+    if (ownAdj === 4) threat += 900;
+    return guard - threat;
+  }
+  function kingDelta(m) {
+    return kingSafety(boardAfter(m)) - kingSafety(A.S.board);
+  }
+  function guardDelta(m) {
+    var k = kingAt(A.S.board);
+    if (!k) return 0;
+    var before = guardValue(m.p, Math.abs(m.fr - k[0]) + Math.abs(m.fc - k[1])),
+      bd = boardAfter(m),
+      kk = kingAt(bd);
+    if (!kk) return -9999;
+    var np = bd[m.to.r][m.to.c],
+      nr = m.to.r,
+      nc = m.to.c;
+    if (!np || np.id !== m.p.id) {
+      np = bd[m.fr][m.fc];
+      nr = m.fr;
+      nc = m.fc;
+    }
+    if (!np || np.id !== m.p.id) return before > 0 ? -before * 0.7 : 0;
+    var after = guardValue(np, Math.abs(nr - kk[0]) + Math.abs(nc - kk[1]));
+    return after - before;
+  }
+  function exposureDelta(m) {
+    if (!m.p.revealed) return 0;
+    var before = publicThreatAt(A.S.board, m.p, m.fr, m.fc),
+      bd = boardAfter(m),
+      np = bd[m.to.r][m.to.c],
+      nr = m.to.r,
+      nc = m.to.c;
+    if (!np || np.id !== m.p.id) {
+      np = bd[m.fr][m.fc];
+      nr = m.fr;
+      nc = m.fc;
+    }
+    if (!np || np.id !== m.p.id) return before * 0.3;
+    return before - publicThreatAt(bd, np, nr, nc);
+  }
+  function candidateScore(p, r, c) {
+    if (!p || p.owner !== "bottom" || p.revealed) return 0;
+    var x = rec(p, r, c),
+      s = 105 + (x ? x.king : 100);
+    if (r === 7) s += 110;
+    else if (r === 6) s += 70;
+    else if (r === 5) s += 28;
+    if (c === 3 || c === 4) s += 18;
+    var guard = 0;
+    for (var dr = -1; dr <= 1; dr++)
+      for (var dc = -1; dc <= 1; dc++) {
+        if (!dr && !dc) continue;
+        var q = A.S.board[r + dr] && A.S.board[r + dr][c + dc];
+        if (q && q.owner === "bottom") guard++;
+      }
+    s += Math.min(guard, 4) * 12;
+    if (x && x.moved >= 2) s -= 45;
+    return Math.max(0, s);
+  }
+  function hiddenAround(r, c) {
+    var n = 0;
+    for (var dr = -1; dr <= 1; dr++)
+      for (var dc = -1; dc <= 1; dc++) {
+        if (Math.abs(dr) + Math.abs(dc) !== 1) continue;
+        var p = A.S.board[r + dr] && A.S.board[r + dr][c + dc];
+        if (p && p.owner === "bottom" && !p.revealed) n++;
+      }
+    return n;
+  }
+  function nearestCandidateDist(r, c) {
+    var best = 99;
+    for (var i = 0; i < 8; i++)
+      for (var j = 0; j < 8; j++) {
+        var p = A.S.board[i][j],
+          cs = candidateScore(p, i, j);
+        if (cs) {
+          var d = Math.abs(r - i) + Math.abs(c - j) - cs / 520;
+          if (d < best) best = d;
+        }
+      }
+    return best;
+  }
+  function candidatePressure(m, ph) {
+    if (m.to.hit) return 0;
+    var before = nearestCandidateDist(m.fr, m.fc),
+      after = nearestCandidateDist(m.to.r, m.to.c);
+    if (before === 99) return 0;
+    var w = ph === "late" ? 285 : ph === "mid" ? 170 : 70,
+      s = (before - after) * w;
+    if (after <= 2) s += ph === "late" ? 180 : ph === "mid" ? 95 : 60;
+    if (after <= 1) s += ph === "late" ? 180 : 85;
+    if (before - after >= 1.4 && ph !== "early") s += 70;
+    if (m.p.type === "KING") s *= 0.12;
+    if (m.p.type === "BOMB") s *= ph === "late" ? 0.45 : 0.3;
+    return s;
+  }
+  function publicFight(m) {
+    var p = m.p,
+      t = A.S.board[m.to.r][m.to.c];
+    if (!t || !t.revealed) return 0;
+    var r = A.battleRank(p, t),
+      av = val(p.type),
+      dv = val(t.type);
+    if (t.type === "KING" && (r === "A" || r === "X")) return 90000;
+    if (p.type === "SPY") {
+      if (p.revealed) return -100000;
+      if (A.isGen(t.type)) return 3600;
+      return -90000;
+    }
+    if (r === "A") return dv - av * 0.12;
+    if (r === "B") return -80000 - av;
+    if (r === "D" || r === "K") return dv >= av ? dv - av * 0.85 : -8000;
+    if (r === "X") return dv - av * 1.4 - 1500;
+    return -1000;
+  }
+  function hiddenAttack(m, ph) {
+    var p = m.p,
+      t = A.S.board[m.to.r][m.to.c];
+    if (!t || t.revealed) return 0;
+    if (p.type === "KING") return -100000;
+    var cs = candidateScore(t, m.to.r, m.to.c),
+      high =
+        cs >= 330 ||
+        (ph === "late" && cs >= 240) ||
+        (ph === "mid" && cs >= 300),
+      pressureBonus = cs >= 300 ? 170 : cs >= 250 && ph !== "early" ? 95 : 0,
+      s =
+        cs * (ph === "late" ? 4.1 : ph === "mid" ? 2.25 : 0.9) + pressureBonus;
+    if (p.type === "INFANTRY") s += ph === "early" ? 280 : 380;
+    else if (p.type === "CAVALRY") s += ph === "early" ? 110 : 210;
+    else if (p.type === "SPY" && !p.revealed) s += ph === "early" ? 190 : 300;
+    else if (p.type === "BOMB") s += high ? 180 : ph === "late" ? -60 : -180;
+    else if (A.isGen(p.type)) {
+      s -= val(p.type) * (high ? 0.28 : ph === "early" ? 1.05 : 0.62);
+      if (p.type === "G5" && !high) s -= ph === "early" ? 520 : 260;
+      if (p.type === "G4" && !high) s -= ph === "early" ? 330 : 160;
+      if (high && ph !== "early") s += 160;
+    }
+    if (ph === "early" && hiddenAround(m.to.r, m.to.c) >= 2) s -= 210;
+    if (!high && ph === "early" && A.isGen(p.type)) s -= 220;
+    return s;
+  }
+  function quietAdjust(m, ph, cp, kd, gd) {
+    var p = m.p,
+      t = A.S.board[m.to.r][m.to.c];
+    if (t) return 0;
+    var d = Math.abs(m.to.r - m.fr) + Math.abs(m.to.c - m.fc),
+      s = 0;
+    if (p.type === "KING" && kd < 150) s -= 700;
+    if (cp < 35 && kd <= 0 && gd <= 0) s -= ph === "early" ? 95 : 45;
+    if (A.isGen(p.type) && ph === "early" && cp < 80 && gd <= 0) s -= 90;
+    if (p.type === "BOMB" && gd < 0) s -= ph === "late" ? 80 : 150;
+    if (p.revealed && cp < 60 && kd <= 0) s -= ph === "early" ? 45 : 15;
+    if (ph === "early" && hiddenAround(m.to.r, m.to.c) >= 2) s -= 160;
+    if (p.type === "CAVALRY" && d === 1 && ph === "early" && !p.revealed)
+      s += 35;
+    return s;
+  }
+  function visibleKingWin(m) {
+    var q = A.S.board[m.to.r][m.to.c];
+    if (!q || !q.revealed || q.type !== "KING") return false;
+    var r = A.battleRank(m.p, q);
+    return r === "A" || r === "X";
+  }
+  function score(m) {
+    ensure();
+    var w = mem.style.w,
+      p = m.p,
+      t = A.S.board[m.to.r][m.to.c],
+      ph = phase(),
+      s = 0,
+      cp = 0;
+    if (t) {
+      s += t.revealed ? publicFight(m) * w.atk : hiddenAttack(m, ph) * w.info;
+    } else {
+      cp = candidatePressure(m, ph);
+      s += cp * w.cand;
+      if (p.type === "INFANTRY" && ph !== "late") s += 45 * w.info;
+      if (p.type === "CAVALRY") s += 30;
+    }
+    var kd = kingDelta(m),
+      gd = guardDelta(m);
+    s += kd * w.def * 2.15;
+    s += gd * w.def * 1.25;
+    s += exposureDelta(m) * w.avoid * 1.5;
+    s += quietAdjust(m, ph, cp, kd, gd);
+    if (p.type === "KING") s -= 1050;
+    if (p.type === "BOMB" && !t) s -= 260;
+    if (p.type === "SPY" && p.revealed && !t) s -= 280;
+    if (
+      mem.style.key === "trap" &&
+      (p.type === "SPY" || p.type === "BOMB") &&
+      !t
+    )
+      s += candidatePressure(m, ph) * 0.3;
+    return s;
+  }
+  function choose() {
+    updateMemory();
+    var ms = allMoves("top");
+    if (!ms.length) return null;
+    var win = ms.find(function (m) {
+      return visibleKingWin(m);
+    });
+    if (win) return win;
+    ms.sort(function (a, b) {
+      return score(b) - score(a);
+    });
+    return ms[0];
+  }
+  function summerTurn() {
+    if (busy || !A.isAiTurn || !A.isAiTurn() || mode() !== "ai-summer") return;
+    ensure();
+    busy = true;
+    A.S.viewer = "bottom";
+    var cov = document.getElementById("cover");
+    if (cov) cov.classList.add("hidden");
+    A.render();
+    setTimeout(function () {
+      if (!A.isAiTurn() || A.S.phase !== "playing" || mode() !== "ai-summer") {
+        busy = false;
+        return;
+      }
+      var m = choose();
+      busy = false;
+      if (!m) {
+        A.S.lastKingMove.top = false;
+        A.S.lastMove = { owner: "top", text: "상단 플레이어 패스" };
+        A.S.logs.unshift("상단 플레이어 패스");
+        A.endTurn();
+        return;
+      }
+      A.applyMove(m.fr, m.fc, m.to.r, m.to.c, m.to);
+    }, 650);
+  }
+  A.scheduleAiTurn = function () {
+    if (mode() === "ai-summer") summerTurn();
+    else if (prev) prev();
+  };
+  A.resetAi = function () {
+    busy = false;
+    mem = null;
+    if (oldReset) oldReset();
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    var box = document.getElementById("modeSelect");
+    if (box)
+      box.addEventListener("change", function () {
+        busy = false;
+      });
+  });
+})(ChuWar);
