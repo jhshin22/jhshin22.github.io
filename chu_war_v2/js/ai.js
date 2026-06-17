@@ -1,0 +1,484 @@
+window.ChuWar = window.ChuWar || {};
+(function (A) {
+  var busy = false;
+  var V = {
+    KING: 10000,
+    G5: 900,
+    G4: 760,
+    G3: 620,
+    G2: 500,
+    G1: 380,
+    CAVALRY: 330,
+    SPY: 310,
+    BOMB: 260,
+    INFANTRY: 160,
+  };
+  var KN = [
+    [2, 1],
+    [2, -1],
+    [-2, 1],
+    [-2, -1],
+    [1, 2],
+    [1, -2],
+    [-1, 2],
+    [-1, -2],
+  ];
+  function mode() {
+    var s = document.getElementById("modeSelect");
+    return s ? s.value : "human";
+  }
+  A.isAiMode = function () {
+    return mode() !== "human";
+  };
+  A.isAiTurn = function () {
+    return A.isAiMode() && A.S.phase === "playing" && A.S.turn === "top";
+  };
+  A.resetAi = function () {
+    busy = false;
+  };
+  function val(t) {
+    return V[t] || 100;
+  }
+  function allMoves(o) {
+    var out = [];
+    for (var r = 0; r < 8; r++)
+      for (var c = 0; c < 8; c++) {
+        var p = A.S.board[r][c];
+        if (p && p.owner === o) {
+          A.legal(r, c).forEach(function (m) {
+            out.push({ fr: r, fc: c, to: m, p: p });
+          });
+        }
+      }
+    return out;
+  }
+  function posOf(type, o) {
+    for (var r = 0; r < 8; r++)
+      for (var c = 0; c < 8; c++) {
+        var p = A.S.board[r][c];
+        if (p && p.owner === o && p.type === type) return [r, c];
+      }
+    return null;
+  }
+  function counts(o) {
+    var a = [];
+    for (var r = 0; r < 8; r++)
+      for (var c = 0; c < 8; c++) {
+        var p = A.S.board[r][c];
+        if (p && p.owner === o) a.push(p);
+      }
+    return a;
+  }
+  function nearestEnemyDist(r, c) {
+    var best = 99;
+    for (var i = 0; i < 8; i++)
+      for (var j = 0; j < 8; j++) {
+        var e = A.S.board[i][j];
+        if (e && e.owner === "bottom") {
+          var d = Math.abs(r - i) + Math.abs(c - j);
+          if (!e.revealed) d -= 0.35;
+          if (d < best) best = d;
+        }
+      }
+    return best;
+  }
+  function nearestKingCandidateDist(r, c) {
+    var best = 99;
+    for (var i = 0; i < 8; i++)
+      for (var j = 0; j < 8; j++) {
+        var e = A.S.board[i][j];
+        if (e && e.owner === "bottom" && !e.revealed) {
+          var d = Math.abs(r - i) + Math.abs(c - j);
+          if (d < best) best = d;
+        }
+      }
+    return best;
+  }
+  function huntScore(m, ph) {
+    if (m.pass || m.to.hit) return 0;
+    var before = nearestEnemyDist(m.fr, m.fc),
+      after = nearestEnemyDist(m.to.r, m.to.c);
+    if (before === 99) return 0;
+    var w = ph === "late" ? 170 : ph === "mid" ? 85 : 18,
+      s = (before - after) * w;
+    if (ph === "late" && after <= 2) s += 70;
+    if (m.p.type === "KING") s *= 0.25;
+    if (m.p.type === "BOMB") s *= 0.35;
+    return s;
+  }
+  function candidateHuntScore(m, ph) {
+    if (m.pass || m.to.hit) return 0;
+    var before = nearestKingCandidateDist(m.fr, m.fc),
+      after = nearestKingCandidateDist(m.to.r, m.to.c);
+    if (before === 99) return 0;
+    var w = ph === "late" ? 230 : ph === "mid" ? 110 : 25,
+      s = (before - after) * w;
+    if (ph === "late" && after <= 2) s += 110;
+    if (m.p.type === "KING") s *= 0.25;
+    if (m.p.type === "BOMB") s *= 0.35;
+    return s;
+  }
+  function knownCounts(enemy) {
+    var left = {};
+    A.C.ORDER.forEach(function (t) {
+      left[t] = A.C.TYPES[t].count;
+    });
+    A.S.captured[enemy].forEach(function (p) {
+      left[p.type]--;
+    });
+    for (var r = 0; r < 8; r++)
+      for (var c = 0; c < 8; c++) {
+        var p = A.S.board[r][c];
+        if (p && p.owner === enemy && p.revealed) left[p.type]--;
+      }
+    return left;
+  }
+  function candidates(enemy) {
+    var left = knownCounts(enemy),
+      a = [];
+    A.C.ORDER.forEach(function (t) {
+      for (var i = 0; i < left[t]; i++) a.push(t);
+    });
+    return a.length ? a : A.C.ORDER.slice();
+  }
+  function hiddenRisk(r, c) {
+    var k = posOf("KING", "top"),
+      risk = 0;
+    if (k) {
+      var d = Math.abs(r - k[0]) + Math.abs(c - k[1]);
+      if (d <= 1) risk += 180;
+      if (d === 2) risk += 70;
+    }
+    if (r <= 1) risk += 45;
+    if (c === 3 || c === 4) risk += 35;
+    return risk;
+  }
+  function bval(att, dt, hidden) {
+    var fake = { type: dt, revealed: !hidden },
+      r = A.battleRank(att, fake),
+      av = val(att.type),
+      dv = val(dt);
+    if (dt === "KING" && r === "A") return 30000;
+    if (r === "A") return dv - av * 0.1;
+    if (r === "B") return -av;
+    if (r === "K") return -500;
+    return dv - av;
+  }
+  function publicFight(m) {
+    var p = m.p,
+      t = A.S.board[m.to.r][m.to.c];
+    if (!t || !t.revealed) return 0;
+    var r = A.battleRank(p, t),
+      av = val(p.type),
+      dv = val(t.type);
+    if (t.type === "KING")
+      return r === "A" || (r === "X" && p.type !== "KING") ? 80000 : -100000;
+    if (p.type === "SPY") {
+      if (p.revealed) return -100000;
+      if (A.isGen(t.type)) return 3200;
+      return -80000;
+    }
+    if (r === "B") return -70000 - av;
+    if (r === "K") return -100000;
+    if (r === "D") return dv >= av ? dv - av * 0.35 : -6000;
+    if (r === "X") {
+      if (p.type === "BOMB") return dv - av * 0.1;
+      if (t.type === "BOMB") return dv - av * 1.6 - 2000;
+      return -3000;
+    }
+    if (r === "A") return dv - av * 0.1;
+    return -1000;
+  }
+  function winsKing(m) {
+    var q = A.S.board[m.to.r][m.to.c];
+    if (!q || !q.revealed || q.type !== "KING") return false;
+    var r = A.battleRank(m.p, q);
+    return r === "A" || (r === "X" && m.p.type !== "KING");
+  }
+  function expected(m) {
+    var p = m.p,
+      t = A.S.board[m.to.r][m.to.c];
+    if (!t) return 0;
+    if (t.revealed) return publicFight(m);
+    var cs = candidates("bottom"),
+      sum = 0;
+    cs.forEach(function (x) {
+      sum += bval(p, x, true);
+    });
+    var risk = hiddenRisk(m.to.r, m.to.c);
+    if (p.type === "SPY" && p.revealed) risk += 1800;
+    return sum / cs.length - risk * (A.isGen(p.type) ? 1.2 : 0.35);
+  }
+  function clearLine(a, b, board) {
+    if (a[0] !== b[0] && a[1] !== b[1]) return false;
+    var dr = Math.sign(b[0] - a[0]),
+      dc = Math.sign(b[1] - a[1]),
+      r = a[0] + dr,
+      c = a[1] + dc;
+    while (r !== b[0] || c !== b[1]) {
+      if (board[r][c]) return false;
+      r += dr;
+      c += dc;
+    }
+    return true;
+  }
+  function canPublicReach(e, er, ec, tr, tc, board) {
+    if (e.type === "CAVALRY")
+      return (er === tr || ec === tc) && clearLine([er, ec], [tr, tc], board);
+    return Math.abs(er - tr) + Math.abs(ec - tc) === 1;
+  }
+  function publicThreatAt(board, p, r, c) {
+    if (!p || !p.revealed) return 0;
+    var worst = 0,
+      pv = val(p.type);
+    for (var er = 0; er < 8; er++)
+      for (var ec = 0; ec < 8; ec++) {
+        var e = board[er][ec];
+        if (!e || e.owner !== "bottom" || !e.revealed) continue;
+        if (!canPublicReach(e, er, ec, r, c, board)) continue;
+        var res = A.battleRank(e, p),
+          ev = val(e.type),
+          risk = 0;
+        if (res === "A") risk = pv + 280;
+        if (res === "X") risk = pv * 0.9 + ev * 0.15;
+        if (res === "D" || res === "K") risk = Math.max(120, pv - ev * 0.35);
+        if (p.type === "KING" && risk > 0) risk += 9000;
+        if (risk > worst) worst = risk;
+      }
+    return worst;
+  }
+  function exposureDelta(m) {
+    if (!m.p.revealed) return 0;
+    var before = publicThreatAt(A.S.board, m.p, m.fr, m.fc),
+      bd = boardAfter(m),
+      np = bd[m.to.r][m.to.c],
+      nr = m.to.r,
+      nc = m.to.c;
+    if (!np || np.id !== m.p.id) {
+      np = bd[m.fr][m.fc];
+      nr = m.fr;
+      nc = m.fc;
+    }
+    if (!np || np.id !== m.p.id) return before * 0.35;
+    var after = publicThreatAt(bd, np, nr, nc);
+    return before - after;
+  }
+  function dangerOnKing(board) {
+    var k = null;
+    for (var r = 0; r < 8; r++)
+      for (var c = 0; c < 8; c++) {
+        var p = board[r][c];
+        if (p && p.owner === "top" && p.type === "KING") k = [r, c];
+      }
+    if (!k) return 99999;
+    var danger = 0;
+    for (var r2 = 0; r2 < 8; r2++)
+      for (var c2 = 0; c2 < 8; c2++) {
+        var e = board[r2][c2];
+        if (!e || e.owner !== "bottom") continue;
+        var d = Math.abs(r2 - k[0]) + Math.abs(c2 - k[1]);
+        if (e.revealed) {
+          if (
+            e.type === "CAVALRY" &&
+            (r2 === k[0] || c2 === k[1]) &&
+            clearLine([r2, c2], k, board)
+          )
+            danger += 900;
+          if (e.type !== "CAVALRY" && d === 1) danger += 650;
+        } else {
+          if (d === 1) danger += 500;
+          if (
+            KN.some(function (n) {
+              return r2 + n[0] === k[0] && c2 + n[1] === k[1];
+            })
+          )
+            danger += 240;
+        }
+      }
+    return danger;
+  }
+  function boardAfter(m) {
+    var b = A.S.board.map(function (row) {
+      return row.slice();
+    });
+    if (m.pass) return b;
+    var p = b[m.fr][m.fc],
+      q = b[m.to.r][m.to.c];
+    if (!p) return b;
+    if (!q) {
+      b[m.fr][m.fc] = null;
+      b[m.to.r][m.to.c] = p;
+      return b;
+    }
+    if (!q.revealed) {
+      if (p.type === "BOMB") {
+        b[m.fr][m.fc] = null;
+        b[m.to.r][m.to.c] = null;
+      } else {
+        b[m.fr][m.fc] = null;
+      }
+      return b;
+    }
+    var r = A.battleRank(p, q);
+    if (r === "A") {
+      if (p.type === "G4" && !p.revealed && !p.specialUsed) {
+        b[m.to.r][m.to.c] = null;
+      } else {
+        b[m.fr][m.fc] = null;
+        b[m.to.r][m.to.c] = p;
+      }
+    } else if (r === "B") {
+      b[m.fr][m.fc] = null;
+    } else {
+      b[m.fr][m.fc] = null;
+      b[m.to.r][m.to.c] = null;
+    }
+    return b;
+  }
+  function phase() {
+    var n = counts("top").length + counts("bottom").length;
+    if (n > 24) return "early";
+    if (n > 12) return "mid";
+    return "late";
+  }
+  function passScore(level) {
+    if (level !== "bom") return -120;
+    var ph = phase(),
+      dg = dangerOnKing(A.S.board);
+    if (ph === "late") return -1600 - Math.min(dg, 900);
+    if (ph === "mid") return -700 - Math.min(dg, 650);
+    return -250 - Math.min(dg, 350);
+  }
+  function score(m, level) {
+    if (m.pass) return passScore(level);
+    var p = m.p,
+      t = A.S.board[m.to.r][m.to.c],
+      s = level === "bom" ? 0 : Math.random() * 25,
+      ph = phase();
+    if (t) {
+      s += expected(m);
+      if (t.revealed && t.type === "KING" && !winsKing(m)) s -= 100000;
+      if (t.revealed && (t.type === "G5" || t.type === "G4")) s += 350;
+      if (t.revealed && t.type === "SPY" && p.type !== "SPY") s += 420;
+    } else {
+      s += Math.random() * 10;
+      if (p.type === "INFANTRY" && ph === "early") s += 90;
+      if (p.type === "CAVALRY") {
+        s += 55;
+        if ((m.to.dist || 0) >= 2 && ph === "early") s -= 180;
+      }
+      if (A.isGen(p.type) && ph === "early") s -= 25;
+    }
+    if (level === "bom") {
+      s += huntScore(m, ph);
+      s += candidateHuntScore(m, ph);
+      s += exposureDelta(m) * 1.25;
+    }
+    if (p.type === "KING") s -= 450;
+    if (p.type === "SPY") {
+      if (t && t.revealed && t.type === "KING")
+        s += winsKing(m) ? 60000 : -100000;
+      if (t && t.revealed && A.isGen(t.type)) s += p.revealed ? -100000 : 1600;
+      if (
+        t &&
+        t.revealed &&
+        (t.type === "INFANTRY" ||
+          t.type === "CAVALRY" ||
+          t.type === "SPY" ||
+          t.type === "BOMB")
+      )
+        s -= 100000;
+      if (t && !t.revealed && p.revealed) s -= 3000;
+      if (!p.revealed && !t) s -= 180;
+      if (p.revealed && !t) s -= 240;
+    }
+    if (p.type === "BOMB") {
+      if (!t) s -= level === "bom" ? 260 : 80;
+      if (
+        t &&
+        t.revealed &&
+        (t.type === "KING" || t.type === "G5" || t.type === "G4")
+      )
+        s += 900;
+    }
+    if (A.isGen(p.type) && t && !t.revealed)
+      s -= level === "bom" ? hiddenRisk(m.to.r, m.to.c) + 260 : 80;
+    if (p.type === "G1" && m.to.kind === "special") {
+      s += t ? 180 : -260;
+      if (t && t.revealed && t.type === "KING")
+        s += winsKing(m) ? 60000 : -100000;
+    }
+    if (p.type === "G4" && t && !p.revealed && !p.specialUsed) s += 260;
+    if (p.type === "G5" && t && !t.revealed && level === "bom") s -= 380;
+    if (m.to.kind === "special" && level === "normal") s -= 80;
+    var bd = boardAfter(m),
+      dg = dangerOnKing(bd);
+    s -= dg;
+    if (dg > 0 && p.type === "KING") s += 300;
+    return s;
+  }
+  function choose(level) {
+    var ms = allMoves("top");
+    if (!ms.length) return null;
+    var royal = ms.find(function (m) {
+      return winsKing(m);
+    });
+    if (royal) return royal;
+    if (level === "easy") {
+      var hits = ms.filter(function (m) {
+        return m.to.hit;
+      });
+      if (hits.length && Math.random() < 0.45)
+        return hits[Math.floor(Math.random() * hits.length)];
+      return ms[Math.floor(Math.random() * ms.length)];
+    }
+    if (level === "bom") ms.push({ pass: true });
+    ms.sort(function (a, b) {
+      return score(b, level) - score(a, level);
+    });
+    if (level === "normal") {
+      var top = ms.slice(0, Math.min(3, ms.length));
+      return top[Math.floor(Math.random() * top.length)];
+    }
+    return ms[0];
+  }
+  A.scheduleAiTurn = function () {
+    if (busy || !A.isAiTurn()) return;
+    busy = true;
+    A.S.viewer = "bottom";
+    var cov = document.getElementById("cover");
+    if (cov) cov.classList.add("hidden");
+    A.render();
+    setTimeout(function () {
+      if (!A.isAiTurn() || A.S.phase !== "playing") {
+        busy = false;
+        return;
+      }
+      var lv =
+          mode() === "ai-easy"
+            ? "easy"
+            : mode() === "ai-bom"
+              ? "bom"
+              : "normal",
+        m = choose(lv);
+      busy = false;
+      if (!m || m.pass) {
+        A.S.lastKingMove.top = false;
+        A.S.lastMove = { owner: "top", text: "상단 플레이어 패스" };
+        A.S.logs.unshift("상단 플레이어 패스");
+        A.endTurn();
+        return;
+      }
+      A.applyMove(m.fr, m.fc, m.to.r, m.to.c, m.to);
+    }, 650);
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    var box = document.getElementById("modeSelect");
+    if (box)
+      box.onchange = function () {
+        busy = false;
+        A.S.viewer = "bottom";
+        A.render();
+      };
+  });
+})(ChuWar);
