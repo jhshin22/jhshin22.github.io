@@ -100,6 +100,22 @@ window.ChuWar = window.ChuWar || {};
       for (var c = 0; c < 8; c++) if (A.S.board[r][c]) n++;
     return n > 24 ? "early" : n > 12 ? "mid" : "late";
   }
+
+  function recentNoBattleMoves() {
+    var logs = A.S.logs || [];
+    var count = 0;
+    for (var i = 0; i < logs.length; i++) {
+      var text = String(logs[i] || "");
+      if (text.indexOf(" vs ") >= 0 || text.indexOf("양쪽 제거") >= 0) break;
+      count++;
+    }
+    return count;
+  }
+  function noProgressHuntMode(ph) {
+    var quiet = recentNoBattleMoves();
+    if (quiet >= 44) return true;
+    return ph !== "early" && quiet >= 28;
+  }
   function scan() {
     ensure();
     for (var r = 0; r < 8; r++)
@@ -469,11 +485,19 @@ window.ChuWar = window.ChuWar || {};
     var before = nearestCandidateDist(m.fr, m.fc),
       after = nearestCandidateDist(m.to.r, m.to.c);
     if (before === 99) return 0;
-    var w = ph === "late" ? 260 : ph === "mid" ? 135 : 55,
-      s = (before - after) * w;
-    if (after <= 2) s += ph === "late" ? 140 : 55;
+    var quiet = recentNoBattleMoves(),
+      stuck = noProgressHuntMode(ph),
+      w = ph === "late" ? 340 : ph === "mid" ? 190 : 55,
+      gain = before - after,
+      s = gain * w;
+    if (after <= 2) s += ph === "late" ? 230 : ph === "mid" ? 115 : 55;
+    if (after <= 1) s += ph === "late" ? 190 : ph === "mid" ? 95 : 35;
+    if (ph !== "early" && gain >= 2) s += ph === "late" ? 180 : 110;
+    if (stuck && after <= 3) s += quiet >= 40 ? 170 : 95;
+    if (stuck && after > 3 && gain <= 0) s -= quiet >= 40 ? 150 : 80;
     if (m.p.type === "KING") s *= 0.12;
-    if (m.p.type === "BOMB") s *= 0.22;
+    if (m.p.type === "BOMB")
+      s *= ph === "late" ? 0.55 : ph === "mid" ? 0.38 : 0.22;
     return s;
   }
   function publicFight(m) {
@@ -500,20 +524,35 @@ window.ChuWar = window.ChuWar || {};
       t = A.S.board[m.to.r][m.to.c];
     if (!t || t.revealed) return 0;
     if (p.type === "KING") return -100000;
-    var cs = candidateScore(t, m.to.r, m.to.c),
-      high = cs >= 330 || (ph === "late" && cs >= 260),
-      s = cs * (ph === "late" ? 3.6 : ph === "mid" ? 1.75 : 0.75);
-    if (p.type === "INFANTRY") s += 260;
-    else if (p.type === "CAVALRY") s += 90;
-    else if (p.type === "SPY" && !p.revealed) s += 160;
-    else if (p.type === "BOMB") s += high ? 120 : -220;
+    var quiet = recentNoBattleMoves(),
+      stuck = noProgressHuntMode(ph),
+      cs = candidateScore(t, m.to.r, m.to.c),
+      high =
+        cs >= 330 ||
+        (ph === "mid" && cs >= 285) ||
+        (ph === "late" && cs >= 235),
+      pressureBonus =
+        Math.max(0, cs - 220) *
+        (ph === "late" ? 1.35 : ph === "mid" ? 0.75 : 0.25),
+      s =
+        cs * (ph === "late" ? 4.35 : ph === "mid" ? 2.35 : 0.85) +
+        pressureBonus;
+    if (stuck && cs >= 220) s += quiet >= 40 ? 190 : 115;
+    if (stuck && cs >= 190 && ph === "late") s += 90;
+    if (p.type === "INFANTRY") s += ph === "early" ? 300 : 430;
+    else if (p.type === "CAVALRY")
+      s += ph === "late" ? 290 : ph === "mid" ? 210 : 120;
+    else if (p.type === "SPY" && !p.revealed) s += ph === "early" ? 220 : 360;
+    else if (p.type === "BOMB") s += high ? (ph === "late" ? 260 : 170) : -130;
     else if (A.isGen(p.type)) {
-      s -= val(p.type) * (high ? 0.45 : ph === "early" ? 1.25 : 0.85);
-      if (p.type === "G5" && !high) s -= 650;
-      if (p.type === "G4" && !high) s -= 420;
+      s -=
+        val(p.type) *
+        (high ? (ph === "early" ? 0.42 : 0.28) : ph === "early" ? 1.15 : 0.65);
+      if (p.type === "G5" && !high) s -= ph === "early" ? 620 : 360;
+      if (p.type === "G4" && !high) s -= ph === "early" ? 400 : 230;
     }
-    if (ph === "early" && hiddenAround(m.to.r, m.to.c) >= 2) s -= 260;
-    if (!high && ph !== "late" && A.isGen(p.type)) s -= 260;
+    if (ph === "early" && hiddenAround(m.to.r, m.to.c) >= 2) s -= 210;
+    if (!high && ph === "mid" && A.isGen(p.type)) s -= 150;
     return s;
   }
   function quietAdjust(m, ph, cp, kd, gd) {
@@ -523,9 +562,11 @@ window.ChuWar = window.ChuWar || {};
     var d = Math.abs(m.to.r - m.fr) + Math.abs(m.to.c - m.fc),
       s = 0;
     if (p.type === "KING" && kd < 150) s -= 700;
-    if (cp < 35 && kd <= 0 && gd <= 0) s -= 95;
+    if (cp < 35 && kd <= 0 && gd <= 0)
+      s -= noProgressHuntMode(ph) ? 25 : ph === "early" ? 95 : 55;
     if (A.isGen(p.type) && ph === "early" && cp < 80 && gd <= 0) s -= 90;
-    if (p.type === "BOMB" && gd < 0) s -= 180;
+    if (p.type === "BOMB" && gd < 0)
+      s -= ph === "late" && cp > 70 ? 70 : ph === "mid" && cp > 45 ? 105 : 180;
     if (p.revealed && cp < 60 && kd <= 0) s -= 45;
     if (ph === "early" && hiddenAround(m.to.r, m.to.c) >= 2) s -= 160;
     if (p.type === "CAVALRY" && d === 1 && ph === "early" && !p.revealed)
@@ -561,7 +602,8 @@ window.ChuWar = window.ChuWar || {};
     s += exposureDelta(m) * w.avoid * 1.5;
     s += quietAdjust(m, ph, cp, kd, gd);
     if (p.type === "KING") s -= 1050;
-    if (p.type === "BOMB" && !t) s -= 260;
+    if (p.type === "BOMB" && !t)
+      s -= ph === "late" && cp > 80 ? 90 : ph === "mid" && cp > 55 ? 150 : 260;
     if (p.type === "SPY" && p.revealed && !t) s -= 280;
     if (
       mem.style.key === "trap" &&
