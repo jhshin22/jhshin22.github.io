@@ -72,9 +72,32 @@ window.ChuWar = window.ChuWar || {};
     return result;
   }
 
+  function recentNoBattleMoves() {
+    const logs = A.S.logs || [];
+    let count = 0;
+    for (const row of logs) {
+      const text = String(row || "");
+      if (text.indexOf(" vs ") >= 0 || text.indexOf("양쪽 제거") >= 0) break;
+      count++;
+    }
+    return count;
+  }
+
+  function isNoProgressHuntMode(enemy) {
+    const quiet = recentNoBattleMoves();
+    const summary = enemy || pieceSummary("bottom");
+    if (quiet >= 44) return true;
+    if (quiet >= 28 && phase() !== "early") return true;
+    return quiet >= 28 && (summary.total <= 12 || summary.hidden <= 8);
+  }
   function isEndgameHuntMode() {
     const enemy = pieceSummary("bottom");
-    return phase() === "late" || enemy.total <= 5 || enemy.hidden <= 4;
+    return (
+      phase() === "late" ||
+      enemy.total <= 8 ||
+      enemy.hidden <= 5 ||
+      isNoProgressHuntMode(enemy)
+    );
   }
 
   function hiddenNeighborCount(row, col) {
@@ -103,6 +126,8 @@ window.ChuWar = window.ChuWar || {};
       const enemy = pieceSummary("bottom");
       score += Math.max(0, 6 - enemy.total) * 85;
       score += Math.max(0, 5 - enemy.hidden) * 70;
+      if (isNoProgressHuntMode(enemy))
+        score += recentNoBattleMoves() >= 40 ? 95 : 55;
       if (enemy.hidden <= 2) score += 180;
     }
     return score;
@@ -348,10 +373,16 @@ window.ChuWar = window.ChuWar || {};
       const nearest = bestHiddenCandidateNear(move.r, move.c);
       const beforeNearest = bestHiddenCandidateNear(fromRow, fromCol);
       const usefulCandidatePressure =
-        nearest.distance <= 2 && nearest.score >= 230;
+        nearest.distance <= (nowPhase === "early" ? 2 : 3) &&
+        nearest.score >=
+          (isNoProgressHuntMode() ? 165 : nowPhase === "early" ? 230 : 185);
       const improvesCandidateDistance =
-        nearest.score >= 220 && nearest.distance + 1 < beforeNearest.distance;
-      const usefulLinePressure = linePressure(move.r, move.c) >= 250;
+        nearest.score >=
+          (isNoProgressHuntMode() ? 155 : nowPhase === "early" ? 220 : 175) &&
+        nearest.distance < beforeNearest.distance;
+      const usefulLinePressure =
+        linePressure(move.r, move.c) >=
+        (isNoProgressHuntMode() ? 185 : nowPhase === "early" ? 250 : 205);
       if (
         !usefulCandidatePressure &&
         !improvesCandidateDistance &&
@@ -359,7 +390,8 @@ window.ChuWar = window.ChuWar || {};
         !moveHelpsKing(fromRow, fromCol, move)
       )
         return false;
-      if (hiddenNeighborCount(move.r, move.c) >= 1) return false;
+      if (nowPhase === "early" && hiddenNeighborCount(move.r, move.c) >= 1)
+        return false;
       if (
         nowPhase === "late" &&
         !usefulLinePressure &&
@@ -390,9 +422,15 @@ window.ChuWar = window.ChuWar || {};
     if (moveHelpsKing(fromRow, fromCol, move)) return true;
     if (isEndgameHuntMode()) return true;
     const candidateScore = hiddenKingCandidateScore(target, move.r, move.c);
-    if (piece.type === "G5" && candidateScore < 330) return false;
-    if (nowPhase !== "late" && candidateScore < 260) return false;
-    if (nowPhase === "late" && candidateScore < 220) return false;
+    if (
+      piece.type === "G5" &&
+      candidateScore <
+        (nowPhase === "early" ? 330 : nowPhase === "mid" ? 280 : 235)
+    )
+      return false;
+    if (nowPhase === "early" && candidateScore < 260) return false;
+    if (nowPhase === "mid" && candidateScore < 225) return false;
+    if (nowPhase === "late" && candidateScore < 190) return false;
     return true;
   }
 
@@ -419,7 +457,8 @@ window.ChuWar = window.ChuWar || {};
       if (linePressure(move.r, move.c) >= 285) score += 260;
     }
     if (piece.type === "KING") score -= 900;
-    if (piece.type === "BOMB" && !move.hit) score -= 900;
+    if (piece.type === "BOMB" && !move.hit)
+      score -= isEndgameHuntMode() ? 360 : 900;
     if (isImmediateBacktrack(fromRow, fromCol, move, piece)) score -= 500;
     return score;
   }
@@ -444,7 +483,12 @@ window.ChuWar = window.ChuWar || {};
       const target = A.S.board[move.r] && A.S.board[move.r][move.c];
       const afterDanger = kingDanger(simulateMove(fromRow, fromCol, move));
       if (afterDanger > currentDanger + 250) continue;
-      if (piece.type === "BOMB" && !move.hit) continue;
+      if (
+        piece.type === "BOMB" &&
+        !move.hit &&
+        !moveHelpsKing(fromRow, fromCol, move)
+      )
+        continue;
       if (
         isImmediateBacktrack(fromRow, fromCol, move, piece) &&
         afterDanger >= currentDanger
@@ -486,7 +530,18 @@ window.ChuWar = window.ChuWar || {};
       return false;
     }
 
-    if (piece.type === "BOMB" && !move.hit) return false;
+    if (piece.type === "BOMB" && !move.hit) {
+      const near = bestHiddenCandidateNear(move.r, move.c);
+      const beforeNear = bestHiddenCandidateNear(fromRow, fromCol);
+      const closesOnCandidate =
+        near.score >= (isNoProgressHuntMode() ? 150 : 180) &&
+        near.distance < beforeNear.distance;
+      if (
+        !isEndgameHuntMode() ||
+        (!closesOnCandidate && !moveHelpsKing(fromRow, fromCol, move))
+      )
+        return false;
+    }
 
     if (
       isImmediateBacktrack(fromRow, fromCol, move, piece) &&
@@ -621,10 +676,11 @@ window.ChuWar = window.ChuWar || {};
   }
 
   function chooseForcedHunt() {
-    if (currentMode() !== "ai-summer" || !isAiTopTurn() || !isEndgameHuntMode())
-      return null;
+    if (currentMode() !== "ai-summer" || !isAiTopTurn()) return null;
     const enemy = pieceSummary("bottom");
-    if (enemy.total > 5 && enemy.hidden > 3) return null;
+    const noProgress = isNoProgressHuntMode(enemy);
+    if (!isEndgameHuntMode() && !noProgress) return null;
+    if (enemy.total > 10 && enemy.hidden > 7 && !noProgress) return null;
     const currentDanger = kingDanger(A.S.board);
     let best = null;
     let bestScore = -99999;
@@ -647,9 +703,10 @@ window.ChuWar = window.ChuWar || {};
           let score =
             forcePieceScore(piece) +
             hiddenKingCandidateScore(target, move.r, move.c);
-          score += Math.max(0, 6 - enemy.total) * 125;
-          score += Math.max(0, 5 - enemy.hidden) * 95;
+          score += Math.max(0, 9 - enemy.total) * 105;
+          score += Math.max(0, 6 - enemy.hidden) * 85;
           if (enemy.hidden <= 2) score += 260;
+          if (noProgress) score += recentNoBattleMoves() >= 40 ? 180 : 95;
           if (piece.revealed && A.isGen(piece.type)) score += 140;
           if (piece.type === "CAVALRY") score += 210;
           if (piece.type === "BOMB") score -= 180;
@@ -661,7 +718,17 @@ window.ChuWar = window.ChuWar || {};
         }
       }
     }
-    return bestScore >= 720 ? best : null;
+    const threshold =
+      enemy.hidden <= 2
+        ? 520
+        : enemy.total <= 8 || enemy.hidden <= 5
+          ? noProgress
+            ? 620
+            : 680
+          : noProgress
+            ? 680
+            : 720;
+    return bestScore >= threshold ? best : null;
   }
 
   function runForcedHunt() {

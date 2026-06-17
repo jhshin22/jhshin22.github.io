@@ -83,6 +83,7 @@ window.ChuWar = window.ChuWar || {};
     if (col >= 2 && col <= 5) score += 20;
     score += Math.min(adjacentEnemySupport(row, col), 3) * 18;
 
+    if (summary.total <= 8) score += 70;
     if (summary.total <= 6) score += 90;
     if (summary.total <= 4) score += 140;
     if (summary.total <= 3) score += 220;
@@ -255,7 +256,11 @@ window.ChuWar = window.ChuWar || {};
         if (!score) continue;
 
         const guaranteed = summary.hidden === 1;
-        const threshold = guaranteed ? 0 : summary.total <= 4 ? 360 : 520;
+        const threshold = guaranteed
+          ? 0
+          : summary.total <= 8 || summary.hidden <= 5
+            ? 430
+            : 520;
         if (score < threshold) continue;
 
         candidates.push.apply(candidates, collectAttacksOn(row, col, score));
