@@ -69,6 +69,14 @@ summarize result
 
 The runner should support AI vs AI combinations such as easy vs summer, spring vs summer, and summer policy variants.
 
+Initial implementation:
+
+- `Chu_war/tools/headless_match.js` runs one random-AI match in Node.
+- It loads the existing rule scripts with a small DOM/canvas stub instead of duplicating movement, battle, victory, setup, and state rules.
+- It writes a JSON match log with seed, setup, per-turn selected move, battle result, remaining counts, final result, and final board.
+- It is intentionally outside the `index.html` load path, so the GitHub Pages game does not depend on it.
+- Browser AI wrappers, rendering, modals, and localStorage logging are not loaded in this first version.
+
 ## Log Format
 
 Each simulated game should write JSON with:
