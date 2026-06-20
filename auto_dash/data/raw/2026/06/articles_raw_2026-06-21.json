@@ -1,0 +1,614 @@
+{
+  "target_date": "2026-06-21",
+  "updated_at": "2026-06-21T00:22:14+09:00",
+  "count": 14,
+  "articles": [
+    {
+      "id": "9c2f681fc5464b22",
+      "title": "계명대 동산의료원, 의료 AI 테스트베드 사업 선정",
+      "source": "kbsm.net",
+      "source_domain": "kbsm.net",
+      "published_at": "2026-06-21T00:20:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "https://www.kbsm.net/news/view.php?idx=523717",
+      "naver_link": "https://www.kbsm.net/news/view.php?idx=523717",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "계명대 동산의료원이 인공지능(AI)을 활용해 환자를 적합한 의료기관으로 신속하게 연계하는 스마트 의료체계 구축에 나선다.21일 계명대 동산의료원에 따르면 한국보건의료정보원이 공모한 '2026년 의료 AI 테스트베드...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9e7d7a2e76d3d2bd",
+      "title": "이번주 공모주 청약, 매드업·레몬헬스케어 2개사",
+      "source": "dailian.co.kr",
+      "source_domain": "dailian.co.kr",
+      "published_at": "2026-06-21T00:11:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "https://www.dailian.co.kr/news/view/1657992?sc=Naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/119/0003102980?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "21일 금융투자업계에 따르면, 매드업은 오는 23~24일 양일간 청약에 나선다. 2015년 설립된 매드업은 방대한 광고 집행 데이터와 독자적인 AI 엔진을 바탕으로 디지털 마케팅 솔루션을 제공하는 테크 기업이다. 누적...",
+      "pre_score": 0,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8,
+          "ad_promo_noise": -15,
+          "market_noise": -25
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "ad_promo_noise": [
+            {
+              "term": "광고",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "market_noise": [
+            {
+              "term": "공모주",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": -26,
+        "final_score": 0
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": true
+      }
+    },
+    {
+      "id": "5197cf4ebe0f8329",
+      "title": "[전라 Insight] 'AI가 지키는 밤길'…전주천 누비는 미래형 순찰로봇",
+      "source": "jeollailbo.com",
+      "source_domain": "jeollailbo.com",
+      "published_at": "2026-06-21T00:06:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "http://www.jeollailbo.com/news/articleView.html?idxno=802958",
+      "naver_link": "http://www.jeollailbo.com/news/articleView.html?idxno=802958",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "핵심은 AI와 자율주행 기술을 활용해 기존 치안 한계를 보완하는 데 있다. 특히 경찰 인력만으로 관리가 어려운 심야 시간대와 범죄 취약지역에서 효율적인 예방 활동을 수행하는 것이 목표며, 현재 순찰로봇은 전주천...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "65c63e4087095ec3",
+      "title": "[전라 Insight] 농어촌기본소득...사람-소비 늘어 살아난 농촌",
+      "source": "jeollailbo.com",
+      "source_domain": "jeollailbo.com",
+      "published_at": "2026-06-21T00:06:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "http://www.jeollailbo.com/news/articleView.html?idxno=803164",
+      "naver_link": "http://www.jeollailbo.com/news/articleView.html?idxno=803164",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "유인책으로 활용됐다는 분석이다. 지급액의 상당 부분이 지역 내 음식점과 소매점, 생활서비스업 등에서... 주문·배달하는 'AI 로컬 버튼 서비스'도 취약지역 100명을 대상으로 시범 운영할 계획이다. 이처럼 농어촌...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d8649fedcb675281",
+      "title": "6월 21일 오늘의 운세…관계 조율·소비 점검 흐름 띠별·나이별 총운",
+      "source": "topstarnews.net",
+      "source_domain": "topstarnews.net",
+      "published_at": "2026-06-21T00:04:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "https://www.topstarnews.net/news/articleView.html?idxno=16104151",
+      "naver_link": "https://www.topstarnews.net/news/articleView.html?idxno=16104151",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "1시~3시 활용이 도움이 될 수 있다 | 금전운은 계획 소비 중심 | 관계운은 진심 어린 소통 | 건강운은 수분... ※ 본 콘텐츠는 전통 역학 상징 체계를 기반으로 생성형 AI 분석 도구의 도움을 받아 작성됐으며, 최종 내용은...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "2f97ccfabd4013ab",
+      "title": "문턱 높아진 기업대출 1400조…'우량·담보' 쏠림 커졌다",
+      "source": "theguru.co.kr",
+      "source_domain": "theguru.co.kr",
+      "published_at": "2026-06-21T00:02:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "https://www.theguru.co.kr/news/article.html?no=103333",
+      "naver_link": "https://www.theguru.co.kr/news/article.html?no=103333",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "금융 AI",
+        "대출 AI",
+        "신용대출",
+        "연체율",
+        "은행권 대출",
+        "취약차주"
+      ],
+      "description": "통상 저금리 대출이 신용도와 담보력이 높은 차주에게 적용된다는 점을 고려하면, 대출 증가세가 우량 중소기업 중심으로 나타난 것으로 풀이된다. 이 같은 선별 대출 흐름은 담보대출 비중에서도 확인된다. KB국민...",
+      "pre_score": 38,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 8
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "차주",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 38,
+        "final_score": 38
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "47f043bd773dc45e",
+      "title": "오늘의 운세 띠별 운세 6월21일",
+      "source": "bntnews.co.kr",
+      "source_domain": "bntnews.co.kr",
+      "published_at": "2026-06-21T00:02:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "https://www.bntnews.co.kr/article/view/bnt202606200112",
+      "naver_link": "https://www.bntnews.co.kr/article/view/bnt202606200112",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용점수"
+      ],
+      "description": "자잘하게 새어나가는 돈을 막기 위해 오늘만큼은 신용카드 대신 현금을 쓰거나 체크카드로 결제해 보는 것도... 훌륭한 점수를 받을 수 있습니다. 중요한 결정이 필요한 순간이라면 뒤로 숨지 말고 직접 나서서 방향을...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "88188af600017bec",
+      "title": "근로장려금 신청 자격 다시 확인해야…소득·재산 요건 모두 충족 필수",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-21T00:00:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=583408",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=583408",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "AI 활용",
+        "금융 AI",
+        "대출 AI",
+        "자영업자 대출"
+      ],
+      "description": "근로장려금은 일정 수준 이하의 소득을 올리는 근로자와 자영업자 가구를 지원하는 제도이지만, 가구 구성에... 반면 각종 대출 등 부채는 차감되지 않는다. 안내 자료에 따르면 재산 합계액은 기준 시점 현재 가구원이...",
+      "pre_score": 38,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 8
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "자영업자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 38,
+        "final_score": 38
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d51dd85358af7715",
+      "title": "야타브, 비바테크 2026서 AI 신뢰·검증 플랫폼 공개…\"유럽 시장 공략 ...",
+      "source": "thefirstmedia.net",
+      "source_domain": "thefirstmedia.net",
+      "published_at": "2026-06-21T00:00:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "http://www.thefirstmedia.net/news/articleView.html?idxno=201841",
+      "naver_link": "http://www.thefirstmedia.net/news/articleView.html?idxno=201841",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "금융 AI"
+      ],
+      "description": "야타브는 향후 방산과 금융 분야에서 축적한 AI 검증 기술을 기반으로 유럽 시장을 중심으로 규제 산업 분야 협력을 확대해 나갈 계획이다. 이번 비바테크 참가를 통해 야타브는 AI 도입 자체보다 운영 과정의...",
+      "pre_score": 34,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 34,
+        "final_score": 34
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "2f5db6db8ceeb207",
+      "title": "[증시 프리즘] \"올라타지 않으면 낙오된다\" 포모에 갇힌 개미들, 빚내서...",
+      "source": "thefairnews.co.kr",
+      "source_domain": "thefairnews.co.kr",
+      "published_at": "2026-06-21T00:00:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "https://www.thefairnews.co.kr/news/articleView.html?idxno=80011",
+      "naver_link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=80011",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "금융투자협회와 자본시장업계에 따르면 증권사에서 돈을 빌려 주식을 사는 신용융자 잔고는 코스피 9,000선... 특히 글로벌 빅테크 기업들의 인공지능(AI) 반도체 주문 폭주 추세와 맞물려 삼성전자와 SK하이닉스 등 대형...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "435482cae8c5d460",
+      "title": "리플, 아프리카 핀테크 투자 확대…플러터웨이브 지분 인수 주목",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-06-21T00:00:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=583475",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=583475",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "AI가 생성. 리플(XRP)이 아프리카 대표 핀테크 기업 플러터웨이브(Flutterwave)에 투자하며 글로벌 금융 시장 공략을 확대하고 있다. 블룸버그 보도에 따르면 리플은 최근 플러터웨이브의 지분을 인수했다. 구체적인 투자...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "0b59c439ec9b7881",
+      "title": "[하루건강] 자외선에 계속 노출되면 식욕은 늘고 살은 안 찐다",
+      "source": "hankookilbo.com",
+      "source_domain": "hankookilbo.com",
+      "published_at": "2026-06-21T00:00:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "https://www.hankookilbo.com/news/article/A2026061509540003645?did=NA",
+      "naver_link": "https://n.news.naver.com/mnews/article/469/0000937594?sid=103",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "모자와 긴 옷을 챙기고, 외출 30분 전에 자외선차단제를 꼼꼼히 바르고 2~3시간마다 덧발라 주시는 게 좋아요. 전체기사보기: ※ 이 기사는 생성형 AI로 제작했습니다. 한국일보는 생성형 AI 활용 준칙을 준수합니다.",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "22bc45a1a0fa12a8",
+      "title": "[MBTI 오늘의 운세] 2026년 6월 21일",
+      "source": "hankookilbo.com",
+      "source_domain": "hankookilbo.com",
+      "published_at": "2026-06-21T00:00:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "https://www.hankookilbo.com/news/article/A2026061908490000550?did=NA",
+      "naver_link": "https://n.news.naver.com/mnews/article/469/0000937593?sid=103",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "기술의 입문 영상을 하나만 골라 끝까지 시청해 보세요. 컨디션 시원한 과일을 먹으며 잠시 창밖을 바라보면 머릿속이 정돈돼요. ※ 이 기사는 생성형 AI로 제작했습니다. 한국일보는 생성형 AI 활용 준칙을 준수합니다.",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "8cc579569b7f351b",
+      "title": "[김대호 진단] 돈의 질서 ⑦ 스테이블 코인 \"달러의 천하통일\"... 기획시...",
+      "source": "g-enews.com",
+      "source_domain": "g-enews.com",
+      "published_at": "2026-06-21T00:00:00+09:00",
+      "published_date": "2026-06-21",
+      "collected_at": "2026-06-21T00:21:42+09:00",
+      "url": "https://www.g-enews.com/view.php?ud=202606191709134792906806b77b_1",
+      "naver_link": "https://www.g-enews.com/view.php?ud=202606191709134792906806b77b_1",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "기존의 글로벌 금융 시스템은 철저하게 국가가 통제하는 국경선 안에서만 유효했다. 한국에서 해외로 돈을... 한국의 소비자들이 원화 환전 없이 전 세계 디지털 자산 시장과 실물 결제망을 달러로 직접 연결해 쓰는...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    }
+  ]
+}
