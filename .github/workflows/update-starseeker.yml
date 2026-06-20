@@ -46,6 +46,7 @@ jobs:
           pip install --retries 5 --timeout 60 -r starseeker/requirements.txt
 
       - name: Build StarSeeker data
+        id: build
         env:
           ASTRO_LOCATION_NAME: "Seoul Jongno"
           ASTRO_LAT: "37.5729"
@@ -55,10 +56,12 @@ jobs:
           KASI_API_KEY: ${{ secrets.KASI_API_KEY }}
           KMA_API_KEY: ${{ secrets.KMA_API_KEY }}
         run: |
+          set -o pipefail
           cd starseeker
+          : > build.log
           for attempt in 1 2 3; do
-            echo "StarSeeker build attempt ${attempt}/3"
-            if python scripts/build_all.py --days 30; then
+            echo "StarSeeker build attempt ${attempt}/3" | tee -a build.log
+            if python scripts/build_all.py --days 30 2>&1 | tee -a build.log; then
               exit 0
             fi
             if [ "$attempt" -lt 3 ]; then
@@ -66,6 +69,14 @@ jobs:
             fi
           done
           exit 1
+
+      - name: Upload failure log
+        if: failure() && steps.build.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: starseeker-build-log-${{ github.run_id }}
+          path: starseeker/build.log
+          retention-days: 7
 
       - name: Validate output
         run: |
