@@ -1,8 +1,4102 @@
 {
   "target_date": "2026-07-05",
-  "updated_at": "2026-07-05T19:24:36+09:00",
-  "count": 468,
+  "updated_at": "2026-07-05T23:58:02+09:00",
+  "count": 563,
   "articles": [
+    {
+      "id": "fd291504eb752cc1",
+      "title": "[마켓인사이드] 4000달러 위협하던 국제 금값, 바닥 찍었나",
+      "source": "news2day.co.kr",
+      "source_domain": "news2day.co.kr",
+      "published_at": "2026-07-05T23:52:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.news2day.co.kr/article/20260705500067",
+      "naver_link": "https://www.news2day.co.kr/article/20260705500067",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "AI 산업이 아무리 성장하더라도 금융위기나 전쟁, 급격한 경기침체가 발생하면 금의 역할은 다시 커질 수밖에 없다는 관측이다. ◇ 향후 금값을 결정할 다섯 가지 핵심 변수 첫째는 연준의 통화정책이다. 금리 인하가...",
+      "pre_score": 25,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11,
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융위",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 25,
+        "final_score": 25
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "7de3e3201939dc58",
+      "title": "노벨상 수상자 오마르 야기, 中칭화대 합류…AI활용 신소재 연구",
+      "source": "연합뉴스",
+      "source_domain": "yna.co.kr",
+      "published_at": "2026-07-05T23:50:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.yna.co.kr/view/AKR20260705050100083?input=1195m",
+      "naver_link": "https://n.news.naver.com/mnews/article/001/0016176863?sid=104",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "재료과학자인 야기 교수는 AI를 활용해 신소재의 설계와 합성 방식을 혁신하고 개발 기간을 획기적으로 단축하는 연구를 수행할 예정이다. 그는 임명식에서 \"물 부족, 탄소중립, 지속가능한 발전과 같은 주요 환경...",
+      "pre_score": 38,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 10,
+        "raw_score": 38,
+        "final_score": 38
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "36dedfa3f271be2d",
+      "title": "'평생교육 41년' 고대월례강좌, AI 특강으로 미래를 열다",
+      "source": "asiatoday.co.kr",
+      "source_domain": "asiatoday.co.kr",
+      "published_at": "2026-07-05T23:42:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.asiatoday.co.kr/kn/view.php?key=20260705002326354",
+      "naver_link": "https://www.asiatoday.co.kr/kn/view.php?key=20260705002326354",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "조 교수는 급변하는 인공지능(AI) 시대의 흐름을 소개하며 스마트폰을 활용한 다양한 AI 활용법과 실생활에 적용할 수 있는 기술, 미래 트렌드를 쉽고 명확하게 설명해 참석자들의 높은 관심과 호응을 이끌어냈다.특히...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "bc79d571e2b1390e",
+      "title": "[파워인터뷰] 최대해 대신대학교 총장 \"대학, 규모 아닌 가치로 경쟁…...",
+      "source": "news.unn.net",
+      "source_domain": "news.unn.net",
+      "published_at": "2026-07-05T23:30:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://news.unn.net/news/articleView.html?idxno=594202",
+      "naver_link": "https://news.unn.net/news/articleView.html?idxno=594202",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "대신대학교는 전 교과목에 AI 활용 역량을 접목하는 교육과정 개편을 단계적으로 추진하고 있으며, AI 리터러시 교육을 교양 필수 영역으로 확대하고 있다. 교수학습지원센터를 중심으로 생성형 AI 활용 수업 설계, 학습자...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "a0eae91bb00c879c",
+      "title": "삼성전자 사내 부동산 대출 옥죈다…'국평' 이하만 허용 추진",
+      "source": "weekly.hankooki.com",
+      "source_domain": "weekly.hankooki.com",
+      "published_at": "2026-07-05T23:24:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://weekly.hankooki.com/news/articleView.html?idxno=7172944",
+      "naver_link": "https://weekly.hankooki.com/news/articleView.html?idxno=7172944",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "가계대출",
+        "금융감독원 대출",
+        "대출 규제",
+        "대출 금리",
+        "부동산 대출",
+        "주담대"
+      ],
+      "description": "현재 정부는 날로 치솟는 수도권 주택 가격 안정을 위해 가계 대출 규제의 벽을 계속 높이고 있다. 시중 은행 역시 주담대 금리를 올리며 정부 기조에 동참하고 있다. 이에 사내 대출은 기업 복지 성격의 개인 간 대여로...",
+      "pre_score": 55,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "주담대",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 55,
+        "final_score": 55
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "4c1f12d8ff13a326",
+      "title": "인천대, 산학협력과 탄소중립으로 미래 인재 양성 및 지역 현안 해결 앞...",
+      "source": "cstimes.com",
+      "source_domain": "cstimes.com",
+      "published_at": "2026-07-05T23:24:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.cstimes.com/news/articleView.html?idxno=712266",
+      "naver_link": "https://www.cstimes.com/news/articleView.html?idxno=712266",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "홍진배 인천대 국제대외협력처장은 \"대학의 우수한 첨단 바이오 교육 인프라를 활용해 재외동포 청년들에게... 웨이온(주)은 B2B 매칭 서비스 '웨비나우'를 운영하며 AI 기반 무역 자동화, 해외시장 분석, 수출 전략 수립 등...",
+      "pre_score": 22,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8,
+          "customer_demand": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "청년",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 22,
+        "final_score": 22
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "3255c31a85fafb12",
+      "title": "한 총리 \"공무원이 먼저 AI 구축\"...공직문화 변화 예고",
+      "source": "ytn.co.kr",
+      "source_domain": "ytn.co.kr",
+      "published_at": "2026-07-05T23:23:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.ytn.co.kr/_ln/0101_202607052323025062",
+      "naver_link": "https://n.news.naver.com/mnews/article/052/0002375055?sid=100",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "임명장을 받은 직후 첨단산업 투자를 약속했고 첫 공식 일정에선 장관들을 불러모아 인공지능을 활용한 정책 추진 속도 증진을 당부하며 'AI 총리' 정체성을 분명히 했습니다. [한 성 숙/ 국무총리(지난 1일) : 공무원들이...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "aa9ccea03f2782c1",
+      "title": "‘너무 올랐나’…토허구역 지정 전 막판 거래 잠잠한 동탄·기흥·구리",
+      "source": "munhwa.com",
+      "source_domain": "munhwa.com",
+      "published_at": "2026-07-05T23:19:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.munhwa.com/article/11600390?ref=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/021/0002802462?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제"
+      ],
+      "description": "이들 지역은 6월 30일 투기과열지구·조정대상지역으로 추가 지정돼 7월 1일부터 대출 규제와 취득세·양도소득세 중과 등이 적용됐다. 이에 규제 시행 전 계약을 마치려는 ‘막차 수요’가 지난달 30일 집중된 것으로...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "0d75906b8ce59f63",
+      "title": "한국공학대 길형원팀, AI 자세 인식 시스템으로 반도체 캡스톤 대상",
+      "source": "전자신문",
+      "source_domain": "etnews.com",
+      "published_at": "2026-07-05T23:11:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.etnews.com/20260705000083",
+      "naver_link": "https://n.news.naver.com/mnews/article/030/0003444522?sid=102",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "팀은 'AI 기반 실시간 자세 인식 스마트 착석 시스템'을 출품해 대상을 차지했다. 지도교수는 안승언 교수다. 대상작은 다공성 탄소나노튜브(CNT)/PCSR 압저항 센서를 활용해 좌석에 앉은 사용자의 자세를 실시간으로...",
+      "pre_score": 34,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 6,
+        "raw_score": 34,
+        "final_score": 34
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "a70fb04c06bf985e",
+      "title": "한화, 우주·AI 분야 55조원 투자…2040년 AI 우주강국 기반 구축",
+      "source": "thedailypost.kr",
+      "source_domain": "thedailypost.kr",
+      "published_at": "2026-07-05T23:10:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.thedailypost.kr/news/articleView.html?idxno=114566",
+      "naver_link": "https://www.thedailypost.kr/news/articleView.html?idxno=114566",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "정책금융과 생산 기반 고도화 지원 등을 ​추진할 계획이다. 김동관 부회장은 \"세계 최고 수준의 태양광 기술과 우주 역량을 바탕으로 대한민국의 AI 영토를 우주까지 확장하는 데 앞장서겠다\"고 덧붙였다.",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "a47caad246e63623",
+      "title": "[국립부산과학관] 창녕서 '찾아가는 작은 과학관' / 동남권 과학관 실무...",
+      "source": "webeconomy.co.kr",
+      "source_domain": "webeconomy.co.kr",
+      "published_at": "2026-07-05T23:10:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2215726",
+      "naver_link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2215726",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "■ 동남권 과학관 실무자 AI 활용 교육 국립부산과학관이 동남권 과학관 실무자들을 대상으로 생성형 인공지능(AI) 활용 교육을 실시하며 과학문화기관의 디지털 전환(AX) 역량 강화에 나섰다. 최근들어 과학관과 박물관...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "6e6723823f002ba5",
+      "title": "중국 1∼5월 로봇 수출 1천37만 대…EU·아세안이 최대 시장",
+      "source": "news.sbs.co.kr",
+      "source_domain": "news.sbs.co.kr",
+      "published_at": "2026-07-05T23:08:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008642500&plink=ORI&cooper=NAVER",
+      "naver_link": "https://n.news.naver.com/mnews/article/055/0001369849?sid=104",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "같은 기간 산업용 로봇 수출은 약 7만대로, 시각인식과 인공지능(AI) 알고리즘을 탑재한 운반 로봇이 해외 대형 인프라와 운송 프로젝트에 활용되고 있는 것으로 조사됐습니다. CCTV는 자동 스캐닝과 모델링 기능을...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b9784218fdc8563e",
+      "title": "[정치인사이드] 호남·충청·영남을 국가 성장엔진으로… 이재명표 국토...",
+      "source": "newscj.com",
+      "source_domain": "newscj.com",
+      "published_at": "2026-07-05T23:02:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.newscj.com/news/articleView.html?idxno=3414642",
+      "naver_link": "https://www.newscj.com/news/articleView.html?idxno=3414642",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "반도체와 인공지능(AI), 우주항공, 로봇 등 미래 첨단산업의 핵심 거점을 수도권 밖에 구축해 국가... 이를 위해 정부는 중앙정부가 세제·재정·금융·규제·인프라를 패키지로 지원하고 지방정부는 신속한 인허가를...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "2a4b6c0fbdb5c185",
+      "title": "오는 7일 국내 첫 농림위성 발사…내년부터 3일 주기 '한반도 전역' 관측",
+      "source": "아시아경제",
+      "source_domain": "view.asiae.co.kr",
+      "published_at": "2026-07-05T23:00:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://view.asiae.co.kr/article/2026070511324971133",
+      "naver_link": "https://n.news.naver.com/mnews/article/277/0005785627?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "인공지능(AI) 파운데이션 모델'을 개발할 수 있도록 민간을 적극적으로 지원할 계획이다. 우선 농식품부는 정책 수요가 높고 정책 활용 가능성이 큰 분야부터 위성 활용 서비스를 단계적으로 구축할 계획이다. 농경지를...",
+      "pre_score": 21,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 7,
+        "raw_score": 21,
+        "final_score": 21
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e69f805a25659c83",
+      "title": "한은의 경고 “삼전닉스 레버리지, 개미들 죽여”",
+      "source": "munhwa.com",
+      "source_domain": "munhwa.com",
+      "published_at": "2026-07-05T23:00:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.munhwa.com/article/11600388?ref=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/021/0002802460?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "기사 이해를 돕기 위한 AI 이미지. 한국은행이 삼성전자와 SK하이닉스를 기초자산으로 하는 단일종목... 이번 입장은 지난달 24일 발표한 금융안정보고서와 비교해 한층 신중한 기조로 평가된다. 당시 한은은 단일종목...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "0b7435447a74b97d",
+      "title": "신한금융 \"시장 경쟁력 높인다\"…경영진 300명 모여 AI·AX 전략 점검",
+      "source": "thedailypost.kr",
+      "source_domain": "thedailypost.kr",
+      "published_at": "2026-07-05T22:58:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.thedailypost.kr/news/articleView.html?idxno=114565",
+      "naver_link": "https://www.thedailypost.kr/news/articleView.html?idxno=114565",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "금융 AI"
+      ],
+      "description": "이번 포럼에서는 신한금융이 자체 개발한 AI 에이전트가 토론 과정에 활용됐다. AI 에이전트는 토론 내용을 실시간으로 분석해 반론과 대안을 제시하고 발표안 평가와 피드백을 지원했다. 자회사 비상임이사와 실무자로...",
+      "pre_score": 34,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 34,
+        "final_score": 34
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "6526325519defd57",
+      "title": "[AI상보] '연타석 3점포' 강민호, 삼성 SSG에 13-3 완승...SSG 9연패",
+      "source": "newspim.com",
+      "source_domain": "newspim.com",
+      "published_at": "2026-07-05T22:55:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.newspim.com/news/view/20260705000174",
+      "naver_link": "https://www.newspim.com/news/view/20260705000174",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "*AI를 활용해 정리한 경기 내용입니다. 상단의 'AI MY 뉴스' 로그인을 통해 뉴스핌의 차세대 AI 콘텐츠 서비스를 활용해보기 바랍니다. 삼성이 강민호의 연타석 홈런에 힘입어 SSG에 완승을 거뒀다. 삼성은 5일 인천...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "41025395b6c3bdbf",
+      "title": "한국AI거버넌스교육원, 다스카손해사정법인 AI거버넌스 특강 성료",
+      "source": "fntoday.co.kr",
+      "source_domain": "fntoday.co.kr",
+      "published_at": "2026-07-05T22:52:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.fntoday.co.kr/news/articleView.html?idxno=387560",
+      "naver_link": "https://www.fntoday.co.kr/news/articleView.html?idxno=387560",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "금융 AI"
+      ],
+      "description": "한국AI거버넌스교육원은 앞으로도 금융·보험 분야를 비롯한 다양한 산업을 대상으로 생성형 AI와 AI 거버넌스 교육을 확대해 산업 현장의 AI 활용 역량 강화와 안전한 AI 도입을 지원할 계획이다.",
+      "pre_score": 34,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 34,
+        "final_score": 34
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9e7e70f8d3d9293b",
+      "title": "디지털융합교육원·프로AI연구소, KBS국악관현악단에 '젠스파크AI SNS 홍...",
+      "source": "fntoday.co.kr",
+      "source_domain": "fntoday.co.kr",
+      "published_at": "2026-07-05T22:52:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.fntoday.co.kr/news/articleView.html?idxno=387557",
+      "naver_link": "https://www.fntoday.co.kr/news/articleView.html?idxno=387557",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "디지털융합교육원(원장 최재용) 지도교수이자 프로AI연구소 대표인 유인숙 교수가 지난 6월 30일 KBS국악관현악단을 대상으로 '젠스파크AI 활용 SNS 홍보 전략' 특강을 진행했다. 국악 공연 홍보 실무에 생성형 AI를 접목해...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "72987af856357729",
+      "title": "AI 영화감독 최재용, 신작 'Eternal Echoes'로 뉴욕 무대 도전",
+      "source": "fntoday.co.kr",
+      "source_domain": "fntoday.co.kr",
+      "published_at": "2026-07-05T22:52:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.fntoday.co.kr/news/articleView.html?idxno=387556",
+      "naver_link": "https://www.fntoday.co.kr/news/articleView.html?idxno=387556",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "최재용 AI영화감독은 AI를 활용한 영화 제작과 시나리오 창작을 활발히 이어가고 있는 창작자로, 서울국제AI영화제(SIAFF) 조직위원장을 맡아 세계 AI 영화 창작자들의 교류와 산업...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "5a2ed35342637737",
+      "title": "[최종국 칼럼] 거래처가 기업을 평가하는 시대, 노무·안전 관리가 경쟁...",
+      "source": "fntoday.co.kr",
+      "source_domain": "fntoday.co.kr",
+      "published_at": "2026-07-05T22:52:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.fntoday.co.kr/news/articleView.html?idxno=387564",
+      "naver_link": "https://www.fntoday.co.kr/news/articleView.html?idxno=387564",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "기준으로 활용되고 있다. 이에 따라 기업 경영시스템 역시 변화하고 있다. 품질 관리를 위한 ISO 9001... (직원)이 꼭 알아야 하는 30가지 노무이야기, 중소기업 소상공인 세무 노무 컨설팅, 나는 AI ESG 융합 전문가 ▲ [이메일]",
+      "pre_score": 22,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8,
+          "customer_demand": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "소상공인",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 22,
+        "final_score": 22
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "808a7a437a83b63d",
+      "title": "\"농촌을 돌봄의 공간으로\"…한국치유농업학회, 치유농업 산업화 과제 논...",
+      "source": "fntoday.co.kr",
+      "source_domain": "fntoday.co.kr",
+      "published_at": "2026-07-05T22:52:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.fntoday.co.kr/news/articleView.html?idxno=387585",
+      "naver_link": "https://www.fntoday.co.kr/news/articleView.html?idxno=387585",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "치유농업은 농촌의 자연환경과 농업 활동을 활용해 신체적·인지적·심리적·사회적 건강 증진을 돕는... 또한 AI와 데이터 기반 기술은 치유농업의 본질을 대체하는 수단이 아니라, 치유 효과를 설명하고 맞춤형 서비스를...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "466c29c699032ecd",
+      "title": "[사설] 정통망법 시행, 표현의 자유·권력 감시 위축 우려된다",
+      "source": "segye.com",
+      "source_domain": "segye.com",
+      "published_at": "2026-07-05T22:48:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.segye.com/newsView/20260705507565?OutUrl=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/022/0004140693?sid=110",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "리스크 최소화를 위해 플랫폼이 인공지능(AI)을 활용해 게시물을 필터링할 경우 건전한 정부 정책 비판마저 사라질 수도 있다. 법이 시행되면 부작용이 속속 드러날 것이다. 벌써 “댓글 하나 잘못 달면 거액 배상을 물 것”...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "6cc074d3a3dedfe7",
+      "title": "한국투자증권, 글로벌 부동산 대체투자 운용사 CEO 네트워크 행사 개최...",
+      "source": "rcast.co.kr",
+      "source_domain": "rcast.co.kr",
+      "published_at": "2026-07-05T22:46:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.rcast.co.kr/news/articleView.html?idxno=31196",
+      "naver_link": "https://www.rcast.co.kr/news/articleView.html?idxno=31196",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "금융 AI"
+      ],
+      "description": "한국투자증권, 글로벌 부동산 대체투자 운용사 CEO 네트워크 행사 개최 한국금융지주 자회사 한국투자증권... 투자상담, 챗봇상담, AI PB, 고객지원센터 등 다양한 상담 채널도 함께 배치해 디지털 환경에서도 신한...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "챗봇",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "6b334ac774468cfb",
+      "title": "미래경제문화포럼, 김종인 \"21세기 세계질서 개편과 한반도\" 주제 강연",
+      "source": "gukjenews.com",
+      "source_domain": "gukjenews.com",
+      "published_at": "2026-07-05T22:46:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.gukjenews.com/news/articleView.html?idxno=3626788",
+      "naver_link": "https://www.gukjenews.com/news/articleView.html?idxno=3626788",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "오명 국가원로회의 상임의장(전 부총리)은 \"IT 교육을 통한 디지털 역량 강화와 AI 시대의 주도적 역할\"을... 판교금융센터 영업지점장, 문종진 명지대학교 교수, 박명희 ㈜홋카이도신문사 EC 서울사무소장, 조홍균...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "dc410f5689d48161",
+      "title": "aT, K-푸드 해외 판로 넓히고 농산물 유통혁신 지원",
+      "source": "s-journal.co.kr",
+      "source_domain": "s-journal.co.kr",
+      "published_at": "2026-07-05T22:30:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.s-journal.co.kr/news/articleView.html?idxno=42188",
+      "naver_link": "https://www.s-journal.co.kr/news/articleView.html?idxno=42188",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "참가자들은 꾸러미 상품 구성과 물류 운영 노하우를 교류하고 현장을 견학했으며, 생성형 인공지능(AI)을 활용한 홍보 콘텐츠 제작과 온라인 마케팅 교육도 받았다. aT는 이번 교육을 통해 지역 생산자들의 디지털 마케팅...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ee045e36a5d66b74",
+      "title": "코엑스 ICML 2026 계기, 서울시 블레저 관광 본격화",
+      "source": "newscj.com",
+      "source_domain": "newscj.com",
+      "published_at": "2026-07-05T22:28:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.newscj.com/news/articleView.html?idxno=3414638",
+      "naver_link": "https://www.newscj.com/news/articleView.html?idxno=3414638",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "낮에는 코엑스 회의장에서 AI의 미래를 논하고, 밤에는 한강과 도심을 걸으며 서울을 경험한다. 서울시는 6일... 코엑스몰과 봉은사를 둘러보는 워킹 투어는 학회 틈새 시간을 활용하기 좋다. 대형 전시장과 도심 사찰이...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b32c2a6953f879cd",
+      "title": "의료산업·학술·병원 한자리에…2026 메디엑스포 코리아 성료",
+      "source": "idaegu.co.kr",
+      "source_domain": "idaegu.co.kr",
+      "published_at": "2026-07-05T22:14:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.idaegu.co.kr/news/articleView.html?idxno=552999",
+      "naver_link": "https://www.idaegu.co.kr/news/articleView.html?idxno=552999",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "인공지능(AI)과 바이오 기술을 접목한 첨단 디지털 의료기기와 디지털헬스케어, 치과기자재 등 최신... 자가혈액 줄기세포 치료와 산업보건, 재일코리안의사회 특별강연, 금융 트렌드 강의 등도 진행됐다. 이날...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e0432fc242e05a9b",
+      "title": "삼성전자, 사내 주택대출 '국민평형' 이하로 제한",
+      "source": "4th.kr",
+      "source_domain": "4th.kr",
+      "published_at": "2026-07-05T22:08:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "http://www.4th.kr/news/articleView.html?idxno=2114249",
+      "naver_link": "http://www.4th.kr/news/articleView.html?idxno=2114249",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "가계대출",
+        "가계부채",
+        "대출 규제"
+      ],
+      "description": "금융당국의 가계대출 규제 기조와 달리 사내 대출이 규제 사각지대에서 수도권 집값 상승을 부추길 수 있다는 비판이 제기되자 제도 보완에 나선 것으로 풀이된다. 5일 업계에 따르면 삼성전자는 사내 주거안정 지원 대출...",
+      "pre_score": 49,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 24,
+        "source_bonus": 0,
+        "raw_score": 49,
+        "final_score": 49
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "97fc4527e4b9c5da",
+      "title": "XRP 가격 주간 8% 상승, 향후 전망은?",
+      "source": "tokenpost.kr",
+      "source_domain": "tokenpost.kr",
+      "published_at": "2026-07-05T22:08:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.tokenpost.kr/news/cryptocurrency/375186",
+      "naver_link": "https://www.tokenpost.kr/news/cryptocurrency/375186",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "AI 에이전트 결제 인프라 'x402', XRPL 위에서 100만 건 처리 XRP 생태계는 인공지능(AI) 에이전트 기반의... MEXC 분석에 따르면 7월 1일을 기준으로 캘리포니아주의 디지털 금융자산법(DFAL·Digital Financial Assets Law)...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "683ff670646dc2d6",
+      "title": "포항시, 민선9기 민생경제 회복 속도 낸다…소상공인·전통시장 활성화",
+      "source": "sentv.co.kr",
+      "source_domain": "sentv.co.kr",
+      "published_at": "2026-07-05T22:02:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.sentv.co.kr/article/view/sentv202607050022",
+      "naver_link": "https://www.sentv.co.kr/article/view/sentv202607050022",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "고금리와 고물가, 내수 부진이 장기화되는 가운데 포항시는 금융지원과 소비촉진, 상권 특화, 전통시장... AI 라이브커머스, 브랜딩 지원 등을 통해 소상공인의 판로를 넓히고, 포항형 통합 배달플랫폼 구축도 검토해...",
+      "pre_score": 36,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8,
+          "customer_demand": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "소상공인",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 36,
+        "final_score": 36
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "04bc0893ad882fd9",
+      "title": "[아주경제 오늘의 뉴스 종합] 與 \"3대 메가프로젝트 성공 총력…당정청...",
+      "source": "ajunews.com",
+      "source_domain": "ajunews.com",
+      "published_at": "2026-07-05T22:02:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.ajunews.com/view/20260705212534859",
+      "naver_link": "https://www.ajunews.com/view/20260705212534859",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "대출 AI",
+        "대출 금리"
+      ],
+      "description": "삼성전자는 지난 5월 노사 합의를 통해 직급별로 최대 5억원의 주택 자금을 연 1.5% 금리로 빌려주는 사내 대출 제도를 도입했다. 당시 노사는 주택 자금 지원 금액과 대상, 시행 시기 등 세부 사항은 회사가 정하는 대로...",
+      "pre_score": 18,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 18,
+        "final_score": 18
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "02e9ecd86186253b",
+      "title": "청주시, 청년 전세자금 이자 지원",
+      "source": "news.kbs.co.kr",
+      "source_domain": "news.kbs.co.kr",
+      "published_at": "2026-07-05T22:01:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8602574&ref=A",
+      "naver_link": "https://n.news.naver.com/mnews/article/056/0012212003?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "전세대출"
+      ],
+      "description": "청주시가 청년들의 주거비 부담을 줄이기 위해 한해 100만 원까지 전세자금 대출이자를 지원합니다. 지원 대상은 19세 이상 39세 이하 미혼인 무주택 청주 시민입니다. 연소득 등 자세한 지원 자격은 청주시...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 22
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "청년",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "75312366cee4ba10",
+      "title": "'국민마트'는 왜 무너졌나…홈플러스 몰락과 MBK 논란의 전말",
+      "source": "thedailypost.kr",
+      "source_domain": "thedailypost.kr",
+      "published_at": "2026-07-05T21:56:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.thedailypost.kr/news/articleView.html?idxno=114563",
+      "naver_link": "https://www.thedailypost.kr/news/articleView.html?idxno=114563",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI",
+        "금융소비자"
+      ],
+      "description": "비용과 금융비용 부담으로 디지털 전환에 충분한 투자를 하지 못했다는 분석이 나온다. 소비자들이 온라인으로 이동하는 흐름에 적절히 대응하지 못하면서 성장 동력도 빠르게 약화됐다. 인수 과정에서 활용된 차입매수...",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "93aec8f6f31ca6ca",
+      "title": "전남광주 경제공약 재설계...정부 투자 확대",
+      "source": "mhns.co.kr",
+      "source_domain": "mhns.co.kr",
+      "published_at": "2026-07-05T21:48:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.mhns.co.kr/news/articleView.html?idxno=752373",
+      "naver_link": "https://www.mhns.co.kr/news/articleView.html?idxno=752373",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "공공금융과 투자공사 출자, 기업의 지역 상생협력 기금 등을 연계하는 방식이 검토될 것으로 전망된다. 인수위원회 관계자는 \"대규모 반도체 투자가 현실화하면 AI와 반도체 중심의 산업 생태계를 구축할 기반은 더욱...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "aec79e4558dc4e50",
+      "title": "정읍시, 2026년 7월 6일자 인사발령…( )는 전임지",
+      "source": "jeonmin.co.kr",
+      "source_domain": "jeonmin.co.kr",
+      "published_at": "2026-07-05T21:48:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "http://www.jeonmin.co.kr/news/articleView.html?idxno=442767",
+      "naver_link": "http://www.jeonmin.co.kr/news/articleView.html?idxno=442767",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "미래산업과 AI금융데이터센터TF팀장(미래산업과) ▲박석희 입암면 팀장요원(시민소통실) ▲이종당 영원면 팀장요원(칠보면) ▲박옥주 영원면 팀장요원(산외면) ▲박제준 감곡면 팀장요원(사회복지과) ▲박지현 감곡면...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b165eb5bf2c97fa1",
+      "title": "경북농협, 상호금융대출금 상반기 35조 달성 '쾌거'",
+      "source": "idaegu.co.kr",
+      "source_domain": "idaegu.co.kr",
+      "published_at": "2026-07-05T21:44:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.idaegu.co.kr/news/articleView.html?idxno=552969",
+      "naver_link": "https://www.idaegu.co.kr/news/articleView.html?idxno=552969",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "소상공인 대출",
+        "자영업자 대출"
+      ],
+      "description": "경북농협이 상호금융대출금 35조원을 달성하고 지난 3일 지역본부 대강당에서 달성탑 기념식을 가졌다. 이번 성과는 어려운 경제 여건 속에서도 농업인과 지역민, 소상공인에 대한 안정적인 금융지원을 지속해 온 결과로...",
+      "pre_score": 44,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 24,
+          "customer_demand": 8
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "상호금융",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "소상공인",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 44,
+        "final_score": 44
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "8efa389ca7c4c114",
+      "title": "문창환 IBK캐피탈 대표, 금융수익·평가손익 하락에 순익 소폭 감소…유...",
+      "source": "한국금융신문",
+      "source_domain": "fntimes.com",
+      "published_at": "2026-07-05T21:44:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.fntimes.com/html/view.php?ud=2026070521385415588a55064dd1_18",
+      "naver_link": "https://www.fntimes.com/html/view.php?ud=2026070521385415588a55064dd1_18",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용대출",
+        "연체율"
+      ],
+      "description": "IBK캐피탈 관계자는 \"우량 자산 및 우량 업체의 신용 보강이 제공되는 기업금융건에 대한 대출규모와 비중을 확대하여 안정적 수익기반 확보할 계획\"이라며 \"신용/유동화 상품, NPL 및 인수금융 등에 대한 취급...",
+      "pre_score": 19,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 12,
+        "source_bonus": 7,
+        "raw_score": 19,
+        "final_score": 19
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "812d3ea83f2f4117",
+      "title": "연중기획 / 저출산 초고령화 시대, 대한민국의 나아갈 길",
+      "source": "monthly.chosun.com",
+      "source_domain": "monthly.chosun.com",
+      "published_at": "2026-07-05T21:38:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://monthly.chosun.com/news/articleView.html?idxno=70610",
+      "naver_link": "https://monthly.chosun.com/news/articleView.html?idxno=70610",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI",
+        "금융소비자"
+      ],
+      "description": "금융 지원, 주거비 지원, 위기 사유 발생시 긴급주거지원 등의 서비스가 있으나 모두 소득 기준 또는... 실버스테이, 실버주택, 실버타운, 시니어타운 등 다양한 용어가 혼용되면서 소비자의 혼란도 불가피하다....",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "81bf8469fe44a9e0",
+      "title": "경남도, 폐점 홈플러스 소상공인 경영안정자금 지원",
+      "source": "news.kbs.co.kr",
+      "source_domain": "news.kbs.co.kr",
+      "published_at": "2026-07-05T21:35:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8602549&ref=A",
+      "naver_link": "https://n.news.naver.com/mnews/article/056/0012211984?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "소상공인 대출"
+      ],
+      "description": "경상남도가 폐점된 홈플러스 6개 지점의 입점 소상공인을 돕기 위해 20억 원 규모 긴급경영안정자금을 지원합니다. 지원 대상은 올해 해당 지점에 하루 이상 입점했던 업체로, 최대 1억 원 이내 대출로 1년 동안 연 2.5...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 22
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "소상공인",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "381d42dada28739d",
+      "title": "함양군, 중기·소상공인 90억 지원",
+      "source": "gnmaeil.com",
+      "source_domain": "gnmaeil.com",
+      "published_at": "2026-07-05T21:34:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "http://www.gnmaeil.com/news/articleView.html?idxno=590089",
+      "naver_link": "http://www.gnmaeil.com/news/articleView.html?idxno=590089",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "소상공인 대출",
+        "전세대출"
+      ],
+      "description": "상환 조건은 일반운전자금과 소상공인 창업·전세자금은 2년 거치 2년 균분 상환, 중소기업 기술개발자금과... 신청은 농협 함양군지부, 경남은행 함양지점, 새마을금고 등 융자취급 금융기관에서 대출 상담 후 신청서를...",
+      "pre_score": 34,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 22
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "소상공인",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 34,
+        "final_score": 34
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "a850fa3997bc580c",
+      "title": "우리銀, 문화예술 플랫폼 '투더문' 오픈 기념 페스티벌 개최 外",
+      "source": "rcast.co.kr",
+      "source_domain": "rcast.co.kr",
+      "published_at": "2026-07-05T21:34:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.rcast.co.kr/news/articleView.html?idxno=31195",
+      "naver_link": "https://www.rcast.co.kr/news/articleView.html?idxno=31195",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "이는 우리은행이 강조해 온 포용금융의 가치를 문화예술 생태계로 확장해, 실력 있는 창작자들에게 더 많은... 경제, AI 산업 트렌드, 주식시장 전망, 시니어 건강 관리, 자산관리 및 절세 전략 등 다양한 주제의 강연을...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "46a5013b37f1580b",
+      "title": "전세 수요 ‘탈아파트·탈서울’ 변화 조짐",
+      "source": "segye.com",
+      "source_domain": "segye.com",
+      "published_at": "2026-07-05T21:32:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.segye.com/newsView/20260705507894?OutUrl=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/022/0004140683?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제",
+        "전세대출"
+      ],
+      "description": "전세 대출 규제가 강화돼 자금 조달이 어려워진 점도 실수요자들의 주거 선택에 영향을 미친 것으로 보인다. 서울 아파트 전월세 거래는 1∼5월 11만9722건으로 6.5% 줄어든 반면에 비아파트는 25만9853건으로 6.3% 늘었다....",
+      "pre_score": 31,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11,
+          "customer_demand": 8
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "실수요자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 31,
+        "final_score": 31
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "f01304e336c3126d",
+      "title": "진옥동 신한금융 회장 \"신한 고유 야성으로 시장 경쟁·미래 금융 혁신...",
+      "source": "kfenews.co.kr",
+      "source_domain": "kfenews.co.kr",
+      "published_at": "2026-07-05T21:24:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.kfenews.co.kr/news/articleView.html?idxno=659802",
+      "naver_link": "https://www.kfenews.co.kr/news/articleView.html?idxno=659802",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "특히, 이번 포럼에서는 신한금융그룹이 자체 제작한 AI 에이전트가 토론의 '레드팀'으로 활용됐다. AI 에이전트는 토론 내용을 실시간으로 분석해 다양한 반론·대안을 제시했고, 사전 과제 피드백과 조별 발표안 평가에...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d9f5b602ade4ee58",
+      "title": "블랙햇 USA 2026에서 주목해야 할 5대 사이버보안 화두",
+      "source": "dailysecu.com",
+      "source_domain": "dailysecu.com",
+      "published_at": "2026-07-05T21:20:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.dailysecu.com/news/articleView.html?idxno=207453",
+      "naver_link": "https://www.dailysecu.com/news/articleView.html?idxno=207453",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "2026년 행사에서는 인공지능을 중심으로 디지털 신원, 소프트웨어 공급망, 클라우드, 금융과 의료 분야 보안이 핵심 주제로 다뤄질 전망이다. 첫 번째 화두는 AI...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "355ae77bec9971f0",
+      "title": "[장원준 칼럼] 캐나다 잠수함 사업, K-방산의 미래 30년 가를 승부처",
+      "source": "news2day.co.kr",
+      "source_domain": "news2day.co.kr",
+      "published_at": "2026-07-05T21:20:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.news2day.co.kr/article/20260705500064",
+      "naver_link": "https://www.news2day.co.kr/article/20260705500064",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "사이버보안, AI 기반 군수 데이터 플랫폼, 산업협력을 결합한 해양안보 패키지로 고도화해야 한다. 아울러 공동생산, 현지화, 금융지원, 전문인력 양성 모델을 체계화해 차기 시장을 준비해야 한다. 이제 대형 방산 수출은...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "03551251e137fb5f",
+      "title": "[Y르포] 파산 위기 대구 홈플러스…입점 점포 상당수 벌써 영업중단 “...",
+      "source": "yeongnam.com",
+      "source_domain": "yeongnam.com",
+      "published_at": "2026-07-05T21:20:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.yeongnam.com/web/view.php?key=20260705020304123",
+      "naver_link": "https://www.yeongnam.com/web/view.php?key=20260705020304123",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "개인회생"
+      ],
+      "description": "com 법원 홈플러스 회생 폐지 결정 이후 혼란 가중 텅 빈 매장…신선·냉장 매대 재고 처리 자리로 입점 음식점·카페도 운영 종료, 재고 개인 거래도 직원들 임금체불, 점주 보증금 걱정에 전전긍긍",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "814b0fd7984653a1",
+      "title": "카카오페이, AX 전환 담은 듀얼 리더블 ESG 보고서 공개",
+      "source": "technoa.co.kr",
+      "source_domain": "technoa.co.kr",
+      "published_at": "2026-07-05T21:12:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "http://www.technoa.co.kr/news/articleView.html?idxno=101123",
+      "naver_link": "http://www.technoa.co.kr/news/articleView.html?idxno=101123",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI",
+        "금융소비자"
+      ],
+      "description": "회사는 경영 활동이 외부 환경ㆍ사회에 미치는 영향과 재무적 가치에 미치는 영향을 동시에 분석한 결과, 기존 핵심 이슈였던 개인정보보호, 금융소비자보호, 기후변화 대응에 더해 AI 기반 금융 혁신을 신규 중대...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "6dc49efa816a0882",
+      "title": "[이슈+]삼성전자, 사내 주택대출 '국평 이하'로 제한…5억원 저리 지원...",
+      "source": "businessplus.kr",
+      "source_domain": "businessplus.kr",
+      "published_at": "2026-07-05T21:10:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.businessplus.kr/news/articleView.html?idxno=113729",
+      "naver_link": "https://www.businessplus.kr/news/articleView.html?idxno=113729",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "가계대출",
+        "대출 규제",
+        "주택담보대출",
+        "주택시장 대출"
+      ],
+      "description": "삼성 계열사들이 지원 대상에 면적 기준을 도입한 것은 고액의 사내 대출이 정부의 가계대출 관리 기조와 충돌할 수 있다는 우려를 반영한 것으로 풀이된다. 사내 주택자금 대출은 기업 복지 차원의 개인 대여 성격으로...",
+      "pre_score": 44,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 44,
+        "final_score": 44
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e8220c9eaad00145",
+      "title": "뉴욕라이프인베스트먼트, 센트리퓨즈와 협력...하이일드 회사채 토큰화",
+      "source": "digitaltoday.co.kr",
+      "source_domain": "digitaltoday.co.kr",
+      "published_at": "2026-07-05T21:10:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=681424",
+      "naver_link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=681424",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "하이일드(High Yield) 회사채는 신용평가사로부터 투자적격등급 미만으로 평가 받은 기업들이 발행하는 채권을 말한다. 리스크가 높은 만큼, 국채나 우량 회사채보다 높은 수익을 기대할 수 있다. HYB는 자격 갖춘...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "c6b5526832046941",
+      "title": "함양군, 하반기 중소기업·소상공인 육성자금 접수",
+      "source": "polinews.co.kr",
+      "source_domain": "polinews.co.kr",
+      "published_at": "2026-07-05T21:09:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.polinews.co.kr/news/articleView.html?idxno=736067",
+      "naver_link": "https://www.polinews.co.kr/news/articleView.html?idxno=736067",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "소상공인 대출",
+        "전세대출"
+      ],
+      "description": "상환 조건은 일반운전자금과 소상공인 창업·전세자금의 경우 2년 거치 2년 균분 상환이다. 중소기업... 금융기관에서 대출 상담을 받은 뒤 신청서를 제출하면 된다. 상담 시에는 사업자등록증을 지참해야 한다. 군...",
+      "pre_score": 34,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 22
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "소상공인",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 34,
+        "final_score": 34
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "a81875582e29cb18",
+      "title": "삼성전자, 5억원 사내 주택자금 대출 대상 84㎡ 이하로 제한",
+      "source": "서울경제",
+      "source_domain": "sedaily.com",
+      "published_at": "2026-07-05T21:08:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.sedaily.com/article/20063991?ref=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/011/0004638319?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "대출 규제",
+        "대출 금리"
+      ],
+      "description": "규제의 사각지대에 있어 시장 왜곡을 더 심화할 수 있다는 지적이 나온 바 있다. 사내 대출은 기업 복지 성격의 개인 간 대여로 분류돼 금융권 대출 한도의 기준인 총부채원리금상환비율(DSR) 등 규제에서 제외될 수 있다.",
+      "pre_score": 37,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "DSR",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "총부채원리금상환비율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 8,
+        "raw_score": 37,
+        "final_score": 37
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "bcc337c88ac01ab7",
+      "title": "[신탁 대전①] 예금·대출 밖 1500조…금융권의 새 먹거리",
+      "source": "tfmedia.co.kr",
+      "source_domain": "tfmedia.co.kr",
+      "published_at": "2026-07-05T21:08:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.tfmedia.co.kr/news/article.html?no=205518",
+      "naver_link": "https://www.tfmedia.co.kr/news/article.html?no=205518",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "금융감독원 대출",
+        "금융소비자",
+        "대출 AI",
+        "은행권 대출"
+      ],
+      "description": "5편에서는 신탁업 확대 과정에서 금융권이 마주한 제도적 과제와 소비자 보호 쟁점을 살펴본다. (조세금융신문=진민경 기자) 국내 신탁시장이 1500조원 시대를 맞았다. 은행 예·적금이나 대출처럼 대중에게...",
+      "pre_score": 30,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 30,
+        "final_score": 30
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "72ebfa24f18e4179",
+      "title": "대형마트 선두두자의 초라한 퇴장…홈플러스. 파산 위기 앞 '운명의 2주...",
+      "source": "kfenews.co.kr",
+      "source_domain": "kfenews.co.kr",
+      "published_at": "2026-07-05T21:00:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.kfenews.co.kr/news/articleView.html?idxno=659797",
+      "naver_link": "https://www.kfenews.co.kr/news/articleView.html?idxno=659797",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "메리츠금융그룹은 담보권을 행사해 투자금을 안전하게 회수할 것이고 사모펀드 역시 나름의 출구전략을 모색하겠지만, 껍데기만 남은 마트와 길거리에 나앉게 된 수만 명의 근로자와 단골 마트를 잃은 소비자들의 피해...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "0b8aa6044e7698df",
+      "title": "자동차사고 과실비율 민원 이달부터 보험협회가 신속처리",
+      "source": "inthenews.co.kr",
+      "source_domain": "inthenews.co.kr",
+      "published_at": "2026-07-05T20:58:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.inthenews.co.kr/news/article.html?no=88941",
+      "naver_link": "https://www.inthenews.co.kr/news/article.html?no=88941",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "보험협회는 비분쟁성 민원, 금융감독원은 분쟁민원 해소에 집중하는 투트랙 방식으로 처리기간을 줄이고 보험소비자 만족도를 개선하려는 것입니다. 세부적으로 자동차 운전자간 과실을 다투는 자동차사고 과실비율...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융감독원",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ae18993ee33cb7eb",
+      "title": "블랙햇 USA 2026, 8월 라스베이거스서 개최",
+      "source": "dailysecu.com",
+      "source_domain": "dailysecu.com",
+      "published_at": "2026-07-05T20:52:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.dailysecu.com/news/articleView.html?idxno=207450",
+      "naver_link": "https://www.dailysecu.com/news/articleView.html?idxno=207450",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "8월 4일에는 ▲AI 서밋 ▲CISO 서밋 ▲금융 위협 서밋 ▲혁신기업·투자자 서밋... 소비자용 기기의 취약점부터 국가 핵심 기반시설을 위협하는 공격까지 폭넓은 연구가...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "a29f258a4dcb2dff",
+      "title": "포항시, ‘145억 확보’로 골목상권 살리기 총력…민선9기 민생경제 대...",
+      "source": "ksmnews.co.kr",
+      "source_domain": "ksmnews.co.kr",
+      "published_at": "2026-07-05T20:44:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.ksmnews.co.kr/news/view.php?idx=612084",
+      "naver_link": "https://www.ksmnews.co.kr/news/view.php?idx=612084",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "원산지 및 위생 관리를 철저히 하고 착한가격업소 지정을 확대해 소비자가 믿고 찾을 수 있는 건전한 상거래 질서를 확립할 계획이다.박용선 포항시장은 \"확보된 공모사업 재원을 바탕으로 금융 지원, 상권 특화, 관광 자원...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "1f9d689b356f3154",
+      "title": "울산 남구, 중소기업·소상공인 안정자금 184억 신속 집행",
+      "source": "ulsanpress.net",
+      "source_domain": "ulsanpress.net",
+      "published_at": "2026-07-05T20:36:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.ulsanpress.net/news/articleView.html?idxno=578441",
+      "naver_link": "https://www.ulsanpress.net/news/articleView.html?idxno=578441",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "소상공인 대출"
+      ],
+      "description": "이번 경영안정자금 융자 규모는 중소기업 34억원과 소상공인 150억원으로, 중소기업은 업체당 최대 2억원, 소상공인은 최대 5,000만원까지 지원된다. 남구는 대출금에 대한 이자 차액으로 중소기업은 2~3%, 소상공인은 2%씩...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 22
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "소상공인",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ccbc39c995eddcca",
+      "title": "아파트 전월세 매물…절벽에 외면했던 빌라 다시 찾는다",
+      "source": "khan.co.kr",
+      "source_domain": "khan.co.kr",
+      "published_at": "2026-07-05T20:33:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.khan.co.kr/article/202607052033025",
+      "naver_link": "https://n.news.naver.com/mnews/article/032/0003456193?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제",
+        "전세대출",
+        "주택담보대출"
+      ],
+      "description": "현재 거주 중인 서울 지하철 2호선 역세권 다세대주택의 전세를 연장할지, 주택담보대출을 받아 금천구 등에 5억~6억원대 아파트를 살지 쉽사리 결정하지 못하고 있다. 아파트로 옮기고 싶지만 월 200만원이 넘는...",
+      "pre_score": 32,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "주택담보대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 32,
+        "final_score": 32
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "4634907c6dfc8340",
+      "title": "KB·경찰 핫라인, 보이스피싱 퇴치 효과",
+      "source": "khan.co.kr",
+      "source_domain": "khan.co.kr",
+      "published_at": "2026-07-05T20:29:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.khan.co.kr/article/202607052029005",
+      "naver_link": "https://n.news.naver.com/mnews/article/032/0003456187?sid=102",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대환대출"
+      ],
+      "description": "최근 적발된 범죄 유형을 보면, 사기범은 저금리 대환대출을 미끼로 피해자의 신분증과 신용·체크카드 등을 빼앗았다. 이후 인출책이 자금 세탁을 위해 피해자의 카드로 마트 상품권을 구매하고, 이를 다시 현금과...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "대환대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "32214b63c6ef6569",
+      "title": "예금 빼고 마통 뚫고…2분기 일평균 '빚투' 61조 사상 최대",
+      "source": "한국경제",
+      "source_domain": "hankyung.com",
+      "published_at": "2026-07-05T20:27:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.hankyung.com/article/2026070565637",
+      "naver_link": "https://n.news.naver.com/mnews/article/015/0005306436?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "마이너스통장",
+        "은행권 대출"
+      ],
+      "description": "KB국민·신한·하나·우리·NH농협 등 5대 은행의 마이너스통장 대출 잔액은 지난달 말 43조2812억원으로 3월 말 대비 3조4246억원 늘어난 데 이어, 이달 들어 2일까지 이틀간 4930억원이 추가로 늘었다. 반면 5대 은행의...",
+      "pre_score": 35,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "마이너스통장",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 9,
+        "raw_score": 35,
+        "final_score": 35
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "c112cf66e9093e0a",
+      "title": "\"아파트 전세 비싸서 못 살겠다\"…임차인들 대거 이동한 '이곳'의 정체",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-07-05T20:22:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=586669",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=586669",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제",
+        "전세대출"
+      ],
+      "description": "전세대출 규제 강화와 대출 문턱이 높아지면서 상대적으로 저렴한 비아파트로 임차 수요가 이동하는 현상도 관측됐다. 국토교통부 집계에 따르면 올해 1∼5월 서울 아파트 월세 비중은 51.3%로, 지난해 같은 기간보다...",
+      "pre_score": 37,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "전세대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 37,
+        "final_score": 37
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "1916397e313df838",
+      "title": "‘회생절차 폐지’ 홈플러스, 2000억 자금 조달 ‘마지막 희망’",
+      "source": "ekn.kr",
+      "source_domain": "ekn.kr",
+      "published_at": "2026-07-05T20:22:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.ekn.kr/web/view.php?key=20260705022459315",
+      "naver_link": "https://www.ekn.kr/web/view.php?key=20260705022459315",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "개인회생",
+        "소상공인 대출"
+      ],
+      "description": "법원이 회생절차 폐지를 결정했지만 자금을 확보할 경우 이 기간 내 즉시항고가 가능하기 때문이다.... MBK는 김 회장의 개인 증여 등을 통해 이미 수천억원의 자금과 신용을 직간접적으로 부담했다며 맞섰다. 메리츠는...",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "320b62961432d40c",
+      "title": "“청춘 바쳤는데” “막막”… ‘파산 기로’ 홈플러스의 한숨",
+      "source": "seoul.co.kr",
+      "source_domain": "seoul.co.kr",
+      "published_at": "2026-07-05T20:20:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.seoul.co.kr/news/economy/distribution/2026/07/06/20260706029001?wlog_tag3=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/081/0003658462?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "개인회생",
+        "소상공인 대출"
+      ],
+      "description": "서울회생법원의 회생절차 폐지 결정으로 더욱 썰렁해진 매장에서 “20년 가까이 청춘을 바친 일터가... 반면 MBK 측은 회사 차원의 연대보증을 제시했고 이미 김 회장의 개인 증여 등을 통해 수천억원의 자금과 신용을...",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d5ba6f941efc7a12",
+      "title": "中 위닛, 북미 제3자물류 업체에 모듈식 풀필먼트 플랫폼 공급",
+      "source": "irobotnews.com",
+      "source_domain": "irobotnews.com",
+      "published_at": "2026-07-05T20:14:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.irobotnews.com/news/articleView.html?idxno=47259",
+      "naver_link": "https://www.irobotnews.com/news/articleView.html?idxno=47259",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "위닛은 전자상거래의 지속적인 성장, 비용 압박 심화, 소비자 행동 변화에 따라 3PL 부문이 진화하고 있다고... 이 회사는 모바일 전자상거래, 노동력 및 부동산 비용 상승, 심화된 임베디드 금융 통합 역시 3PL 성장을...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "0767828e0c470d7f",
+      "title": "금융당국 대출 기조 맞춘 삼성전자…사내 주택대출 '국평' 이하로 제한",
+      "source": "econovill.com",
+      "source_domain": "econovill.com",
+      "published_at": "2026-07-05T20:12:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.econovill.com/news/articleView.html?idxno=744325",
+      "naver_link": "https://www.econovill.com/news/articleView.html?idxno=744325",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "가계대출",
+        "대출 규제",
+        "주택시장 대출"
+      ],
+      "description": "삼성 계열사들이 잇따라 지원 대상 주택의 면적 제한을 도입한 것은 고액의 사내 주택자금 대출이 금융당국의 가계대출 관리 기조와 맞지 않는다는 지적과 함께 수도권 집값 상승을 자극할 수 있다는 우려가 제기된 데...",
+      "pre_score": 38,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 24,
+        "source_bonus": 0,
+        "raw_score": 38,
+        "final_score": 38
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "5881713468b09ccb",
+      "title": "삼성전자, 사내 주택대출 대상 축소…수도권 '국민평형' 이하만 지원",
+      "source": "kgnews.co.kr",
+      "source_domain": "kgnews.co.kr",
+      "published_at": "2026-07-05T20:12:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.kgnews.co.kr/news/article.html?no=902665",
+      "naver_link": "https://www.kgnews.co.kr/news/article.html?no=902665",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "가계대출",
+        "대출 규제"
+      ],
+      "description": "삼성전자와 삼성디스플레이가 지원 대상 주택의 면적 기준을 마련한 것은 사내 대출이 금융당국의 가계대출 관리 기조와 맞지 않는다는 지적이 이어진 데 따른 조치로 해석된다. 기업이 직원에게 제공하는 사내 대출은...",
+      "pre_score": 32,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 32,
+        "final_score": 32
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "426de5c310edf2ce",
+      "title": "삼성전자, 5억원 사내 주택자금 대출 대상 '국평' 이하로 제한",
+      "source": "inews24.com",
+      "source_domain": "inews24.com",
+      "published_at": "2026-07-05T20:08:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "http://www.inews24.com/view/1982533",
+      "naver_link": "https://n.news.naver.com/mnews/article/031/0001039839?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "대출 규제"
+      ],
+      "description": "특히 사내 대출은 기업 복지 성격의 개인 간 대여로 분류돼 총부채원리금상환비율(DSR) 규제를 적용받지 않아 시장 왜곡 가능성이 제기돼 왔다. 삼성전자의 내년도 성과급과 사내 대출 규모를 합치면 최대 36조6000억원의...",
+      "pre_score": 23,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "DSR",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "총부채원리금상환비율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 23,
+        "final_score": 23
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "c31b621f03e145ff",
+      "title": "여행 플랫폼 트라발라, 전 세계 220만 개 호텔 예약에 XRP 결제 도입",
+      "source": "g-enews.com",
+      "source_domain": "g-enews.com",
+      "published_at": "2026-07-05T20:08:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.g-enews.com/view.php?ud=202607052002229675e250e8e188_1",
+      "naver_link": "https://www.g-enews.com/view.php?ud=202607052002229675e250e8e188_1",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "기존 금융망 없는 '즉시 예약'…XRP 본연의 가치 실현 트라발라는 XRP의 핵심 목적이 '신속한 가치 이전'에... 이번 통합으로 XRP는 기존의 단순 투자 자산 및 거래소 플랫폼 활용을 넘어, 광범위한 소비자 여행 및 숙박...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "5d8e4d74e25f8a1b",
+      "title": "삼성전자 5억 사내대출 제동…‘국민평형’ 이하만 빌려준다",
+      "source": "kyeonggi.com",
+      "source_domain": "kyeonggi.com",
+      "published_at": "2026-07-05T20:07:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.kyeonggi.com/article/20260705580372",
+      "naver_link": "https://n.news.naver.com/mnews/article/666/0000114022?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "대출 규제",
+        "대출 금리"
+      ],
+      "description": "특히 사내대출은 기업 복지 차원의 개인 간 대여로 분류돼 금융권 대출 한도 산정 기준인 총부채원리금상환비율, DSR 규제에서 제외될 수 있다. 이 때문에 시중 대출 규제를 피해 부동산 시장으로 대규모 자금이 흘러갈 수...",
+      "pre_score": 29,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "DSR",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "총부채원리금상환비율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 29,
+        "final_score": 29
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d51fcfeb6d98f1ed",
+      "title": "삼성전자, 5억원 사내 주택자금 대출 '국평 85㎡' 이하로 제한",
+      "source": "newscj.com",
+      "source_domain": "newscj.com",
+      "published_at": "2026-07-05T20:06:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.newscj.com/news/articleView.html?idxno=3414618",
+      "naver_link": "https://www.newscj.com/news/articleView.html?idxno=3414618",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "가계대출",
+        "대출 규제"
+      ],
+      "description": "삼성 계열사들이 잇따라 대출 대상 주택에 면적 제한을 둔 것은 고액의 저금리 사내 대출이 금융당국의 가계대출 관리 기조와 엇박자를 낼 수 있다는 지적을 고려한 것으로 풀이된다. 사내 대출이 수도권 주택 수요를...",
+      "pre_score": 32,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 32,
+        "final_score": 32
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "956ae68f52ad7960",
+      "title": "삼성전자, 연 1.5%·5억 사내대출 '국평 이하'로 제한",
+      "source": "sjsori.com",
+      "source_domain": "sjsori.com",
+      "published_at": "2026-07-05T20:04:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.sjsori.com/news/articleView.html?idxno=87330",
+      "naver_link": "https://www.sjsori.com/news/articleView.html?idxno=87330",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "가계대출",
+        "대출 규제",
+        "대출 금리",
+        "보험사 대출",
+        "주택담보대출",
+        "주택시장 대출"
+      ],
+      "description": "삼성 계열사들이 잇달아 주택 면적 제한을 도입한 것은 고액 사내 대출이 정부의 가계대출 억제 기조와 충돌한다는 지적을 의식한 결과로 풀이된다. △DSR 적용 안 받아…시장 자극 우려 사내 대출은 일반적으로 기업...",
+      "pre_score": 55,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "policy_regulation": [
+            {
+              "term": "DSR",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 55,
+        "final_score": 55
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "93229784c2ee714c",
+      "title": "'국평' 이하만 빌려준다…'최대 5억' 삼성전자 대출 근황",
+      "source": "한국경제",
+      "source_domain": "hankyung.com",
+      "published_at": "2026-07-05T20:02:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.hankyung.com/article/2026070565417",
+      "naver_link": "https://n.news.naver.com/mnews/article/015/0005306432?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "대출 규제",
+        "대출 금리"
+      ],
+      "description": "사내 대출은 기업 복지 성격의 개인 간 대여로 분류돼 총부채원리금상환비율(DSR) 등 금융 당국의 규제 조치에서 제외된다. 이에 따라 규제 사각지대에 놓인 대규모 자금이 시장 왜곡을 심화할 수 있다는 지적이...",
+      "pre_score": 38,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "DSR",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "총부채원리금상환비율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 9,
+        "raw_score": 38,
+        "final_score": 38
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "8f3c04764d750831",
+      "title": "롯데건설, 성수4지구 1.3조 수주…‘성수 르엘 S70’ 나온다",
+      "source": "kukinews.com",
+      "source_domain": "kukinews.com",
+      "published_at": "2026-07-05T20:00:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.kukinews.com/article/view/kuk202607050039",
+      "naver_link": "https://www.kukinews.com/article/view/kuk202607050039",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "LTV"
+      ],
+      "description": "이주비 대여에는 LTV 100%를 적용하기로 했다. 조합원 전용 커뮤니티를 무료로 운영하는 방안도 제시해 수주에 성공했다. 이번 수주는 롯데건설 입장에서 4년 전 대우건설과의 맞대결 패배를 설욕했다는 의미를...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "LTV",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "df2466057d9c95d6",
+      "title": "삼성 무풍에어컨 2000만대 돌파…유럽 중심 B2B 공조 판 키워",
+      "source": "econovill.com",
+      "source_domain": "econovill.com",
+      "published_at": "2026-07-05T20:00:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.econovill.com/news/articleView.html?idxno=744321",
+      "naver_link": "https://www.econovill.com/news/articleView.html?idxno=744321",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "독일 품질금융연구소(ITQF)가 발표한 '2026 이탈리아 가격 대비 품질 평가'에서 삼성전자 에어컨은 대형 가전 부문 소비자 만족도 1위를 기록했으며, 히트펌프 부문도 3년 연속 높은 평가를 받았다. 임성택 삼성전자...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b5e0d6aa731ded2f",
+      "title": "삼성전자, 최대 5억원 사내 주택자금 대출 85㎡ 이하로 제한",
+      "source": "이데일리",
+      "source_domain": "edaily.co.kr",
+      "published_at": "2026-07-05T19:59:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=02259926645511568",
+      "naver_link": "https://n.news.naver.com/mnews/article/018/0006323252?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제",
+        "대출 금리"
+      ],
+      "description": "이같은 결정을 한 이유는 낮은 이율로 고액의 주택 자금 대출을 시행하는 게 금융 당국의 대출 규제 기조와 맞지 않는데다 집값 상승을 자극할 수 있다는 우려가 있기 때문이라는 분석이다. 다만 삼성전자는 대출 대상...",
+      "pre_score": 31,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 8,
+        "raw_score": 31,
+        "final_score": 31
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "732d6b7f4bbbeefd",
+      "title": "삼성전자, 사내 주택대출 ‘국민평형’ 이하로 제한… 수도권·광역시 ...",
+      "source": "biz.chosun.com",
+      "source_domain": "biz.chosun.com",
+      "published_at": "2026-07-05T19:58:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://biz.chosun.com/it-science/ict/2026/07/05/65R7PVNXHBD3ZKBGJGO3VGWMSA",
+      "naver_link": "https://n.news.naver.com/mnews/article/366/0001176915?sid=105",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "가계대출",
+        "대출 규제",
+        "주택시장 대출"
+      ],
+      "description": "이번 면적 제한은 사내 대출이 금융당국의 가계대출 관리 기조와 충돌할 수 있다는 우려를 반영한 것으로 풀이된다. 기업이 제공하는 사내 대출은 복지 목적의 개인 대여로 분류돼 총부채원리금상환비율(DSR) 등 금융권...",
+      "pre_score": 49,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "policy_regulation": [
+            {
+              "term": "DSR",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "총부채원리금상환비율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 24,
+        "source_bonus": 0,
+        "raw_score": 49,
+        "final_score": 49
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e8a7f5da337b0165",
+      "title": "[경인 WIDE] 다른 수요층·가격 양극화 ‘구멍’… 핀셋처방 나서야",
+      "source": "kyeongin.com",
+      "source_domain": "kyeongin.com",
+      "published_at": "2026-07-05T19:56:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.kyeongin.com/article/1766784",
+      "naver_link": "https://www.kyeongin.com/article/1766784",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "LTV"
+      ],
+      "description": "사내대출을 받을 수 있다면 언제든지 주택을 살 수 있다. 직장이 삼성전자와 SK하이닉스가 아닌 신혼부부, 무주택자는 주택담보인정비율(LTV)이 70%에서 40%로 줄어드는 등 주택 마련이 더욱 어려워질 것”이라고 말했다.",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "LTV",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "39ae47bb53d4731f",
+      "title": "부동산 자극 우려에...삼성전자, 사내 주택대출 ‘국평이하’ 제한",
+      "source": "joongang.co.kr",
+      "source_domain": "joongang.co.kr",
+      "published_at": "2026-07-05T19:55:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.joongang.co.kr/article/25442543",
+      "naver_link": "https://n.news.naver.com/mnews/article/025/0003535430?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "금융감독원 대출",
+        "대출 규제",
+        "대출 금리"
+      ],
+      "description": "하지만 이런 저금리 사내대출이 복지 성격의 개인 간 대여로 분류돼, 총부채원리금상환비율(DSR) 등 정부 규제를 받지 않는다는 비판이 나왔다. 부동산 시장을 왜곡할 수 있다는 금융당국의 우려와 비판 여론도 커졌다....",
+      "pre_score": 35,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "DSR",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "총부채원리금상환비율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 24,
+        "source_bonus": 0,
+        "raw_score": 35,
+        "final_score": 35
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "f0728e235e459fca",
+      "title": "삼성전자, 사내 주택자금 대출 대상 '전용 85㎡ 이하'로 조정...'집값 상...",
+      "source": "ngonews.kr",
+      "source_domain": "ngonews.kr",
+      "published_at": "2026-07-05T19:54:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.ngonews.kr/news/articleView.html?idxno=232249",
+      "naver_link": "https://www.ngonews.kr/news/articleView.html?idxno=232249",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "가계대출"
+      ],
+      "description": "이번 제도 조정은 기업의 저금리 주택자금 지원이 금융당국의 가계대출 관리 기조와 맞지 않을 수 있다는 지적과 함께, 부동산 시장에 미치는 영향에 대한 우려가 제기된 데 따른 것으로 해석된다. 일부에서는 삼성전자의...",
+      "pre_score": 26,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 26,
+        "final_score": 26
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "59c22fe29cbb82c1",
+      "title": "“집값 상승 자극한다”…삼성전자, 5억원 사내 주택자금 대출 ‘국평 ...",
+      "source": "매일경제",
+      "source_domain": "mk.co.kr",
+      "published_at": "2026-07-05T19:47:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.mk.co.kr/article/12090787",
+      "naver_link": "https://n.news.naver.com/mnews/article/009/0005703004?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제",
+        "대출 금리"
+      ],
+      "description": "이는 저리로 고액의 주택 자금을 빌려주는 제도가 부동산 시장 안정을 위해 시중 대출을 규제하는 금융 당국의 기조와 맞지 않는 데다 수도권 집값 상승을 부추길 수 있다는 우려에 따른 것이다. 산업계에 따르면...",
+      "pre_score": 21,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 12,
+        "source_bonus": 9,
+        "raw_score": 21,
+        "final_score": 21
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9ee89e406272632a",
+      "title": "프리즘/ 도민과 함께 여는 13대 충북도의회의 약속",
+      "source": "dynews.co.kr",
+      "source_domain": "dynews.co.kr",
+      "published_at": "2026-07-05T19:46:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "http://www.dynews.co.kr/news/articleView.html?idxno=856807",
+      "naver_link": "http://www.dynews.co.kr/news/articleView.html?idxno=856807",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계부채"
+      ],
+      "description": "소비자물가지수는 1년 전보다 3% 넘게 올랐으며 가계부채가 증가하고 고유가, 고금리, 고환율이 도민의 삶을 흔들고 있다. 고통 극복에 우리 의회가 앞장설 것이다. 앞으로 4년간 13대 충청북도의회는 도민에게 꿈과 희망을...",
+      "pre_score": 1,
+      "score_detail": {
+        "groups": {
+          "weak_relevance": -5
+        },
+        "matched_terms": {
+          "weak_relevance": [
+            {
+              "term": "환율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 1,
+        "final_score": 1
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": true
+      }
+    },
+    {
+      "id": "5dc32c2345917039",
+      "title": "삼성전자, 5억원 사내 주택대출 '국평' 이하로 제한…집값 자극 우려",
+      "source": "etoday.co.kr",
+      "source_domain": "etoday.co.kr",
+      "published_at": "2026-07-05T19:42:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.etoday.co.kr/news/view/2600380",
+      "naver_link": "https://www.etoday.co.kr/news/view/2600380",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "대출 규제",
+        "대출 금리"
+      ],
+      "description": "대출 규제 기조와 맞지 않고 집값 상승을 자극할 수 있다는 우려가 작용한 것으로 보인다. 사내 대출은 기업 복지 성격의 개인 간 대여로 분류돼 금융권 대출 한도의 기준인 총부채원리금상환비율(DSR) 등 규제에서 제외된다.",
+      "pre_score": 29,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "DSR",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "총부채원리금상환비율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 29,
+        "final_score": 29
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "36a115b3fc3a49fe",
+      "title": "삼전 '5억 사내대출' 제한 생겼다...\"국평 이하만\"",
+      "source": "wowtv.co.kr",
+      "source_domain": "wowtv.co.kr",
+      "published_at": "2026-07-05T19:41:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202607050084&t=NN",
+      "naver_link": "https://n.news.naver.com/mnews/article/215/0001257659?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "대출 금리"
+      ],
+      "description": "않고 집값 상승을 자극할 수 있다는 우려에 이처럼 정한 것으로 보인다. 사내 대출은 기업 복지 성격의 개인 간 대여로 분류된다. 이에 금융권 대출 한도의 기준인 총부채원리금상환비율(DSR) 등 규제에서 제외될 수 있다.",
+      "pre_score": 23,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "DSR",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "총부채원리금상환비율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 23,
+        "final_score": 23
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "1c436a8b49c5674c",
+      "title": "삼성전자, 사내 주택자금 대출 '전용 85㎡' 이하로 제한…이달 시행",
+      "source": "ajunews.com",
+      "source_domain": "ajunews.com",
+      "published_at": "2026-07-05T19:40:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.ajunews.com/view/20260705192821828",
+      "naver_link": "https://www.ajunews.com/view/20260705192821828",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "대출 금리",
+        "주택담보대출"
+      ],
+      "description": "금융당국은 지난해부터 수도권·규제지역 주택담보대출을 최대한도 6억원으로 설정한 6·27대책과, 주택가격 구간별로 대출한도를 차등화한 10·15대책 등 강력한 대출규제를 단계적으로 시행하며 수요 억제 정책을...",
+      "pre_score": 32,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "주택담보대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 32,
+        "final_score": 32
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "c509a31750a40bdd",
+      "title": "[경인 WIDE] 정작 투기세력은 놓치고, 실수요자 발목만 잡았다",
+      "source": "kyeongin.com",
+      "source_domain": "kyeongin.com",
+      "published_at": "2026-07-05T19:40:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.kyeongin.com/article/1766779",
+      "naver_link": "https://www.kyeongin.com/article/1766779",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "전세대출"
+      ],
+      "description": "않았다”며 “전세를 낀 급매물이 일부 나오긴 했지만 예상만큼 쏟아지지는 않았다”고 분위기를 전했다. 10·15 대책 발표 당시와 닮은 꼴 이미 주택 가격은 오를 대로 올라 대출 부담·내집마련 문턱만 높여 공인중개사...",
+      "pre_score": 21,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 15
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "실수요자",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 21,
+        "final_score": 21
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "94f14c77b9564578",
+      "title": "삼성전자, 5억원 사내 주택자금 대출 '국평' 이하 제한",
+      "source": "yonhapnewstv.co.kr",
+      "source_domain": "yonhapnewstv.co.kr",
+      "published_at": "2026-07-05T19:39:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "http://www.yonhapnewstv.co.kr/news/AKR20260705193817W8V",
+      "naver_link": "https://n.news.naver.com/mnews/article/422/0000881738?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 금리"
+      ],
+      "description": "삼성전자는 지난 5월 노사 합의를 통해 직급별로 최대 5억원의 주택 자금을 연 1.5% 금리로 빌려주는 사내 대출 제도를 도입했습니다. 당시 노사는 주택 자금 지원 금액과 대상, 시행 시기 등 세부 사항은 회사가 정하는 대로...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "0f16136e0afe1861",
+      "title": "\"더 큰 집은 큰일 난다\"…'연 1.5% 최대 5억' 삼전 사내 대출 '전용 85㎡...",
+      "source": "아시아경제",
+      "source_domain": "view.asiae.co.kr",
+      "published_at": "2026-07-05T19:38:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://view.asiae.co.kr/article/2026070519383119066",
+      "naver_link": "https://n.news.naver.com/mnews/article/277/0005785620?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR",
+        "가계대출",
+        "대출 규제"
+      ],
+      "description": "이처럼 삼성 주요 계열사들이 대출 대상 주택 규모에 제한을 둔 배경에는 사내 복지 대출이 금융당국의 가계대출 억제 기조와 상충하고 시장을 자극할 수 있다는 비판 여론이 자리 잡고 있다. 실제로 삼성전자...",
+      "pre_score": 39,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 7,
+        "raw_score": 39,
+        "final_score": 39
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9eae1ecadee87b71",
+      "title": "삼성전자, 5억원 사내 주택자금 대출 85㎡ 이하로 제한",
+      "source": "ikbc.co.kr",
+      "source_domain": "ikbc.co.kr",
+      "published_at": "2026-07-05T19:35:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.ikbc.co.kr/article/view/kbc202607050033",
+      "naver_link": "https://n.news.naver.com/mnews/article/660/0000112558?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 금리"
+      ],
+      "description": "삼성전자는 지난 5월 노사 합의를 통해 직급별로 최대 5억원의 주택 자금을 연 1.5% 금리로 빌려주는 사내 대출 제도를 도입했습니다. 당시 노사는 주택 자금 지원 금액과 대상, 시행 시기 등 세부 사항은 회사가 정하는...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "3bfc75988e28aef6",
+      "title": "靑 “AI발 생산혁명”…국힘 “허황된 불꽃놀이”",
+      "source": "kookje.co.kr",
+      "source_domain": "kookje.co.kr",
+      "published_at": "2026-07-05T19:30:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "http://www.kookje.co.kr/news2011/asp/newsbody.asp?code=0100&key=20260706.22003001308",
+      "naver_link": "https://n.news.naver.com/mnews/article/658/0000148654?sid=100",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "그는 또 “국제신용평가사(S&P)는 한국의 AI 경기 사이클 취약성과 금융 불안 가능성을 정조준했다”고 덧붙였다. 나경원 의원도 SNS에 “정부와 여당은 당장 대단한 투자가 실제 이뤄진 것처럼 떠들지만, 기업은 사실상...",
+      "pre_score": 42,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 42,
+        "final_score": 42
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "09f56a4b0fe7a5c9",
+      "title": "삼성전자, 사내 주택대출 ‘국평’ 이하로 제한…수도권 집값 영향 우려...",
+      "source": "디지털타임스",
+      "source_domain": "dt.co.kr",
+      "published_at": "2026-07-05T19:29:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.dt.co.kr/article/12071246?ref=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/029/0003035391?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR"
+      ],
+      "description": "업계에서는 사내 대출이 금융권 규제 대상이 아닌 기업 복지 성격의 개인 간 대여로 분류되면서 총부채원리금상환비율(DSR) 규제를 피해가는 구조인 만큼, 시장 왜곡 가능성에 대한 지적이 이어지고 있다. 성과급과 사내...",
+      "pre_score": 23,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "DSR",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "총부채원리금상환비율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 6,
+        "raw_score": 23,
+        "final_score": 23
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "84f421bcbd20967b",
+      "title": "[금융체크] KB금융·네이버페이·신복위 등",
+      "source": "bizwnews.com",
+      "source_domain": "bizwnews.com",
+      "published_at": "2026-07-05T19:28:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "http://www.bizwnews.com/news/articleView.html?idxno=139991",
+      "naver_link": "http://www.bizwnews.com/news/articleView.html?idxno=139991",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융감독원 대출"
+      ],
+      "description": "협약대출도 운영하며 사회연대경제 생태계 조성에 나선다는 계획이다. 네이버페이는 싱가포르관광청과... 불법사금융 피해에 노출된 경우 금융감독원에 신고하여 필요한 도움을 받을 수 있으며 과다채무 등으로...",
+      "pre_score": 25,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11,
+          "industry_strategy": 8
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융감독원",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "사금융",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 25,
+        "final_score": 25
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e95e4f6a5e3070f9",
+      "title": "[따져보니] 한밤중 환전해도 수수료 '뚝'…6일부터 달러 24시간 거래",
+      "source": "news.tvchosun.com",
+      "source_domain": "news.tvchosun.com",
+      "published_at": "2026-07-05T19:27:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://news.tvchosun.com/site/data/html_dir/2026/07/05/2026070590141.html",
+      "naver_link": "https://n.news.naver.com/mnews/article/448/0000624482?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "런던이나 뉴욕 등 글로벌 금융 허브와 같은 시간대에 원화를 사고팔 수 있는 길이 열린 겁니다. 다만 미국... [기자] 소비자 입장에선 환전에 드는 숨은 비용이 줄어들게 됩니다. 기존에는 은행 영업시간 외 심야에 모바일...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "3548449d3bbf9347",
+      "title": "삼성전자, 5억원 사내 대출 대상 ‘국평’ 이하로 제한",
+      "source": "디지털타임스",
+      "source_domain": "dt.co.kr",
+      "published_at": "2026-07-05T19:26:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.dt.co.kr/article/12071245?ref=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/029/0003035390?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "DSR"
+      ],
+      "description": "특히 사내 대출은 기업 복지 성격의 개인 간 대여로 분류돼 총부채원리금상환비율(DSR) 등 금융권의 핵심 대출 한도 규제를 받지 않아 시장 왜곡을 심화할 수 있다는 지적을 받아왔다.",
+      "pre_score": 23,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "DSR",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "총부채원리금상환비율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 6,
+        "raw_score": 23,
+        "final_score": 23
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
     {
       "id": "5eaaf64146b8c5e3",
       "title": "[이슈&경제] 집값을 잡는 힘, 규제의 강도보다 정책의 정교함",
@@ -5316,6 +9410,48 @@
       },
       "flags": {
         "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b396af6aff945760",
+      "title": "K관광 뜨자 낡은 빌딩 속속 호스텔 변신",
+      "source": "매일경제",
+      "source_domain": "mk.co.kr",
+      "published_at": "2026-07-05T16:36:00+09:00",
+      "published_date": "2026-07-05",
+      "collected_at": "2026-07-05T23:57:16+09:00",
+      "url": "https://www.mk.co.kr/article/12090604",
+      "naver_link": "https://n.news.naver.com/mnews/article/009/0005702865?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "주택담보대출"
+      ],
+      "description": "빌딩 전문 중개법인 빌사남의 윤상연 상무는 \"호스텔 시장의 경우 매물 특성상 대출 시 주택담보대출비율이 낮게 책정되고, 최우선 변제금만큼 대출 한도가 차감되는 방공제가 객실마다 적용된다\"며 \"투자자의 현금...",
+      "pre_score": 29,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "주택담보대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 9,
+        "raw_score": 29,
+        "final_score": 29
+      },
+      "flags": {
+        "trusted_source": true,
         "domestic": true,
         "loan_related": true,
         "possible_ad": false
