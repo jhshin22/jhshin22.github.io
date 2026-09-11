@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="광삼 2027 클럽 공연 후보곡을 듣고 선호도와 난이도를 기록하는 페이지">
+  <meta name="theme-color" content="#101116">
+  <title>광삼 후보곡 듣기</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101116'/%3E%3Cpath d='M17 43V20l31-5v23' fill='none' stroke='%23ff5a36' stroke-width='6' stroke-linejoin='round'/%3E%3Ccircle cx='13' cy='45' r='8' fill='%23ffd166'/%3E%3Ccircle cx='44' cy='40' r='8' fill='%23ffd166'/%3E%3C/svg%3E">
+  <style>
+    :root{--ink:#f4f1e8;--muted:#9a9aa4;--panel:#181920;--panel2:#20212a;--line:#343641;--hot:#ff5a36;--gold:#ffd166;--blue:#6bbcff;--bg:#101116;--shadow:0 20px 50px #0006}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 8% 0,#34201c 0,transparent 28rem),var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Noto Sans KR",sans-serif}
+    button,select,input{font:inherit}button{color:inherit}.shell{width:min(1500px,calc(100% - 32px));margin:auto}.top{position:sticky;z-index:20;top:0;background:#101116e8;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12}
+    header{display:flex;gap:24px;align-items:center;justify-content:space-between;padding:18px 0}.brand{display:flex;align-items:center;gap:12px}.mark{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--hot);color:white;font-weight:900}.brand h1{font-size:1.18rem;margin:0}.brand p{font-size:.78rem;color:var(--muted);margin:1px 0 0}
+    .stats{display:flex;gap:8px;align-items:center}.pill{border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--muted);font-size:.84rem}.pill b{color:var(--ink)}
+    .controls{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:10px;padding:18px 0 22px}.field,.select{height:46px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);padding:0 14px;outline:none}.field:focus,.select:focus{border-color:var(--hot);box-shadow:0 0 0 3px #ff5a3626}.toggle{height:46px;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:0 15px;cursor:pointer}.toggle[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+    main{padding:26px 0 72px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{min-width:0;background:linear-gradient(150deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 34px #0002;transition:.2s ease}.card:hover{transform:translateY(-2px);border-color:#585b6b;box-shadow:var(--shadow)}
+    .browser{background:#0b0c10}.chrome{height:38px;display:flex;align-items:center;gap:7px;padding:0 11px;background:#2b2d37;border-bottom:1px solid #000}.dot{width:9px;height:9px;border-radius:50%;background:#5d606d}.dot:first-child{background:#ff655e}.dot:nth-child(2){background:#ffbd2e}.dot:nth-child(3){background:#28c840}.urlbar{display:block;min-width:0;flex:1;margin-left:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#aaabb5;background:#1b1c23;border:1px solid #3b3d49;border-radius:6px;padding:4px 9px;font-size:.7rem;text-decoration:none}.urlbar:hover{color:white;border-color:#666977}
+    .video{position:relative;aspect-ratio:16/9;background:#08090c}.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.body{padding:15px 16px 17px}.meta{display:flex;justify-content:space-between;gap:12px;align-items:start;margin-bottom:14px}.song-title{margin:0;font-size:1rem;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.who{flex:none;color:var(--muted);font-size:.76rem;border:1px solid var(--line);border-radius:999px;padding:3px 8px}
+    .rating-row{display:grid;grid-template-columns:64px 1fr 24px;align-items:center;gap:6px;margin-top:8px}.rating-label{font-size:.82rem;color:var(--muted)}.stars{display:flex;gap:1px}.star{border:0;background:none;padding:2px;cursor:pointer;color:#5a5b65;font-size:1.6rem;line-height:1;transition:.12s;filter:drop-shadow(0 1px 0 #000)}.star:hover,.star:focus-visible{transform:scale(1.18);outline:none}.stars[data-type=preference] .star.on{color:var(--gold)}.stars[data-type=difficulty] .star.on{color:var(--hot)}.score{font-size:.78rem;color:var(--muted);text-align:right}.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:70px 20px;border:1px dashed var(--line);border-radius:18px}
+    .hint{margin:0 0 16px;color:var(--muted);font-size:.86rem}.hint strong{color:var(--ink)}
+    @media(max-width:1050px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:700px){.shell{width:min(100% - 22px,1500px)}header{align-items:flex-start}.stats{display:none}.controls{grid-template-columns:1fr 1fr}.field{grid-column:1/-1}.grid{grid-template-columns:1fr;gap:14px}main{padding-top:18px}.brand p{display:none}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <header class="shell">
+      <div class="brand"><div class="mark">GS</div><div><h1>광삼 후보곡 듣기</h1><p>2027. 4. 9. 클럽 공연 · 후보곡 셀렉션</p></div></div>
+      <div class="stats"><span class="pill">전체 <b id="total">0</b></span><span class="pill">평가 완료 <b id="done">0</b></span></div>
+    </header>
+    <section class="controls shell" aria-label="후보곡 필터">
+      <input class="field" id="search" type="search" placeholder="곡 제목 또는 추천자 검색" aria-label="검색">
+      <select class="select" id="sort" aria-label="정렬"><option value="order">추천 순서</option><option value="preference">선호도 높은 순</option><option value="difficulty">난이도 낮은 순</option></select>
+      <button class="toggle" id="unrated" type="button" aria-pressed="false">미평가만 보기</button>
+    </section>
+  </div>
+  <main class="shell">
+    <p class="hint"><strong>별을 누르면 바로 저장됩니다.</strong> 평가는 이 브라우저에만 보관돼요.</p>
+    <section class="grid" id="grid" aria-live="polite"></section>
+  </main>
+  <script>
+    const SONGS = [
+      ['GA1lzBnSWEU','KYO 박명규'],['aezBwpaHxD8','KYO 박명규'],['elyhLAHsXGg','KYO이재영'],['X6ddRF8zL_U','KYO 박명규'],['7DhoZ_sni1c','KYO이재영'],['NogSf4vEh_o','KYO이재영'],['gAZE8MmgHsM','김경미'],['I_PntcnBWHw','KYO이재영'],['ihhdNqG32cw','KYO이재영'],['TmRQXIE-sPQ','KYO이재영'],['p0ewNfkvasA','KYO이재영'],['o1N5HXCesW0','KYO이재영'],['Uhptii3078A','KYO이재영'],['FETna_HDWWk','KYO이재영'],['47OLnr_hYFc','KYO이재영'],['VEDkhmvjHcY','KYO이재영'],
+      ['UdFRaQ-2lco','신지호'],['5qzbyFjuL7k','신지호'],['kqkGY9jsBOw','신지호'],['voH0S0e01vs','전정민'],['Pgum6OT_VH8','전정민'],['CnwFWZNMCKA','전정민'],['a2OS0tZ-1II','전정민'],['6ATUG1uCI04','전정민'],['TehTBrBH_qs','전정민'],['1m9gGoRYfIA','전정민'],['m_MuSyqkGJI','전정민'],['TK-zNXP29eU','전정민'],['EkqU44qaHZM','전정민'],['FQjXTkKHqT0','전정민'],['2gPrBKr-xoc','전정민'],['z1-u_XafioY','전정민'],['jAhhTvBEPHo','전정민'],['APkaNbQ6WdM','전정민'],['iMvXvXK0MAQ','전정민'],['goQ-VnUKQkM','전정민'],['uHpBnHlk-0w','전정민'],['Rm6R92J4bbY','전정민'],['g300QWDDNDM','전정민'],['PZyOj_I4_AY','전정민'],['MSO2YAcChbE','전정민'],['ugoOSOJxkyA','전정민'],['CldYD5fVolQ','전정민'],['p6YobhcA2PQ','전정민'],['kM_4RRO_qjE','전정민'],['Dk2pIN68-uE','전정민'],['r_zDqVgF1eY','전정민'],['ElJyxeT-zvM','전정민'],['7AYHT0bH6cU','전정민'],['E22KQ7l3riY','전정민'],['N1aBAIAjX3A','전정민'],['26QmNiFP1P4','전정민'],['DiC6znoerfg','전정민'],['OTmUcW8L2q4','전정민'],['cg6NNvxdpW4','전정민'],['0dN7cKCoWcA','전정민'],['op79QxRX59c','전정민']
+    ].map(([id,by],i)=>({id,by,order:i+1,title:`후보곡 ${String(i+1).padStart(2,'0')}`}));
+
+    const STORAGE_KEY='gwangsam-song-ratings-v1';
+    let ratings=loadRatings();
+    let titles={};
+    const grid=document.querySelector('#grid');
+    const search=document.querySelector('#search');
+    const sort=document.querySelector('#sort');
+    const unrated=document.querySelector('#unrated');
+
+    function loadRatings(){
+      try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||readCookie(STORAGE_KEY)||'{}')}catch{return {}}
+    }
+    function readCookie(name){
+      const item=document.cookie.split('; ').find(row=>row.startsWith(name+'='));
+      return item?decodeURIComponent(item.split('=').slice(1).join('=')):'';
+    }
+    function saveRatings(){
+      const value=JSON.stringify(ratings);
+      localStorage.setItem(STORAGE_KEY,value);
+      document.cookie=`${STORAGE_KEY}=${encodeURIComponent(value)}; Max-Age=63072000; Path=/; SameSite=Lax`;
+    }
+    function isDone(song){const r=ratings[song.id];return Boolean(r?.preference&&r?.difficulty)}
+    function starGroup(song,type,label){
+      const value=ratings[song.id]?.[type]||0;
+      const stars=Array.from({length:5},(_,i)=>`<button class="star ${i<value?'on':''}" data-id="${song.id}" data-type="${type}" data-value="${i+1}" type="button" aria-label="${label} ${i+1}점" aria-pressed="${i<value}">★</button>`).join('');
+      return `<div class="rating-row"><span class="rating-label">${label}</span><div class="stars" data-type="${type}">${stars}</div><span class="score">${value||'–'}</span></div>`;
+    }
+    function render(){
+      const q=search.value.trim().toLowerCase();
+      let list=SONGS.filter(s=>(titles[s.id]||s.title).toLowerCase().includes(q)||s.by.toLowerCase().includes(q));
+      if(unrated.getAttribute('aria-pressed')==='true')list=list.filter(s=>!isDone(s));
+      if(sort.value==='preference')list.sort((a,b)=>(ratings[b.id]?.preference||0)-(ratings[a.id]?.preference||0)||a.order-b.order);
+      if(sort.value==='difficulty')list.sort((a,b)=>(ratings[a.id]?.difficulty||99)-(ratings[b.id]?.difficulty||99)||a.order-b.order);
+      grid.innerHTML=list.length?list.map(song=>`<article class="card" data-video="${song.id}">
+        <div class="browser"><div class="chrome"><i class="dot"></i><i class="dot"></i><i class="dot"></i><a class="urlbar" href="https://youtu.be/${song.id}" target="_blank" rel="noopener" title="유튜브에서 열기">youtube.com/watch?v=${song.id}</a></div><div class="video"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${song.id}?rel=0" title="${escapeHtml(titles[song.id]||song.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
+        <div class="body"><div class="meta"><h2 class="song-title">${escapeHtml(titles[song.id]||song.title)}</h2><span class="who">${escapeHtml(song.by)}</span></div>${starGroup(song,'preference','선호도')}${starGroup(song,'difficulty','난이도')}</div>
+      </article>`).join(''):'<div class="empty">조건에 맞는 후보곡이 없습니다.</div>';
+      document.querySelector('#total').textContent=SONGS.length;
+      document.querySelector('#done').textContent=SONGS.filter(isDone).length;
+    }
+    function escapeHtml(value){return value.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+    grid.addEventListener('click',event=>{
+      const button=event.target.closest('.star');if(!button)return;
+      const {id,type,value}=button.dataset;
+      ratings[id]??={};ratings[id][type]=Number(value);saveRatings();render();
+    });
+    search.addEventListener('input',render);sort.addEventListener('change',render);
+    unrated.addEventListener('click',()=>{unrated.setAttribute('aria-pressed',unrated.getAttribute('aria-pressed')!=='true');render()});
+    async function fetchTitles(){
+      const queue=[...SONGS];
+      async function worker(){while(queue.length){const song=queue.shift();try{const r=await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${song.id}&format=json`);if(r.ok){const data=await r.json();titles[song.id]=data.title;const h=document.querySelector(`[data-video="${song.id}"] .song-title`);if(h)h.textContent=data.title}}catch{}}}
+      await Promise.all(Array.from({length:6},worker));
+    }
+    render();fetchTitles();
+  </script>
+</body>
+</html>
