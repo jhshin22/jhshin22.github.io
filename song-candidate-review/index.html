@@ -16,7 +16,7 @@
     .controls{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:10px;padding:18px 0 22px}.field,.select{height:46px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);padding:0 14px;outline:none}.field:focus,.select:focus{border-color:var(--hot);box-shadow:0 0 0 3px #ff5a3626}.toggle{height:46px;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:0 15px;cursor:pointer}.toggle[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
     main{padding:26px 0 72px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{min-width:0;background:linear-gradient(150deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 34px #0002;transition:.2s ease}.card:hover{transform:translateY(-2px);border-color:#585b6b;box-shadow:var(--shadow)}
     .browser{background:#0b0c10}.chrome{height:38px;display:flex;align-items:center;gap:7px;padding:0 11px;background:#2b2d37;border-bottom:1px solid #000}.dot{width:9px;height:9px;border-radius:50%;background:#5d606d}.dot:first-child{background:#ff655e}.dot:nth-child(2){background:#ffbd2e}.dot:nth-child(3){background:#28c840}.urlbar{display:block;min-width:0;flex:1;margin-left:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#aaabb5;background:#1b1c23;border:1px solid #3b3d49;border-radius:6px;padding:4px 9px;font-size:.7rem;text-decoration:none}.urlbar:hover{color:white;border-color:#666977}
-    .video{position:relative;aspect-ratio:16/9;background:#08090c}.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.body{padding:15px 16px 17px}.meta{display:flex;justify-content:space-between;gap:12px;align-items:start;margin-bottom:14px}.song-title{margin:0;font-size:1rem;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.who{flex:none;color:var(--muted);font-size:.76rem;border:1px solid var(--line);border-radius:999px;padding:3px 8px}
+    .video{position:relative;aspect-ratio:16/9;background:#08090c}.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.body{padding:15px 16px 17px}.meta{margin-bottom:14px}.song-title{margin:0;font-size:1rem;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
     .rating-row{display:grid;grid-template-columns:64px 1fr 24px;align-items:center;gap:6px;margin-top:8px}.rating-label{font-size:.82rem;color:var(--muted)}.stars{display:flex;gap:1px}.star{border:0;background:none;padding:2px;cursor:pointer;color:#5a5b65;font-size:1.6rem;line-height:1;transition:.12s;filter:drop-shadow(0 1px 0 #000)}.star:hover,.star:focus-visible{transform:scale(1.18);outline:none}.stars[data-type=preference] .star.on{color:var(--gold)}.stars[data-type=difficulty] .star.on{color:var(--hot)}.score{font-size:.78rem;color:var(--muted);text-align:right}.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:70px 20px;border:1px dashed var(--line);border-radius:18px}
     .hint{margin:0 0 16px;color:var(--muted);font-size:.86rem}.hint strong{color:var(--ink)}
     @media(max-width:1050px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -31,7 +31,7 @@
       <div class="stats"><span class="pill">전체 <b id="total">0</b></span><span class="pill">평가 완료 <b id="done">0</b></span></div>
     </header>
     <section class="controls shell" aria-label="후보곡 필터">
-      <input class="field" id="search" type="search" placeholder="곡 제목 또는 추천자 검색" aria-label="검색">
+      <input class="field" id="search" type="search" placeholder="곡 제목 검색" aria-label="검색">
       <select class="select" id="sort" aria-label="정렬"><option value="order">추천 순서</option><option value="preference">선호도 높은 순</option><option value="difficulty">난이도 낮은 순</option></select>
       <button class="toggle" id="unrated" type="button" aria-pressed="false">미평가만 보기</button>
     </section>
@@ -42,9 +42,9 @@
   </main>
   <script>
     const SONGS = [
-      ['GA1lzBnSWEU','KYO 박명규'],['aezBwpaHxD8','KYO 박명규'],['elyhLAHsXGg','KYO이재영'],['X6ddRF8zL_U','KYO 박명규'],['7DhoZ_sni1c','KYO이재영'],['NogSf4vEh_o','KYO이재영'],['gAZE8MmgHsM','김경미'],['I_PntcnBWHw','KYO이재영'],['ihhdNqG32cw','KYO이재영'],['TmRQXIE-sPQ','KYO이재영'],['p0ewNfkvasA','KYO이재영'],['o1N5HXCesW0','KYO이재영'],['Uhptii3078A','KYO이재영'],['FETna_HDWWk','KYO이재영'],['47OLnr_hYFc','KYO이재영'],['VEDkhmvjHcY','KYO이재영'],
-      ['UdFRaQ-2lco','신지호'],['5qzbyFjuL7k','신지호'],['kqkGY9jsBOw','신지호'],['voH0S0e01vs','전정민'],['Pgum6OT_VH8','전정민'],['CnwFWZNMCKA','전정민'],['a2OS0tZ-1II','전정민'],['6ATUG1uCI04','전정민'],['TehTBrBH_qs','전정민'],['1m9gGoRYfIA','전정민'],['m_MuSyqkGJI','전정민'],['TK-zNXP29eU','전정민'],['EkqU44qaHZM','전정민'],['FQjXTkKHqT0','전정민'],['2gPrBKr-xoc','전정민'],['z1-u_XafioY','전정민'],['jAhhTvBEPHo','전정민'],['APkaNbQ6WdM','전정민'],['iMvXvXK0MAQ','전정민'],['goQ-VnUKQkM','전정민'],['uHpBnHlk-0w','전정민'],['Rm6R92J4bbY','전정민'],['g300QWDDNDM','전정민'],['PZyOj_I4_AY','전정민'],['MSO2YAcChbE','전정민'],['ugoOSOJxkyA','전정민'],['CldYD5fVolQ','전정민'],['p6YobhcA2PQ','전정민'],['kM_4RRO_qjE','전정민'],['Dk2pIN68-uE','전정민'],['r_zDqVgF1eY','전정민'],['ElJyxeT-zvM','전정민'],['7AYHT0bH6cU','전정민'],['E22KQ7l3riY','전정민'],['N1aBAIAjX3A','전정민'],['26QmNiFP1P4','전정민'],['DiC6znoerfg','전정민'],['OTmUcW8L2q4','전정민'],['cg6NNvxdpW4','전정민'],['0dN7cKCoWcA','전정민'],['op79QxRX59c','전정민']
-    ].map(([id,by],i)=>({id,by,order:i+1,title:`후보곡 ${String(i+1).padStart(2,'0')}`}));
+      'GA1lzBnSWEU','aezBwpaHxD8','elyhLAHsXGg','X6ddRF8zL_U','7DhoZ_sni1c','NogSf4vEh_o','gAZE8MmgHsM','I_PntcnBWHw','ihhdNqG32cw','TmRQXIE-sPQ','p0ewNfkvasA','o1N5HXCesW0','Uhptii3078A','FETna_HDWWk','47OLnr_hYFc','VEDkhmvjHcY',
+      'UdFRaQ-2lco','5qzbyFjuL7k','kqkGY9jsBOw','voH0S0e01vs','Pgum6OT_VH8','CnwFWZNMCKA','a2OS0tZ-1II','6ATUG1uCI04','TehTBrBH_qs','1m9gGoRYfIA','m_MuSyqkGJI','TK-zNXP29eU','EkqU44qaHZM','FQjXTkKHqT0','2gPrBKr-xoc','z1-u_XafioY','jAhhTvBEPHo','APkaNbQ6WdM','iMvXvXK0MAQ','goQ-VnUKQkM','uHpBnHlk-0w','Rm6R92J4bbY','g300QWDDNDM','PZyOj_I4_AY','MSO2YAcChbE','ugoOSOJxkyA','CldYD5fVolQ','p6YobhcA2PQ','kM_4RRO_qjE','Dk2pIN68-uE','r_zDqVgF1eY','ElJyxeT-zvM','7AYHT0bH6cU','E22KQ7l3riY','N1aBAIAjX3A','26QmNiFP1P4','DiC6znoerfg','OTmUcW8L2q4','cg6NNvxdpW4','0dN7cKCoWcA','op79QxRX59c'
+    ].map((id,i)=>({id,order:i+1,title:`후보곡 ${String(i+1).padStart(2,'0')}`}));
 
     const STORAGE_KEY='gwangsam-song-ratings-v1';
     let ratings=loadRatings();
@@ -74,13 +74,13 @@
     }
     function render(){
       const q=search.value.trim().toLowerCase();
-      let list=SONGS.filter(s=>(titles[s.id]||s.title).toLowerCase().includes(q)||s.by.toLowerCase().includes(q));
+      let list=SONGS.filter(s=>(titles[s.id]||s.title).toLowerCase().includes(q));
       if(unrated.getAttribute('aria-pressed')==='true')list=list.filter(s=>!isDone(s));
       if(sort.value==='preference')list.sort((a,b)=>(ratings[b.id]?.preference||0)-(ratings[a.id]?.preference||0)||a.order-b.order);
       if(sort.value==='difficulty')list.sort((a,b)=>(ratings[a.id]?.difficulty||99)-(ratings[b.id]?.difficulty||99)||a.order-b.order);
       grid.innerHTML=list.length?list.map(song=>`<article class="card" data-video="${song.id}">
         <div class="browser"><div class="chrome"><i class="dot"></i><i class="dot"></i><i class="dot"></i><a class="urlbar" href="https://youtu.be/${song.id}" target="_blank" rel="noopener" title="유튜브에서 열기">youtube.com/watch?v=${song.id}</a></div><div class="video"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${song.id}?rel=0" title="${escapeHtml(titles[song.id]||song.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
-        <div class="body"><div class="meta"><h2 class="song-title">${escapeHtml(titles[song.id]||song.title)}</h2><span class="who">${escapeHtml(song.by)}</span></div>${starGroup(song,'preference','선호도')}${starGroup(song,'difficulty','난이도')}</div>
+        <div class="body"><div class="meta"><h2 class="song-title">${escapeHtml(titles[song.id]||song.title)}</h2></div>${starGroup(song,'preference','선호도')}${starGroup(song,'difficulty','난이도')}</div>
       </article>`).join(''):'<div class="empty">조건에 맞는 후보곡이 없습니다.</div>';
       document.querySelector('#total').textContent=SONGS.length;
       document.querySelector('#done').textContent=SONGS.filter(isDone).length;
@@ -89,7 +89,19 @@
     grid.addEventListener('click',event=>{
       const button=event.target.closest('.star');if(!button)return;
       const {id,type,value}=button.dataset;
-      ratings[id]??={};ratings[id][type]=Number(value);saveRatings();render();
+      const selected=Number(value);
+      ratings[id]??={};ratings[id][type]=selected;saveRatings();
+      const group=button.closest('.stars');
+      group.querySelectorAll('.star').forEach(star=>{
+        const on=Number(star.dataset.value)<=selected;
+        star.classList.toggle('on',on);star.setAttribute('aria-pressed',String(on));
+      });
+      group.nextElementSibling.textContent=selected;
+      document.querySelector('#done').textContent=SONGS.filter(isDone).length;
+      if(unrated.getAttribute('aria-pressed')==='true'&&isDone(SONGS.find(song=>song.id===id))){
+        button.closest('.card').remove();
+        if(!grid.querySelector('.card'))grid.innerHTML='<div class="empty">모든 후보곡의 평가를 마쳤습니다.</div>';
+      }
     });
     search.addEventListener('input',render);sort.addEventListener('change',render);
     unrated.addEventListener('click',()=>{unrated.setAttribute('aria-pressed',unrated.getAttribute('aria-pressed')!=='true');render()});
