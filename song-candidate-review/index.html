@@ -42,14 +42,27 @@
     <section class="grid" id="grid" aria-live="polite"></section>
   </main>
   <script>
+    // 2026-09-16 단톡방의 1인 3곡 목록. 같은 곡을 여러 명이 골랐어도 한 카드만 표시한다.
+    // 기존 영상 ID는 그대로 두어 브라우저에 저장된 별점이 이어지게 한다.
     const SONGS = [
-      'GA1lzBnSWEU','aezBwpaHxD8','elyhLAHsXGg','X6ddRF8zL_U','7DhoZ_sni1c','NogSf4vEh_o','gAZE8MmgHsM','I_PntcnBWHw','ihhdNqG32cw','TmRQXIE-sPQ','p0ewNfkvasA','o1N5HXCesW0','Uhptii3078A','FETna_HDWWk','47OLnr_hYFc','VEDkhmvjHcY',
-      'UdFRaQ-2lco','5qzbyFjuL7k','kqkGY9jsBOw','voH0S0e01vs','Pgum6OT_VH8','CnwFWZNMCKA','a2OS0tZ-1II','6ATUG1uCI04','TehTBrBH_qs','1m9gGoRYfIA','m_MuSyqkGJI','TK-zNXP29eU','EkqU44qaHZM','FQjXTkKHqT0','2gPrBKr-xoc','z1-u_XafioY','jAhhTvBEPHo','APkaNbQ6WdM','iMvXvXK0MAQ','goQ-VnUKQkM','uHpBnHlk-0w','Rm6R92J4bbY','g300QWDDNDM','PZyOj_I4_AY','MSO2YAcChbE','ugoOSOJxkyA','CldYD5fVolQ','p6YobhcA2PQ','kM_4RRO_qjE','Dk2pIN68-uE','r_zDqVgF1eY','ElJyxeT-zvM','7AYHT0bH6cU','E22KQ7l3riY','N1aBAIAjX3A','26QmNiFP1P4','DiC6znoerfg','OTmUcW8L2q4','cg6NNvxdpW4','0dN7cKCoWcA','op79QxRX59c'
-    ].map((id,i)=>({id,order:i+1,title:`후보곡 ${String(i+1).padStart(2,'0')}`}));
+      {id:'X6ddRF8zL_U',title:'이승윤 - 인투로'},
+      {id:'gAZE8MmgHsM',title:'밴드기린 - Jump'},
+      {id:'MSO2YAcChbE',title:'카디 - Player 1'},
+      {id:'GA1lzBnSWEU',title:'터치드 - 야경'},
+      {id:'I54vmd8eewY',title:'럼블피쉬 - I Go'},
+      {id:'tOI2K1CD_Ik',title:'터치드 - Hi Bully'},
+      {id:'I_PntcnBWHw',title:'극동아시아타이거즈 - 비냄새'},
+      {id:'ihhdNqG32cw',title:'아이묭 - 너는 록을 듣지 않아'},
+      {id:'iMvXvXK0MAQ',title:'너드커넥션 - Back in Time'},
+      {id:'UdFRaQ-2lco',title:'토카이 - Marigolds'},
+      {id:'1lr0HThC-ko',title:'이젤 - 동경소녀'},
+      {id:'-N-pmPKS-bE',title:'DAY6 - INSIDE OUT'},
+      {id:'5Vp1of6Z0ro',title:'롤링쿼츠 - Fearless'},
+      {id:'gIkowwJR6EY',title:'극동아시아타이거즈 - 면목중학교'}
+    ].map((song,i)=>({...song,order:i+1}));
 
     const STORAGE_KEY='gwangsam-song-ratings-v1';
     let ratings=loadRatings();
-    let titles={};
     const grid=document.querySelector('#grid');
     const search=document.querySelector('#search');
     const sort=document.querySelector('#sort');
@@ -76,13 +89,13 @@
     }
     function render(){
       const q=search.value.trim().toLowerCase();
-      let list=SONGS.filter(s=>(titles[s.id]||s.title).toLowerCase().includes(q));
+      let list=SONGS.filter(s=>s.title.toLowerCase().includes(q));
       if(unrated.getAttribute('aria-pressed')==='true')list=list.filter(s=>!isDone(s));
       if(sort.value==='preference')list.sort((a,b)=>(ratings[b.id]?.preference||0)-(ratings[a.id]?.preference||0)||a.order-b.order);
       if(sort.value==='difficulty')list.sort((a,b)=>(ratings[a.id]?.difficulty||99)-(ratings[b.id]?.difficulty||99)||a.order-b.order);
       grid.innerHTML=list.length?list.map(song=>`<article class="card" data-video="${song.id}">
-        <div class="browser"><div class="chrome"><i class="dot"></i><i class="dot"></i><i class="dot"></i><a class="urlbar" href="https://youtu.be/${song.id}" target="_blank" rel="noopener" title="유튜브에서 열기">youtube.com/watch?v=${song.id}</a></div><div class="video"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${song.id}?rel=0" title="${escapeHtml(titles[song.id]||song.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
-        <div class="body"><div class="meta"><h2 class="song-title">${escapeHtml(titles[song.id]||song.title)}</h2></div>${starGroup(song,'preference','선호도')}${starGroup(song,'difficulty','난이도')}</div>
+        <div class="browser"><div class="chrome"><i class="dot"></i><i class="dot"></i><i class="dot"></i><a class="urlbar" href="https://youtu.be/${song.id}" target="_blank" rel="noopener" title="유튜브에서 열기">youtube.com/watch?v=${song.id}</a></div><div class="video"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${song.id}?rel=0" title="${escapeHtml(song.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
+        <div class="body"><div class="meta"><h2 class="song-title">${escapeHtml(song.title)}</h2></div>${starGroup(song,'preference','선호도')}${starGroup(song,'difficulty','난이도')}</div>
       </article>`).join(''):'<div class="empty">조건에 맞는 후보곡이 없습니다.</div>';
       document.querySelector('#total').textContent=SONGS.length;
       document.querySelector('#done').textContent=SONGS.filter(isDone).length;
@@ -112,10 +125,9 @@
       return /^[=+\-@]/.test(clean)?`'${clean}`:clean;
     }
     async function copyForExcel(){
-      copyExcel.disabled=true;copyExcel.textContent='곡 정보 확인 중…';
-      await titleLoadPromise;
+      copyExcel.disabled=true;copyExcel.textContent='복사 중…';
       const rows=[['순번','가수 포함 곡이름','선호도','난이도'],...SONGS.map(song=>[
-        song.order,excelSafe(titles[song.id]||song.title),ratings[song.id]?.preference||'',ratings[song.id]?.difficulty||''
+        song.order,excelSafe(song.title),ratings[song.id]?.preference||'',ratings[song.id]?.difficulty||''
       ])];
       const text=rows.map(row=>row.join('\t')).join('\r\n');
       try{
@@ -129,12 +141,7 @@
       setTimeout(()=>{copyExcel.disabled=false;copyExcel.textContent='Excel용 복사'},1600);
     }
     copyExcel.addEventListener('click',copyForExcel);
-    async function fetchTitles(){
-      const queue=[...SONGS];
-      async function worker(){while(queue.length){const song=queue.shift();try{const r=await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${song.id}&format=json`);if(r.ok){const data=await r.json();titles[song.id]=data.title;const h=document.querySelector(`[data-video="${song.id}"] .song-title`);if(h)h.textContent=data.title}}catch{}}}
-      await Promise.all(Array.from({length:6},worker));
-    }
-    render();const titleLoadPromise=fetchTitles();
+    render();
   </script>
 </body>
 </html>
