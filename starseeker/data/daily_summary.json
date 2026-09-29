@@ -1,25 +1,13 @@
 [
   {
-    "date": "2026-09-29",
-    "best_time": "23:00",
-    "best_objects": [
-      "달",
-      "토성",
-      "화성"
-    ],
-    "top_score": 95,
-    "grade": "excellent",
-    "short_comment": "달 · 토성 관측 추천"
-  },
-  {
     "date": "2026-09-30",
-    "best_time": "00:00",
+    "best_time": "04:00",
     "best_objects": [
       "달",
       "토성",
       "화성"
     ],
-    "top_score": 95,
+    "top_score": 85,
     "grade": "excellent",
     "short_comment": "달 · 토성 관측 추천"
   },
@@ -37,18 +25,6 @@
   },
   {
     "date": "2026-10-02",
-    "best_time": "02:00",
-    "best_objects": [
-      "달",
-      "토성",
-      "베가"
-    ],
-    "top_score": 95,
-    "grade": "excellent",
-    "short_comment": "달 · 토성 관측 추천"
-  },
-  {
-    "date": "2026-10-03",
     "best_time": "22:00",
     "best_objects": [
       "토성",
@@ -58,6 +34,18 @@
     "top_score": 88,
     "grade": "excellent",
     "short_comment": "토성 · 베가 관측 추천"
+  },
+  {
+    "date": "2026-10-03",
+    "best_time": "03:00",
+    "best_objects": [
+      "달",
+      "토성",
+      "베가"
+    ],
+    "top_score": 95,
+    "grade": "excellent",
+    "short_comment": "달 · 토성 관측 추천"
   },
   {
     "date": "2026-10-05",
@@ -109,15 +97,15 @@
   },
   {
     "date": "2026-10-09",
-    "best_time": "22:00",
+    "best_time": "20:00",
     "best_objects": [
-      "토성",
       "베가",
-      "알타이르"
+      "알타이르",
+      "데네브"
     ],
-    "top_score": 88,
+    "top_score": 85,
     "grade": "excellent",
-    "short_comment": "토성 · 베가 관측 추천"
+    "short_comment": "베가 · 알타이르 관측 추천"
   },
   {
     "date": "2026-10-10",
@@ -133,15 +121,15 @@
   },
   {
     "date": "2026-10-11",
-    "best_time": "21:00",
+    "best_time": "04:00",
     "best_objects": [
+      "화성",
       "토성",
-      "베가",
-      "알타이르"
+      "카펠라"
     ],
-    "top_score": 88,
+    "top_score": 80,
     "grade": "excellent",
-    "short_comment": "토성 · 베가 관측 추천"
+    "short_comment": "화성 · 토성 관측 추천"
   },
   {
     "date": "2026-10-12",
@@ -169,15 +157,15 @@
   },
   {
     "date": "2026-10-14",
-    "best_time": "19:00",
+    "best_time": "21:00",
     "best_objects": [
+      "토성",
       "베가",
-      "알타이르",
-      "데네브"
+      "알타이르"
     ],
-    "top_score": 85,
+    "top_score": 88,
     "grade": "excellent",
-    "short_comment": "베가 · 알타이르 관측 추천"
+    "short_comment": "토성 · 베가 관측 추천"
   },
   {
     "date": "2026-10-15",
@@ -185,7 +173,7 @@
     "best_objects": [
       "화성",
       "토성",
-      "베가"
+      "카펠라"
     ],
     "top_score": 80,
     "grade": "excellent",
@@ -346,5 +334,17 @@
     "top_score": 85,
     "grade": "excellent",
     "short_comment": "달 · 화성 관측 추천"
+  },
+  {
+    "date": "2026-10-29",
+    "best_time": "00:00",
+    "best_objects": [
+      "달",
+      "목성",
+      "화성"
+    ],
+    "top_score": 85,
+    "grade": "excellent",
+    "short_comment": "달 · 목성 관측 추천"
   }
 ]
