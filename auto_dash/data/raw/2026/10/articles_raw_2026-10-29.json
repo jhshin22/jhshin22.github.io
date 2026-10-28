@@ -1,0 +1,55 @@
+{
+  "target_date": "2026-10-29",
+  "updated_at": "2026-10-29T00:00:55+09:00",
+  "count": 1,
+  "articles": [
+    {
+      "id": "e29949f0fbd09ca9",
+      "title": "\"전력거래소, 직접 PPA 거래 확대...계약부터 증빙까지 디지털화\"",
+      "source": "e2news.com",
+      "source_domain": "e2news.com",
+      "published_at": "2026-10-29T00:00:00+09:00",
+      "published_date": "2026-10-29",
+      "collected_at": "2026-10-29T00:00:24+09:00",
+      "url": "http://www.e2news.com/news/articleView.html?idxno=335539",
+      "naver_link": "http://www.e2news.com/news/articleView.html?idxno=335539",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "기업의 자금 부담을 줄이기 위해 현금 예치 외에 보증보험을 활용할 수 있도록 했으며, 계약 신고 기한은... 서면계약을 전자계약으로 전환하고 계약 업무 자동화와 인공지능(AI) 기반 데이터 관리를 도입한다. 재생에너지...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    }
+  ]
+}
