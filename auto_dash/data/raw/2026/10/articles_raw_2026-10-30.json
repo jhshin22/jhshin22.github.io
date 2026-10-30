@@ -1,8 +1,4765 @@
 {
   "target_date": "2026-10-30",
-  "updated_at": "2026-10-30T18:44:30+09:00",
-  "count": 795,
+  "updated_at": "2026-10-30T23:59:15+09:00",
+  "count": 901,
   "articles": [
+    {
+      "id": "99815da8a26c3fc6",
+      "title": "[증권가H] 금융위, 2027년 회계사 최소선발 인원 11월 말 확정 등",
+      "source": "hansbiz.co.kr",
+      "source_domain": "hansbiz.co.kr",
+      "published_at": "2026-10-30T23:56:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.hansbiz.co.kr/news/articleView.html?idxno=878337",
+      "naver_link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=878337",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "AI 활용",
+        "금융 AI",
+        "금융감독원 대출",
+        "금융소비자",
+        "금융위원회 대출",
+        "대출 AI"
+      ],
+      "description": "코스콤은 상장지수펀드(ETF) 정보 플랫폼 'ETF CHECK(체크)'를 통해 다양한 ETF 투자정보를 무료로 이용할 수 있도록 지원하며 금융소비자의 정보 접근성과 선택권 확대에 기여한 공로를 인정받았다. 2021년 출시된 ETF...",
+      "pre_score": 52,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 22
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융위",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 52,
+        "final_score": 52
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "6bddf5867dd9d12c",
+      "title": "2025년 말 대비 226% 상승…엔비디아 CDS, 메타 추월",
+      "source": "tokenpost.kr",
+      "source_domain": "tokenpost.kr",
+      "published_at": "2026-10-30T23:56:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.tokenpost.kr/news/ai/430266",
+      "naver_link": "https://www.tokenpost.kr/news/ai/430266",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "대출 AI",
+        "보험사 대출",
+        "신용평가"
+      ],
+      "description": "골드만삭스는 8월 5일 공개한 신용시장 대담에서 대형 AI 관련 채권 거래의 30년물에 5000만달러(약 669억원) 이상 주문한 보험사 고객이 1분기 약 15곳에서 2분기 말 절반 수준으로 줄었다고 밝혔다. 대출시장에...",
+      "pre_score": 40,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 8,
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 24,
+        "source_bonus": 0,
+        "raw_score": 40,
+        "final_score": 40
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "33fb6695d89931ba",
+      "title": "인크로스, '2026 아이엠 리포트' 발표…생성형 AI 이용률 85%·유료 결제...",
+      "source": "thedailypost.kr",
+      "source_domain": "thedailypost.kr",
+      "published_at": "2026-10-30T23:54:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.thedailypost.kr/news/articleView.html?idxno=116562",
+      "naver_link": "https://www.thedailypost.kr/news/articleView.html?idxno=116562",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "유료 결제 서비스 비중은 챗GPT(53.1%), 구글 제미나이(43.4%), 클로드(15.4%) 순이었으며, 주요 활용 목적은 정보 검색(76.8%), 이미지 생성 및 편집(38.2%), 텍스트·수치 요약정리(33.8%)로 조사됐다. 아울러 AI 서비스에...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "478e29afb0e693fd",
+      "title": "현대차그룹, 새만금에 9조원 규모 AI 데이터센터 본격 추진",
+      "source": "pinpointnews.co.kr",
+      "source_domain": "pinpointnews.co.kr",
+      "published_at": "2026-10-30T23:50:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500181",
+      "naver_link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500181",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "금융 AI"
+      ],
+      "description": "현대차그룹은 AI 데이터센터의 안정적 인프라 구축과 대규모 클라우드 연동을 위해 글로벌 기업과의 기술 협력 및 산업은행 등과의 금융지원 방안도 검토하고 있다. 신승규 RH PMO 담당 부사장은 \"AI 데이터센터는...",
+      "pre_score": 34,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 34,
+        "final_score": 34
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b6abdbf8a04fb5ff",
+      "title": "솔트웨어, 데이터브릭스 행사서 기업 데이터·AI 통합 운영 솔루션 제시",
+      "source": "thedailypost.kr",
+      "source_domain": "thedailypost.kr",
+      "published_at": "2026-10-30T23:50:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.thedailypost.kr/news/articleView.html?idxno=116561",
+      "naver_link": "https://www.thedailypost.kr/news/articleView.html?idxno=116561",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "솔트웨어는 30일 \"서울 양재동 엘타워에서 개최된 데이터브릭스(Databricks)의 'Data+AI Learning Festival'에 참가해 기업의 데이터 플랫폼 구축 및 AI 활용 전략을 발표했다\"고 밝혔다. 이번 행사에서 솔트웨어는...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "109374ed9d666197",
+      "title": "깃허브 \"올해 韓 이용자 350만 명…정부 AI 정책 영향\"",
+      "source": "zdnet.co.kr",
+      "source_domain": "zdnet.co.kr",
+      "published_at": "2026-10-30T23:48:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://zdnet.co.kr/view?no=20261030234712",
+      "naver_link": "https://n.news.naver.com/mnews/article/092/0002443248?sid=105",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "전문 개발자뿐 아니라 프로그래밍을 배우는 학생과 일반인도 AI 도구를 활용해 개발에 참여하면서 깃허브 이용자가 증가하고 있다는 것이다. 탈라 카라드셰 깃허브 비즈니스 인사이트 부문 수석 디렉터가 한국 개발...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "5ea6bbcdafd6ea9d",
+      "title": "삼성전자, '코리아 그랜드 페스티벌' 개시…B2B 소상공인 특별전 동시 진...",
+      "source": "thedailypost.kr",
+      "source_domain": "thedailypost.kr",
+      "published_at": "2026-10-30T23:46:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.thedailypost.kr/news/articleView.html?idxno=116560",
+      "naver_link": "https://www.thedailypost.kr/news/articleView.html?idxno=116560",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI",
+        "금융소비자"
+      ],
+      "description": "차별화된 금융 지원을 연계해 경기 둔화 속 소상공인의 상생 발전을 적극 지원할 방침이다. 삼성전자 관계자는 \"11년 연속으로 국내 최대 쇼핑 축제에 함께하며 고물가 속 소비자들의 구매 부담을 절감하고자 이번...",
+      "pre_score": 34,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 22
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "소상공인",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 34,
+        "final_score": 34
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b67a998df7a91ca9",
+      "title": "[시사천국] \"원수도 시비하지 않게\"…4대 종교인의 '대통령 SNS' 일침",
+      "source": "news.cpbc.co.kr",
+      "source_domain": "news.cpbc.co.kr",
+      "published_at": "2026-10-30T23:40:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://news.cpbc.co.kr/article/1176720?division=NAVER",
+      "naver_link": "https://news.cpbc.co.kr/article/1176720?division=NAVER",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "▶박세웅: 저는 사실 개인적으로 SNS를 이제 활용하지는 않고요. 부득이하게 어떤 단체에 가입해야 할 때... ▷요즘은 이제 워낙 AI도 발달하고 그래서 딥페이크 기술이 발달해서 굉장히 손쉽게 사실은 그렇게 합성을 할...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d54e8821e97a6b41",
+      "title": "“안 마셔도 돼”에 흑기사 은퇴…복지부, 절주 공익광고 공개",
+      "source": "medicalworldnews.co.kr",
+      "source_domain": "medicalworldnews.co.kr",
+      "published_at": "2026-10-30T23:40:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://medicalworldnews.co.kr/news/view.php?idx=1510978193",
+      "naver_link": "https://medicalworldnews.co.kr/news/view.php?idx=1510978193",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "올해 공익광고는 생성형 인공지능(AI)을 활용해 제작됐으며, 10월 말부터 디지털 매체를 중심으로 송출된다. ◆인플루언서 협업·‘음주 기회비용 계산기’ 운영 광고 송출과 함께 ‘2026년 음주폐해예방의 달 캠페인’도...",
+      "pre_score": 0,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8,
+          "ad_promo_noise": -45
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "ad_promo_noise": [
+            {
+              "term": "광고",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": -31,
+        "final_score": 0
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": true
+      }
+    },
+    {
+      "id": "865cbc2fd3c6b5ee",
+      "title": "코인 9조 털어간 北해커들...직업·관심사 韓 맞춤형 유인 급증",
+      "source": "이데일리",
+      "source_domain": "edaily.co.kr",
+      "published_at": "2026-10-30T23:37:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.edaily.co.kr/News/Read?newsId=08085206645618168&mediaCodeNo=257",
+      "naver_link": "https://n.news.naver.com/mnews/article/018/0006400513?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "금융 AI"
+      ],
+      "description": "이 외에도 AI 침투 테스트 도구인 아텍스(ARTEX)를 활용해 작전을 수행하고 있는 것으로 나타났다. 아텍스는 최근 잇따른 국내 금융권 해킹 세력들이 활용한 것으로 파악된다. 실제 지난 21일 금융당국은 금융보안...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 8,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9caae87debb69a6e",
+      "title": "[데스크에서] ‘AI 국정 자문’의 함정",
+      "source": "chosun.com",
+      "source_domain": "chosun.com",
+      "published_at": "2026-10-30T23:36:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.chosun.com/opinion/desk/2026/10/30/4LA2QJMAUZFPTHPIWNL7TTQTD4",
+      "naver_link": "https://n.news.naver.com/mnews/article/023/0004006957?sid=110",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "‘책임 있는 AI 활용’에 대해 연구하는 버지니아 디그넘 스웨덴 우메오대 교수는 “우리는 챗GPT에 투표하지 않았다”고 했다. 그는 유엔 산하 AI 자문 기구 위원을 지낸 전문가다. 왜 정치 지도자들이 정책 결정에 AI를...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "4210e1f1841fe667",
+      "title": "에이브 V3·V4 시장 재개…9종 자산 담보는 제한",
+      "source": "tokenpost.kr",
+      "source_domain": "tokenpost.kr",
+      "published_at": "2026-10-30T23:36:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.tokenpost.kr/news/breaking/430251",
+      "naver_link": "https://www.tokenpost.kr/news/breaking/430251",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "LTV"
+      ],
+      "description": "에이브는 X 게시물에서 USDT·USDC·USDT0·POL·WAVAX·sAVAX·XAUT·PAXG·OP 등 9종 자산의 LTV를 당분간 0으로 유지해 신규 대출 담보로 사용할 수 없다고 밝혔다. 동결 기간에는 신규 예치와 차입만 중단됐으며...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "LTV",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "bcdeed387626c829",
+      "title": "LG CNS, '인도네시아 데이터센터 내달 준공'…북미·유럽 진출 박차",
+      "source": "ppss.kr",
+      "source_domain": "ppss.kr",
+      "published_at": "2026-10-30T23:32:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.ppss.kr/news/articleView.html?idxno=318268",
+      "naver_link": "https://www.ppss.kr/news/articleView.html?idxno=318268",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "공급망을 활용해 북미와 유럽 시장 확대를 준비 중이다. 앞서 LG CNS는 싱가포르 데이터센터 행사에서 모듈형 데이터센터인 'AI HAUS'와 AI팩토리 서비스를 선보인 바 있다. AI팩토리는 데이터센터 및 GPU 인프라, AI...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "8c0fd78978ccad7f",
+      "title": "JVM, 영업이익률 24.4%…북미 성장에 신사업 확장 속도",
+      "source": "megaeconomy.co.kr",
+      "source_domain": "megaeconomy.co.kr",
+      "published_at": "2026-10-30T23:26:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065622904013211",
+      "naver_link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065622904013211",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "현재 실제 조제 현장에서 운영되고 있으며, 제이브이엠은 운영 데이터와 사용자 의견을 반영해 제품 활용... 로봇과 인공지능(AI) 관련 기술 개발 및 특허 확보를 추진하고 있으며, 의약품 자동조제 장비부터 주변...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "585cf0c2e49925c9",
+      "title": "바이낸스 해킹…노트북 침투로 자금 유출,북한가능성 언급",
+      "source": "cbci.co.kr",
+      "source_domain": "cbci.co.kr",
+      "published_at": "2026-10-30T23:24:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.cbci.co.kr/news/articleView.html?idxno=621597",
+      "naver_link": "https://www.cbci.co.kr/news/articleView.html?idxno=621597",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "이용자 자산 보호와 관련해서는 SAFU 기금과 별도 준비금을 활용한 손실 보전 방안이 거론됐다. 약 63억4000만... 발표를 통한 추가 확인이 필요합니다. 본 기사 작성 과정에서 AI의 조력을 일부 받았습니다.] ▮ CBC뉴스ㅣCBCNEWS",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "4a24d7aba7ace9e5",
+      "title": "과락하던 '측량학'을 최고점으로...5급 공채 토목직 수석 김학균 씨",
+      "source": "lec.co.kr",
+      "source_domain": "lec.co.kr",
+      "published_at": "2026-10-30T23:22:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.lec.co.kr/news/articleView.html?idxno=752949",
+      "naver_link": "http://www.lec.co.kr/news/articleView.html?idxno=752949",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "이해가 어려운 부분은 교재와 논문, 인공지능(AI) 등을 활용해 보완했다. 답안에서는 핵심 개념을 중심으로 관련 내용을 최대한 풍부하게 작성하려 했다. 여러 차례 과락했던 과목을 극복하는 과정에서, 학습 내용의...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ab244a51eddc76eb",
+      "title": "전기화 시대…한·독일, 산업경쟁력 확보 위해 에너지 협력 강화",
+      "source": "mediapen.com",
+      "source_domain": "mediapen.com",
+      "published_at": "2026-10-30T23:22:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.mediapen.com/news/view/1133930",
+      "naver_link": "https://www.mediapen.com/news/view/1133930",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "기회로 활용하기 위한 전략적 협력의 틀을 재정비했다는 데 의미가 있다. 특히 제조업 기반이 강한 한국과... 협력 분야는 △재생에너지 및 에너지 효율 △청정수소 △전력망 및 에너지저장장치(ESS) △인공지능(AI)·디지털...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "eebad78b6d5d648c",
+      "title": "한국군 GP·미군 전차 모형에 北 자폭드론 돌진…김정은 \"힘이 곧 평화\"",
+      "source": "weekly.chosun.com",
+      "source_domain": "weekly.chosun.com",
+      "published_at": "2026-10-30T23:16:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://weekly.chosun.com/news/articleView.html?idxno=56744",
+      "naver_link": "https://n.news.naver.com/mnews/article/053/0000062712?sid=100",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "그는 \"힘이 곧 평화이고 평화는 힘으로만 담보된다\"며 무인항공기술과 국방 인공지능(AI) 분야의 기술 개발을 주문했다. 군사 전문가들은 북한이 우크라이나 전쟁에서 실전 활용성이 확인된 자폭드론과 무인기 운용...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "37ba245fc2cabbda",
+      "title": "소니코리아, 5K 오픈 게이트 지원 'FX5' 출시",
+      "source": "autodaily.co.kr",
+      "source_domain": "autodaily.co.kr",
+      "published_at": "2026-10-30T23:12:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.autodaily.co.kr/news/articleView.html?idxno=601650",
+      "naver_link": "https://www.autodaily.co.kr/news/articleView.html?idxno=601650",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "FX5는 소니 시네마 라인 FX 시리즈 가운데 처음으로 풀프레임 센서 전체를 활용하는 3:2 비율 오픈 게이트 촬영을 지원한다. 새로 개발된 적층형 5K 풀프레임 Exmor RS CMOS 센서와 AI 처리 장치가 포함된 BIONZ XR2...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "df976458280dd0e3",
+      "title": "부산테크노파크, 4개 기관 손잡고 수중쓰레기 탐지 AI 기술 개발",
+      "source": "newstown.co.kr",
+      "source_domain": "newstown.co.kr",
+      "published_at": "2026-10-30T23:04:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.newstown.co.kr/news/articleView.html?idxno=720343",
+      "naver_link": "http://www.newstown.co.kr/news/articleView.html?idxno=720343",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "인공지능을 활용한 수중쓰레기 탐지 기술 개발과 해양환경 개선을 위해 협력한다. 해양 현장에서 확보한... 데이터 AI 역량, KOFERA의 특화분야 연구역량, 전문기업의 현장 기술을 하나로 잇는 계기\"라며 \"현재 추진 중인...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "dd8f3559f3a39890",
+      "title": "포티투닷, '글레오 AI' 첫 OT⋯내비·문자·주유소 검색 기능 강화",
+      "source": "autodaily.co.kr",
+      "source_domain": "autodaily.co.kr",
+      "published_at": "2026-10-30T23:02:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.autodaily.co.kr/news/articleView.html?idxno=601645",
+      "naver_link": "https://www.autodaily.co.kr/news/articleView.html?idxno=601645",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "운전자가 주행 중 원하는 장소를 음성으로 요청하면 글레오 AI가 LLM을 활용해 사용자의 의도와 맥락을 파악한 뒤 실제 주행 경로에서 이용하기 편한 장소를 찾도록 개선했다. 휴게소와 주유소, 화장실처럼 근거리...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d7390294e6505d55",
+      "title": "美 중간선거 후에도 달러 강세 전망…고금리·AI 투자 자금이 버팀목",
+      "source": "g-enews.com",
+      "source_domain": "g-enews.com",
+      "published_at": "2026-10-30T23:00:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.g-enews.com/view.php?ud=2026103022332861749a1f309431_1",
+      "naver_link": "https://www.g-enews.com/view.php?ud=2026103022332861749a1f309431_1",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용",
+        "금융 AI"
+      ],
+      "description": "정치적 교착 상태가 달러에 부정적으로 작용할 수 있지만 높은 미국 금리와 인공지능(AI) 관련 투자 자금... 또한 의회 권력이 분산되면 대규모 정책 변경이 어려워지는 대신 불확실성이 줄어들어 금융시장에 일정한...",
+      "pre_score": 34,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 34,
+        "final_score": 34
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d22d91015f0b85b7",
+      "title": "서울 민간 정비사업 연내 3만 1천가구 착공 추진",
+      "source": "newscj.com",
+      "source_domain": "newscj.com",
+      "published_at": "2026-10-30T23:00:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.newscj.com/news/articleView.html?idxno=3444623",
+      "naver_link": "https://www.newscj.com/news/articleView.html?idxno=3444623",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제"
+      ],
+      "description": "홍지선 국토교통부 장관은 재개발 현장을 찾아 사업 추진 상황을 점검하고 이주비 대출 규제 완화와 취득세 감면 등 사업 지연 요인을 해소하기 위한 지원 방안을 검토하겠다고 밝혔다. 홍 장관은 30일 서울 노원구...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "73c4a0df0765a7fe",
+      "title": "GC메디아이, 영업이익 전망 170억원으로 상향…수익성 개선 가시화",
+      "source": "megaeconomy.co.kr",
+      "source_domain": "megaeconomy.co.kr",
+      "published_at": "2026-10-30T23:00:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065621418110169",
+      "naver_link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065621418110169",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "기존 사업의 수익구조를 정비하는 동시에 인공지능(AI) 진료 솔루션과 Medical OS 기반 신규 사업을... 현재 환자 플랫폼 ‘똑닥’을 비롯해 실손보험 청구와 금융 등 다양한 서비스를 연결하고 있으며, 향후 연동...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d1aa893397e54539",
+      "title": "머스크, 테슬라·스페이스X 합병 후 종목코드 'X' 채택할까",
+      "source": "g-enews.com",
+      "source_domain": "g-enews.com",
+      "published_at": "2026-10-30T23:00:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.g-enews.com/view.php?ud=2026103022444656659a1f309431_1",
+      "naver_link": "https://www.g-enews.com/view.php?ud=2026103022444656659a1f309431_1",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "기업이나 금융상품으로 넘어가는 일이 불가능한 것은 아니라고 설명했다. 다만 SPCX의 기존 사용 사례가 테슬라와 스페이스X의 합병 후 X 채택을 의미하는 것은 아니다. ◇자동차·우주사업 넘어 AI 통합기업 구상…새 이름...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "8aa9d63f3d6c039c",
+      "title": "아들 학폭 피해 호소 했다가 역풍 맞은 ‘유명 AV 배우’",
+      "source": "wikitree.co.kr",
+      "source_domain": "wikitree.co.kr",
+      "published_at": "2026-10-30T23:00:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.wikitree.co.kr/articles/1170578",
+      "naver_link": "https://www.wikitree.co.kr/articles/1170578",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 활용"
+      ],
+      "description": "기사 내용 토대로 AI툴 활용해 제작한 자료사진. “내 직업과 전혀 관련 없다”아오이 소라는 논란이 이어지자 기존 게시물을 지우고 며칠 뒤 새 글을 올렸다. 그는 아들이 상급생에게 공을 맞은 사건은 자신의 직업과 전혀...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b144d530f01f76ed",
+      "title": "한전, ‘공공기관 AI 혁신 챌린지’ 최우수상 수상…석유공사는 AI 혁신...",
+      "source": "busan.com",
+      "source_domain": "busan.com",
+      "published_at": "2026-10-30T22:56:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.busan.com/view/busan/view.php?code=2026103022320848934",
+      "naver_link": "https://n.news.naver.com/mnews/article/082/0001404937?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가"
+      ],
+      "description": "한전은 △에너지 복지 사각지대 발굴 △전력 데이터 기반 대안 신용평가 △AI 전기요금 안심 알리미 등을 통해 AI의 공공적 가치를 넓혀갈 계획이다. ○…한국석유공사(사장 손주석)는 지난 28일 서울 상암동...",
+      "pre_score": 42,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 42,
+        "final_score": 42
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d0526449ced982e5",
+      "title": "[보험업계기상도]미래에셋생명 정보유출·DB손보 제재 ‘비’",
+      "source": "nspna.com",
+      "source_domain": "nspna.com",
+      "published_at": "2026-10-30T22:56:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.nspna.com/news?mode=view&newsid=834010",
+      "naver_link": "https://www.nspna.com/news/?mode=view&newsid=834010",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명",
+        "금융 AI"
+      ],
+      "description": "KB손보 3분기 투자손익 316억원 적자, 누적 순이익 11.2% 감소 교보생명 채용 확대 금융위원장 표창, 한화손보 해양보험 협력 추진 이번 주 미래에셋생명은 해킹에 따른 개인정보 유출, DB손해보험은 보험계약 설명의무...",
+      "pre_score": 31,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11,
+          "industry_strategy": 8
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융위",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 31,
+        "final_score": 31
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ce4dc0c718ab0526",
+      "title": "MS 희망퇴직 vs 구글 희망판매···알파벳 12% 폭락의 속사정",
+      "source": "womaneconomy.co.kr",
+      "source_domain": "womaneconomy.co.kr",
+      "published_at": "2026-10-30T22:56:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.womaneconomy.co.kr/news/articleView.html?idxno=260448",
+      "naver_link": "https://www.womaneconomy.co.kr/news/articleView.html?idxno=260448",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "두 기업의 재무제표에는 인공지능(AI) 산업의 새로운 경쟁이 나타난다. 연산 설비를... 이번 분기 금융리스를 포함한 자본적지출은 약 452억 달러로 전년 동기 349억 달러보다 증가했다....",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9942f5283672c173",
+      "title": "\"수자원관리가 생명줄\"…섬유패션 생산국 저마다 '물 보전' 나서",
+      "source": "ktnews.com",
+      "source_domain": "ktnews.com",
+      "published_at": "2026-10-30T22:44:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.ktnews.com/news/articleView.html?idxno=149804",
+      "naver_link": "http://www.ktnews.com/news/articleView.html?idxno=149804",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "사진=AI생성이미지(ChatGPT) 물 부족과 수질오염이 섬유패션업계 생산비용과 공급망 안정성을 위협하고 있다.... 데니즐리 산업회의소와는 섬유 제조업체의 청정생산 투자를 지원하는 금융수단을 개발했다. 다만...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e0229c3079eb96c5",
+      "title": "[오늘의 운세] 10월 31일 띠별 재물운…자금 운용 의지 강해지고 지출 선...",
+      "source": "topstarnews.net",
+      "source_domain": "topstarnews.net",
+      "published_at": "2026-10-30T22:36:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.topstarnews.net/news/articleView.html?idxno=16264232",
+      "naver_link": "https://www.topstarnews.net/news/articleView.html?idxno=16264232",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "금융 AI",
+        "대출 AI"
+      ],
+      "description": "생성형 AI 분석 도구의 도움을 받아 작성됐으며, 최종 내용은 편집국 검수 및 편집을 거쳤습니다. 재물운·금전운·투자운·사업운은 실제 금융상품의 가격이나 수익률, 사업 매출·계약 성사 여부를 예측하는 정보가...",
+      "pre_score": 26,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 26,
+        "final_score": 26
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "a457614f15f7fb9d",
+      "title": "\"AI 비용 부담·실적 쇼크\"… 미 뉴욕증시 나스닥 2.2% 하락 출발",
+      "source": "gukjenews.com",
+      "source_domain": "gukjenews.com",
+      "published_at": "2026-10-30T22:34:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.gukjenews.com/news/articleView.html?idxno=3738122",
+      "naver_link": "https://www.gukjenews.com/news/articleView.html?idxno=3738122",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "시장 전문가들은 빅테크의 클라우드 성장세에도 불구하고 대규모 AI 투자 및 금융 비용 부담이 기업의 현금흐름을 압박하고 있다고 분석했다. 여기에 미국 연방준비제도(Fed)의 긴축 재개 가능성까지 겹치면서...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "fb214709629d4328",
+      "title": "김동현, 압구정현대 100억 매입에 '집주인 대출' 50억...온라인 반응 \"대...",
+      "source": "pennmike.com",
+      "source_domain": "pennmike.com",
+      "published_at": "2026-10-30T22:32:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.pennmike.com/news/articleView.html?idxno=130671",
+      "naver_link": "https://www.pennmike.com/news/articleView.html?idxno=130671",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제",
+        "전세대출",
+        "주택담보대출"
+      ],
+      "description": "당시 분당은 토지거래허가구역으로 묶여 25억 원 초과 아파트의 주택담보대출 한도가 2억 원으로 제한된 상태였다. 매수인이 대출로 잔금을 마련하기 어려운 상황에서 대통령이 사실상 은행 역할을 맡은 셈이다. 논란이...",
+      "pre_score": 32,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "주택담보대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 32,
+        "final_score": 32
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "6c144dc69c0c1ec4",
+      "title": "노지선, 고양이 감성 카페에서 여유로운 커피 한잔",
+      "source": "topstarnews.net",
+      "source_domain": "topstarnews.net",
+      "published_at": "2026-10-30T22:26:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.topstarnews.net/news/articleView.html?idxno=16264217",
+      "naver_link": "https://www.topstarnews.net/news/articleView.html?idxno=16264217",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "카드론"
+      ],
+      "description": "7월에는 아이즈매거진의 '류정란 x 노지선 숨 막히는 72분 소개팅' 콘텐츠에서 토크와 콘셉트 연기를 선보였고, 10월에는 직무 전환과 금융 경험을 주제로 한 '카드론은 겪지 마세요! 아이돌에서 직무 전환한 인생 선배의...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "카드론",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "a6a511983cd96ccf",
+      "title": "김동현, 반포 반전세 청산…압구정 '100억 아파트' 새 주인→50억 빌려준...",
+      "source": "mhnse.com",
+      "source_domain": "mhnse.com",
+      "published_at": "2026-10-30T22:25:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://mhnse.com/news/articleView.html?idxno=1648696",
+      "naver_link": "https://m.entertain.naver.com/article/445/0000484398",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "전세대출"
+      ],
+      "description": "통상 채권최고액이 대출금의 120% 수준에서 책정되는 점을 감안하면 약 50억 원을 매도인으로부터 차입하고... 반전세로 거주 중인 근황을 전한 바 있다. 당시 그는 \"집값 열차에서 잠깐 내렸더니 그 사이 집값이 확...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "636aa96424ed4b58",
+      "title": "GC녹십자, 헌터증후군 치료제 국내 허가…혈액제제 사업에 1700억 대출 승...",
+      "source": "sateconomy.co.kr",
+      "source_domain": "sateconomy.co.kr",
+      "published_at": "2026-10-30T22:20:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://sateconomy.co.kr/news/view/1065618575920868",
+      "naver_link": "https://sateconomy.co.kr/news/view/1065618575920868",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융위원회 대출"
+      ],
+      "description": "금융위원회가 이날 발표한 자료에 따르면 국민성장펀드 기금운용심의회는 지난 29일 GC녹십자의 차세대 혈액제제 개발 및 생산설비 투자사업에 1700억원의 대출 지원을 승인했다. 해당 사업은 미국 임상 연구개발과...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융위원회",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "금융위",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b71e51dafc1fee1e",
+      "title": "바이낸스, 역대 최대 63억 달러 털렸지만 30억 달러는 파트너 협조로 동...",
+      "source": "wikitree.co.kr",
+      "source_domain": "wikitree.co.kr",
+      "published_at": "2026-10-30T22:12:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.wikitree.co.kr/articles/1170603",
+      "naver_link": "https://www.wikitree.co.kr/articles/1170603",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "금융 AI",
+        "대출 AI"
+      ],
+      "description": "청산 규모는 실제 손실액과는 다른 개념이다.디파이(탈중앙화 금융)에도 여파가 번졌다. 에이브는... 대변인은 이용자에게 “자금은 완전히 안전하다”고 안심시켰다.AI 요인을 거론하는 시각도 있다. 호주 RMIT대의...",
+      "pre_score": 26,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 26,
+        "final_score": 26
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "815fd9e75aa7f9a4",
+      "title": "하나은행, 서민금융진흥원에 1000억원 출연",
+      "source": "siminilbo.co.kr",
+      "source_domain": "siminilbo.co.kr",
+      "published_at": "2026-10-30T22:06:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160281486713260",
+      "naver_link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160281486713260",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용대출"
+      ],
+      "description": "오는 12월 출시 예정인 신용대출 상품은 연간 급여 3500만원 이하, 재직기간 1년 이상의 직장인을 대상으로 최대 1500만원까지 지원하며, 1년 거치·5년 분할상환 방식이다. 특히, 한부모·다자녀가구, 저소득층...",
+      "pre_score": 35,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "customer_demand": 15
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "서민금융",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 35,
+        "final_score": 35
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "63ee84f97e1ca415",
+      "title": "AI가 SI 일감 키웠다… LG CNS, 3분기 영업익 15% 증가",
+      "source": "newscj.com",
+      "source_domain": "newscj.com",
+      "published_at": "2026-10-30T22:02:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.newscj.com/news/articleView.html?idxno=3444638",
+      "naver_link": "https://www.newscj.com/news/articleView.html?idxno=3444638",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "다만 금융권 전반에서는 아직 개념검증(PoC) 비중이 높고 AI 프로젝트의 규모와 수익성을 기존 대형 SI와 직접 비교하기는 어렵다는 게 회사 설명이다. NH농협은행·미래에셋생명·KB국민은행 등 대형 프로젝트가...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "6616a683e2cd1dbc",
+      "title": "불장에 ‘빚투’도 훌쩍…금리 오르며 가계 ‘흔들’",
+      "source": "news.kbs.co.kr",
+      "source_domain": "news.kbs.co.kr",
+      "published_at": "2026-10-30T21:41:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8700138&ref=A",
+      "naver_link": "https://n.news.naver.com/mnews/article/056/0012284503?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "마이너스통장",
+        "신용대출",
+        "연체율",
+        "주택담보대출"
+      ],
+      "description": "일부 섹터(분야)는 아주 좋지만, 그것보다도 훨씬 더 많은 숫자 더 넓은 영역의 경제에서 어려움이 가중되고 있고.\"] 주택담보대출을 제외한 신용대출 등의 가계대출 연체율은 0.91%까지 올라 지난해 8월 이후 가장 높은...",
+      "pre_score": 53,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "risk_repayment": 9
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "신용대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "주택담보대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 53,
+        "final_score": 53
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ffe53718d07c1b2a",
+      "title": "보건복지형 예비사회적기업 17곳 신규 지정…3년간 지원",
+      "source": "medicalworldnews.co.kr",
+      "source_domain": "medicalworldnews.co.kr",
+      "published_at": "2026-10-30T21:40:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://medicalworldnews.co.kr/news/view.php?idx=1510978194",
+      "naver_link": "https://medicalworldnews.co.kr/news/view.php?idx=1510978194",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 금리"
+      ],
+      "description": "사업화 자금을 조달할 때 대출금리 2.5%포인트를 보전하는 이차보전과 모태펀드 투자도 받을 수 있다. 성장단계별 맞춤형 경영지원과 ‘가치장터’·‘STORE36.5’ 입점 등 판로지원도 이어진다. 정식 인증을 받으면...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ec50927d96213f86",
+      "title": "'집 팔아 코인투자' 김동현, 압구정 100억 아파트 매입…50억은 집주인에...",
+      "source": "xportsnews.com",
+      "source_domain": "xportsnews.com",
+      "published_at": "2026-10-30T21:38:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.xportsnews.com/article/2213663",
+      "naver_link": "https://m.entertain.naver.com/article/311/0002074805",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제",
+        "전세대출"
+      ],
+      "description": "최근 고가 주택에 대한 대출 규제가 강화되면서 자금 조달 수단 중 하나로 주목받고 있다. 앞서 김동현은 지난 6월 유튜브 채널 '밉지않은 관종언니'에 출연해 서울 반포의 60평대 아파트에 반전세로 거주 중이라고 밝힌...",
+      "pre_score": 23,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 23,
+        "final_score": 23
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d690b6549b511374",
+      "title": "뉴욕증시 프리뷰, 아마존·인텔 쇼크에 하락 출발 전망…나스닥 선물 2...",
+      "source": "newspim.com",
+      "source_domain": "newspim.com",
+      "published_at": "2026-10-30T21:31:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.newspim.com/news/view/20261030001346",
+      "naver_link": "https://www.newspim.com/news/view/20261030001346",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "이어 \"앞으로는 더 높아진 금융 비용이 벌어들인 현금을 더 많이 잠식해, 사업 확장과 부채 상환에 쓸 돈이 줄어들 위험이 있다\"고 진단했다. 다수 기업이 AI 투자 자금을 대려고 채권시장에 손을 벌리면서, 금리...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "797e886f64be45b3",
+      "title": "코스피, 3%대 낙폭에 5800선 밑으로...삼성전기, SK하이닉스 등 하락",
+      "source": "econonews.co.kr",
+      "source_domain": "econonews.co.kr",
+      "published_at": "2026-10-30T21:30:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.econonews.co.kr/news/articleView.html?idxno=446503",
+      "naver_link": "http://www.econonews.co.kr/news/articleView.html?idxno=446503",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "위 이미지는 기사 이해를 돕기 위해 AI(인공지능)를 활용해 제작했습니다. 코스피가 3%대 낙폭을... 이 밖에 삼성전자우(-5.33%), SK스퀘어(-5.88%), 삼성전기(-7.50%), 현대차(-3.59%), KB금융(-0.83%), 삼성생명(-2.70...",
+      "pre_score": 22,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 8,
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "삼성생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 22,
+        "final_score": 22
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "5d751351170033e2",
+      "title": "[금융그룹 3Q 리뷰] 5대 금융 누적 순익 19.6조…역대 최대 눈앞",
+      "source": "kfenews.co.kr",
+      "source_domain": "kfenews.co.kr",
+      "published_at": "2026-10-30T21:30:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.kfenews.co.kr/news/articleView.html?idxno=667305",
+      "naver_link": "https://www.kfenews.co.kr/news/articleView.html?idxno=667305",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "보험사 대출"
+      ],
+      "description": "지난해 3분기 보험사 인수 과정에서 발생한 염가매수차익 등 일회성 요인을 제외하면 18.7% 증가했다. ◆ 수수료이익 일제히 증가…WM·증권 부문 성장 이자이익은 대출자산 증가에 힘입어 성장세를 이어갔다....",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 8
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "1e8c3e14824eb2d2",
+      "title": "현대건설, 3분기 영업이익 114% 증가…누적 수주 28조8746억원",
+      "source": "sateconomy.co.kr",
+      "source_domain": "sateconomy.co.kr",
+      "published_at": "2026-10-30T21:26:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://sateconomy.co.kr/news/view/1065615466395596",
+      "naver_link": "https://sateconomy.co.kr/news/view/1065615466395596",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "30일 금융감독원 전자공시시스템에 따르면 현대건설의 올해 3분기 연결 기준 매출은 6조2406억원... 미국 전기로 제철소와 포항 인공지능(AI) 데이터센터 등 국내외 전략사업에서 수주를 확보한 것이 영향을 미쳤다....",
+      "pre_score": 25,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11,
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융감독원",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 25,
+        "final_score": 25
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "a85ff6eade81b969",
+      "title": "계속 털리는데도 ‘이상무’?…체크리스트로 막을 수 있나",
+      "source": "news.kbs.co.kr",
+      "source_domain": "news.kbs.co.kr",
+      "published_at": "2026-10-30T21:20:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8700106&ref=A",
+      "naver_link": "https://n.news.naver.com/mnews/article/056/0012284488?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "[리포트] 해킹이 잇따르자 이달 초 금융감독원이 금융회사 555곳에 내려보낸 보안 점검표입니다. 공격자 IP를 차단했는지, AI 해킹의 주요 공격 지점인 내부 직원용 서버 등 취약지점에 대한 조치를 했는지 등을 살펴보라고...",
+      "pre_score": 25,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11,
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융감독원",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 25,
+        "final_score": 25
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "7e4ac462906c12c7",
+      "title": "정보 유출 안내도 오락가락…보상은 말로만 서비스 중단까지",
+      "source": "news.kbs.co.kr",
+      "source_domain": "news.kbs.co.kr",
+      "published_at": "2026-10-30T21:18:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8700104&ref=A",
+      "naver_link": "https://n.news.naver.com/mnews/article/056/0012284487?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자",
+        "대출 금리"
+      ],
+      "description": "유출 항목은 대출 한도와 금리 등 8개, 그런데 십여 일 뒤에 다시 개인정보가 유출되지 않았다는 문자가 왔고, 다음날엔 또 정보 유출이 있었다고 번복했습니다. 이번엔 유출 항목도 11개로 늘어났습니다. [김OO/신한은행...",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "a1ec446f1f2d699f",
+      "title": "인천시, 청년 창업기업 10곳 해외 진출 지원",
+      "source": "gukjenews.com",
+      "source_domain": "gukjenews.com",
+      "published_at": "2026-10-30T21:16:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.gukjenews.com/news/articleView.html?idxno=3738098",
+      "naver_link": "https://www.gukjenews.com/news/articleView.html?idxno=3738098",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "현지 소비자 반응과 유통·판매 가능성을 점검할 예정이다. 일본에서는 11월 4일부터 6일까지 도쿄와... 5개 기업은 Tokyo Innovation Base, 한국무역투자진흥공사 도쿄 IT지원센터, 미쓰비시 UFJ 신탁은행, 키라보시 금융그룹...",
+      "pre_score": 21,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 15
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "청년",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 21,
+        "final_score": 21
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "8a8536c7790f579a",
+      "title": "하나은행, 11월 2일부터 비대면 주담대 일부 재개…혼합형 모기지보험도...",
+      "source": "sateconomy.co.kr",
+      "source_domain": "sateconomy.co.kr",
+      "published_at": "2026-10-30T21:06:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://sateconomy.co.kr/news/view/1065613116233494",
+      "naver_link": "https://sateconomy.co.kr/news/view/1065613116233494",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "대출 갈아타기",
+        "대출 규제",
+        "대출 금리",
+        "신용대출",
+        "주담대",
+        "주택담보대출"
+      ],
+      "description": "[하나은행] 하나은행이 가계대출 총량 관리를 위해 중단했던 비대면 주택담보대출 일부 상품의 신규 취급을 다음 달 2일부터 재개한다. 혼합금리형 주택담보대출에 대한 모기지보험과 보증 가입도 다시 허용한다. 30일...",
+      "pre_score": 58,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 28
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "주택담보대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "주담대",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 58,
+        "final_score": 58
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "4d3194703cff4db6",
+      "title": "코웬 \"비트코인(BTC), 앤트로픽 IPO로 스페이스X(SPCX) 상장 전 데자뷔 가...",
+      "source": "coinreaders.com",
+      "source_domain": "coinreaders.com",
+      "published_at": "2026-10-30T21:02:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://coinreaders.com/266454",
+      "naver_link": "http://coinreaders.com/266454",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "10월 29일(현지시간) 금융 전문 매체 벤징가에 따르면, 암호화폐 애널리스트 벤자민 코웬(Benjamin Cowen)은 NFA... 코웬을 비롯한 토론 참여자들은 이란 분쟁과 인공지능(AI) 기업들의 상장을 둘러싼 불확실성이 남은...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "566ba88b1e4a67d9",
+      "title": "“월가, AI 빅테크 평가 기준 바꿨다”…알파벳 시총 하루새 80조원 증발",
+      "source": "헤럴드경제",
+      "source_domain": "biz.heraldcorp.com",
+      "published_at": "2026-10-30T21:01:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://biz.heraldcorp.com/article/10920786?ref=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/016/0002716882?sid=104",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융 AI"
+      ],
+      "description": "인공지능(AI) 투자 경쟁에서 현금 창출 능력이 빅테크 기업들의 새로운 평가 기준으로 떠오르고 있다.... 반면 MS의 해당 비율은 금융리스 관련 지출을 제외하면 68%에 그쳤다. 이 비율이 100%를 넘는다는 것은...",
+      "pre_score": 35,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 7,
+        "raw_score": 35,
+        "final_score": 35
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "4d913de90957e90d",
+      "title": "'반포 거주' 김동현, 압구정 아파트 100억 매입…50억은 집주인 대출",
+      "source": "topstarnews.net",
+      "source_domain": "topstarnews.net",
+      "published_at": "2026-10-30T20:58:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.topstarnews.net/news/articleView.html?idxno=16264130",
+      "naver_link": "https://www.topstarnews.net/news/articleView.html?idxno=16264130",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제",
+        "전세대출",
+        "주택담보대출",
+        "주택시장 대출"
+      ],
+      "description": "정부가 지난해 발표한 10·15 대책에 따라 25억원 초과 주택의 주택담보대출 한도가 기존 6억원에서 2억원으로 축소되면서 고가주택 매수자들의 자금조달 부담이 커졌기 때문이다. 매도자 입장에서는 매매대금을 즉시...",
+      "pre_score": 38,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "주택담보대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 24,
+        "source_bonus": 0,
+        "raw_score": 38,
+        "final_score": 38
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "c9f957d6c0fc6d96",
+      "title": "\"주가 빠져 배당수익률 6.7% 껑충…KB금융, '주주환원 56%'로 응답한다\"",
+      "source": "newsquest.co.kr",
+      "source_domain": "newsquest.co.kr",
+      "published_at": "2026-10-30T20:58:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.newsquest.co.kr/news/articleView.html?idxno=303897",
+      "naver_link": "https://www.newsquest.co.kr/news/articleView.html?idxno=303897",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "대출 금리",
+        "연체율"
+      ],
+      "description": "기업대출 변동주기 축소와 가계대출 코픽스 비중확대를 통해 대출금리 리프라이싱 효과를 높이고 있으며, 전통적으로 강한 저원가성 수신기반을 갖고 있어 향후 마진관리와 이자이익 확보에 상대적으로 유리하다....",
+      "pre_score": 32,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 32,
+        "final_score": 32
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "ef07d8dc5e4203e8",
+      "title": "홍콩 역자산 주담대 3819건, 6월 말보다 12.3% 줄었다",
+      "source": "tokenpost.kr",
+      "source_domain": "tokenpost.kr",
+      "published_at": "2026-10-30T20:54:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.tokenpost.kr/news/economy/430156",
+      "naver_link": "https://www.tokenpost.kr/news/economy/430156",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "연체율",
+        "은행권 대출",
+        "주담대",
+        "주택담보대출"
+      ],
+      "description": "홍콩에서 금융기관이 1순위 주택담보대출을 기준으로 파악한 마이너스 에쿼티 대출은 9월 말 3819건으로 추산됐다. 6월 말보다 537건, 12.3% 감소했다. 홍콩금융관리국(Hong Kong Monetary Authority, HKMA)은 30일 9월 말 조사...",
+      "pre_score": 52,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 28
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "주택담보대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "주담대",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 24,
+        "source_bonus": 0,
+        "raw_score": 52,
+        "final_score": 52
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "8c0ab2c7581cb8e4",
+      "title": "[기획] 엇갈린 성적표…JB 날고 BNK·iM 주춤",
+      "source": "kfenews.co.kr",
+      "source_domain": "kfenews.co.kr",
+      "published_at": "2026-10-30T20:54:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.kfenews.co.kr/news/articleView.html?idxno=667298",
+      "naver_link": "https://www.kfenews.co.kr/news/articleView.html?idxno=667298",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "연체율"
+      ],
+      "description": "01%포인트 낮아졌지만 연체율은 1.40%로 0.06%포인트 상승했다. 보통주자본비율(CET1)은 12.18%로 전분기보다 0.04%포인트 높아졌다. 설용진 iM증권 연구원은 \"연체율 등 건전성 부진 추세와 현재 2000억원 내외의 경상...",
+      "pre_score": 29,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "risk_repayment": 9
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 29,
+        "final_score": 29
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "5053ebf13a218f16",
+      "title": "[월드 e 브리핑] 유럽중앙은행 금리 동결…예금금리 연 2.50%",
+      "source": "obsnews.co.kr",
+      "source_domain": "obsnews.co.kr",
+      "published_at": "2026-10-30T20:50:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542243",
+      "naver_link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542243",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "대출 AI",
+        "대출 금리"
+      ],
+      "description": "기준금리와 한계대출금리도 각각 2.65%와 2.9%로 동결했는데요. 지난 6월과 9월 두 차례 금리를 올린 뒤 경제에 미치는 영향을 지켜보기로 한 겁니다. 중동 전쟁으로 에너지 가격이 급등하면서 지난달 유로존 물가...",
+      "pre_score": 18,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 18,
+        "final_score": 18
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "7bcaf415c6e175db",
+      "title": "보이스피싱 피해구제에 AI…한국딥러닝·기업은행 맞손",
+      "source": "이데일리",
+      "source_domain": "edaily.co.kr",
+      "published_at": "2026-10-30T20:42:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.edaily.co.kr/News/Read?newsId=06504246645618168&mediaCodeNo=257",
+      "naver_link": "https://n.news.naver.com/mnews/article/018/0006400222?sid=105",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "한국딥러닝은 IBK기업은행 금융소비자지원부와 지난 4~8월 시각언어모델(VLM) 기반 보이스피싱 피해구제 업무 자동화를 공동 실증했다고 30일 밝혔다. 기존에는 직원이 팩스로 접수된 피해구제 서류를 직접 확인하고...",
+      "pre_score": 29,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 15
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 8,
+        "raw_score": 29,
+        "final_score": 29
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "285affa8d7443b7e",
+      "title": "'미소금융' 출연 본격화...농협·하나 1000억원씩 투입",
+      "source": "dongponews.net",
+      "source_domain": "dongponews.net",
+      "published_at": "2026-10-30T20:40:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.dongponews.net/news/articleView.html?idxno=61381",
+      "naver_link": "https://www.dongponews.net/news/articleView.html?idxno=61381",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용대출",
+        "은행권 대출"
+      ],
+      "description": "하나은행은 저소득 직장인을 위한 별도 신용대출 상품도 12월 선보인다. 연소득 3500만원 이하, 재직기간 1년 이상인 직장인에게 최대 1500만원을 지원하고, 한부모·다자녀가구와 저소득층 등에는 연 1.0%포인트의...",
+      "pre_score": 26,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 26,
+        "final_score": 26
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9a7abcff0b81fbe4",
+      "title": "김동현, 반포 60평대 반전세→압구정 아파트 100억에 매입…50억은 집주...",
+      "source": "stoo.com",
+      "source_domain": "stoo.com",
+      "published_at": "2026-10-30T20:40:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.stoo.com/article.php?aid=109634332021",
+      "naver_link": "http://www.stoo.com/article.php?aid=109634332021",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "전세대출"
+      ],
+      "description": "통상 채권최고액이 대출금의 120% 수준으로 설정되는 것을 고려하면, 약 50억 원가량을 매도인에게 빌린... 앞서 김동현은 지난 6월 유튜브 채널 '밉지않은 관종언니'에 출연해 반포 60평대 반전세 아파트를...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "dce521c3845dfdf3",
+      "title": "금감원 \"매칭조정 승인 기준 내년쯤 마련\"…보험사 자본 부담 던다",
+      "source": "뉴스1",
+      "source_domain": "news1.kr",
+      "published_at": "2026-10-30T20:36:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.news1.kr/finance/insurance-card/6338384",
+      "naver_link": "https://n.news.naver.com/mnews/article/421/0009261698?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융감독원 대출",
+        "보험계약대출",
+        "보험사 대출",
+        "부동산 대출"
+      ],
+      "description": "노 실장은 \"상업용 부동산 담보대출 등 현금흐름의 예측 가능성이 높은 자산과 연금 이외의 보험계약까지 적용 대상을 확대해야 한다\"며 \"자산과 부채의 현금흐름 불일치 허용 기준과 승인 절차를 구체화하고...",
+      "pre_score": 69,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 22,
+          "industry_strategy": 16
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금감원",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 24,
+        "source_bonus": 7,
+        "raw_score": 69,
+        "final_score": 69
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "76d73b7cee01609f",
+      "title": "KB국민·신한·하나은행 ELS 과징금 감경, 법 적용과 피해배상 다시 따졌...",
+      "source": "sateconomy.co.kr",
+      "source_domain": "sateconomy.co.kr",
+      "published_at": "2026-10-30T20:34:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://sateconomy.co.kr/news/view/1065612718645311",
+      "naver_link": "http://sateconomy.co.kr/news/view/1065612718645311",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금소법",
+        "금융소비자"
+      ],
+      "description": "이번 감경을 이해하려면 먼저 금융소비자보호법 시행 당시의 감독 방침을 살펴볼 필요가 있다. 금융위는 2021년 5월 26일 금소법 시행 초기 6개월 동안 신설되거나 강화된 규제 위반행위에 대해 원칙적으로 제재보다...",
+      "pre_score": 23,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융위",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 23,
+        "final_score": 23
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "502a5271387bab18",
+      "title": "[재무이슈] 한번에 5조짜리 삼성생명 일시납 저축성보험 가입한 삼성전...",
+      "source": "moneystorm.kr",
+      "source_domain": "moneystorm.kr",
+      "published_at": "2026-10-30T20:24:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.moneystorm.kr/news/articleView.html?idxno=7904",
+      "naver_link": "https://www.moneystorm.kr/news/articleView.html?idxno=7904",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "대출 AI",
+        "보험사 대출",
+        "생명보험 대출"
+      ],
+      "description": "여기에다 마땅한 대출 수요가 없는 상황에서 수조원의 예금에 이자(4%대)를 주려면 은행 입장에서는 오히려... 저축성보험은 보험사 매출(CSM)로 인식되지 않고 대부분 부채로 잡히는데다 수많은 개인고객을 관리하는...",
+      "pre_score": 40,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 16
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "보험사",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "삼성생명",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 24,
+        "source_bonus": 0,
+        "raw_score": 40,
+        "final_score": 40
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "51652bdceab41a9a",
+      "title": "머스크 \"매일이 제로데이\" 발언에…바이낸스 창업자 \"농담할 때 아니다...",
+      "source": "joseilbo.com",
+      "source_domain": "joseilbo.com",
+      "published_at": "2026-10-30T20:19:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.joseilbo.com/news/news_read.php?uid=578585&class=18&grp=",
+      "naver_link": "https://n.news.naver.com/mnews/article/123/0002393012?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "대출 AI"
+      ],
+      "description": "(ETH)을 대출받은 정황을 언급하며 \"언젠가 초지능 에이전트(AI)가 인간이 아닌 자신들의 자금을 확보하기 위해 이 같은 수법을 쓸 것\"이라며 AI의 자율적 자금 탈취 가능성을 지적했다. 이에 자오 창업자는 30일 자신의...",
+      "pre_score": 20,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 20,
+        "final_score": 20
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "bd81d672798294e9",
+      "title": "NH농협생명·손보·캐피탈, 미소금융에 100억원 출연…계열사 분담 확정",
+      "source": "sateconomy.co.kr",
+      "source_domain": "sateconomy.co.kr",
+      "published_at": "2026-10-30T20:16:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://sateconomy.co.kr/news/view/1065611449861983",
+      "naver_link": "https://sateconomy.co.kr/news/view/1065611449861983",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융위원회 대출"
+      ],
+      "description": "금융위원회에 따르면 올해 납입 예정인 출연금은 534억원이다. 나머지 재원은 향후 일정에 따라 분할 출연된다. 재단은 내년 1분기부터 농촌 지역 금융취약계층을 대상으로 대출을 공급할 예정이다. 사업 첫해 전국 8개...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융위원회",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "금융위",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "cc67c31f18036c05",
+      "title": "김동현, 압구정 100억 아파트 샀다…50억은 ‘집주인 대출’",
+      "source": "sportsseoul.com",
+      "source_domain": "sportsseoul.com",
+      "published_at": "2026-10-30T20:16:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.sportsseoul.com/news/read/1645598?ref=naver",
+      "naver_link": "https://m.entertain.naver.com/article/468/0001276783",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "전세대출"
+      ],
+      "description": "과거 반포 60평대 아파트에서 반전세로 거주하며 집값을 놓친 아쉬움을 토로했던 그가 압구정 신현대... 통상 채권최고액이 실제 대출금의 120% 수준으로 설정되는 점을 고려하면 약 50억 원을 매도인에게 빌린 것으로...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9892c80c9e4e238a",
+      "title": "양동원 하나저축은행 대표, 부동산 부실자산 감축에 흑자 전환…안전자...",
+      "source": "한국금융신문",
+      "source_domain": "fntimes.com",
+      "published_at": "2026-10-30T20:10:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.fntimes.com/html/view.php?ud=2026103016570673317c96e79780_18",
+      "naver_link": "https://www.fntimes.com/html/view.php?ud=2026103016570673317c96e79780_18",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용평가",
+        "연체율",
+        "저축은행 대출"
+      ],
+      "description": "다만 연체율은 7.40%로 전년 동기(7.37%)보다 0.03%p 높아졌다. 연체여신은 1731억원으로 전년 동기(1709억원) 대비 1.28% 늘었다. 하나저축은행 관계자는 “부동산 관련 PF·브릿지 대출자산을 경공매, 회수, 정상화 등을...",
+      "pre_score": 81,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "risk_repayment": 18,
+          "industry_strategy": 24
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "부실",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "저축은행",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            },
+            {
+              "term": "여신",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 7,
+        "raw_score": 81,
+        "final_score": 81
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "4ac9066c07be8775",
+      "title": "금융사 부실 정리 기간 단축… '신속정리제도' 도입 추진",
+      "source": "insnews.co.kr",
+      "source_domain": "insnews.co.kr",
+      "published_at": "2026-10-30T20:08:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.insnews.co.kr/news/articleView.html?idxno=93598",
+      "naver_link": "https://www.insnews.co.kr/news/articleView.html?idxno=93598",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "금융위 관계자는 \"이번 방안과 개정안이 제도화된다면 금융회사의 급격한 부실이 시스템 리스크로 전이되는 것을 선제적으로 차단할 수 있다\"며 \"위기상황 발생 시 신속한 정리를 통해 금융시장 안정과 금융소비자...",
+      "pre_score": 44,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11,
+          "risk_repayment": 27
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융위",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "부실",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 44,
+        "final_score": 44
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "039204b33af431a4",
+      "title": "일본은행, 기준금리 1.25% 동결… “물가 2% 목표 도달” 첫 공식 인정",
+      "source": "segye.com",
+      "source_domain": "segye.com",
+      "published_at": "2026-10-30T20:02:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.segye.com/newsView/20261030511913?OutUrl=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/022/0004171193?sid=104",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "물가 위험은 “위쪽으로 치우쳐 있다”고 봤고, 2027회계연도 소비자물가 상승률 전망치는 2.4%에서 2.6%로 높였다. 경제와 물가가 전망대로 가면 “금리를 계속 올려 금융완화 정도를 조정하는 것이 적절하다”고도...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "fc235fa1de5dbd28",
+      "title": "국토장관 \"연말까지 서울 민간 정비 3만1천호 착공…차질없이 추진\"(종...",
+      "source": "jasm.co.kr",
+      "source_domain": "jasm.co.kr",
+      "published_at": "2026-10-30T20:00:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.jasm.co.kr/news/view/323646?sc=Naver",
+      "naver_link": "https://www.jasm.co.kr/news/view/323646/?sc=Naver",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제"
+      ],
+      "description": "이날 간담회에서는 이주비 대출 규제 완화와 조합원 지위 양도 제한, 공사비 분쟁 등에 관한 건의가 나온 것으로 전해졌다. 홍 장관은 간담회가 끝나고 기자들과 만나 \"조합 측에서 내년부터 이주가 시작되는 만큼 이주비...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "f1926592e133b9d0",
+      "title": "박완수 \"좋은 정책도 전달돼야 의미 있어\"…사회복지사 노고 격려",
+      "source": "cnbnews.com",
+      "source_domain": "cnbnews.com",
+      "published_at": "2026-10-30T20:00:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.cnbnews.com/news/articleView.html?idxno=1021786",
+      "naver_link": "https://www.cnbnews.com/news/articleView.html?idxno=1021786",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "현장에서는 지역사회 복지 증진에 기여한 유공자 32명에 대한 표창 수여식과 대일전기㈜, 365엔씨치과의원, 교보생명 산호지점의 후원금(총 800만 원) 전달식이 진행됐다. 한편 경남도는 향후 경남형 긴급복지 '희망지원금...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 8
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "48bd29d4d9bdbd43",
+      "title": "KB국민은행, 청각장애인 고객 위한 '모바일 화상 수어상담' 도입",
+      "source": "ttlnews.com",
+      "source_domain": "ttlnews.com",
+      "published_at": "2026-10-30T20:00:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.ttlnews.com/news/articleView.html?idxno=3157309",
+      "naver_link": "http://www.ttlnews.com/news/articleView.html?idxno=3157309",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "KB국민은행이 모바일 뱅킹 플랫폼에 실시간 화상 수어상담 시스템을 전격 탑재하면서, 장애인 금융 소비자가 손안의 스마트폰 하나로 막힘없는 은행 업무를 볼 수 있는 통로가 열렸다. KB국민은행은 10월 30일 청각장애인의...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "6aca344ea4fe8322",
+      "title": "동성제약 전 회장·대표 등 5명 불구속 송치…310억원대 횡령 혐의",
+      "source": "mydaily.co.kr",
+      "source_domain": "mydaily.co.kr",
+      "published_at": "2026-10-30T19:59:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.mydaily.co.kr/page/view/2026103019574992825",
+      "naver_link": "https://n.news.naver.com/mnews/article/117/0004120288?sid=102",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "개인회생"
+      ],
+      "description": "이 전 회장은 2022년 초부터 2024년 말까지 회사 자금 약 250억원을 횡령해 개인 주식 거래에서 발생한 손실을... 동성제약은 경영권 분쟁 이후 지난해 5월 기업회생 절차에 들어갔다. 한국거래소는 지난 7월...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "d309f2ec8fc3104f",
+      "title": "바이낸스, 8.5조원 가상자산 해킹 피해…“北 조직이 주도” 분석도",
+      "source": "donga.com",
+      "source_domain": "donga.com",
+      "published_at": "2026-10-30T19:54:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.donga.com/news/Inter/article/all/20261030/134939884/1",
+      "naver_link": "https://n.news.naver.com/mnews/article/020/0003759022?sid=104",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "국내외를 막론하고 해킹 사건이 끊이지 않으면서 소비자들의 우려가 커지고 있다. ● 역대 최대 규모 가상자산 해킹 30일 금융권에 따르면 바이낸스는 X(옛 트위터)에서 가상자산 탈취 사건 초기 조사 결과를 공개하며...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "78c5a1df4daaaf81",
+      "title": "교보생명, 변액보험 고객에 매일 금융시황 '모닝브리핑' 서비스 시작",
+      "source": "gukjenews.com",
+      "source_domain": "gukjenews.com",
+      "published_at": "2026-10-30T19:50:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.gukjenews.com/news/articleView.html?idxno=3738044",
+      "naver_link": "https://www.gukjenews.com/news/articleView.html?idxno=3738044",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "교보생명, 로보어드바이저로 변액보험 고객 펀드 관리 돕는다(출처=교보생명) 교보생명은 변액보험 고객의 체계적인 펀드 관리를 지원하기 위해 매일 금융시황 정보를 제공한다고 30일 밝혔다. 교보생명은 투자성향과...",
+      "pre_score": 30,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 24
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 30,
+        "final_score": 30
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "b4868bebf50ce725",
+      "title": "젬백스, 자산 잔금 마련에 단기차입 175억원",
+      "source": "vegannews.co.kr",
+      "source_domain": "vegannews.co.kr",
+      "published_at": "2026-10-30T19:50:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.vegannews.co.kr/news/article.html?no=398512",
+      "naver_link": "https://www.vegannews.co.kr/news/article.html?no=398512",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대환대출",
+        "부동산 대출"
+      ],
+      "description": "차입 방식은 하나은행 기업시설일반자금대출이며, 거래 상대방의 기존 부동산 담보대출을 대환하는 데 쓰인다. 공시상 단기차입금 합계는 차입 전 203억2500만원에서 차입 후 378억2500만원으로 증가한다. 금융기관...",
+      "pre_score": 12,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 12,
+        "final_score": 12
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "4a2ef874415e4f12",
+      "title": "홍지선 국토장관 \"연내 서울 민간 정비사업 3.1만가구 착공…용적률 1.2...",
+      "source": "ajunews.com",
+      "source_domain": "ajunews.com",
+      "published_at": "2026-10-30T19:48:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.ajunews.com/view/20261030194211548",
+      "naver_link": "https://www.ajunews.com/view/20261030194211548",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제"
+      ],
+      "description": "정비사업의 속도를 높이기 위해 이주비 대출 규제 완화와 용적률 상향 등 사업 여건 개선도 추진한다. 홍 장관은 30일 서울 노원구 상계2구역 재개발사업 현장을 방문해 관계기관 및 시공사 관계자들과 간담회를 열고...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "31aa35008523e098",
+      "title": "강남 이어 한강벨트도 거래 줄고 매물 늘고…인허가는 또 줄었다",
+      "source": "mbn.co.kr",
+      "source_domain": "mbn.co.kr",
+      "published_at": "2026-10-30T19:47:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.mbn.co.kr/pages/news/newsView.php?news_seq_no=5228170",
+      "naver_link": "https://n.news.naver.com/mnews/article/057/0001976021?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제"
+      ],
+      "description": "성동구는 올해 3분기 거래량이 지난해보다 76% 급감했고, 광진구와 마포구도 60% 안팎으로 감소했습니다.\" 단기간에 집값이 수억 원씩 오른 데다 20억 원이 넘는 아파트도 많아 대출 규제와 세금 부담까지 겹치면서 매수세가...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "f106dd2f0c0d9e68",
+      "title": "\"3분기 일회성 부진?…KB금융, NIM 반등과 '순이익 7조 클럽' 고지가 증...",
+      "source": "newsquest.co.kr",
+      "source_domain": "newsquest.co.kr",
+      "published_at": "2026-10-30T19:46:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.newsquest.co.kr/news/articleView.html?idxno=303890",
+      "naver_link": "https://www.newsquest.co.kr/news/articleView.html?idxno=303890",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 금리"
+      ],
+      "description": "특히 기업대출의 금리 재조정 주기를 단축하고 저원가성 예금 확보에 주력하고 있어 NIM 개선 가능성이 높다고 판단한다. 3분기 보통주자본(CET 1) 비율은 13.80%로 전분기 대비 5bp 개선됐다. 환율 하락에 따른...",
+      "pre_score": 1,
+      "score_detail": {
+        "groups": {
+          "weak_relevance": -5
+        },
+        "matched_terms": {
+          "weak_relevance": [
+            {
+              "term": "환율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 1,
+        "final_score": 1
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": true
+      }
+    },
+    {
+      "id": "e12fde7760d653d3",
+      "title": "[금융 HOT 뉴스] NH농협금융, 지역밀착형 생산적·포용금융 확대에 시동",
+      "source": "bizwnews.com",
+      "source_domain": "bizwnews.com",
+      "published_at": "2026-10-30T19:42:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.bizwnews.com/news/articleView.html?idxno=150380",
+      "naver_link": "http://www.bizwnews.com/news/articleView.html?idxno=150380",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "금융위원회 대출",
+        "대출 AI",
+        "대환대출",
+        "신용평가",
+        "저신용자",
+        "취약차주"
+      ],
+      "description": "2금융권 성실상환 차주를 위한 은행 대환대출 등 중·저신용자 대상 금융상품을 확대하고 비금융정보를 활용한 대안신용평가모형 고도화를 통해 금융이력이 부족한 고객의 금융 접근성을 개선한다. 아울러...",
+      "pre_score": 68,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "industry_strategy": 8,
+          "ai_issue": 8,
+          "customer_demand": 8
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "대환대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "신용평가",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "2금융",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "ai_issue": [
+            {
+              "term": "신용평가모형",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "차주",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "저신용자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 30,
+        "source_bonus": 0,
+        "raw_score": 68,
+        "final_score": 68
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "827c30439482ee36",
+      "title": "하나은행, 미소금융 재원 1000억 출연…서민·청년 경제적 자립 돕는다",
+      "source": "inthenews.co.kr",
+      "source_domain": "inthenews.co.kr",
+      "published_at": "2026-10-30T19:40:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.inthenews.co.kr/news/article.html?no=93814",
+      "naver_link": "https://www.inthenews.co.kr/news/article.html?no=93814",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "신용대출",
+        "은행권 대출",
+        "자영업자 대출"
+      ],
+      "description": "오는 12월 출시될 신용대출 상품은 연간 급여 3500만원 이하, 재직기간 1년이상 직장인 대상으로 합니다. 최대 1500만원까지 지원하며 1년 거치, 5년 분할상환 방식으로 초기 자금 마련을 돕습니다. 한부모·다자녀가구...",
+      "pre_score": 47,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "customer_demand": 15
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "신용대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "청년",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 47,
+        "final_score": 47
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "9fbde64bfe47a26c",
+      "title": "\"증권형 토큰, 韓 자본시장 혁신 기회…전자증권 법·제도 정비해야\"",
+      "source": "efnews.co.kr",
+      "source_domain": "efnews.co.kr",
+      "published_at": "2026-10-30T19:40:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.efnews.co.kr/news/articleView.html?idxno=133616",
+      "naver_link": "http://www.efnews.co.kr/news/articleView.html?idxno=133616",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "유승동 한국금융소비자학회장, 정대 한국상사판례학회장, 김병연 한국증권학회장이 30일 서울 여의도 한국거래소에서 열린 '자본시장의 선진화를 위한 법적 인프라 구축' 학술대회에서 주제 발표자 및 토론 패널들과 함께...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "6f108692156af289",
+      "title": "채수웅 신한저축은행 대표, 기업여신 확대·대손비용 절감으로 순익 증...",
+      "source": "한국금융신문",
+      "source_domain": "fntimes.com",
+      "published_at": "2026-10-30T19:38:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.fntimes.com/html/view.php?ud=2026102918344911107c96e79780_18",
+      "naver_link": "https://www.fntimes.com/html/view.php?ud=2026102918344911107c96e79780_18",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "저축은행 대출"
+      ],
+      "description": "신한저축은행 관계자는 “기업여신 취급 확대로 전년 동기 대비 잔액이 약 3700억원 증가했다”며 “가계대출은 햇살론, 사잇돌과 같은 포용금융 상품 중심으로 늘었다”고 말했다. 다만 조달비용이 늘면서 여신...",
+      "pre_score": 57,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "industry_strategy": 24
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "저축은행",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            },
+            {
+              "term": "여신",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 7,
+        "raw_score": 57,
+        "final_score": 57
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "7e25ff09cac61643",
+      "title": "서울 연말까지 3만 1000가구 착공… 국토부, 상계2구역 찾아 공급 점검",
+      "source": "segye.com",
+      "source_domain": "segye.com",
+      "published_at": "2026-10-30T19:36:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.segye.com/newsView/20261030513599?OutUrl=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/022/0004171185?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제"
+      ],
+      "description": "이날 현장 간담회에서는 주민과 시공사 측으로부터 이주비 대출 규제 완화, 조합원 지위 양도 제한 개선, 공사비 분쟁 조정 등에 관한 요청이 전달됐다. 이에 대해 홍 장관은 “내년부터 이주가 시작되는 만큼...",
+      "pre_score": 17,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 17,
+        "final_score": 17
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e28c5e03b5cce291",
+      "title": "현대百, 영업·디지털본부 폐지…출점·미래성장 '투트랙' 재편",
+      "source": "ftoday.co.kr",
+      "source_domain": "ftoday.co.kr",
+      "published_at": "2026-10-30T19:30:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.ftoday.co.kr/news/articleView.html?idxno=368580",
+      "naver_link": "http://www.ftoday.co.kr/news/articleView.html?idxno=368580",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "기존 점포는 매출과 수익성, 상품 구성, 소비자 유입 등 일상적인 영업 경쟁력을 관리해야 한다. 신규 점포는... 2025년 말 기준 현금성 자산과 단기 현금화 가능 금융자산을 합산한 가용 유동성은 약 1조4352억원으로...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "0a3e98052c1ba7ec",
+      "title": "기아 3분기 매출 31조5974억원 달성…한·미 역대 최고 점유율 기록",
+      "source": "ttlnews.com",
+      "source_domain": "ttlnews.com",
+      "published_at": "2026-10-30T19:30:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.ttlnews.com/news/articleView.html?idxno=3157398",
+      "naver_link": "http://www.ttlnews.com/news/articleView.html?idxno=3157398",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "기아는 10월 30일 투자자와 금융시장 관계자들을 소집해 기업설명회를 열고 2026년 3분기 경영실적 집계를... 실제 소비자 인도 기준인 글로벌 소매 판매량 역시 82만9000대로 지난해보다 6.9% 증가했다. 중동 분쟁...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "10eae4b8b3d10d35",
+      "title": "예탁금 이용료, 100만원 넘어가면 오히려 덜 받아",
+      "source": "consumuch.com",
+      "source_domain": "consumuch.com",
+      "published_at": "2026-10-30T19:28:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.consumuch.com/news/articleView.html?idxno=79436",
+      "naver_link": "https://www.consumuch.com/news/articleView.html?idxno=79436",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "증권사 계좌에 예탁금을 넣어놓으면, 소비자는 예탁금 이용료를 받을 수 있다. 그런데 이용료율을... 요율은 금융투자협회 전자공시와 각사 지급기준 문서, 각사 확인을 토대로 정리했다. 예탁금 이용료율을...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "23abe29a553a3a5d",
+      "title": "하나은행, 비대면 주담대 판매 재개…내달 2일부터",
+      "source": "newsway.co.kr",
+      "source_domain": "newsway.co.kr",
+      "published_at": "2026-10-30T19:24:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.newsway.co.kr/news/view?ud=2026103019235017924",
+      "naver_link": "https://www.newsway.co.kr/news/view?ud=2026103019235017924",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "대출 갈아타기",
+        "주담대",
+        "주택담보대출"
+      ],
+      "description": "하나은행이 가계대출 총량 관리를 위해 중단했던 비대면 주택담보대출 판매를 재개한다. 정부의 가계대출 관리 기조에 따라 제한했던 대출 취급을 다시 허용해 실수요자의 자금 조달을 지원한다는 방침이다. 30일...",
+      "pre_score": 60,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 28,
+          "customer_demand": 8
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "주택담보대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "주담대",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "실수요자",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 24,
+        "source_bonus": 0,
+        "raw_score": 60,
+        "final_score": 60
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "3b6900e30224cd6b",
+      "title": "박준철 MG신용정보 대표, ‘사람 살리는 금융’ 릴레이 캠페인 동참 [신...",
+      "source": "한국금융신문",
+      "source_domain": "fntimes.com",
+      "published_at": "2026-10-30T19:24:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.fntimes.com/html/view.php?ud=2026103014555327407c96e79780_18",
+      "naver_link": "https://www.fntimes.com/html/view.php?ud=2026103014555327407c96e79780_18",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자",
+        "채무조정"
+      ],
+      "description": "채무자의 상환 여건을 고려한 채무조정 제도 안내와 신용회복 지원, 성실상환자 지원 등으로 금융취약계층의 부담을 덜고 있다. MG신용정보 관계자는 “새마을금고중앙회의 일원으로서 지역사회 발전과 사회공헌을 위해...",
+      "pre_score": 28,
+      "score_detail": {
+        "groups": {
+          "risk_repayment": 9
+        },
+        "matched_terms": {
+          "risk_repayment": [
+            {
+              "term": "채무조정",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 7,
+        "raw_score": 28,
+        "final_score": 28
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "729606a7d878bb9e",
+      "title": "‘재개발 이주비 대출’ 숨통 트일까…홍지선 “HUG 보증 지원 협의”",
+      "source": "매일경제",
+      "source_domain": "mk.co.kr",
+      "published_at": "2026-10-30T19:21:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.mk.co.kr/article/12191903",
+      "naver_link": "https://n.news.naver.com/mnews/article/009/0005756830?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제"
+      ],
+      "description": "재개발 현장에서는 이주비 대출 규제 완화와 조합원 지위 양도 제한 등 제도 개선 요구도 나왔다. 홍지선 국토교통부 장관은 30일 서울 노원구 상계2구역 재개발사업 현장을 방문해 “상계2구역을 포함한 민간 정비사업을...",
+      "pre_score": 26,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 9,
+        "raw_score": 26,
+        "final_score": 26
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e3228edf533ea4be",
+      "title": "교보생명, 변액보험에 AI 모닝브리핑 도입…일일 시황 분석 제공",
+      "source": "consumuch.com",
+      "source_domain": "consumuch.com",
+      "published_at": "2026-10-30T19:20:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.consumuch.com/news/articleView.html?idxno=79437",
+      "naver_link": "https://www.consumuch.com/news/articleView.html?idxno=79437",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "교보생명이 자사 변액보험 가입자를 위해 인공지능 기반의 일간 금융시장 분석 서비스를 선보인다. 교보생명은 변액보험 로보어드바이저 시스템에 평일 아침마다 글로벌 경제 흐름을 분석해 전달하는 '모닝브리핑...",
+      "pre_score": 45,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 24,
+          "ai_issue": 15
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ],
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": false,
+              "weight": 2.0
+            },
+            {
+              "term": "인공지능",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 45,
+        "final_score": 45
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "7593eba8f31a134b",
+      "title": "[패트롤]대구시의회-경산시-영진전문대-영남이공대-대구도시개발공사-...",
+      "source": "ekn.kr",
+      "source_domain": "ekn.kr",
+      "published_at": "2026-10-30T19:20:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.ekn.kr/web/view.php?key=20261030025573504",
+      "naver_link": "https://www.ekn.kr/web/view.php?key=20261030025573504",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "대구=에너지경제신문 손중모기자 iM뱅크는 강정훈 은행장이 불법사금융 피해 예방과 금융소비자 보호를 위한 '사람 살리는 금융 릴레이 캠페인'에 참여한다고 30일 밝혔다. 서민금융진흥원이 주최하는 이번 캠페인은...",
+      "pre_score": 22,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 8,
+          "customer_demand": 8
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "사금융",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "customer_demand": [
+            {
+              "term": "서민금융",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 22,
+        "final_score": 22
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "49f24c9f1ad64a47",
+      "title": "반도체 호황에 세수 풍년...초과세수 향방은",
+      "source": "00news.co.kr",
+      "source_domain": "00news.co.kr",
+      "published_at": "2026-10-30T19:20:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.00news.co.kr/news/articleView.html?idxno=107639",
+      "naver_link": "http://www.00news.co.kr/news/articleView.html?idxno=107639",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "취약차주"
+      ],
+      "description": "정부와 여당 측에서는 박홍근 기획예산처 장관을 중심으로 고금리 장기화에 따른 취약 차주 보호와 서민금융 지원, 미래대응기금 확충 등에 추가 재원을 투입하는 방안을 검토 중이다. 반면 야당인 국민의힘은...",
+      "pre_score": 14,
+      "score_detail": {
+        "groups": {
+          "customer_demand": 8
+        },
+        "matched_terms": {
+          "customer_demand": [
+            {
+              "term": "차주",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "서민금융",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 14,
+        "final_score": 14
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "8e8397b77dd99219",
+      "title": "[더벨][thebell interview | 다시 뛰는 부동산 운용사] \"숫자 아닌 현장서...",
+      "source": "thebell.co.kr",
+      "source_domain": "thebell.co.kr",
+      "published_at": "2026-10-30T19:12:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202610271727445680107959",
+      "naver_link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202610271727445680107959",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 금리"
+      ],
+      "description": "내년도 대체투자 시장은 금리 상승으로 대출 펀드 수요 증가와 후순위·에쿼티를 섞은 하이브리드형 블라인드 펀드가 늘 것으로 내다봤다. 국내 실물은 프라임급 트로피 에셋에 집중할 계획으로, 올해 매입한 여의도...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "385db28874e6dffb",
+      "title": "김재홍 “재활용 넘어 순환경제로”…베트남서 새 수익모델 제시",
+      "source": "헤럴드경제",
+      "source_domain": "biz.heraldcorp.com",
+      "published_at": "2026-10-30T19:10:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://biz.heraldcorp.com/article/10921030?ref=naver",
+      "naver_link": "https://n.news.naver.com/mnews/article/016/0002716872?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "PaaS는 기업이 제품을 소비자에게 판매해 소유권을 넘기는 대신, 제품을 직접 보유하면서 이용자에게... 현지에서는 중소기업들이 ESG 관련 데이터와 평가·인증 역량 부족으로 녹색금융 접근에 어려움을 겪고 있다는...",
+      "pre_score": 13,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 7,
+        "raw_score": 13,
+        "final_score": 13
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "dfbbc4747caa6365",
+      "title": "케이뱅크 3분기 순익 2배 넘게 급증…기업대출 확대가 견인",
+      "source": "betanews.net",
+      "source_domain": "betanews.net",
+      "published_at": "2026-10-30T19:02:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.betanews.net/article/view/beta202610300076",
+      "naver_link": "https://www.betanews.net/article/view/beta202610300076",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "연체율"
+      ],
+      "description": "3% 감소했다. 2분기 채권매각이익 감소에 따른 순이익 부진이 영향을 미쳤다. 건전성 지표는 소폭 악화했다. 연체율은 전 분기 0.60%에서 0.62%로, 고정이하여신비율은 0.59%에서 0.60%로 각각 상승했다.",
+      "pre_score": 37,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "risk_repayment": 9,
+          "industry_strategy": 8
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "여신",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 37,
+        "final_score": 37
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "2689434ca2cc6a0f",
+      "title": "[더벨][여전사경영분석] 삼성카드, 외형 성장 흡수한 이자비용",
+      "source": "thebell.co.kr",
+      "source_domain": "thebell.co.kr",
+      "published_at": "2026-10-30T19:02:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202610271844525200101064",
+      "naver_link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202610271844525200101064",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "연체율",
+        "채무조정",
+        "카드론"
+      ],
+      "description": "상대적으로 수익률이 낮은 신용판매 잔고가 1년 사이 14.6% 늘어난 반면 카드론 잔고가 2.8% 증가하면서 마진이 하락한 것으로 풀이된다. 영업수익 증가폭보다 비용이 빠르게 늘어난 점도 수익에 영향을 미쳤다....",
+      "pre_score": 32,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "카드론",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 18,
+        "source_bonus": 0,
+        "raw_score": 32,
+        "final_score": 32
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "808cfa7257a7d134",
+      "title": "박완수 지사 \"신청 기다리는 복지 넘어 필요한 도민 찾아 지원\"",
+      "source": "newstown.co.kr",
+      "source_domain": "newstown.co.kr",
+      "published_at": "2026-10-30T19:02:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.newstown.co.kr/news/articleView.html?idxno=720318",
+      "naver_link": "http://www.newstown.co.kr/news/articleView.html?idxno=720318",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "교보생명"
+      ],
+      "description": "대일전기㈜와 365엔씨치과의원, 교보생명 산호지점은 사회복지사 권익 향상을 위한 후원금 총 800만 원을 기탁했다. 경남도는 경남형 긴급복지 '희망지원금', 통합돌봄 전담과 신설, AI 기반 경남통합복지플랫폼 개통 등에...",
+      "pre_score": 22,
+      "score_detail": {
+        "groups": {
+          "industry_strategy": 8,
+          "ai_issue": 8
+        },
+        "matched_terms": {
+          "industry_strategy": [
+            {
+              "term": "교보생명",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 22,
+        "final_score": 22
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "db55af4c04044bb0",
+      "title": "[채권-마감] 강세 플래트닝…주가 급락·WGBI 수요 유입",
+      "source": "news.einfomax.co.kr",
+      "source_domain": "news.einfomax.co.kr",
+      "published_at": "2026-10-30T19:02:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442274",
+      "naver_link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442274",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "외국인이 약 1천200계약 팔았고 금융투자는 약 1천100계약 사들였다. 장 초반에는 간밤 미 주가 하락에... BOJ는 경제전망 보고서에서 \"소비자물가의 기조적인 상승률은 2%의 '물가안정 목표'와 대체로 부합하는 수준에...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e6b4b3ae65d65d0d",
+      "title": "6000만USDT 담보 대출 뒤 머스크, AI 자금 조달 가능성 경고",
+      "source": "tokenpost.kr",
+      "source_domain": "tokenpost.kr",
+      "published_at": "2026-10-30T18:56:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.tokenpost.kr/news/blockchain/430080",
+      "naver_link": "https://www.tokenpost.kr/news/blockchain/430080",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "AI 대출",
+        "대출 AI"
+      ],
+      "description": "◇ 머스크 발언과 대출 거래 머스크는 30일 X 게시물에서 “초지능 에이전트는 언젠가 인간이 아닌 자신을 위해 자금을 얻으려 이런 일을 할 것”이라고 썼다. 이 발언은 미래 AI의 행동 가능성에 관한 경고다. 이번...",
+      "pre_score": 34,
+      "score_detail": {
+        "groups": {
+          "ai_issue": 22
+        },
+        "matched_terms": {
+          "ai_issue": [
+            {
+              "term": "AI",
+              "in_title": true,
+              "in_description": true,
+              "weight": 3.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 34,
+        "final_score": 34
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "f0bf70f27dec556f",
+      "title": "국토장관 \"연내 서울민간정비 3.1만호 착공…용적률 1.2배 협의\"(종합2보...",
+      "source": "연합뉴스",
+      "source_domain": "yna.co.kr",
+      "published_at": "2026-10-30T18:56:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.yna.co.kr/view/AKR20261030091152003?input=1195m",
+      "naver_link": "https://n.news.naver.com/mnews/article/001/0016412673?sid=101",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "대출 규제"
+      ],
+      "description": "이날 간담회에서는 이주비 대출 규제 완화와 조합원 지위 양도 제한, 공사비 분쟁 등에 관한 건의가 나온 것으로 전해졌다. 홍 장관은 간담회가 끝나고 기자들과 만나 \"조합 측에서 내년부터 이주가 시작되는 만큼 이주비...",
+      "pre_score": 27,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "대출 규제",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 10,
+        "raw_score": 27,
+        "final_score": 27
+      },
+      "flags": {
+        "trusted_source": true,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "3995a085b0ed07b4",
+      "title": "[기자수첩] 해커보다 한발 늦는 금융권…보안 불감증의 대가",
+      "source": "tfmedia.co.kr",
+      "source_domain": "tfmedia.co.kr",
+      "published_at": "2026-10-30T18:56:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.tfmedia.co.kr/news/article.html?no=208520",
+      "naver_link": "https://www.tfmedia.co.kr/news/article.html?no=208520",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융소비자"
+      ],
+      "description": "하지만 금융소비자의 불안을 키우는 보안 사고가 터질 때마다 뒤늦게 현장점검에 나서고 재발 방지를 약속하는 식의 대응이 반복돼서는 곤란하다. 사후약방문식 대응으로는 금융권의 고질적인 보안 취약점을 근본적으로...",
+      "pre_score": 6,
+      "score_detail": {
+        "groups": {},
+        "matched_terms": {},
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 6,
+        "final_score": 6
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": false,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "2afcb0be54493c8e",
+      "title": "케이뱅크 3분기 순익 421억원…누적은 1.3% 감소",
+      "source": "vegannews.co.kr",
+      "source_domain": "vegannews.co.kr",
+      "published_at": "2026-10-30T18:48:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.vegannews.co.kr/news/article.html?no=398481",
+      "naver_link": "https://www.vegannews.co.kr/news/article.html?no=398481",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "연체율"
+      ],
+      "description": "가계대출 관리 기조 속에서 기업대출이 여신 증가를 이끌었다. 건전성 지표는 전 분기보다 소폭 상승했다. 3분기 연체율은 0.62%로 전 분기 0.60%보다 0.02%포인트 높아졌고, 고정이하여신비율은 0.60%로 전 분기...",
+      "pre_score": 43,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14,
+          "risk_repayment": 9,
+          "industry_strategy": 8
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "연체율",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "risk_repayment": [
+            {
+              "term": "연체",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ],
+          "industry_strategy": [
+            {
+              "term": "여신",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 43,
+        "final_score": 43
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "e8071515f7aaa309",
+      "title": "\"무인가 중개·대주주 초과대출\"..태성자산운용 제재",
+      "source": "4th.kr",
+      "source_domain": "4th.kr",
+      "published_at": "2026-10-30T18:48:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "http://www.4th.kr/news/articleView.html?idxno=2120849",
+      "naver_link": "http://www.4th.kr/news/articleView.html?idxno=2120849",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "금융감독원 대출",
+        "금융위원회 대출"
+      ],
+      "description": "자본시장법에 따라 투자중개업을 영위하려면 금융위원회 인가를 받아야 한다. 대주주 등에게 법정 한도를 넘겨 자금을 대여한 사실도 적발됐다. 태성자산운용은 2020년 9월25일부터 12월28일까지 대주주인 전...",
+      "pre_score": 23,
+      "score_detail": {
+        "groups": {
+          "policy_regulation": 11
+        },
+        "matched_terms": {
+          "policy_regulation": [
+            {
+              "term": "금융위원회",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            },
+            {
+              "term": "금융위",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 23,
+        "final_score": 23
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "4bab9fd4b9b0ab25",
+      "title": "안선영, 10년 모은 '전 재산' 사기→깨달음 얻었다...“돈보다 중요한 건...",
+      "source": "tvreport.co.kr",
+      "source_domain": "tvreport.co.kr",
+      "published_at": "2026-10-30T18:45:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.tvreport.co.kr/entertainment/article/1087197",
+      "naver_link": "https://m.entertain.naver.com/article/213/0001406590",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "개인회생"
+      ],
+      "description": "영상에서 안선영은 카페 폐업 후 개인회생 절차를 밟으며 자존감이 낮아졌다고 고백한 39세 구독자의 사연을 다뤘다. 이날 안선영은 경제적 손실만큼이나 그로 인해 무너진 자신감을 회복하는 것이 중요하다고 강조했다....",
+      "pre_score": 15,
+      "score_detail": {
+        "groups": {
+          "risk_repayment": 9
+        },
+        "matched_terms": {
+          "risk_repayment": [
+            {
+              "term": "개인회생",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 6,
+        "source_bonus": 0,
+        "raw_score": 15,
+        "final_score": 15
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
+    {
+      "id": "06e92e830b5f5e64",
+      "title": "5대 금융 순익 20조 눈앞…이자이익·증권 실적 '날개'",
+      "source": "sentv.co.kr",
+      "source_domain": "sentv.co.kr",
+      "published_at": "2026-10-30T18:44:00+09:00",
+      "published_date": "2026-10-30",
+      "collected_at": "2026-10-30T23:58:36+09:00",
+      "url": "https://www.sentv.co.kr/article/view/sentv202610300097",
+      "naver_link": "https://www.sentv.co.kr/article/view/sentv202610300097",
+      "origin": "naver_news_api",
+      "matched_keywords": [
+        "가계대출",
+        "대출 금리"
+      ],
+      "description": "가계대출 관리 기조 속에서도 기업대출을 중심으로 대출자산을 늘린 영향입니다. 증권 등 비은행 계열사의 약진도 눈에 띕니다. 5대 금융의 비이자이익은 14조6000억원으로 12.4% 늘었습니다. 금리 인상기에 대출...",
+      "pre_score": 26,
+      "score_detail": {
+        "groups": {
+          "direct_loan": 14
+        },
+        "matched_terms": {
+          "direct_loan": [
+            {
+              "term": "가계대출",
+              "in_title": false,
+              "in_description": true,
+              "weight": 1.0
+            }
+          ]
+        },
+        "keyword_bonus": 12,
+        "source_bonus": 0,
+        "raw_score": 26,
+        "final_score": 26
+      },
+      "flags": {
+        "trusted_source": false,
+        "domestic": true,
+        "loan_related": true,
+        "possible_ad": false
+      }
+    },
     {
       "id": "79f774b9855c8bd0",
       "title": "[iN The Scene] 강정훈 iM뱅크 은행장 “불법사금융 피해예방에 노력”",
