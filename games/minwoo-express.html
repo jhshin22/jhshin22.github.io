@@ -23,7 +23,7 @@ const stages=[
 ];
 const route=$('.route'),meter=$('.meter'),button=$('#action');
 for(const name of stops){const s=document.createElement('span');s.className='station';s.textContent=name;route.append(s)}
-let stage=0,mode='ready',trip=0,start=0,left=0,width=0,frame=0;
+let stage=0,mode='ready',trip=0,start=0,width=0,frame=0;
 function station(i){Array.from(route.children).forEach((s,n)=>s.classList.toggle('on',n===i))}
 function words(title,copy,action){$('#title').textContent=title;$('#copy').textContent=copy;button.textContent=action}
 function scene(i){
@@ -44,8 +44,10 @@ const rounds=[
  {hits:3,width:14,period:1240,seconds:8,drift:7},
  {hits:3,width:12,period:1180,seconds:7,drift:9}
 ];
-let hits,base,direction,deadline,phase,shown;
+const TOUCH_GRACE_MS=45;
+let hits,base,direction,deadline,phase,targetSince;
 function setTarget(){
+ targetSince=performance.now();
  const side=(hits+stage+trip)%2;
  base=(side?58:17)+Math.random()*9;
  direction=(side?1:-1)*(stage%2?-1:1);
@@ -58,12 +60,15 @@ function hideMeter(){
 function missed(reason){
  hideMeter();end(stages[stage][3],reason+' '+stages[stage][4]);
 }
-function draw(t){
+function poseAt(t){
  const r=rounds[stage],elapsed=t-start;
  const cycle=((elapsed/r.period+phase)%1+1)%1;
- left=base+r.drift*Math.sin(elapsed/430+phase);
- shown={p:100*(1-Math.abs(2*cycle-1)),dir:cycle<0.5?1:-1};
- $('.zone').style.left=left+'%';
+ const left=base+r.drift*Math.sin(elapsed/430+phase);
+ return {left,p:100*(1-Math.abs(2*cycle-1)),dir:cycle<0.5?1:-1};
+}
+function draw(t){
+ const shown=poseAt(t);
+ $('.zone').style.left=shown.left+'%';
  $('.needle').style.left=shown.p+'%';
  $('#clock').textContent='막차까지 '+(Math.max(0,deadline-t)/1000).toFixed(1)+'초';
 }
@@ -79,17 +84,36 @@ function play(){
  start=performance.now();deadline=start+r.seconds*1000;tick(start);
 }
 function end(title,copy){mode='end';words(title,copy,'이번엔 진짜 간다 ↻');$('#sign').textContent='서울 도착 실패';$('#ticket').textContent='제 '+trip+'회 상경 시도 · 서울 출석 0회'}
-button.onclick=()=>{
+function activate(t,grace=0){
  if(mode==='ready'||mode==='end'){trip++;stage=0;$('#ticket').textContent='제 '+trip+'회 상경 시도 · 승객 박민우';play();return}
  if(mode==='next'){play();return}
- if(performance.now()>=deadline){missed('막차 출발!');return}
- if(shown.p<left||shown.p>left+width){missed('검표 칸을 놓쳤다.');return}
- if(shown.dir!==direction){missed('역방향 검표!');return}
+ if(t>=deadline){missed('막차 출발!');return}
+ if(t<targetSince)return;
+ const current=poseAt(t);
+ if(current.dir!==direction){missed('역방향 검표!');return}
+ // Within one sweep, the needle overtakes even the fastest moving target.
+ // Its signed offset therefore crosses the valid interval monotonically.
+ const previous=poseAt(Math.max(targetSince,t-grace));
+ const offset=current.p-current.left;
+ const earlier=previous.dir===direction ? previous.p-previous.left : (direction===1 ? -100 : 100);
+ if(Math.max(earlier,offset)<0 || Math.min(earlier,offset)>width){
+  missed('검표 칸을 놓쳤다.');return
+ }
  hits++;
  if(hits<rounds[stage].hits){setTarget();draw(performance.now());return}
  hideMeter();
  if(stage===3){end('완벽한 타이밍, 부산행','검표 열 번을 다 통과했다! 민우가 당당히 자리에 앉았다. “이번 열차의 종착역은 부산입니다.” 단톡방에 답장이 왔다. “민우야, 올 때 갈매기 표 좀 빌려.”');return}
  stage++;mode='next';station(stage);scene(stage);$('#sign').textContent=stops[stage]+'역 도착';words(stops[stage]+'까지 왔다!', ['민우가 표를 되찾았다. 갈매기는 입석이다.','젓가락을 놓고 가까스로 탔다. 주머니에서 간장 냄새가 난다.','빵 냄새를 뿌리치고 광명 도착. 친구가 이제 불판을 갈았다.'][stage-1],'다음 승강장으로 →')
+}
+let handledPress=false;
+button.onpointerdown=event=>{
+ if(!event.isPrimary || event.button!==0)return;
+ handledPress=event.pointerType==='touch' && mode==='play';
+ if(handledPress)activate(event.timeStamp,TOUCH_GRACE_MS);
+};
+button.onclick=event=>{
+ if(event.detail!==0 && handledPress)return;
+ activate(event.timeStamp);
 };
 station(0);scene(0)
 </script></body></html>
