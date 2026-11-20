@@ -5,10 +5,11 @@
 <title>민우야, 어디쯤이야?</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#122e32;color:#182d2c;font-family:"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;min-height:100vh;display:grid;place-items:center;padding:22px 14px}main{width:min(100%,660px);background:#fff3ce;border-radius:15px;overflow:hidden;box-shadow:8px 9px 0 #081f21}header,section,footer{padding:20px 26px}header{display:flex;justify-content:space-between;align-items:center;font:bold 12px monospace;letter-spacing:.09em;border-bottom:2px solid}header b{background:#183a3b;color:#fff3ce;padding:5px 8px}h1{margin:0 0 6px;font-size:clamp(32px,7vw,52px);letter-spacing:-.075em}p{margin:0;line-height:1.55;word-break:keep-all}.scene{position:relative;background:#9adaca}.scene canvas{width:100%;height:auto;display:block;image-rendering:pixelated}.sign{position:absolute;left:5%;top:12%;background:#fff3ce;border:2px solid;padding:4px 8px;font-size:13px;font-weight:900;box-shadow:3px 3px 0 #193737}.route{display:flex;justify-content:space-between;gap:4px;margin-bottom:16px}.station{flex:1;border-top:4px solid #c1bba1;padding-top:4px;font-size:12px;color:#5b6053}.station.on{border-color:#b34628;color:#99371f;font-weight:bold}h2{font-size:23px;margin:0 0 5px;letter-spacing:-.05em}#copy{min-height:3.15em}.meter{position:relative;background:#304c49;height:24px;margin:13px 0 9px;border-radius:4px}.zone{height:100%;position:absolute;background:repeating-linear-gradient(135deg,#eea33b 0 6px,#ffd46a 6px 12px)}.needle{background:white;position:absolute;width:4px;height:34px;top:-5px;transform:translateX(-50%);box-shadow:0 0 0 2px #152d2c}button{width:100%;background:#a53620;border:2px solid #452e23;color:#fff8e8;font:800 18px inherit;font-family:inherit;font-size:18px;font-weight:800;padding:13px;border-radius:6px;cursor:pointer;box-shadow:0 4px 0 #452e23}button:active{transform:translateY(2px);box-shadow:0 2px #452e23}button:focus-visible{outline:4px solid #007899;outline-offset:3px}footer{border-top:2px dashed #a89d79;display:flex;justify-content:space-between;align-items:center;font:12px monospace;color:#46574a}.barcode{width:77px;height:22px;background:repeating-linear-gradient(90deg,#193332 0 2px,transparent 2px 4px,#193332 4px 5px,transparent 5px 9px)}[hidden]{display:none!important}
-#status{display:flex;justify-content:space-between;margin-top:12px;font-size:14px;font-variant-numeric:tabular-nums}.zone{text-align:center;line-height:24px;font-weight:900;color:#172d2c}.needle{pointer-events:none}button{touch-action:manipulation}</style></head><body><main>
+#status{display:flex;justify-content:space-between;margin-top:12px;font-size:14px;font-variant-numeric:tabular-nums}.zone{text-align:center;line-height:24px;font-weight:900;color:#172d2c}.needle{pointer-events:none}button{touch-action:manipulation}#stamp{position:absolute;right:5%;bottom:10%;pointer-events:none;opacity:0;border:3px double currentColor;background:#fff3ce;color:#185246;padding:3px 8px;font-weight:900;transform:rotate(-8deg)}.meter.failed .needle{background:#ff5953}
+</style></head><body><main>
 <header><b>민우철도</b><span>막차 승차권 · HARD</span></header>
 <section><h1>민우야, 어디쯤이야?</h1><p>박민우 “나 지금 서울 올라가는 중.”</p></section>
-<div class="scene"><canvas width="320" height="87" aria-hidden="true"></canvas><span class="sign" id="sign">부산역 → 서울역</span></div>
+<div class="scene"><canvas width="320" height="87" aria-hidden="true"></canvas><span id="stamp" aria-hidden="true">✓ 검표 완료</span><span class="sign" id="sign">부산역 → 서울역</span></div>
 <section><div class="route" aria-label="이동 경로"></div><div aria-live="polite"><h2 id="title">이번에는 진짜 출발</h2><p id="copy">서울 친구들이 고기를 벌써 뒤집었다. 주황 칸의 화살표와 바늘의 진행 방향이 같을 때 눌러라. 한 번 삐끗하면 오늘도 민우 몫은 없다.</p></div>
 <div id="status" hidden><strong id="hits"></strong><span id="clock"></span></div><div class="meter" hidden><div class="zone"></div><div class="needle"></div></div><button id="action" type="button">승차권 발권하기 →</button></section>
 <footer><span id="ticket">승객 박민우 · 부산 → 서울</span><i class="barcode" aria-hidden="true"></i></footer></main>
@@ -29,7 +30,7 @@ function words(title,copy,action){$('#title').textContent=title;$('#copy').textC
 function scene(i){
  const ctx=$('canvas').getContext('2d');
  function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(x,y,w,h)}
- const sky=['#a8dcce','#c5dfca','#f1d298','#f0ba91'][i];
+ const sky=['#a8dcce','#c5dfca','#f1d298','#f0ba91','#ffc890'][i];
  rect(0,0,320,87,sky);rect(254,8,18,18,'#fff0af');
  for(let k=0;k<21;k++){let h=9+(k*17+i*7)%23;rect(k*17,52-h,14,h,'#78a59a');rect(k*17+3,54-h,2,3,sky)}
  rect(0,52,320,35,'#5ca79f');
@@ -57,8 +58,17 @@ function setTarget(){
 function hideMeter(){
  cancelAnimationFrame(frame);meter.hidden=true;$('#status').hidden=true;
 }
-function missed(reason){
- hideMeter();end(stages[stage][3],reason+' '+stages[stage][4]);
+function missed(reason,t=deadline){
+ cancelAnimationFrame(frame);
+ draw(t);
+ meter.classList.add('failed');
+ const arrow=poseAt(t).dir===1?'→':'←';
+ $('#hits').textContent=stops[stage]+'역 · '+(hits+1)+'번째 검표';
+ $('#clock').textContent=(t===deadline?'시간 종료 위치 ':'누른 위치 ')+arrow;
+ mode='end';
+ words(stages[stage][3],reason+' '+stages[stage][4],'이번엔 진짜 간다 ↻');
+ $('#sign').textContent=stops[stage]+'역에서 발이 묶였다';
+ $('#ticket').textContent='제 '+trip+'회 상경 시도 · 서울행 실패';
 }
 function poseAt(t){
  const r=rounds[stage],elapsed=t-start;
@@ -77,32 +87,49 @@ function tick(t){
  draw(t);frame=requestAnimationFrame(tick);
 }
 function play(){
+ meter.classList.remove('failed');
  mode='play';station(stage);scene(stage);$('#sign').textContent=stops[stage]+'역 → '+stops[stage+1]+'역';
  const s=stages[stage],r=rounds[stage];words(s[0],s[1]+' 화살표 방향으로 통과할 때만!',s[2]);
  hits=0;width=r.width;phase=Math.random();setTarget();
  $('.zone').style.width=width+'%';meter.hidden=false;$('#status').hidden=false;
  start=performance.now();deadline=start+r.seconds*1000;tick(start);
 }
-function end(title,copy){mode='end';words(title,copy,'이번엔 진짜 간다 ↻');$('#sign').textContent='서울 도착 실패';$('#ticket').textContent='제 '+trip+'회 상경 시도 · 서울 출석 0회'}
+function stampTicket(){
+ const stamp=$('#stamp');
+ stamp.getAnimations().forEach(animation=>animation.cancel());
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ stamp.animate([
+  {opacity:1,transform:reduced?'rotate(-8deg)':'rotate(-13deg) scale(1.15)'},
+  {opacity:1,transform:'rotate(-8deg)',offset:0.65},
+  {opacity:0,transform:'rotate(-8deg)'}
+ ],{duration:320,easing:'ease-out'});
+}
 function activate(t,grace=0){
  if(mode==='ready'||mode==='end'){trip++;stage=0;$('#ticket').textContent='제 '+trip+'회 상경 시도 · 승객 박민우';play();return}
  if(mode==='next'){play();return}
  if(t>=deadline){missed('막차 출발!');return}
  if(t<targetSince)return;
  const current=poseAt(t);
- if(current.dir!==direction){missed('역방향 검표!');return}
+ if(current.dir!==direction){missed('역방향 검표!',t);return}
  // Within one sweep, the needle overtakes even the fastest moving target.
  // Its signed offset therefore crosses the valid interval monotonically.
  const previous=poseAt(Math.max(targetSince,t-grace));
  const offset=current.p-current.left;
  const earlier=previous.dir===direction ? previous.p-previous.left : (direction===1 ? -100 : 100);
  if(Math.max(earlier,offset)<0 || Math.min(earlier,offset)>width){
-  missed('검표 칸을 놓쳤다.');return
+  missed((direction===1 ? offset<0 : offset>width) ? '조금 일찍 눌렀다.' : '검표 칸을 지나쳤다.',t);return
  }
  hits++;
+ stampTicket();
  if(hits<rounds[stage].hits){setTarget();draw(performance.now());return}
  hideMeter();
- if(stage===3){end('완벽한 타이밍, 부산행','검표 열 번을 다 통과했다! 민우가 당당히 자리에 앉았다. “이번 열차의 종착역은 부산입니다.” 단톡방에 답장이 왔다. “민우야, 올 때 갈매기 표 좀 빌려.”');return}
+ if(stage===rounds.length-1){
+  mode='end';station(4);scene(4);
+  $('#sign').textContent='서울역 도착';
+  $('#ticket').textContent='제 '+trip+'회 상경 시도 · 서울행 승차권 사용 완료';
+  words('민우야, 진짜 왔네?','서울역에서 민우가 손을 흔든다. 친구가 불판 한쪽에 숨겨 둔 마지막 고기 한 점을 건넸다. “야, 갈매기도 너보다 먼저 와서 먹고 갔다.”','부산에서 다시 출발 ↻');
+  return
+ }
  stage++;mode='next';station(stage);scene(stage);$('#sign').textContent=stops[stage]+'역 도착';words(stops[stage]+'까지 왔다!', ['민우가 표를 되찾았다. 갈매기는 입석이다.','젓가락을 놓고 가까스로 탔다. 주머니에서 간장 냄새가 난다.','빵 냄새를 뿌리치고 광명 도착. 친구가 이제 불판을 갈았다.'][stage-1],'다음 승강장으로 →')
 }
 let handledPress=false;
